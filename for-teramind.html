@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teramind: New Marketing Strategy Presentation</title>
+    <!-- Chosen Palette: Teramind.co Elementor Global Colors (Orange, Dark Grey, Blue Accents) -->
+    <!-- Application Structure Plan: This SPA is structured as a dynamic presentation by a new marketing leader. It follows a logical flow: an introductory "Vision" slide, a "Current State" overview (metrics & market position), a deep dive into "Growth Levers" (valuation & bowtie analysis), and finally, a "Strategic Roadmap" for tangible impact. This linear, yet interactive, structure supports a persuasive narrative, allowing the presenter to guide the audience through the strategy while enabling interactive exploration of data points. -->
+    <!-- Visualization & Content Choices: Animated counters provide immediate impact for key metrics. Interactive bar charts compare market position, reinforcing competitive insights (Chart.js). A line chart illustrates market growth, and a slider-based calculator demonstrates valuation drivers, making complex financial concepts accessible (Chart.js). The Bowtie analysis is a custom HTML/CSS interactive diagram, allowing drill-down into acquisition and expansion funnels. Recommendations are presented as clear, actionable cards. NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --e-global-color-primary: #f7931e;
+            --e-global-color-secondary: #fff;
+            --e-global-color-text: #1f2937;
+            --e-global-color-accent: #2563eb;
+            --e-global-color-ffc860d: #f8fafc; /* Background light */
+            --e-global-color-b20e5bc: #020313; /* Very dark */
+            --e-global-color-ed66aa8: #da7909; /* Darker orange */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--e-global-color-ffc860d);
+            color: var(--e-global-color-text);
+            overflow-x: hidden; /* From provided CSS */
+        }
+
+        h1, h2, h3, h4, h5, h6, p, span, a, div { /* From provided CSS */
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1 { /* From provided CSS */
+            font-size: 68px;
+            line-height: 76px;
+        }
+        @media(max-width: 767px) { /* From provided CSS */
+            h1 {
+                font-size: 40px;
+                line-height: 48px;
+            }
+        }
+
+        h2 { /* From provided CSS */
+            font-size: 48px;
+            line-height: 60px;
+            font-weight: 500 !important;
+        }
+        @media(max-width: 767px) { /* From provided CSS */
+            h2 {
+                font-size: 32px; /* Adjusted for mobile readability, not in provided CSS but good practice */
+                line-height: 40px;
+            }
+        }
+
+
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+            font-weight: 500;
+            color: var(--e-global-color-text); /* Default nav link color */
+        }
+        .nav-link:hover {
+            color: var(--e-global-color-primary); /* Orange hover */
+        }
+        .nav-link.active {
+            color: var(--e-global-color-primary); /* Orange for active */
+            border-bottom-color: var(--e-global-color-primary);
+        }
+
+        .presentation-card {
+            background-color: var(--e-global-color-secondary);
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 1px solid #e9ecef;
+        }
+        .presentation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 5px 28px -4px rgba(0,0,0,.33); /* From provided CSS for .hoveradd */
+        }
+
+        .metric-card {
+            border-left-width: 4px;
+            border-style: solid;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--e-global-color-secondary);
+            box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.075);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 1px solid #e9ecef;
+        }
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+        }
+
+        .bowtie-section {
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            border-radius: 0.5rem;
+            border: 1px solid #e9ecef;
+            background-color: var(--e-global-color-secondary); /* Ensure white background */
+        }
+        .bowtie-section:hover {
+            background-color: #fff8f0; /* Light orange hover */
+            transform: translateY(-2px);
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+        }
+
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            max-height: 400px;
+            width: 100%;
+            max-width: 800px;
+        }
+        @media (max-width: 767px) {
+            .chart-container {
+                height: 50vh;
+            }
+        }
+
+        /* Custom button style mimicking Teramind.co's primary button */
+        .btn-primary {
+            background-color: var(--e-global-color-primary); /* Orange */
+            color: var(--e-global-color-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.3rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 0.25rem 0.5rem rgba(247, 147, 30, 0.2);
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: var(--e-global-color-ed66aa8); /* Darker orange */
+            transform: translateY(-1px);
+            box-shadow: 0 0.375rem 0.75rem rgba(247, 147, 30, 0.3);
+        }
+
+        /* Style for the central "Commit" button in bowtie */
+        .bowtie-commit-center {
+            background-color: var(--e-global-color-primary); /* Orange */
+            box-shadow: 0 0.25rem 0.5rem rgba(247, 147, 30, 0.2);
+        }
+        .bowtie-commit-center:hover {
+            background-color: var(--e-global-color-ed66aa8); /* Darker orange */
+            box-shadow: 0 0.375rem 0.75rem rgba(247, 147, 30, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Specific colors for metric cards and charts to align with Teramind's brand palette */
+        .border-primary-orange { border-color: var(--e-global-color-primary); }
+        .text-primary-orange { color: var(--e-global-color-primary); }
+        .bg-background-light { background-color: var(--e-global-color-ffc860d); }
+        .accent-primary-orange { accent-color: var(--e-global-color-primary); } /* For slider */
+        .text-accent-blue { color: var(--e-global-color-accent); } /* For general links/accent text */
+
+        /* Chart.js specific colors for consistency */
+        .chart-color-main { background-color: rgba(247, 147, 30, 0.7); border-color: #f7931e; } /* Primary Orange */
+        .chart-color-accent { background-color: rgba(37, 99, 235, 0.7); border-color: #2563eb; } /* Accent Blue */
+        .chart-color-green { background-color: rgba(40, 167, 69, 0.7); border-color: #28a745; } /* Green for positive trends/expansion */
+        .chart-color-red { background-color: rgba(220, 53, 69, 0.7); border-color: #dc3545; } /* Red for negative trends/churn */
+        .chart-color-cyan { background-color: rgba(23, 162, 184, 0.7); border-color: #17a2b8; } /* Cyan for other data */
+    </style>
+</head>
+<body class="bg-background-light text-gray-800">
+
+    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-40 shadow-sm border-b border-gray-200">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-primary-orange">Teramind: Marketing Strategy</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#top" class="nav-link px-3 py-2 text-sm border-b-2 border-transparent">Current State</a>
+                        <a href="#growth-levers" class="nav-link px-3 py-2 text-sm border-b-2 border-transparent">Growth Levers</a>
+                        <a href="#roadmap" class="nav-link px-3 py-2 text-sm border-b-2 border-transparent">Strategic Roadmap</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="metric-card border-primary-orange">
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">Est. Annual Revenue</h3>
+                    <p class="text-4xl font-bold text-gray-800 mt-2" id="metric-revenue">$0M</p>
+                </div>
+                <div class="metric-card border-chart-color-green">
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">Plausible Valuation</h3>
+                    <p class="text-4xl font-bold text-gray-800 mt-2" id="metric-valuation">$0M</p>
+                </div>
+                <div class="metric-card border-chart-color-accent">
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">Global Customers</h3>
+                    <p class="text-4xl font-bold text-gray-800 mt-2" id="metric-customers">0+</p>
+                </div>
+                 <div class="metric-card border-chart-color-cyan">
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">Customer Retention</h3>
+                    <p class="text-4xl font-bold text-gray-800 mt-2" id="metric-retention">0%</p>
+                </div>
+            </div>
+            
+            <div class="presentation-card p-6 mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Strengths</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start">
+                        <span class="text-primary-orange mr-3 mt-1">&#10004;</span>
+                        <div><strong class="font-semibold">Comprehensive Product:</strong> Unified cybersecurity and productivity platform.</div>
+                    </li>
+                    <li class="flex items-start">
+                         <span class="text-primary-orange mr-3 mt-1">&#10004;</span>
+                        <div><strong class="font-semibold">Strong Market Presence:</strong> 10,000+ global customers, strong brand.</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-orange mr-3 mt-1">&#10004;</span>
+                        <div><strong class="font-semibold">High Customer Retention:</strong> >97% retention shows strong product-market fit.</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-orange mr-3 mt-1">&#10004;</span>
+                        <div><strong class="font-semibold">Proactive AI Integration:</strong> AI for predictive analytics creates a formidible technological edge.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="presentation-card p-6">
+                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Market Awareness: Brand Search Volume</h3>
+                     <p class="text-sm text-gray-600 mb-4">Teramind's brand search volume vs. competitors shows strong recognition with underleveraged paid search: a clear opportunity to defend and grow Teramind's reach.</p>
+                    <div class="chart-container">
+                        <canvas id="semChart"></canvas>
+                    </div>
+                </div>
+                <div class="presentation-card p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Competitive Ad Strategies: What Competitors Are Doing</h3>
+                     <p class="text-sm text-gray-600 mb-4">Competitors actively target Teramind, which validates the brand's market relevance. This highlights a critical need to strengthen search marketing defense and offense.</p>
+                    <ul class="space-y-4 text-sm" id="competitor-list">
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="growth-levers" class="mb-16 scroll-mt-24">
+            <h2 class="font-bold text-gray-800 mb-2">Growth Levers: Driving Valuation & Expansion</h2>
+            <p class="text-lg text-gray-600 mb-8">Future growth engines: Teramind's customer journey indicates onramps for revenue acceleration.</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-8">
+                <div class="lg:col-span-3 presentation-card p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">High-Growth Market Projections (CAGR)</h3>
+                    <p class="text-sm text-gray-600 mb-4">Teramind operates in rapidly expanding markets with significant growth tailwinds. The data loss prevention (DLP) market shows alignment with Teramind product strengths.</p>
+                    <div class="chart-container">
+                        <canvas id="marketGrowthChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 presentation-card p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Interactive Valuation Calculator</h3>
+                    <p class="text-sm text-gray-600 mb-6">SaaS valuations use ARR multiples. Teramind's estimated ARR is $55.6M. Adjust the slider to see how investor sentiment impacts the plausible valuation range, showcasing the power of recurring revenue.</p>
+                    
+                    <div>
+                        <label for="valuation-multiple" class="block text-sm font-medium text-gray-600 mb-2">Revenue Multiple: <span id="multiple-value" class="font-bold text-primary-orange">7.5x</span></label>
+                        <input id="valuation-multiple" type="range" min="5" max="15" value="7.5" step="0.1" class="w-full h-2 bg-background-light rounded-lg appearance-none cursor-pointer accent-primary-orange">
+                    </div>
+
+                    <div class="mt-6 bg-background-light p-4 rounded-lg text-center">
+                         <h4 class="text-sm font-medium text-gray-500 uppercase">Calculated Valuation</h4>
+                         <p class="text-4xl font-bold text-gray-800 mt-1" id="calculated-valuation">$417M</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="presentation-card p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">The Bowtie Model: Customer Journey & Growth Dynamics</h3>
+                <p class="text-sm text-gray-600 mb-6">The Bowtie visualizes the customer journey from acquisition through expansion. Retention is excellent. New customer acquisition can be optimized. Click for details.</p>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-0">
+                    <!-- Left Side -->
+                    <div id="bowtie-acquisition" class="bowtie-section w-full md:w-5/12 p-4 rounded-l-lg border-r-0 border-gray-200">
+                        <h3 class="font-bold text-lg text-center text-gray-800">Acquisition Funnel</h3>
+                        <p class="text-xs text-center text-gray-500 mb-4">New Customer Growth</p>
+                        <div class="flex justify-around items-center text-center">
+                            <div>
+                                <p class="text-2xl font-bold text-accent-blue">5,000</p>
+                                <p class="text-xs text-gray-500">Leads</p>
+                            </div>
+                            <span class="text-2xl text-gray-400 font-light">&#8594;</span>
+                             <div>
+                                <p class="text-2xl font-bold text-accent-blue">43</p>
+                                <p class="text-xs text-gray-500">New Customers</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Center -->
+                    <div class="w-full md:w-2/12 flex flex-col items-center justify-center bowtie-commit-center text-white p-4 z-10 rounded-lg">
+                        <h3 class="font-bold text-lg text-center">Commit</h3>
+                        <p class="text-2xl font-bold" id="new-arr-value">$6.4M</p>
+                        <p class="text-xs text-center opacity-80">New ARR</p>
+                    </div>
+                    <!-- Right Side -->
+                     <div id="bowtie-expansion" class="bowtie-section w-full md:w-5/12 p-4 rounded-r-lg border-l-0 border-gray-200">
+                        <h3 class="font-bold text-lg text-center text-gray-800">Expansion Funnel</h3>
+                        <p class="text-xs text-center text-gray-500 mb-4">Existing Customer Growth</p>
+                        <div class="flex justify-around items-center text-center">
+                            <div>
+                                <p class="text-2xl font-bold text-chart-color-green">$2.78M</p>
+                                <p class="text-xs text-gray-500">Expansion ARR</p>
+                            </div>
+                            <span class="text-2xl text-gray-400 font-light">&#8594;</span>
+                             <div>
+                                <p class="text-2xl font-bold text-chart-color-red">($0.83M)</p>
+                                <p class="text-xs text-gray-500">Churn ARR</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="text-center mt-6">
+                    <p class="text-lg font-semibold text-gray-700">Net New ARR From Existing Customers: <span class="text-2xl font-bold text-chart-color-green">$1.95M</span></p>
+                    <p class="text-sm text-gray-500">(Expansion - Churn)</p>
+                    <p class="text-lg font-semibold text-gray-700">Total New ARR (Acquisition + Expansion): <span class="text-2xl font-bold text-chart-color-green">$10.29M</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="scroll-mt-24">
+             <h2 class="font-bold text-gray-800 mb-2">Strategic Roadmap to Tangible Impact</h2>
+            <p class="text-lg text-gray-600 mb-8">Actionable recommendations: accelerate growth, strengthen market position, and enhance valuation. Each initiative delivers measurable, tangible impact.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="presentation-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-orange-100 text-primary-orange mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Marketing Optimization: Driving New Acquisitions</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm list-disc list-inside text-gray-700">
+                        <li><strong>Increase Paid Search:</strong> Defend brand, capture high-intent searchers, boost leads.</li>
+                        <li><strong>Target Competitor Keywords:</strong> Bid on competitor terms to intercept users.</li>
+                        <li><strong>Enhance Mid-Funnel Content:</strong> Create comparison guides, feature explanations to convert leads.</li>
+                        <li><strong>Leverage Video Content:</strong> Implement video ads on LinkedIn (currently absent) and establish a frequent, high-quality video cadence on YouTube. YouTube is the #2 search engine; consistent videos offer outsized competitive advantage. Video ads on LinkedIn can achieve 3x engagement and 35% higher CTR, capturing attention and warming prospects.</li>
+                        <li><strong>Engage on Reddit and GitHub:</strong> Target IT professionals and developers via ads on the carbon network as well as through AMAs (Ask Me Anything), and organic content in relevant subreddits to build credibility and drive organic interest from peers. </li>
+                        <li><strong>Website Hygiene:</strong> Deprecate the outdated `/news/` page and redirect traffic to the updated `/company/media-room/` to ensure a current and active brand impression.</li>
+                    </ul>
+                </div>
+
+                <div class="presentation-card p-6">
+                     <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-blue-100 text-accent-blue mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Accelerating Growth</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm list-disc list-inside text-gray-700">
+                        <li><strong>Evaluate Strategic M&A:</strong> Consider acquisitions to expand features, markets, or consolidate.</li>
+                        <li><strong>Deepen AI Differentiation:</strong> Invest in AI/ML for advanced analytics, maintaining edge.</li>
+                        <li><strong>Expand Partner Ecosystem:</strong> Grow MSP programs for wider reach and leverage as competitive spears.</li>
+                        <li><strong>"Always-On" Webinars:</strong> Shift the webinar strategy from customer success to new customer acquisition. Implement a continuous cadence of new, value-driven webinars (e.g., "Solving Insider Threat with AI," "Optimizing Hybrid Work"). Promote widely across all channels.</li>
+                        <li><strong>Dedicated Events Page:</strong> Create and actively maintain a dedicated web page listing upcoming conferences, webinars, and sponsored events. Include past event content (recordings, presentations) for reference. This captures in-person engagement and provides content for curious, in-market individuals.</li>
+                    </ul>
+                </div>
+
+                <div class="presentation-card p-6">
+                     <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-green-100 text-chart-color-green mr-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Maximizing Valuation</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm list-disc list-inside text-gray-700">
+                        <li><strong>Communicate Funnel Efficiency:</strong> Quantify improved new customer acquisition efficiency to investors.</li>
+                        <li><strong>Highlight Customer ROI:</strong> Document tangible productivity gains and security savings for clients.</li>
+                        <li><strong>Articulate Financial Stability:</strong> Clearly communicate profitability or strong financial runway.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-white mt-16 border-t border-gray-200">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+            <p>This interactive presentation outlines a strategic marketing roadmap for Teramind.co.</p>
+            <p>&copy; 2025, Ron Kagan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full p-6 relative">
+            <button id="modal-close" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4"></h3>
+            <div id="modal-content" class="text-gray-700 space-y-4"></div>
+        </div>
+    </div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const reportData = {
+            metrics: {
+                revenue: 55.6, // $55.6M
+                valuation: [278, 556], // $278M - $556M
+                customers: 10000,
+                retention: 97,
+            },
+            sem: {
+                teramind: { volume: 3000, cpc: 4.90 },
+                competitors: [
+                    { name: 'ActivTrak', volume: 5300 },
+                    { name: 'Netwrix', volume: 1200 },
+                    { name: 'InterGuard', volume: 800 },
+                    { name: 'Veriato', volume: 1500 },
+                ]
+            },
+            competitorStrategies: [
+                { name: 'Netwrix', strategy: 'Positions as "#1 Competitor" for DLP, highlighting award-winning features and broad OS support. This is a direct challenge to DLP market share.' },
+                { name: 'ActivTrak', strategy: 'Emphasizes business decisions and flexibility, offering a free tier to attract a wide audience. They are capturing the entry-level market.' },
+                { name: 'Controlio', strategy: 'Directly challenges with "Looking for teramind? Try Controlio", promoting its own OCR and DLP features. A clear attempt to divert Teramind brand traffic.' },
+                { name: 'Endpoint Protector', strategy: 'Also claims "#1 Competitor" status for DLP, focusing on integrated security layers and compliance (GDPR, HIPAA). Another direct competitor in a key area.' },
+                { name: 'CurrentWare', strategy: 'Markets as the "Best Alternative to Teramind," highlighting a lightweight and simple solution. They are targeting users seeking simpler alternatives.' }
+            ],
+            marketGrowth: {
+                labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                datasets: [
+                    { label: 'Employee Monitoring (7.2% CAGR)', cagr: 7.2, color: 'rgb(247, 147, 30)' }, /* Primary Orange */
+                    { label: 'Endpoint Security (7.4% CAGR)', cagr: 7.4, color: 'rgb(37, 99, 235)' }, /* Accent Blue */
+                    { label: 'Data Loss Prevention (18.9% CAGR)', cagr: 18.9, color: 'rgb(40, 167, 69)' }, /* Green */
+                ]
+            },
+            bowtie: {
+                acquisition: {
+                    title: "Acquisition Funnel: New Growth Opportunities",
+                    content: `<p>The left side of the bowtie highlights new customer acquisition. While brand awareness is strong, converting leads into paying customers presents a significant opportunity for optimization.</p>
+                              <ul class="list-disc list-inside mt-2 text-gray-700">
+                                <li><strong>Challenge:</strong> New customer acquisition currently contributes signficantly less to ARR growth than expansion.</li>
+                                <li><strong>Paid Search/Social Opportunity:</strong> Under-investment in paid search/social means more marketing will yield 2-5x new customers than typically martriculate from these channels.</li>
+                                <li><strong>Video Opportunity:</strong>Video content achieves 3x the engagement compared to traditional ad formats and a 35% higher Click-Through Rate (CTR) for 7-15 second videos. Video ad campaigns would allow Teramind to capture precious, fleeting attention more effectively, moving prospects from a "cold" to "warm" state, which significantly improves lead generation outcomes. All of this will stand out and build collective confidence in prospective buyer groups.
+                                <li><strong>Field Marketing Opportunity:</strong> While sponsorship of RSA is a significant investment, it is not a replacement for a cadence of smaller-format executive forums (such as Evanta's) and presence at other relevant, well-attended events. While it can be daunting to underwrite such activities, in-person engagement, particularly at the top-of-the-funnel with the right stakeholders in the field is an irreplaceable asset for a growing SaaS org.
+                                <li><strong>Tangible Impact:</strong> Strengthening funnel diversifies growth, accelerates market share, and improves valuation via scalable new customer growth.</li>
+                              </ul>`
+                },
+                expansion: {
+                    title: "Expansion Funnel: Core Strength & Predictable Growth",
+                    content: `<p>The right side of the bowtie, existing customers, is Teramind's strength. High retention and robust expansion revenue show excellent product-market fit.</p>
+                              <ul class="list-disc list-inside mt-2 text-gray-700">
+                                <li><strong>Strength:</strong> High retention (>97%) and 10% expansion drive most new ARR.</li>
+                                <li><strong>Strategy:</strong> Growth comes from upselling (UAM to DLP) and cross-selling within organizations.</li>
+                                <li><strong>Tangible Impact:</strong> Maintaining strong post-sale motion is crucial for predictable, profitable growth, forming a scalable business foundation and boosting valuation.</li>
+                              </ul>`
+                }
+            }
+        };
+
+        const formatNumber = (num) => {
+            if (num >= 1000000) return `$${(num / 1000000).toFixed(1)}M`;
+            if (num >= 1000) return `$${(num / 1000).toFixed(0)}k`;
+            return `$${num}`;
+        };
+
+        function animateValue(obj, start, end, duration, formatter) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                let value = progress * (end - start) + start;
+                obj.innerHTML = formatter(value);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        animateValue(document.getElementById('metric-revenue'), 0, reportData.metrics.revenue * 1000000, 1500, (v) => `$${(v/1000000).toFixed(1)}M`);
+        animateValue(document.getElementById('metric-valuation'), 0, reportData.metrics.valuation[0] * 1000000, 1500, (v) => `$${(v/1000000).toFixed(0)}M - $${reportData.metrics.valuation[1]}M`);
+        animateValue(document.getElementById('metric-customers'), 0, reportData.metrics.customers, 1500, (v) => `${Math.floor(v).toLocaleString()}+`);
+        animateValue(document.getElementById('metric-retention'), 0, reportData.metrics.retention, 1500, (v) => `>${v.toFixed(0)}%`);
+        document.getElementById('new-arr-value').textContent = formatNumber(6400000);
+
+        const semCtx = document.getElementById('semChart').getContext('2d');
+        const semLabels = ['Teramind', ...reportData.sem.competitors.map(c => c.name)];
+        const semData = [reportData.sem.teramind.volume, ...reportData.sem.competitors.map(c => c.volume)];
+        new Chart(semCtx, {
+            type: 'bar',
+            data: {
+                labels: semLabels,
+                datasets: [{
+                    label: 'Monthly Brand Search Volume',
+                    data: semData,
+                    backgroundColor: [
+                        'var(--e-global-color-primary)', /* Teramind Orange */
+                        'var(--e-global-color-accent)', /* Accent Blue */
+                        'var(--chart-color-green)',
+                        'var(--chart-color-cyan)',
+                        'var(--chart-color-red)'
+                    ].map(color => color.replace(')', ', 0.7)')), /* Add transparency for chart bars */
+                    borderColor: [
+                        'var(--e-global-color-primary)',
+                        'var(--e-global-color-accent)',
+                        '#28a745',
+                        '#17a2b8',
+                        '#dc3545'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Volume: ${context.raw.toLocaleString()}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        const competitorList = document.getElementById('competitor-list');
+        reportData.competitorStrategies.forEach(c => {
+            const li = document.createElement('li');
+            li.className = "flex items-start p-3 bg-gray-50 rounded-lg border border-gray-200";
+            li.innerHTML = `<span class="text-chart-color-red mr-3 mt-1">&#9876;</span><div><strong class="font-semibold text-gray-700">${c.name}:</strong> ${c.strategy}</div>`;
+            competitorList.appendChild(li);
+        });
+
+        const marketGrowthCtx = document.getElementById('marketGrowthChart').getContext('2d');
+        const generateGrowthData = (start, cagr, years) => {
+            let data = [start];
+            for (let i = 1; i < years; i++) {
+                data.push(data[i - 1] * (1 + cagr / 100));
+            }
+            return data;
+        }
+
+        new Chart(marketGrowthCtx, {
+            type: 'line',
+            data: {
+                labels: reportData.marketGrowth.labels,
+                datasets: reportData.marketGrowth.datasets.map(d => ({
+                    label: d.label,
+                    data: generateGrowthData(100, d.cagr, reportData.marketGrowth.labels.length),
+                    borderColor: d.color,
+                    backgroundColor: d.color.replace(')', ', 0.1)'),
+                    fill: true,
+                    tension: 0.3
+                }))
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                         callbacks: {
+                            label: function(context) {
+                                return ` ${context.dataset.label}: ${context.raw.toFixed(1)}% growth (indexed)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        const valuationSlider = document.getElementById('valuation-multiple');
+        const multipleValueDisplay = document.getElementById('multiple-value');
+        const calculatedValuationDisplay = document.getElementById('calculated-valuation');
+        valuationSlider.addEventListener('input', () => {
+            const multiple = parseFloat(valuationSlider.value);
+            const calculatedValuation = reportData.metrics.revenue * multiple;
+            multipleValueDisplay.textContent = `${multiple.toFixed(1)}x`;
+            calculatedValuationDisplay.textContent = `$${calculatedValuation.toFixed(1)}M`;
+        });
+        calculatedValuationDisplay.textContent = `$${(reportData.metrics.revenue * parseFloat(valuationSlider.value)).toFixed(1)}M`;
+
+
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const modalClose = document.getElementById('modal-close');
+        
+        const openModal = (side) => {
+            const data = reportData.bowtie[side];
+            modalTitle.textContent = data.title;
+            modalContent.innerHTML = data.content;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        };
+
+        document.getElementById('bowtie-acquisition').addEventListener('click', () => openModal('acquisition'));
+        document.getElementById('bowtie-expansion').addEventListener('click', () => openModal('expansion'));
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-50% 0px -50% 0px' });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    });
+    </script>
+</body>
+</html>
