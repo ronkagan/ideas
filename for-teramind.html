@@ -179,7 +179,7 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#top" class="nav-link px-3 py-2 text-sm border-b-2 border-transparent">Current State</a>
+                        <a href="#current-state" class="nav-link px-3 py-2 text-sm border-b-2 border-transparent">Current State</a>
                         <a href="#growth-levers" class="nav-link px-3 py-2 text-sm border-b-2 border-transparent">Growth Levers</a>
                         <a href="#roadmap" class="nav-link px-3 py-2 text-sm border-b-2 border-transparent">Strategic Roadmap</a>
                     </div>
@@ -189,6 +189,10 @@
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <section id="current-state" class="mb-16 scroll-mt-24">
+            <h2 class="font-bold text-gray-800 mb-2">Current State: Performance Overview</h2>
+            <p class="text-lg text-gray-600 mb-8">A snapshot of Teramind's current market position and key performance indicators.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div class="metric-card border-primary-orange">
@@ -203,7 +207,7 @@
                     <h3 class="text-sm font-medium text-gray-500 uppercase">Global Customers</h3>
                     <p class="text-4xl font-bold text-gray-800 mt-2" id="metric-customers">0+</p>
                 </div>
-                 <div class="metric-card border-chart-color-cyan">
+                   <div class="metric-card border-chart-color-cyan">
                     <h3 class="text-sm font-medium text-gray-500 uppercase">Customer Retention</h3>
                     <p class="text-4xl font-bold text-gray-800 mt-2" id="metric-retention">0%</p>
                 </div>
@@ -217,7 +221,7 @@
                         <div><strong class="font-semibold">Comprehensive Product:</strong> Unified cybersecurity and productivity platform.</div>
                     </li>
                     <li class="flex items-start">
-                         <span class="text-primary-orange mr-3 mt-1">&#10004;</span>
+                           <span class="text-primary-orange mr-3 mt-1">&#10004;</span>
                         <div><strong class="font-semibold">Strong Market Presence:</strong> 10,000+ global customers, strong brand.</div>
                     </li>
                     <li class="flex items-start">
@@ -231,17 +235,54 @@
                 </ul>
             </div>
 
+            <!-- PDF Insights integrated here -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="presentation-card p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Website Traffic & Engagement</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-center">
+                            <span class="text-primary-orange mr-3">&#9679;</span>
+                            <div><strong>Estimated Monthly Domain Visits:</strong> <span id="domain-visits-value"></span> people visit teramind.co globally each month.</div>
+                        </li>
+                    </ul>
+                    <h4 class="text-lg font-semibold text-gray-800 mt-6 mb-3">Social Network Engagement Trends</h4>
+                    <ul class="space-y-2 text-sm text-gray-700" id="social-networks-list">
+                        <!-- Social network data will be populated by JS -->
+                    </ul>
+                    <h4 class="text-lg font-semibold text-gray-800 mt-6 mb-3">Search & AI Tool Usage Trends</h4>
+                    <ul class="space-y-2 text-sm text-gray-700" id="search-ai-tools-list">
+                        <!-- Search & AI tools data will be populated by JS -->
+                    </ul>
+                </div>
+                <div class="presentation-card p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Audience & Keyword Insights</h3>
+                    <h4 class="text-lg font-semibold text-gray-800 mb-3">Highest Affinity Keywords</h4>
+                    <ul class="space-y-2 text-sm text-gray-700" id="highest-affinity-keywords-list">
+                        <!-- Highest affinity keywords data will be populated by JS -->
+                    </ul>
+                    <h4 class="text-lg font-semibold text-gray-800 mt-6 mb-3">Relevant Social Accounts & Communities</h4>
+                    <ul class="space-y-2 text-sm text-gray-700" id="social-accounts-list">
+                        <!-- Social accounts data will be populated by JS -->
+                    </ul>
+                    <h4 class="text-lg font-semibold text-gray-800 mt-6 mb-3">Key SubReddits for Engagement</h4>
+                    <ul class="space-y-2 text-sm text-gray-700" id="subreddits-list">
+                        <!-- Subreddits data will be populated by JS -->
+                    </ul>
+                </div>
+            </div>
+            <!-- End of PDF Insights integrated section -->
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="presentation-card p-6">
-                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Market Awareness: Brand Search Volume</h3>
-                     <p class="text-sm text-gray-600 mb-4">Teramind's brand search volume vs. competitors shows strong recognition with underleveraged paid search: a clear opportunity to defend and grow Teramind's reach.</p>
+                       <h3 class="text-xl font-semibold text-gray-800 mb-4">Market Awareness: Brand Search Volume</h3>
+                       <p class="text-sm text-gray-600 mb-4">Teramind's brand search volume vs. competitors shows strong recognition with underleveraged paid search: a clear opportunity to defend and grow Teramind's reach.</p>
                     <div class="chart-container">
                         <canvas id="semChart"></canvas>
                     </div>
                 </div>
                 <div class="presentation-card p-6">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Competitive Ad Strategies: What Competitors Are Doing</h3>
-                     <p class="text-sm text-gray-600 mb-4">Competitors actively target Teramind, which validates the brand's market relevance. This highlights a critical need to strengthen search marketing defense and offense.</p>
+                       <p class="text-sm text-gray-600 mb-4">Competitors actively target Teramind, which validates the brand's market relevance. This highlights a critical need to strengthen search marketing defense and offense.</p>
                     <ul class="space-y-4 text-sm" id="competitor-list">
                     </ul>
                 </div>
@@ -270,8 +311,8 @@
                     </div>
 
                     <div class="mt-6 bg-background-light p-4 rounded-lg text-center">
-                         <h4 class="text-sm font-medium text-gray-500 uppercase">Calculated Valuation</h4>
-                         <p class="text-4xl font-bold text-gray-800 mt-1" id="calculated-valuation">$417M</p>
+                           <h4 class="text-sm font-medium text-gray-500 uppercase">Calculated Valuation</h4>
+                           <p class="text-4xl font-bold text-gray-800 mt-1" id="calculated-valuation">$417M</p>
                     </div>
                 </div>
             </div>
@@ -303,7 +344,7 @@
                         <p class="text-xs text-center opacity-80">New ARR</p>
                     </div>
                     <!-- Right Side -->
-                     <div id="bowtie-expansion" class="bowtie-section w-full md:w-5/12 p-4 rounded-r-lg border-l-0 border-gray-200">
+                       <div id="bowtie-expansion" class="bowtie-section w-full md:w-5/12 p-4 rounded-r-lg border-l-0 border-gray-200">
                         <h3 class="font-bold text-lg text-center text-gray-800">Expansion Funnel</h3>
                         <p class="text-xs text-center text-gray-500 mb-4">Existing Customer Growth</p>
                         <div class="flex justify-around items-center text-center">
@@ -319,7 +360,7 @@
                         </div>
                     </div>
                 </div>
-                 <div class="text-center mt-6">
+                   <div class="text-center mt-6">
                     <p class="text-lg font-semibold text-gray-700">Net New ARR From Existing Customers: <span class="text-2xl font-bold text-chart-color-green">$1.95M</span></p>
                     <p class="text-sm text-gray-500">(Expansion - Churn)</p>
                     <p class="text-lg font-semibold text-gray-700">Total New ARR (Acquisition + Expansion): <span class="text-2xl font-bold text-chart-color-green">$10.29M</span></p>
@@ -328,7 +369,7 @@
         </section>
 
         <section id="roadmap" class="scroll-mt-24">
-             <h2 class="font-bold text-gray-800 mb-2">Strategic Roadmap to Tangible Impact</h2>
+               <h2 class="font-bold text-gray-800 mb-2">Strategic Roadmap to Tangible Impact</h2>
             <p class="text-lg text-gray-600 mb-8">Actionable recommendations: accelerate growth, strengthen market position, and enhance valuation. Each initiative delivers measurable, tangible impact.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="presentation-card p-6">
@@ -349,7 +390,7 @@
                 </div>
 
                 <div class="presentation-card p-6">
-                     <div class="flex items-center mb-4">
+                       <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-blue-100 text-accent-blue mr-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                         </div>
@@ -365,9 +406,9 @@
                 </div>
 
                 <div class="presentation-card p-6">
-                     <div class="flex items-center mb-4">
+                       <div class="flex items-center mb-4">
                         <div class="p-3 rounded-full bg-green-100 text-chart-color-green mr-4">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
                         <h3 class="text-xl font-semibold text-gray-800">Maximizing Valuation</h3>
                     </div>
@@ -437,23 +478,62 @@
                 acquisition: {
                     title: "Acquisition Funnel: New Growth Opportunities",
                     content: `<p>The left side of the bowtie highlights new customer acquisition. While brand awareness is strong, converting leads into paying customers presents a significant opportunity for optimization.</p>
-                              <ul class="list-disc list-inside mt-2 text-gray-700">
-                                <li><strong>Challenge:</strong> New customer acquisition currently contributes signficantly less to ARR growth than expansion.</li>
-                                <li><strong>Paid Search/Social Opportunity:</strong> Under-investment in paid search/social means more marketing will yield 2-5x new customers than typically martriculate from these channels.</li>
-                                <li><strong>Video Opportunity:</strong>Video content achieves 3x the engagement compared to traditional ad formats and a 35% higher Click-Through Rate (CTR) for 7-15 second videos. Video ad campaigns would allow Teramind to capture precious, fleeting attention more effectively, moving prospects from a "cold" to "warm" state, which significantly improves lead generation outcomes. All of this will stand out and build collective confidence in prospective buyer groups.
-                                <li><strong>Field Marketing Opportunity:</strong> While sponsorship of RSA is a significant investment, it is not a replacement for a cadence of smaller-format executive forums (such as Evanta's) and presence at other relevant, well-attended events. While it can be daunting to underwrite such activities, in-person engagement, particularly at the top-of-the-funnel with the right stakeholders in the field is an irreplaceable asset for a growing SaaS org.
-                                <li><strong>Tangible Impact:</strong> Strengthening funnel diversifies growth, accelerates market share, and improves valuation via scalable new customer growth.</li>
-                              </ul>`
+                                     <ul class="list-disc list-inside mt-2 text-gray-700">
+                                        <li><strong>Challenge:</strong> New customer acquisition currently contributes signficantly less to ARR growth than expansion.</li>
+                                        <li><strong>Paid Search/Social Opportunity:</strong> Under-investment in paid search/social means more marketing will yield 2-5x new customers than typically martriculate from these channels.</li>
+                                        <li><strong>Video Opportunity:</strong>Video content achieves 3x the engagement compared to traditional ad formats and a 35% higher Click-Through Rate (CTR) for 7-15 second videos. Video ad campaigns would allow Teramind to capture precious, fleeting attention more effectively, moving prospects from a "cold" to "warm" state, which significantly improves lead generation outcomes. All of this will stand out and build collective confidence in prospective buyer groups.
+                                        <li><strong>Field Marketing Opportunity:</strong> While sponsorship of RSA is a significant investment, it is not a replacement for a cadence of smaller-format executive forums (such as Evanta's) and presence at other relevant, well-attended events. While it can be daunting to underwrite such activities, in-person engagement, particularly at the top-of-the-funnel with the right stakeholders in the field is an irreplaceable asset for a growing SaaS org.
+                                        <li><strong>Tangible Impact:</strong> Strengthening funnel diversifies growth, accelerates market share, and improves valuation via scalable new customer growth.</li>
+                                    </ul>`
                 },
                 expansion: {
                     title: "Expansion Funnel: Core Strength & Predictable Growth",
                     content: `<p>The right side of the bowtie, existing customers, is Teramind's strength. High retention and robust expansion revenue show excellent product-market fit.</p>
-                              <ul class="list-disc list-inside mt-2 text-gray-700">
-                                <li><strong>Strength:</strong> High retention (>97%) and 10% expansion drive most new ARR.</li>
-                                <li><strong>Strategy:</strong> Growth comes from upselling (UAM to DLP) and cross-selling within organizations.</li>
-                                <li><strong>Tangible Impact:</strong> Maintaining strong post-sale motion is crucial for predictable, profitable growth, forming a scalable business foundation and boosting valuation.</li>
-                              </ul>`
+                                     <ul class="list-disc list-inside mt-2 text-gray-700">
+                                        <li><strong>Strength:</strong> High retention (>97%) and 10% expansion drive most new ARR.</li>
+                                        <li><strong>Strategy:</strong> Growth comes from upselling (UAM to DLP) and cross-selling within organizations.</li>
+                                        <li><strong>Tangible Impact:</strong> Maintaining strong post-sale motion is crucial for predictable, profitable growth, forming a scalable business foundation and boosting valuation.</li>
+                                    </ul>`
                 }
+            },
+            // Data extracted from PDF for integration
+            pdfInsights: {
+                domainVisits: "100K", // Page 1
+                socialNetworks: [ // Page 2
+                    { name: 'YouTube', change: '<1%' },
+                    { name: 'Facebook', change: '-6.2%' },
+                    { name: 'Reddit', change: '+3.9%' },
+                    { name: 'LinkedIn', change: '+8.5%' },
+                    { name: 'Instagram', change: '-4.9%' },
+                    { name: 'TikTok', change: '+77%' } // Assuming #1 is TikTok based on the image
+                ],
+                searchAITools: [ // Page 2
+                    { name: 'Google', change: '<1%' },
+                    { name: 'Microsoft', change: '+16.8%' }, // Assuming #2 is Microsoft
+                    { name: 'Wikipedia', change: '-1.6%' }, // Assuming #3 is Wikipedia
+                    { name: 'Reddit', change: '+5.9%' },
+                    { name: 'Amazon', change: '-11.8%' },
+                    { name: 'ChatGPT', change: '+113%' } // Assuming #1 is ChatGPT based on the image
+                ],
+                highestAffinityKeywords: [ // Page 4
+                    { keyword: 'employee control', affinity: 61, volume: '9,900/month' },
+                    { keyword: 'vulnerability in information security', affinity: 57, volume: '390/month' },
+                    { keyword: 'siem vendor', affinity: 56, volume: '320/month' },
+                    { keyword: 'staff monitoring', affinity: 51, volume: '-/month' },
+                    { keyword: 'types of insider threat', affinity: 46, volume: '590/month' }
+                ],
+                socialAccounts: [ // Page 4-5
+                    { name: 'SANS Institute', handle: 'sansinstitute', affinity: 65, followers: '160-202K' },
+                    { name: 'Dark Reading', handle: 'darkreadingcom', affinity: 64, followers: '270-345K' },
+                    { name: 'Threatpost', handle: '@threatpost', affinity: 64, followers: '190-265K' },
+                    { name: 'The Hacker News', handle: '@thehackernews', affinity: 63, followers: '785-994K' }
+                ],
+                subreddits: [ // Page 5
+                    { name: 'Sysadmin', description: 'A reddit dedicated to the profession of Computer System Administration.' },
+                    { name: 'homelabbity', description: 'Welcome to your friendly /r/homelab, where techies and sysadmin from everywhere are welcome to share their labs, projects, builds, etc.' },
+                    { name: 'Linux, GNU/Linux, free software...', description: 'All things Linux and GNU/Linux -- this is neither a community exclusively about the kernel Linux, nor is exclusively about the GNU Operating System.' },
+                    { name: 'Enterprise Networking Design, Support, and Discussion', description: 'Enterprise Networking Design, Support, and Discussion. Enterprise Networking -- Routers, switches, wireless, and firewalls. Cisco, Juniper, Arista.....' }
+                ]
             }
         };
 
@@ -575,11 +655,11 @@
                         position: 'bottom',
                     },
                     tooltip: {
-                         callbacks: {
-                            label: function(context) {
-                                return ` ${context.dataset.label}: ${context.raw.toFixed(1)}% growth (indexed)`;
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.dataset.label}: ${context.raw.toFixed(1)}% growth (indexed)`;
+                                }
                             }
-                        }
                     }
                 },
                 scales: {
@@ -650,6 +730,58 @@
             observer.observe(section);
         });
 
+        // Populate the integrated PDF insights
+        document.getElementById('domain-visits-value').textContent = reportData.pdfInsights.domainVisits;
+
+        const socialNetworksList = document.getElementById('social-networks-list');
+        reportData.pdfInsights.socialNetworks.forEach(item => {
+            const li = document.createElement('li');
+            li.className = "flex items-center";
+            li.innerHTML = `<span class="text-accent-blue mr-3">&#8227;</span><div><strong>${item.name}:</strong> ${item.change}</div>`;
+            socialNetworksList.appendChild(li);
+        });
+
+        const searchAiToolsList = document.getElementById('search-ai-tools-list');
+        reportData.pdfInsights.searchAITools.forEach(item => {
+            const li = document.createElement('li');
+            li.className = "flex items-center";
+            li.innerHTML = `<span class="text-chart-color-green mr-3">&#8227;</span><div><strong>${item.name}:</strong> ${item.change}</div>`;
+            searchAiToolsList.appendChild(li);
+        });
+
+        const highestAffinityKeywordsList = document.getElementById('highest-affinity-keywords-list');
+        reportData.pdfInsights.highestAffinityKeywords.forEach(item => {
+            const li = document.createElement('li');
+            li.className = "flex items-center";
+            li.innerHTML = `<span class="text-primary-orange mr-3">&#9679;</span><div><strong>${item.keyword}:</strong> Affinity ${item.affinity}/100, Volume ${item.volume}</div>`;
+            highestAffinityKeywordsList.appendChild(li);
+        });
+
+        const socialAccountsList = document.getElementById('social-accounts-list');
+        reportData.pdfInsights.socialAccounts.forEach(item => {
+            const li = document.createElement('li');
+            li.className = "flex items-center";
+            li.innerHTML = `<span class="text-accent-blue mr-3">&#8227;</span><div><strong>${item.name} (${item.handle}):</strong> Affinity ${item.affinity}/100, Est. Followers ${item.followers}</div>`;
+            socialAccountsList.appendChild(li);
+        });
+
+        const subredditsList = document.getElementById('subreddits-list');
+        reportData.pdfInsights.subreddits.forEach(item => {
+            const li = document.createElement('li');
+            li.className = "flex items-start";
+            li.innerHTML = `<span class="text-chart-color-green mr-3 mt-1">&#8227;</span><div><strong>${item.name}:</strong> ${item.description}</div>`;
+            subredditsList.appendChild(li);
+        });
+
+        // The following lines were causing the error because the 'a[href="#top"]' element
+        // no longer exists after the previous refactor. The 'Current State' link already
+        // correctly points to '#current-state' in the HTML.
+        // document.querySelector('a[href="#top"]').href = '#current-state';
+        // document.querySelector('a[href="#top"]').textContent = 'Current State';
+
+        // Re-observe sections to include the new one (if any changes to sections array)
+        // This part is now handled by the initial observer setup, as the content is directly in HTML.
+        // No need to re-add or remove sections from the DOM dynamically.
     });
     </script>
 </body>
