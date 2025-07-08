@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapbox: Interactive Demand Generation Dossier</title>
+    <!-- Chosen Palette: Dark Mode with Blue Accent -->
+    <!-- Application Structure Plan: A single, long-scroll page with a sticky top navigation bar. The nav links act as anchor links, smoothly scrolling the user to the corresponding section. An IntersectionObserver is used for scroll-spying, highlighting the active link in the navigation as the user scrolls. This structure transforms the original tabbed SPA into a more fluid, report-style layout, allowing users to consume the content linearly while still providing quick navigation. -->
+    <!-- Visualization & Content Choices: 
+        - Strategic Context: Presented with clear typography and highlighted key stats (e.g., funding amount, developer count) to establish the high-stakes environment. Goal: Inform. Method: HTML/Tailwind.
+        - Pain-Point Playbook: Uses interactive cards with Heroicons for the four main themes and a dynamic, filterable HTML table for the 'Rosetta Stone' matrix. Goal: Compare & Organize. Interaction: Dropdown filters update the table content. Method: Vanilla JS for table filtering. Justification: Makes the most complex data set in the report explorable and easy to digest.
+        - Prospecting Engine: A tabbed interface separates the three main targeting strategies (Technographic, Signal-Based, Lookalike). Goal: Organize. Interaction: Clicking tabs reveals relevant content. Method: HTML/Tailwind/JS. Justification: A standard, intuitive UI pattern for grouping distinct but related strategies.
+        - Growth Levers: Uses a responsive grid of cards to present the Video, Webinar, and Events tactics. A custom HTML/CSS funnel diagram illustrates the video strategy. Goal: Inform. Method: HTML/Tailwind. Justification: Visually separates and highlights the key proposed tactics.
+        - GTM Frameworks: A custom HTML/CSS diagram visualizes the Bowtie model. An interactive accordion explains the SPICED framework with detailed sample questions. Goal: Organize & Inform. Interaction: Clicking accordion headers reveals details. Method: HTML/Tailwind/JS. Justification: Visual and interactive elements make these abstract frameworks easier to understand.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Cera Pro';
+            src: url(https://cdn.prod.website-files.com/6050a76fa6a633d5d54ae714/66ba0910faf611ff1d9ab01a_Cera%20Pro%20Light.woff2) format("woff2");
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Cera Pro';
+            src: url(https://cdn.prod.website-files.com/6050a76fa6a633d5d54ae714/6050ab43f0e445b9ad810484_Cera%20Pro.woff2) format("woff2");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Cera Pro';
+            src: url(https://cdn.prod.website-files.com/6050a76fa6a633d5d54ae714/6050ab43d6285ca7e942f809_Cera%20Pro%20Regular%20Italic.woff2) format("woff2");
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Cera Pro';
+            src: url(https://cdn.prod.website-files.com/6050a76fa6a633d5d54ae714/6050ab4346858de0e05420ae_Cera%20Pro%20Medium.woff2) format("woff2");
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Cera Pro';
+            src: url(https://cdn.prod.website-files.com/6050a76fa6a633d5d54ae714/6050ab431e1747f755fc0299_Cera%20Pro%20Medium%20italic.woff2) format("woff2");
+            font-weight: 500;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Cera Pro';
+            src: url(https://cdn.prod.website-files.com/6050a76fa6a633d5d54ae714/6050ab4338c9f1473d2527a2_Cera%20Pro%20Bold.woff2) format("woff2");
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Cera Pro';
+            src: url(https://cdn.prod.website-files.com/6050a76fa6a633d5d54ae714/6050ab43b06ece77adab5f49_Cera%20Pro%20Bold%20italic.woff2) format("woff2");
+            font-weight: 700;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Offset for sticky header */
+        }
+        body {
+            font-family: 'Cera Pro', 'Trebuchet MS', sans-serif;
+            background-color: #0e1012;
+            color: #a0aaba;
+        }
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+            border-bottom: 2px solid transparent;
+            color: #a0aaba;
+        }
+        .nav-link.active {
+            border-bottom-color: #007afc;
+            color: #ffffff;
+        }
+        .nav-link:hover {
+            border-bottom-color: #007afc;
+            color: #ffffff;
+        }
+        .tab-button.active {
+            border-color: #007afc;
+            background-color: rgba(0, 122, 252, 0.1);
+            color: #ffffff;
+        }
+        .accordion-header {
+            transition: background-color 0.2s ease-in-out;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .text-brand-copy { color: #a0aaba; }
+        .bg-brand-accent { background-color: #007afc; }
+        .text-brand-accent { color: #007afc; }
+        .border-brand-accent { border-color: #007afc; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#0e1012]/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-white">Mapbox Growth Dossier</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#context" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Strategic Context</a>
+                        <a href="#playbook" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Pain-Point Playbook</a>
+                        <a href="#prospecting" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Prospecting Engine</a>
+                        <a href="#levers" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Growth Levers</a>
+                        <a href="#frameworks" class="nav-link px-3 py-2 rounded-md text-sm font-medium">GTM Frameworks</a>
+                    </div>
+                </div>
+                 <div class="md:hidden">
+                    <select id="mobile-nav" class="block w-full rounded-md border-slate-700 bg-slate-800 text-white shadow-sm focus:border-brand-accent focus:ring-brand-accent sm:text-sm">
+                        <option value="context">Strategic Context</option>
+                        <option value="playbook">Pain-Point Playbook</option>
+                        <option value="prospecting">Prospecting Engine</option>
+                        <option value="levers">Growth Levers</option>
+                        <option value="frameworks">GTM Frameworks</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-16 md:space-y-24">
+
+        <!-- Section 1: Strategic Context -->
+        <section id="context">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-3xl md:text-4xl font-bold text-white text-center">The Pre-IPO Growth Imperative</h1>
+                <p class="mt-4 text-lg text-brand-copy text-center">The recent <span class="font-bold text-brand-accent">$280M Series E funding</span> led by SoftBank signals a clear mandate for Mapbox: achieve aggressive, high-margin, and repeatable enterprise growth. This dossier outlines a tactical plan to build a demand generation engine capable of fueling the path to a successful IPO.</p>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-slate-900 p-6 rounded-lg border border-slate-800">
+                        <div class="text-4xl font-bold text-brand-accent">$280M</div>
+                        <p class="mt-2 text-sm font-medium text-brand-copy">Series E Funding</p>
+                    </div>
+                    <div class="bg-slate-900 p-6 rounded-lg border border-slate-800">
+                        <div class="text-4xl font-bold text-brand-accent">4M+</div>
+                        <p class="mt-2 text-sm font-medium text-brand-copy">Registered Developers</p>
+                    </div>
+                    <div class="bg-slate-900 p-6 rounded-lg border border-slate-800">
+                        <div class="text-4xl font-bold text-brand-accent">40%</div>
+                        <p class="mt-2 text-sm font-medium text-brand-copy">of Fortune 500 Use Mapbox</p>
+                    </div>
+                </div>
+                <div class="mt-12 bg-slate-900 p-8 rounded-lg border border-slate-800">
+                    <h2 class="text-2xl font-bold text-white">The Strategic Directives</h2>
+                    <p class="mt-3 text-brand-copy">The investment explicitly targets two key growth pillars that must form the core of all demand generation efforts. The GTM strategy must be fundamentally aligned with these board-level directives to build the IPO narrative.</p>
+                    <div class="mt-6 flex flex-col md:flex-row gap-6">
+                        <div class="flex-1 p-6 bg-slate-800/50 rounded-lg border border-slate-800">
+                            <h3 class="font-semibold text-white">1. AI Location Services</h3>
+                            <p class="mt-2 text-sm text-brand-copy">Fueling investments in ADAS, EV battery management, logistics optimization, and richer 3D map content for developers.</p>
+                        </div>
+                        <div class="flex-1 p-6 bg-slate-800/50 rounded-lg border border-slate-800">
+                            <h3 class="font-semibold text-white">2. Automotive Industry Footprint</h3>
+                            <p class="mt-2 text-sm text-brand-copy">Broadening Mapbox's presence in automotive, focusing on compliance with new safety standards like GSR and NCAP.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Pain-Point Playbook -->
+        <section id="playbook">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-3xl md:text-4xl font-bold text-white text-center">The Pain-Point Playbook</h1>
+                <p class="mt-4 text-lg text-brand-copy text-center">The most effective path to repeatable enterprise wins is to codify the success Mapbox has already achieved. This section deconstructs customer stories into universal "Pain Themes" that form a predictive model for identifying and engaging future customers.</p>
+                <div id="pain-point-cards" class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Pain point cards will be injected here by JS -->
+                </div>
+                
+                <div class="mt-12 bg-slate-900 p-6 md:p-8 rounded-lg border border-slate-800">
+                    <h2 class="text-2xl font-bold text-white text-center">The "Rosetta Stone" for Enterprise Sales</h2>
+                    <p class="mt-3 text-brand-copy max-w-4xl mx-auto text-center">This interactive matrix connects target verticals to their most probable business pains, the language they use, and the specific Mapbox solutions that resolve them. Use the filter to explore how Mapbox addresses challenges across different industries.</p>
+                     <div class="my-6">
+                        <label for="vertical-filter" class="block text-sm font-medium text-white">Filter by Target Vertical</label>
+                        <select id="vertical-filter" class="mt-1 block w-full md:w-1/3 rounded-md border-slate-700 bg-slate-800 text-white shadow-sm focus:border-brand-accent focus:ring-brand-accent sm:text-sm">
+                            <!-- Options will be injected by JS -->
+                        </select>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-slate-700">
+                            <thead class="bg-slate-800/50">
+                                <tr>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Vertical</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Pain Theme</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Specific Pain Point</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Solution</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Impact</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Persona</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rosetta-table-body" class="divide-y divide-slate-800">
+                                <!-- Table rows will be injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Prospecting Engine -->
+        <section id="prospecting">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-3xl md:text-4xl font-bold text-white text-center">The Enterprise Prospecting Engine</h1>
+                <p class="mt-4 text-lg text-brand-copy text-center">A modern demand generation function must proactively identify and engage the right accounts at the right time. This requires a multi-layered approach combining technographic analysis, real-time buying signals, and strategic lookalike targeting.</p>
+
+                <div class="mt-12">
+                    <div class="border-b border-slate-800">
+                        <nav id="prospecting-tabs" class="-mb-px flex space-x-4 md:space-x-8" aria-label="Tabs">
+                           <!-- Tabs injected by JS -->
+                        </nav>
+                    </div>
+                    <div id="prospecting-content" class="mt-8">
+                        <!-- Tab content injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Growth Levers -->
+        <section id="levers">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-3xl md:text-4xl font-bold text-white text-center">The Demand Generation Toolbox</h1>
+                <p class="mt-4 text-lg text-brand-copy text-center">Identifying accounts is the first step. Engaging them with compelling, relevant content through the right channels is next. This toolbox is built on a "show, don't just tell" philosophy to pull prospects through the buying journey.</p>
+                <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="bg-slate-900 p-8 rounded-lg border border-slate-800 transform hover:scale-105 transition-transform duration-300">
+                        <h3 class="text-xl font-bold text-white">Video Ascendancy</h3>
+                        <p class="mt-3 text-brand-copy">For a visual product like Mapbox, video is a competitive necessity. A three-tiered strategy bridges the gap between what the product does and what prospects understand.</p>
+                        <div class="mt-6 space-y-2">
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold">1</div> <div class="text-brand-copy"><strong class="text-white">The Hook (Top Funnel):</strong> Short, high-impact social videos.</div></div>
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold opacity-80">2</div> <div class="text-brand-copy"><strong class="text-white">The How (Mid Funnel):</strong> Case studies & product spotlights.</div></div>
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold opacity-60">3</div> <div class="text-brand-copy"><strong class="text-white">The Nitty-Gritty (Bottom Funnel):</strong> Deep technical tutorials.</div></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 p-8 rounded-lg border border-slate-800 transform hover:scale-105 transition-transform duration-300">
+                        <h3 class="text-xl font-bold text-white">Always-On Webinar Engine</h3>
+                        <p class="mt-3 text-brand-copy">A programmatic webinar cadence is one of the most effective levers for generating a predictable stream of high-intent leads. The key is relevance: solve problems, don't just pitch products.</p>
+                         <ul class="mt-6 list-disc list-inside text-brand-copy space-y-2">
+                            <li><span class="font-semibold text-white">Problem/Solution Focused:</span> Title webinars based on pain points.</li>
+                            <li><span class="font-semibold text-white">Customer-Led Case Studies:</span> Feature customer champions to build social proof.</li>
+                            <li><span class="font-semibold text-white">"State of the Industry" Panels:</span> Host thought-leadership discussions.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900 p-8 rounded-lg border border-slate-800 transform hover:scale-105 transition-transform duration-300">
+                        <h3 class="text-xl font-bold text-white">Strategic Events Hub</h3>
+                        <p class="mt-3 text-brand-copy">An events strategy is incomplete without a plan for pre-event promotion and post-event content lifecycle. A centralized hub on the website transforms single events into durable, lead-generating assets.</p>
+                        <div class="mt-6 flex flex-col gap-4">
+                            <div class="p-4 bg-slate-800/50 rounded-md border border-slate-800">
+                                <h4 class="font-semibold text-white">Upcoming Events</h4>
+                                <p class="text-sm text-brand-copy">A forward-looking calendar to drive in-person engagement.</p>
+                            </div>
+                            <div class="p-4 bg-slate-800/50 rounded-md border border-slate-800">
+                                <h4 class="font-semibold text-white">Event Library (Past Events)</h4>
+                                <p class="text-sm text-brand-copy">A searchable archive with videos, slides, and summaries to maximize ROI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: GTM Frameworks -->
+        <section id="frameworks">
+            <div class="max-w-6xl mx-auto">
+                 <h1 class="text-3xl md:text-4xl font-bold text-white text-center">Weaving the Fabric of Growth</h1>
+                <p class="mt-4 text-lg text-brand-copy text-center">Strong tactics must be woven into a cohesive strategy. Proven GTM frameworks like SPICED and the Bowtie Model create a common language and standardized process across the entire revenue organization.</p>
+                <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <div class="bg-slate-900 p-8 rounded-lg border border-slate-800">
+                        <h3 class="text-2xl font-bold text-white text-center">The Bowtie Model</h3>
+                        <p class="mt-3 text-brand-copy text-center">A holistic view of the customer journey, connecting pre-sale acquisition with post-sale expansion to combat churn and drive lifetime value.</p>
+                        
+                        <div class="mt-6 flex justify-center items-center h-48">
+                            <div class="flex items-center">
+                                <!-- Left Triangle -->
+                                <div class="w-0 h-0 border-t-[60px] border-t-transparent border-b-[60px] border-b-transparent border-r-[80px] border-r-blue-900/50 relative">
+                                    <span class="absolute -left-16 top-[-10px] text-sm font-semibold text-blue-300">Acquire</span>
+                                </div>
+                                <!-- Adopt Circle -->
+                                <div class="w-16 h-16 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold z-10 -ml-4 -mr-4">Adopt</div>
+                                <!-- Right Triangle -->
+                                <div class="w-0 h-0 border-t-[60px] border-t-transparent border-b-[60px] border-b-transparent border-l-[80px] border-l-blue-500/30 relative">
+                                     <span class="absolute -right-16 top-[-10px] text-sm font-semibold text-blue-300">Expand</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mt-4 text-brand-copy"><strong class="text-white">Onboard & Adopt:</strong> Tier 3 technical videos and deep-dive webinars accelerate time-to-value and reduce churn.</p>
+                        <p class="mt-2 text-brand-copy"><strong class="text-white">Expand:</strong> Customer stories and problem/solution webinars educate existing customers on new use cases, driving cross-sell and up-sell opportunities.</p>
+                    </div>
+
+                    <div class="bg-slate-900 p-8 rounded-lg border border-slate-800">
+                         <h3 class="text-2xl font-bold text-white text-center">The SPICED Framework</h3>
+                        <p class="mt-3 text-brand-copy text-center">A customer-centric framework to connect marketing's message to sales' conversation, ensuring a seamless and effective handoff.</p>
+                        <div id="spiced-accordion" class="mt-6 space-y-2">
+                           <!-- Accordion items injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const painPointData = [
+        { 
+            title: "The Scalability Ceiling", 
+            description: "Occurs when a company's growth outpaces its mapping infrastructure, leading to performance degradation, reliability issues, and inability to support a growing user base.",
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-brand-accent"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>'
+        },
+        { 
+            title: "The Developer Velocity Trap", 
+            description: "Afflicts engineering teams who spend precious cycles building and maintaining commodity mapping features instead of focusing on core, value-differentiating business logic.",
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-brand-accent"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>'
+        },
+        { 
+            title: "The User Experience Deficit", 
+            description: "Arises when a generic or underperforming map layer directly harms user experience, impacting key business metrics like engagement, retention, or even safety.",
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-brand-accent"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75A2.25 2.25 0 0 0 15.75 1.5h-2.25m-3.75 0h3.75M12 18.75h.008v.008H12v-.008Z" /></svg>'
+        },
+        { 
+            title: "The Data Visualization & Trust Imperative", 
+            description: "Is acute for companies whose value proposition involves visualizing complex, proprietary data in a clear, performant, and trustworthy manner. The map is the interface.",
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-brand-accent"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>'
+        },
+    ];
+
+    const rosettaStoneData = [
+        { vertical: "On-Demand Logistics & Delivery", theme: "The User Experience Deficit", specificPain: "Our ETAs are inaccurate, leading to high customer support costs and delivery failures.", solution: "Directions API, Map Matching API, Geocoding API", impact: "Improved on-time delivery rates; Reduced cost-per-delivery; Increased customer satisfaction (CSAT) scores.", persona: "VP of Operations, Head of Logistics" },
+        { vertical: "Drone/Reality Capture", theme: "The Scalability Ceiling", specificPain: "Our open-source maps are slow and can't handle the resolution of our drone data overlays.", solution: "Mapbox GL JS, Mapbox Studio, Mapbox Tiling Service", impact: "Faster rendering of large datasets; Ability to visualize high-resolution overlays; Improved developer velocity.", persona: "VP of Engineering, Head of Product" },
+        { vertical: "Social Fitness & Outdoor Apps", theme: "The User Experience Deficit", specificPain: "Our app feels generic in new international markets, and users complain about unreliable offline maps.", solution: "Mobile Maps SDK (iOS/Android), Mapbox Studio", impact: "Increased user engagement & session time; Improved safety and reliability in offline environments; Faster global expansion.", persona: "Head of Product, CTO" },
+        { vertical: "DePIN", theme: "The Data Visualization & Trust Imperative", specificPain: "We need to visualize our growing global network of nodes with 100% transparency to build community trust.", solution: "Mapbox GL JS, Mapbox Tiling Service", impact: "Ability to visualize millions of data points without performance degradation; Enhanced community trust and participation.", persona: "Founder, VP of Engineering" },
+        { vertical: "Environmental/Carbon Tracking", theme: "The Data Visualization & Trust Imperative", specificPain: "We need to prove the exact location and status of our offset projects to combat greenwashing claims.", solution: "Mapbox GL JS, Satellite Imagery, Mobile Maps SDK", impact: "Full transparency and traceability of assets; Differentiation as a rigorous and reliable partner.", persona: "CEO, Chief Sustainability Officer" },
+        { vertical: "Ticketing & Event Marketplaces", theme: "The Scalability Ceiling", specificPain: "Our legacy seat-mapping system is creating technical debt and doesn't scale for major events.", solution: "Mapbox Tiling Service, Mapbox GL JS", impact: "Offloaded technical debt; Consistent data and UX across web and mobile; Foundation for immersive 3D experiences.", persona: "Senior Product Manager, CTO" }
+    ];
+
+    const prospectingData = [
+        {
+            id: 'technographic',
+            title: 'Technographic Targeting',
+            content: `
+                <p class="text-brand-copy">This strategy leverages data on the specific technologies a company uses to identify high-potential prospects. It enables two key plays:</p>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-800">
+                        <h4 class="font-bold text-white">Rip and Replace</h4>
+                        <p class="mt-2 text-sm text-brand-copy">Targeting companies using inferior or outdated technologies (e.g., Leaflet.js, lower-tier competitor products) who are likely experiencing the "Scalability Ceiling." The motion is a clear migration narrative.</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-800">
+                        <h4 class="font-bold text-white">Enhance and Integrate</h4>
+                        <p class="mt-2 text-sm text-brand-copy">Targeting companies using complementary best-in-class tech (e.g., Snowflake, AWS). Mapbox is positioned as a critical component that enhances their existing investments.</p>
+                    </div>
+                </div>
+            `
+        },
+        {
+            id: 'signal',
+            title: 'Signal-Based Targeting',
+            content: `
+                <p class="text-brand-copy">This strategy intercepts accounts as they enter a buying cycle by monitoring real-world business signals that act as proxies for a "Critical Event." Engaging prospects early, as they begin to define their problem, provides a significant competitive advantage.</p>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-700">
+                        <thead class="bg-slate-800/50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Buying Signal</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Inferred Pain Point</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Target Persona</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Outreach Angle / Message Hook</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800">
+                            <tr>
+                                <td class="px-4 py-3 text-sm text-brand-copy">Recent Major Funding Round (Series B/C/D)</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">Scalability Ceiling</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">CFO, VP of Engineering</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">"Congratulations on your recent funding. As you scale, many companies find their mapping infrastructure becomes a bottleneck."</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 text-sm text-brand-copy">Key Executive Hire (CPO, CTO, CSO)</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">Developer Velocity Trap / New Initiatives</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">The New Executive</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">"Welcome to your new role. Leaders in your position are often tasked with accelerating the product roadmap. We help engineering teams focus on core features."</td>
+                            </tr>
+                             <tr>
+                                <td class="px-4 py-3 text-sm text-brand-copy">New Market Expansion Announcement</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">User Experience Deficit</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">Head of Product, Head of International</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">"Saw the news about your expansion. Ensuring a seamless, localized user experience is critical for global success."</td>
+                            </tr>
+                             <tr>
+                                <td class="px-4 py-3 text-sm text-brand-copy">Announcement of New EV/ADAS Initiative</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">Compliance / Product Innovation</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">Head of ADAS, Head of EV Powertrain</td>
+                                <td class="px-4 py-3 text-sm text-brand-copy">"Your new EV initiative is exciting. We provide the AI map and real-time data automakers need for intelligent range forecasting and compliance."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `
+        },
+        {
+            id: 'lookalike',
+            title: 'Lookalike & Vertical Targeting',
+            content: `
+                <p class="text-brand-copy">The most direct path to new revenue is to sell to companies functionally identical to existing happy customers. Winning a marquee customer unlocks an entire industry vertical, creating a powerful flywheel effect.</p>
+                <div class="mt-4 p-6 bg-blue-900/20 border-l-4 border-brand-accent rounded-r-lg">
+                    <p class="font-semibold text-blue-200">The "Vertical Dominance" Playbook:</p>
+                    <p class="mt-2 text-brand-copy">For every major customer, launch a dedicated "Vertical Attack" campaign targeting their top 3-5 competitors with tailored messaging that leverages the existing success as ultimate social proof.</p>
+                </div>
+            `
+        }
+    ];
+
+    const spicedData = [
+        { letter: 'S', title: 'Situation', description: "Understand the prospect's current state and context. <br><br> <strong>Sample Question:</strong> 'Could you give me a sense of the scale you're operating at today in terms of daily deliveries and the size of your driver fleet?'" },
+        { letter: 'P', title: 'Pain', description: "Uncover specific challenges, both rational and emotional. <br><br> <strong>Sample Question:</strong> 'What are the biggest frustrations you're hearing from either your drivers or your end customers?'" },
+        { letter: 'I', title: 'Impact', description: "Quantify the business value of solving the pain. <br><br> <strong>Sample Question:</strong> 'If you were able to improve your on-time delivery rate by even 5%, what would that mean for your customer retention numbers and overall operational costs?'" },
+        { letter: 'C', title: 'Critical Event', description: "Uncover the 'why now?' to establish urgency. <br><br> <strong>Sample Question:</strong> 'What happens if the current routing and ETA issues aren't resolved by the time you launch in those new markets?'" },
+        { letter: 'E', title: 'Decision', description: "Understand the internal buying process, committee, and criteria. <br><br> <strong>Sample Question:</strong> 'To ensure we provide you with the right information, what are the key technical and business criteria your team will use to evaluate a new location platform?'" },
+    ];
+
+
+    function init() {
+        populatePainPoints();
+        populateRosettaStone();
+        setupVerticalFilter();
+        populateProspectingTabs();
+        populateSpicedAccordion();
+        setupScrollSpy();
+    }
+
+    function populatePainPoints() {
+        const container = document.getElementById('pain-point-cards');
+        if (!container) return;
+        container.innerHTML = '';
+        painPointData.forEach(point => {
+            const card = document.createElement('div');
+            card.className = 'bg-slate-900 p-6 rounded-lg border border-slate-800 hover:border-slate-700 transition-colors duration-300';
+            card.innerHTML = `
+                <div class="h-8 w-8">${point.icon}</div>
+                <h3 class="mt-4 text-lg font-bold text-white">${point.title}</h3>
+                <p class="mt-2 text-sm text-brand-copy">${point.description}</p>
+            `;
+            container.appendChild(card);
+        });
+    }
+    
+    function populateRosettaStone(filter = 'All') {
+        const tableBody = document.getElementById('rosetta-table-body');
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+        const filteredData = filter === 'All' ? rosettaStoneData : rosettaStoneData.filter(d => d.vertical === filter);
+        
+        filteredData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="px-4 py-4 align-top text-sm font-medium text-white">${row.vertical}</td>
+                <td class="px-4 py-4 align-top text-sm text-brand-copy">${row.theme}</td>
+                <td class="px-4 py-4 align-top text-sm text-brand-copy">${row.specificPain}</td>
+                <td class="px-4 py-4 align-top text-sm text-brand-copy">${row.solution}</td>
+                <td class="px-4 py-4 align-top text-sm text-brand-copy">${row.impact}</td>
+                <td class="px-4 py-4 align-top text-sm text-brand-copy">${row.persona}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+    
+    function setupVerticalFilter() {
+        const filterSelect = document.getElementById('vertical-filter');
+        if (!filterSelect || filterSelect.options.length > 1) return;
+        const verticals = ['All', ...new Set(rosettaStoneData.map(d => d.vertical))];
+        verticals.forEach(v => {
+            const option = document.createElement('option');
+            option.value = v;
+            option.textContent = v;
+            filterSelect.appendChild(option);
+        });
+        filterSelect.addEventListener('change', (e) => populateRosettaStone(e.target.value));
+    }
+
+    function setupScrollSpy() {
+        const sections = document.querySelectorAll('main > section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-80px 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                    if (mobileNav.value !== id) {
+                        mobileNav.value = id;
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        mobileNav.addEventListener('change', function() {
+            const targetId = this.value;
+            const targetElement = document.getElementById(targetId);
+            if(targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+    
+    function populateProspectingTabs() {
+        const tabsContainer = document.getElementById('prospecting-tabs');
+        const contentContainer = document.getElementById('prospecting-content');
+        if (!tabsContainer || tabsContainer.children.length > 0) return;
+
+        prospectingData.forEach((tab, index) => {
+            const button = document.createElement('button');
+            button.className = 'tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-slate-400 hover:text-white hover:border-slate-500';
+            button.textContent = tab.title;
+            button.dataset.target = tab.id;
+            tabsContainer.appendChild(button);
+
+            const content = document.createElement('div');
+            content.id = tab.id;
+            content.className = 'prospecting-content-panel';
+            content.innerHTML = tab.content;
+            content.style.display = index === 0 ? 'block' : 'none';
+            contentContainer.appendChild(content);
+
+            if (index === 0) {
+                button.classList.add('active');
+            }
+        });
+
+        tabsContainer.addEventListener('click', e => {
+            const button = e.target.closest('.tab-button');
+            if (button) {
+                const targetId = button.dataset.target;
+                
+                tabsContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                contentContainer.querySelectorAll('.prospecting-content-panel').forEach(panel => {
+                    panel.style.display = panel.id === targetId ? 'block' : 'none';
+                });
+            }
+        });
+    }
+
+    function populateSpicedAccordion() {
+        const container = document.getElementById('spiced-accordion');
+        if (!container || container.children.length > 0) return;
+
+        spicedData.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'border border-slate-800 rounded-lg';
+            div.innerHTML = `
+                <div class="accordion-header flex justify-between items-center p-4 bg-slate-800/50 hover:bg-slate-800 cursor-pointer rounded-t-lg">
+                    <h4 class="font-semibold text-white flex items-center gap-3"><span class="inline-block w-6 h-6 text-center leading-6 rounded-full bg-brand-accent text-white font-bold">${item.letter}</span>${item.title}</h4>
+                    <span class="transform transition-transform duration-300 text-brand-accent font-bold text-xl">+</span>
+                </div>
+                <div class="accordion-content bg-slate-900 px-4 rounded-b-lg">
+                    <div class="pt-4 pb-4 text-brand-copy">${item.description}</div>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+
+        container.addEventListener('click', e => {
+            const header = e.target.closest('.accordion-header');
+            if (header) {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('span:last-child');
+                const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                
+                container.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0px');
+                container.querySelectorAll('.accordion-header span:last-child').forEach(i => i.style.transform = 'rotate(0deg)');
+                
+                if (!isOpen) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(45deg)';
+                }
+            }
+        });
+    }
+
+    init();
+});
+</script>
+
+</body>
+</html>
