@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviynt: Interactive Demand Generation Dossier</title>
+    <!-- Chosen Palette: Saviynt Brand Theme -->
+    <!-- Application Structure Plan: A single, long-scroll page with a sticky top navigation bar. The nav links act as anchor links, smoothly scrolling the user to the corresponding section. An IntersectionObserver is used for scroll-spying, highlighting the active link in the navigation as the user scrolls. This structure provides a fluid, report-style layout, allowing users to consume the content linearly while still providing quick navigation. -->
+    <!-- Visualization & Content Choices: 
+        - Strategic Context: Presented with clear typography and highlighted key stats to establish the high-stakes environment. Goal: Inform. Method: HTML/Tailwind.
+        - Pain-Point Playbook: Uses interactive cards with Heroicons for four main themes and a dynamic, filterable HTML table for the 'Rosetta Stone' matrix. Goal: Compare & Organize. Interaction: Dropdown filters update the table content. Method: Vanilla JS for table filtering. Justification: Makes the complex data set of identity security challenges explorable and easy to digest.
+        - Prospecting Engine: A tabbed interface separates the three main targeting strategies (Technographic, Signal-Based, Lookalike). Goal: Organize. Interaction: Clicking tabs reveals relevant content. Method: HTML/Tailwind/JS. Justification: A standard, intuitive UI pattern for grouping distinct but related strategies.
+        - Growth Levers: Uses a responsive grid of cards to present Video, Webinar, and Events tactics. A custom HTML/CSS funnel diagram illustrates the video strategy. Goal: Inform. Method: HTML/Tailwind. Justification: Visually separates and highlights the key proposed tactics.
+        - GTM Frameworks: A custom HTML/CSS diagram visualizes the Bowtie model. An interactive accordion explains the SPICED framework with detailed sample questions. Goal: Organize & Inform. Interaction: Clicking accordion headers reveals details. Method: HTML/Tailwind/JS. Justification: Visual and interactive elements make these abstract frameworks easier to understand.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Public Sans';
+            src: url('https://saviynt.com/_hcms/googlefonts/Public_Sans/regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Public Sans';
+            src: url('https://saviynt.com/_hcms/googlefonts/Public_Sans/bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'MD Nichrome';
+            src: url('https://saviynt.com/hubfs/MDNichrome-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Offset for sticky header */
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            color: #3a3a66;
+            font-size: 1rem;
+            line-height: 1.625;
+            letter-spacing: 0;
+            width: 100%;
+            background-color: #ffffff;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'MD Nichrome', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0;
+            line-height: 1.25;
+        }
+        h1 {
+            color: #10123d;
+            font-size: 3rem; /* Adjusted for better responsiveness */
+        }
+        h2 {
+            color: #10123d;
+            font-size: 2.1666rem;
+        }
+        h3 {
+            color: #333;
+            font-size: 1.8888rem;
+        }
+        h4 {
+            color: #333;
+            font-size: 1.3333rem;
+        }
+        h5, h6 {
+            font-family: 'Public Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0;
+            line-height: 1.25;
+        }
+        h5 { color: #333; font-size: 1.1111rem; }
+        
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+            border-bottom: 2px solid transparent;
+            color: #3a3a66;
+            font-weight: 700;
+        }
+        .nav-link.active {
+            border-bottom-color: #5ba1ba;
+            color: #10123d;
+        }
+        .nav-link:hover {
+            border-bottom-color: #5ba1ba;
+            color: #10123d;
+        }
+        .tab-button {
+            color: #3a3a66;
+        }
+        .tab-button.active {
+            border-color: #5ba1ba;
+            background-color: #f0f7fa;
+            color: #10123d;
+        }
+        .accordion-header {
+            transition: background-color 0.2s ease-in-out;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .text-brand-accent { color: #5ba1ba; }
+        .bg-brand-accent { background-color: #5ba1ba; }
+        .border-brand-accent { border-color: #5ba1ba; }
+
+        #context::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(91, 161, 186, 0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .visual-content {
+            transform: scale(0.8);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold" style="font-family: 'MD Nichrome', sans-serif; color: #10123d;">Saviynt Growth Dossier</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#context" class="nav-link px-3 py-2 rounded-md text-sm">Strategic Context</a>
+                        <a href="#playbook" class="nav-link px-3 py-2 rounded-md text-sm">Pain-Point Playbook</a>
+                        <a href="#prospecting" class="nav-link px-3 py-2 rounded-md text-sm">Prospecting Engine</a>
+                        <a href="#levers" class="nav-link px-3 py-2 rounded-md text-sm">Growth Levers</a>
+                        <a href="#frameworks" class="nav-link px-3 py-2 rounded-md text-sm">GTM Frameworks</a>
+                    </div>
+                </div>
+                 <div class="md:hidden">
+                    <select id="mobile-nav" class="block w-full rounded-md border-gray-300 bg-gray-50 text-gray-900 shadow-sm focus:border-brand-accent focus:ring-brand-accent sm:text-sm">
+                        <option value="context">Strategic Context</option>
+                        <option value="playbook">Pain-Point Playbook</option>
+                        <option value="prospecting">Prospecting Engine</option>
+                        <option value="levers">Growth Levers</option>
+                        <option value="frameworks">GTM Frameworks</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Section 1: Strategic Context -->
+        <section id="context" class="bg-white py-16 md:py-24 relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl hero-content">
+                <h1 class="text-center">The Identity Security Growth Imperative</h1>
+                <p class="mt-4 text-lg text-center">Saviynt's position as a leader in the Gartner Magic Quadrant for Identity Governance and Administration (IGA) signals market validation and a mandate for aggressive growth. The convergence of IGA, privileged access management (PAM), and application access governance (AAG) creates a complex but opportunity-rich environment. This dossier outlines a tactical plan to build a demand generation engine capable of fueling Saviynt's path to market leadership.</p>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 visual-content">
+                        <div class="text-4xl font-bold text-brand-accent" style="font-family: 'MD Nichrome', sans-serif;">Leader</div>
+                        <p class="mt-2 text-sm font-medium">Gartner Magic Quadrant for IGA</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 visual-content">
+                        <div class="text-4xl font-bold text-brand-accent" style="font-family: 'MD Nichrome', sans-serif;">$205M</div>
+                        <p class="mt-2 text-sm font-medium">Recent Funding Round</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 visual-content">
+                        <div class="text-4xl font-bold text-brand-accent" style="font-family: 'MD Nichrome', sans-serif;">Converged</div>
+                        <p class="mt-2 text-sm font-medium">Identity Platform</p>
+                    </div>
+                </div>
+                <div class="mt-12 bg-gray-50 p-8 rounded-lg border border-gray-200 visual-content">
+                    <h2 class="text-center">The Strategic Directives</h2>
+                    <p class="mt-3 text-center">The market demands a unified approach to identity security. Saviynt's core strategy must be to displace point solutions and legacy IGA platforms by demonstrating the superior security posture and lower total cost of ownership (TCO) of a converged platform. The GTM strategy must be fundamentally aligned with these core value propositions.</p>
+                    <div class="mt-6 flex flex-col md:flex-row gap-6">
+                        <div class="flex-1 p-6 bg-white rounded-lg border border-gray-200">
+                            <h3>1. Drive Platform Consolidation</h3>
+                            <p class="mt-2 text-sm">Target enterprises struggling with the complexity and cost of managing multiple identity point solutions (e.g., separate IGA, PAM, AAG tools).</p>
+                        </div>
+                        <div class="flex-1 p-6 bg-white rounded-lg border border-gray-200">
+                            <h3>2. Modernize Legacy IGA</h3>
+                            <p class="mt-2 text-sm">Focus on replacing outdated, on-premises IGA solutions with Saviynt's cloud-native, AI-powered platform to improve efficiency and reduce risk.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Pain-Point Playbook -->
+        <section id="playbook" class="bg-[#efede4] py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <h1 class="text-center">The Pain-Point Playbook</h1>
+                <p class="mt-4 text-lg text-center">The most effective path to repeatable enterprise wins is to codify the security and operational challenges that Saviynt solves. This section deconstructs common enterprise identity struggles into universal "Pain Themes" that form a predictive model for identifying and engaging future customers.</p>
+                <div id="pain-point-cards" class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Pain point cards will be injected here by JS -->
+                </div>
+                
+                <div class="mt-12 bg-white p-6 md:p-8 rounded-lg shadow-sm border border-gray-200 visual-content">
+                    <h2 class="text-center">The "Rosetta Stone" for Enterprise Sales</h2>
+                    <p class="mt-3 max-w-4xl mx-auto text-center">This interactive matrix connects target verticals to their most probable business pains, the language they use, and the specific Saviynt solutions that resolve them. Use the filter to explore how Saviynt addresses challenges across different industries.</p>
+                     <div class="my-6">
+                        <label for="vertical-filter" class="block text-sm font-bold text-[#10123d]">Filter by Target Vertical</label>
+                        <select id="vertical-filter" class="mt-1 block w-full md:w-1/3 rounded-md border-gray-300 shadow-sm focus:border-[#5ba1ba] focus:ring-[#5ba1ba] sm:text-sm">
+                            <!-- Options will be injected by JS -->
+                        </select>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Vertical</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pain Theme</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Specific Pain Point</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Solution</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Impact</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Persona</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rosetta-table-body" class="bg-white divide-y divide-gray-200">
+                                <!-- Table rows will be injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Prospecting Engine -->
+        <section id="prospecting" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <h1 class="text-center">The Enterprise Prospecting Engine</h1>
+                <p class="mt-4 text-lg text-center">A modern demand generation function must proactively identify and engage the right accounts at the right time. This requires a multi-layered approach combining technographic analysis, real-time buying signals, and strategic lookalike targeting.</p>
+
+                <div class="mt-12 visual-content">
+                    <div class="border-b border-gray-200">
+                        <nav id="prospecting-tabs" class="-mb-px flex space-x-4 md:space-x-8" aria-label="Tabs">
+                           <!-- Tabs injected by JS -->
+                        </nav>
+                    </div>
+                    <div id="prospecting-content" class="mt-8">
+                        <!-- Tab content injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Growth Levers -->
+        <section id="levers" class="bg-[#efede4] py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <h1 class="text-center">The Demand Generation Toolbox</h1>
+                <p class="mt-4 text-lg text-center">Identifying accounts is the first step. Engaging them with compelling, relevant content through the right channels is next. This toolbox is built on a "show, don't just tell" philosophy to pull prospects through the buying journey.</p>
+                <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 transform hover:scale-105 transition-transform duration-300 visual-content">
+                        <h3>Video Ascendancy</h3>
+                        <p class="mt-3">For a complex product like Saviynt, video is a competitive necessity. A three-tiered strategy bridges the gap between what the product does and what prospects understand.</p>
+                        <div class="mt-6 space-y-2">
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-[#5ba1ba] text-white flex items-center justify-center font-bold">1</div> <div><strong class="text-[#10123d]">The Hook (Top Funnel):</strong> Short, high-impact social videos.</div></div>
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-[#5ba1ba] text-white flex items-center justify-center font-bold opacity-80">2</div> <div><strong class="text-[#10123d]">The How (Mid Funnel):</strong> Case studies & product spotlights.</div></div>
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-[#5ba1ba] text-white flex items-center justify-center font-bold opacity-60">3</div> <div><strong class="text-[#10123d]">The Nitty-Gritty (Bottom Funnel):</strong> Deep technical tutorials.</div></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 transform hover:scale-105 transition-transform duration-300 visual-content">
+                        <h3>Always-On Webinar Engine</h3>
+                        <p class="mt-3">A programmatic webinar cadence is one of the most effective levers for generating a predictable stream of high-intent leads. The key is relevance: solve problems, don't just pitch products.</p>
+                         <ul class="mt-6 list-disc list-inside space-y-2">
+                            <li><span class="font-bold text-[#10123d]">Problem/Solution Focused:</span> Title webinars based on pain points.</li>
+                            <li><span class="font-bold text-[#10123d]">Customer-Led Case Studies:</span> Feature customer champions to build social proof.</li>
+                            <li><span class="font-bold text-[#10123d]">"State of the Industry" Panels:</span> Host thought-leadership discussions.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 transform hover:scale-105 transition-transform duration-300 visual-content">
+                        <h3>Strategic Events Hub</h3>
+                        <p class="mt-3">An events strategy is incomplete without a plan for pre-event promotion and post-event content lifecycle. A centralized hub on the website transforms single events into durable, lead-generating assets.</p>
+                        <div class="mt-6 flex flex-col gap-4">
+                            <div class="p-4 bg-gray-50 rounded-md border">
+                                <h4>Upcoming Events</h4>
+                                <p class="text-sm">A forward-looking calendar to drive in-person engagement.</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-md border">
+                                <h4>Event Library (Past Events)</h4>
+                                <p class="text-sm">A searchable archive with videos, slides, and summaries to maximize ROI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: GTM Frameworks -->
+        <section id="frameworks" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                 <h1 class="text-center">Weaving the Fabric of Growth</h1>
+                <p class="mt-4 text-lg text-center">Strong tactics must be woven into a cohesive strategy. Proven GTM frameworks like SPICED and the Bowtie Model create a common language and standardized process across the entire revenue organization.</p>
+                <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 visual-content">
+                        <h2 class="text-center">The Bowtie Model</h2>
+                        <p class="mt-3 text-center">A holistic view of the customer journey, connecting pre-sale acquisition with post-sale expansion to combat churn and drive lifetime value.</p>
+                        
+                        <div class="mt-6 flex justify-center items-center h-48">
+                            <div class="flex items-center">
+                                <!-- Left Triangle -->
+                                <div class="w-0 h-0 border-t-[60px] border-t-transparent border-b-[60px] border-b-transparent border-r-[80px] border-r-blue-100 relative">
+                                    <span class="absolute -left-16 top-[-10px] text-sm font-bold text-blue-800">Acquire</span>
+                                </div>
+                                <!-- Adopt Circle -->
+                                <div class="w-16 h-16 rounded-full bg-[#5ba1ba] text-white flex items-center justify-center font-bold z-10 -ml-4 -mr-4">Adopt</div>
+                                <!-- Right Triangle -->
+                                <div class="w-0 h-0 border-t-[60px] border-t-transparent border-b-[60px] border-b-transparent border-l-[80px] border-l-green-100 relative">
+                                     <span class="absolute -right-16 top-[-10px] text-sm font-bold text-green-800">Expand</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mt-4"><strong class="text-[#10123d]">Onboard & Adopt:</strong> Tier 3 technical videos and deep-dive webinars accelerate time-to-value and reduce churn.</p>
+                        <p class="mt-2"><strong class="text-[#10123d]">Expand:</strong> Customer stories and problem/solution webinars educate existing customers on new use cases, driving cross-sell and up-sell opportunities.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 visual-content">
+                         <h2 class="text-center">The SPICED Framework</h2>
+                        <p class="mt-3 text-center">A customer-centric framework to connect marketing's message to sales' conversation, ensuring a seamless and effective handoff.</p>
+                        <div id="spiced-accordion" class="mt-6 space-y-2">
+                           <!-- Accordion items injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        gsap.registerPlugin(ScrollTrigger);
+
+    const painPointData = [
+        { 
+            title: "The Compliance Nightmare", 
+            description: "Struggling to meet complex regulatory requirements like SOX, HIPAA, and GDPR with manual processes and siloed systems, leading to audit failures and fines.",
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5ba1ba]"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>'
+        },
+        { 
+            title: "The Cloud Security Blind Spot", 
+            description: "Rapid adoption of multi-cloud (AWS, Azure, GCP) and SaaS apps has created a fragmented identity landscape with inconsistent security controls and excessive permissions.",
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5ba1ba]"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" /></svg>'
+        },
+        { 
+            title: "The Manual Access Request Trap", 
+            description: "Overburdened IT teams spend countless hours on manual access requests and periodic reviews, leading to slow onboarding, low productivity, and security gaps.",
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5ba1ba]"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>'
+        },
+        { 
+            title: "The Insider Threat Risk", 
+            description: "Lack of visibility into who has access to what, especially privileged and sensitive data, creates significant risk of both malicious and accidental insider threats.",
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5ba1ba]"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>'
+        },
+    ];
+
+        const rosettaStoneData = [
+            { vertical: "Healthcare", theme: "The Compliance Nightmare", specificPain: "We're failing HIPAA audits because we can't prove who accessed patient data in our EHR system.", solution: "Application Access Governance (AAG), Identity Governance (IGA)", impact: "Automated compliance reporting; Reduced audit prep time by 80%; Avoided fines.", persona: "CISO, Compliance Officer" },
+            { vertical: "Financial Services", theme: "The Insider Threat Risk", specificPain: "Our traders have standing privileged access to critical systems, creating a huge security risk.", solution: "Privileged Access Management (PAM), IGA", impact: "Just-in-time privileged access; Reduced standing privileges by 95%; Full audit trail of privileged activity.", persona: "Head of IT Security, CIO" },
+            { vertical: "Manufacturing", theme: "The Manual Access Request Trap", specificPain: "It takes weeks to get a new factory worker access to the five systems they need, slowing down production.", solution: "IGA with automated workflows", impact: "Day-one productivity for new hires; Reduced IT helpdesk tickets by 60%; Improved operational efficiency.", persona: "VP of Operations, Plant Manager" },
+            { vertical: "Retail", theme: "The Cloud Security Blind Spot", specificPain: "Our marketing team is using dozens of SaaS apps with no central oversight, creating a massive shadow IT problem.", solution: "AAG for SaaS, IGA", impact: "Centralized visibility into all application access; Automated access reviews; Reduced license costs.", persona: "CISO, Head of IT" },
+            { vertical: "Technology", theme: "The Cloud Security Blind Spot", specificPain: "Our developers have excessive permissions in AWS, and we have no way to enforce least privilege at scale.", solution: "Cloud Privileged Access Management (CPAM)", impact: "Enforced least privilege in multi-cloud environments; Reduced cloud attack surface; Automated remediation of risky permissions.", persona: "Head of Cloud Security, DevOps Lead" }
+        ];
+
+        const prospectingData = [
+            {
+                id: 'technographic',
+                title: 'Technographic Targeting',
+                content: `
+                    <p>This strategy leverages data on the specific technologies a company uses to identify high-potential prospects. It enables two key plays:</p>
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4>Rip and Replace</h4>
+                            <p class="mt-2 text-sm">Targeting companies using legacy, on-premises IGA solutions (e.g., Oracle Identity Manager, IBM Security Identity Manager) who are likely experiencing the "Compliance Nightmare."</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4>Enhance and Integrate</h4>
+                            <p class="mt-2 text-sm">Targeting companies using point solutions for PAM (e.g., CyberArk, Delinea) and positioning Saviynt's converged platform as a way to reduce complexity and TCO.</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'signal',
+                title: 'Signal-Based Targeting',
+                content: `
+                    <p>This strategy intercepts accounts as they enter a buying cycle by monitoring real-world business signals that act as proxies for a "Critical Event." Engaging prospects early, as they begin to define their problem, provides a significant competitive advantage.</p>
+                    <div class="mt-4 overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Buying Signal</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Inferred Pain Point</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Target Persona</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Outreach Angle / Message Hook</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-3 text-sm">Recent Data Breach Announcement</td>
+                                    <td class="px-4 py-3 text-sm">Insider Threat Risk</td>
+                                    <td class="px-4 py-3 text-sm">CISO, CIO</td>
+                                    <td class="px-4 py-3 text-sm">"In light of recent events, many security leaders are re-evaluating their privileged access controls. A converged identity platform can help prevent similar incidents."</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm">Hiring for "Cloud Security Architect" or "IAM Engineer"</td>
+                                    <td class="px-4 py-3 text-sm">Cloud Security Blind Spot</td>
+                                    <td class="px-4 py-3 text-sm">Head of IT Security, Hiring Manager</td>
+                                    <td class="px-4 py-3 text-sm">"Saw you're expanding your identity security team. As you scale your cloud presence, managing identities and permissions becomes exponentially more complex."</td>
+                                </tr>
+                                 <tr>
+                                    <td class="px-4 py-3 text-sm">M&A Activity</td>
+                                    <td class="px-4 py-3 text-sm">Manual Access Request Trap</td>
+                                    <td class="px-4 py-3 text-sm">CIO, Head of Integration</td>
+                                    <td class="px-4 py-3 text-sm">"Integrating identity systems post-merger is a major challenge. Our platform helps streamline access and enforce consistent policies across both organizations from day one."</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                id: 'lookalike',
+                title: 'Lookalike & Vertical Targeting',
+                content: `
+                    <p>The most direct path to new revenue is to sell to companies functionally identical to existing happy customers. Winning a marquee customer in a specific vertical unlocks an entire industry.</p>
+                    <div class="mt-4 p-6 bg-blue-50 border-l-4 border-[#5ba1ba] rounded-r-lg">
+                        <h4 class="text-blue-900">The "Vertical Dominance" Playbook:</h4>
+                        <p class="mt-2 text-blue-800">For every major customer, launch a dedicated "Vertical Attack" campaign targeting their top 3-5 competitors with tailored messaging that leverages the existing success as ultimate social proof.</p>
+                    </div>
+                `
+            }
+        ];
+
+        const spicedData = [
+            { letter: 'S', title: 'Situation', description: "Understand the prospect's current state and context. <br><br> <strong>Sample Question:</strong> 'Could you give me a sense of your current identity landscape? How many different tools are you using to manage IGA, PAM, and application access?'" },
+            { letter: 'P', title: 'Pain', description: "Uncover specific challenges, both rational and emotional. <br><br> <strong>Sample Question:</strong> 'What are the biggest frustrations your team has when it comes to preparing for audits or managing privileged access?'" },
+            { letter: 'I', title: 'Impact', description: "Quantify the business value of solving the pain. <br><br> <strong>Sample Question:</strong> 'If you could reduce the time spent on manual access reviews by 50%, what would that mean for your IT team's ability to focus on more strategic projects?'" },
+            { letter: 'C', title: 'Critical Event', description: "Uncover the 'why now?' to establish urgency. <br><br> <strong>Sample Question:</strong> 'You mentioned an upcoming SOX audit. What happens if you can't provide the necessary access reports in time?'" },
+            { letter: 'E', title: 'Decision', description: "Understand the internal buying process, committee, and criteria. <br><br> <strong>Sample Question:</strong> 'To ensure we provide you with the right information, what are the key technical and business criteria your team will use to evaluate a new identity security platform?'" },
+        ];
+
+
+        function init() {
+            populatePainPoints();
+            populateRosettaStone();
+            setupVerticalFilter();
+            populateProspectingTabs();
+            populateSpicedAccordion();
+            setupScrollSpy();
+            initAnimations();
+        }
+
+        function initAnimations() {
+            // Hero Parallax
+            gsap.to(".hero-content", {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#context",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }, 
+            });
+
+            gsap.to("#context::before", {
+                yPercent: 10,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#context",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }, 
+            });
+            
+            // Visual Growth
+            const visualElements = document.querySelectorAll('.visual-content');
+            visualElements.forEach(el => {
+                gsap.to(el, {
+                    scale: 1,
+                    opacity: 1,
+                    ease: "power1.inOut",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%",
+                        end: "center 60%",
+                        scrub: true,
+                    }
+                });
+            });
+        }
+
+        function populatePainPoints() {
+            const container = document.getElementById('pain-point-cards');
+            if (!container) return;
+            container.innerHTML = '';
+            painPointData.forEach(point => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300 visual-content';
+                card.innerHTML = `
+                    <div class="h-8 w-8">${point.icon}</div>
+                    <h3 class="mt-4">${point.title}</h3>
+                    <p class="mt-2 text-sm">${point.description}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+        
+        function populateRosettaStone(filter = 'All') {
+            const tableBody = document.getElementById('rosetta-table-body');
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
+            const filteredData = filter === 'All' ? rosettaStoneData : rosettaStoneData.filter(d => d.vertical === filter);
+            
+            filteredData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-4 py-4 align-top text-sm font-bold text-[#10123d]">${row.vertical}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.theme}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.specificPain}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.solution}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.impact}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.persona}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+        
+        function setupVerticalFilter() {
+            const filterSelect = document.getElementById('vertical-filter');
+            if (!filterSelect || filterSelect.options.length > 1) return;
+            const verticals = ['All', ...new Set(rosettaStoneData.map(d => d.vertical))];
+            verticals.forEach(v => {
+                const option = document.createElement('option');
+                option.value = v;
+                option.textContent = v;
+                filterSelect.appendChild(option);
+            });
+            filterSelect.addEventListener('change', (e) => populateRosettaStone(e.target.value));
+        }
+
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('main > section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px -50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                        if (mobileNav.value !== id) {
+                            mobileNav.value = id;
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            mobileNav.addEventListener('change', function() {
+                const targetId = this.value;
+                const targetElement = document.getElementById(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+        
+        function populateProspectingTabs() {
+            const tabsContainer = document.getElementById('prospecting-tabs');
+            const contentContainer = document.getElementById('prospecting-content');
+            if (!tabsContainer || tabsContainer.children.length > 0) return;
+
+            prospectingData.forEach((tab, index) => {
+                const button = document.createElement('button');
+                button.className = 'tab-button whitespace-nowrap py-3 px-1 border-b-2 font-bold text-sm hover:border-gray-300';
+                button.textContent = tab.title;
+                button.dataset.target = tab.id;
+                tabsContainer.appendChild(button);
+
+                const content = document.createElement('div');
+                content.id = tab.id;
+                content.className = 'prospecting-content-panel';
+                content.innerHTML = tab.content;
+                content.style.display = index === 0 ? 'block' : 'none';
+                contentContainer.appendChild(content);
+
+                if (index === 0) {
+                    button.classList.add('active');
+                }
+            });
+
+            tabsContainer.addEventListener('click', e => {
+                const button = e.target.closest('.tab-button');
+                if (button) {
+                    const targetId = button.dataset.target;
+                    
+                    tabsContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    contentContainer.querySelectorAll('.prospecting-content-panel').forEach(panel => {
+                        panel.style.display = panel.id === targetId ? 'block' : 'none';
+                    });
+                }
+            });
+        }
+
+        function populateSpicedAccordion() {
+            const container = document.getElementById('spiced-accordion');
+            if (!container || container.children.length > 0) return;
+
+            spicedData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'border border-gray-200 rounded-lg';
+                div.innerHTML = `
+                    <div class="accordion-header flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200 cursor-pointer rounded-t-lg">
+                        <h4 class="flex items-center gap-3"><span class="inline-block w-6 h-6 text-center leading-6 rounded-full bg-[#5ba1ba] text-white font-bold">${item.letter}</span>${item.title}</h4>
+                        <span class="transform transition-transform duration-300 text-[#5ba1ba] font-bold text-xl">+</span>
+                    </div>
+                    <div class="accordion-content bg-white px-4 rounded-b-lg">
+                        <div class="pt-4 pb-4">${item.description}</div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            container.addEventListener('click', e => {
+                const header = e.target.closest('.accordion-header');
+                if (header) {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('span:last-child');
+                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    
+                    container.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0px');
+                    container.querySelectorAll('.accordion-header span:last-child').forEach(i => i.style.transform = 'rotate(0deg)');
+                    
+                    if (!isOpen) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(45deg)';
+                    }
+                }
+            });
+        }
+
+        init();
+    });
+    </script>
+
+</body>
+</html>
