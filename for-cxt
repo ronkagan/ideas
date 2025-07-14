@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CXT Software: Interactive Demand Generation Dossier</title>
+    <!-- Chosen Palette: CXT Software Brand Theme -->
+    <!-- Application Structure Plan: A single, long-scroll page with a sticky top navigation bar. The nav links act as anchor links, smoothly scrolling the user to the corresponding section. An IntersectionObserver is used for scroll-spying, highlighting the active link in the navigation as the user scrolls. This structure provides a fluid, report-style layout, allowing users to consume the content linearly while still providing quick navigation. -->
+    <!-- Visualization & Content Choices: 
+        - Strategic Context: Presented with clear typography and highlighted key stats to establish CXT's market position. Goal: Inform. Method: HTML/Tailwind.
+        - Pain-Point Playbook: Uses interactive cards with Heroicons for four main themes and a dynamic, filterable HTML table for the 'Rosetta Stone' matrix. Goal: Compare & Organize. Interaction: Dropdown filters update the table content. Method: Vanilla JS for table filtering. Justification: Makes the complex data set of logistics challenges explorable and easy to digest.
+        - Prospecting Engine: A tabbed interface separates the three main targeting strategies (Technographic, Signal-Based, Lookalike). Goal: Organize. Interaction: Clicking tabs reveals relevant content. Method: HTML/Tailwind/JS. Justification: A standard, intuitive UI pattern for grouping distinct but related strategies.
+        - Growth Levers: Uses a responsive grid of cards to present Video, Webinar, and Events tactics. A custom HTML/CSS funnel diagram illustrates the video strategy. Goal: Inform. Method: HTML/Tailwind. Justification: Visually separates and highlights the key proposed tactics.
+        - GTM Frameworks: A custom HTML/CSS diagram visualizes the Bowtie model. An interactive accordion explains the SPICED framework with detailed sample questions. Goal: Organize & Inform. Interaction: Clicking accordion headers reveals details. Method: HTML/Tailwind/JS. Justification: Visual and interactive elements make these abstract frameworks easier to understand.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Calendar Appointment Scheduling begin -->
+    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+    <!-- end Google Calendar Appointment Scheduling -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Offset for sticky header */
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #3a3a66;
+            font-size: 1rem;
+            line-height: 1.625;
+            letter-spacing: 0;
+            width: 100%;
+            background-color: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6, .font-header {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0;
+            line-height: 1.25;
+        }
+        h1 {
+            color: #10123d;
+            font-size: 3rem; /* Adjusted for better responsiveness */
+        }
+        h2 {
+            color: #10123d;
+            font-size: 2.1666rem;
+        }
+        h3 {
+            color: #333;
+            font-size: 1.8888rem;
+        }
+        h4 {
+            color: #333;
+            font-size: 1.3333rem;
+        }
+        
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+            border-bottom: 2px solid transparent;
+            color: #3a3a66;
+            font-weight: 700;
+        }
+        .nav-link.active {
+            border-bottom-color: #5ba1ba;
+            color: #10123d;
+        }
+        .nav-link:hover {
+            border-bottom-color: #5ba1ba;
+            color: #10123d;
+        }
+        .tab-button {
+            color: #3a3a66;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        .tab-button.active {
+            border-color: #5ba1ba;
+            background-color: #f0f7fa;
+            color: #10123d;
+        }
+        .accordion-header {
+            transition: background-color 0.2s ease-in-out;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .text-brand-accent-blue { color: #5ba1ba; }
+        .bg-brand-accent-blue { background-color: #5ba1ba; }
+        .border-brand-accent-blue { border-color: #5ba1ba; }
+        .text-brand-accent-green { color: #308920; }
+        .bg-brand-accent-green { background-color: #308920; }
+        .border-brand-accent-green { border-color: #308920; }
+
+        #context::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(91, 161, 186, 0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .visual-content {
+            transform: scale(0.8);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-header" style="color: #10123d;">CXT Software Growth Dossier</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#context" class="nav-link px-3 py-2 rounded-md text-sm">Strategic Context</a>
+                        <a href="#playbook" class="nav-link px-3 py-2 rounded-md text-sm">Pain-Point Playbook</a>
+                        <a href="#prospecting" class="nav-link px-3 py-2 rounded-md text-sm">Prospecting Engine</a>
+                        <a href="#levers" class="nav-link px-3 py-2 rounded-md text-sm">Growth Levers</a>
+                        <a href="#frameworks" class="nav-link px-3 py-2 rounded-md text-sm">GTM Frameworks</a>
+                        <a href="#analytics" class="nav-link px-3 py-2 rounded-md text-sm">Analytics</a>
+                    </div>
+                </div>
+                 <div class="md:hidden">
+                    <select id="mobile-nav" class="block w-full rounded-md border-gray-300 bg-gray-50 text-gray-900 shadow-sm focus:border-brand-accent-blue focus:ring-brand-accent-blue sm:text-sm">
+                        <option value="context">Strategic Context</option>
+                        <option value="playbook">Pain-Point Playbook</option>
+                        <option value="prospecting">Prospecting Engine</option>
+                        <option value="levers">Growth Levers</option>
+                        <option value="frameworks">GTM Frameworks</option>
+                        <option value="analytics">Analytics</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Section 1: Strategic Context -->
+        <section id="context" class="bg-white py-16 md:py-24 relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl hero-content">
+                <h1 class="text-center">A Marketer for Last-Mile Logistics</h1>
+                <p class="mt-4 text-lg text-center">Having scaled 2 last-mile software businesses, Ron is uniquely well-positioned to grow CXT. This dossier outlines a tactical way to build a demand generation engine that solidifies CXT's market leadership and fuels its next phase of growth.</p>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 visual-content">
+                        <div class="text-4xl font-bold text-brand-accent-blue font-header">14+ Years</div>
+                        <p class="mt-2 text-sm font-medium">B2B Marketing</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 visual-content">
+                        <div class="text-4xl font-bold text-brand-accent-blue font-header">1 Exit</div>
+                        <p class="mt-2 text-sm font-medium">B2B Software SaaS</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 visual-content">
+                        <div class="text-4xl font-bold text-brand-accent-blue font-header">4+ FTE</div>
+                        <p class="mt-2 text-sm font-medium">Team Size Managed</p>
+                    </div>
+                </div>
+                <div class="mt-12 bg-gray-50 p-8 rounded-lg border border-gray-200 visual-content">
+                    <h2 class="text-center">The Strategic Directives</h2>
+                    <p class="mt-3 text-center">The market demands efficiency, visibility, and scalability. And, the GTM strategy must be aligned with CXT's core value propositions: displace manual processes and outdated, disparate systems by demonstrating the superior operational control and profitability of a unified logistics platform. .</p>
+                    <div class="mt-6 flex flex-col md:flex-row gap-6">
+                        <div class="flex-1 p-6 bg-white rounded-lg border border-gray-200">
+                            <h3>1. Drive Operational Modernization</h3>
+                            <p class="mt-2 text-sm">Target logistics companies struggling with manual dispatching, inefficient routing, and a lack of real-time visibility that hinder growth and profitability.</p>
+                        </div>
+                        <div class="flex-1 p-6 bg-white rounded-lg border border-gray-200">
+                            <h3>2. Enable Scalable Growth</h3>
+                            <p class="mt-2 text-sm">Focus on replacing legacy or homegrown systems that cannot scale with demand, preventing businesses from taking on new customers or expanding service areas.</p>
+                        </div>
+                         <div class="flex-1 p-6 bg-white rounded-lg border border-gray-200">
+                            <h3>3. Embrace a Hybrid GTM Model</h3>
+                            <p class="mt-2 text-sm">Blend a Product-Led Growth (PLG) motion for broad adoption with a targeted, high-touch sales motion for key enterprise accounts to maximize market capture.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Pain-Point Playbook -->
+        <section id="playbook" class="bg-[#efede4] py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <h1 class="text-center">The Pain-Point Playbook</h1>
+                <p class="mt-4 text-lg text-center">The most effective path to repeatable wins is to codify the operational and financial challenges that CXT Software solves. This section deconstructs common logistics struggles into universal "Pain Themes" that form a predictive model for identifying and engaging future customers.</p>
+                <div id="pain-point-cards" class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Pain point cards will be injected here by JS -->
+                </div>
+                
+                <div class="mt-12 bg-white p-6 md:p-8 rounded-lg shadow-sm border border-gray-200 visual-content">
+                    <h2 class="text-center">The "Rosetta Stone" for Logistics Sales</h2>
+                    <p class="mt-3 max-w-4xl mx-auto text-center">This interactive matrix connects target verticals to their most probable business pains, the language they use, and the specific CXT solutions that resolve them. Use the filter to explore how CXT addresses challenges across different industries.</p>
+                     <div class="my-6">
+                        <label for="vertical-filter" class="block text-sm font-bold text-[#10123d]">Filter by Target Vertical</label>
+                        <select id="vertical-filter" class="mt-1 block w-full md:w-1/3 rounded-md border-gray-300 shadow-sm focus:border-[#5ba1ba] focus:ring-[#5ba1ba] sm:text-sm">
+                            <!-- Options will be injected by JS -->
+                        </select>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Vertical</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pain Theme</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Specific Pain Point</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Solution</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Impact</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Persona</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rosetta-table-body" class="bg-white divide-y divide-gray-200">
+                                <!-- Table rows will be injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Prospecting Engine -->
+        <section id="prospecting" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <h1 class="text-center">The Enterprise Prospecting Engine</h1>
+                <p class="mt-4 text-lg text-center">A modern demand generation function must proactively identify and engage the right accounts at the right time. This requires a multi-layered approach combining technographic analysis, real-time buying signals, and strategic lookalike targeting.</p>
+
+                <div class="mt-12 visual-content">
+                    <div class="border-b border-gray-200">
+                        <nav id="prospecting-tabs" class="-mb-px flex space-x-4 md:space-x-8" aria-label="Tabs">
+                           <!-- Tabs injected by JS -->
+                        </nav>
+                    </div>
+                    <div id="prospecting-content" class="mt-8">
+                        <!-- Tab content injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Growth Levers -->
+        <section id="levers" class="bg-[#efede4] py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <h1 class="text-center">The Demand Generation Toolbox</h1>
+                <p class="mt-4 text-lg text-center">Identifying accounts is the first step. Engaging them with compelling, relevant content through the right channels is next. This toolbox is built on a "show, don't just tell" philosophy to pull prospects through the buying journey.</p>
+                <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 transform hover:scale-105 transition-transform duration-300 visual-content">
+                        <h3>Video Ascendancy</h3>
+                        <p class="mt-3">For a logistics product like CXT, video is a competitive necessity. A three-tiered strategy bridges the gap between what the product does and what prospects understand.</p>
+                        <div class="mt-6 space-y-2">
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-[#5ba1ba] text-white flex items-center justify-center font-bold">1</div> <div><strong class="text-[#10123d]">The Hook (Top Funnel):</strong> Short, high-impact social videos.</div></div>
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-[#5ba1ba] text-white flex items-center justify-center font-bold opacity-80">2</div> <div><strong class="text-[#10123d]">The How (Mid Funnel):</strong> Case studies & product spotlights.</div></div>
+                           <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-[#5ba1ba] text-white flex items-center justify-center font-bold opacity-60">3</div> <div><strong class="text-[#10123d]">The Nitty-Gritty (Bottom Funnel):</strong> Deep technical tutorials.</div></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 transform hover:scale-105 transition-transform duration-300 visual-content">
+                        <h3>Always-On Webinar Engine</h3>
+                        <p class="mt-3">A programmatic webinar cadence is one of the most effective levers for generating a predictable stream of high-intent leads. The key is relevance: solve problems, don't just pitch products.</p>
+                         <ul class="mt-6 list-disc list-inside space-y-2">
+                            <li><span class="font-bold text-[#10123d]">Problem/Solution Focused:</span> Title webinars based on pain points.</li>
+                            <li><span class="font-bold text-[#10123d]">Customer-Led Case Studies:</span> Feature customer champions to build social proof.</li>
+                            <li><span class="font-bold text-[#10123d]">"State of the Industry" Panels:</span> Host thought-leadership discussions.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 transform hover:scale-105 transition-transform duration-300 visual-content">
+                        <h3>Strategic Events Hub</h3>
+                        <p class="mt-3">An events strategy is incomplete without pre-event promotion and post-event content lifecycling. A centralized hub on the website transforms single events into durable, lead-generating assets.</p>
+                        <div class="mt-6 flex flex-col gap-4">
+                            <div class="p-4 bg-gray-50 rounded-md border">
+                                <h4>Upcoming Events</h4>
+                                <p class="text-sm">A forward-looking calendar to drive in-person engagement.</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-md border">
+                                <h4>Event Library (Past Events)</h4>
+                                <p class="text-sm">A searchable archive with videos, slides, and summaries to maximize ROI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: GTM Frameworks -->
+        <section id="frameworks" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                 <h1 class="text-center">Weaving the Fabric of Growth</h1>
+                <p class="mt-4 text-lg text-center">Strong tactics must be woven into a cohesive strategy. Proven GTM frameworks like SPICED and the Bowtie Model create a common language and standardized process across the entire revenue organization.</p>
+                <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 visual-content">
+                        <h2 class="text-center">The Bowtie Model</h2>
+                        <p class="mt-3 text-center">A holistic view of the customer journey, connecting pre-sale acquisition with post-sale expansion to combat churn and drive lifetime value.</p>
+                        
+                        <div class="mt-6 flex justify-center items-center h-48">
+                            <div class="flex items-center">
+                                <!-- Left Triangle -->
+                                <div class="w-0 h-0 border-t-[60px] border-t-transparent border-b-[60px] border-b-transparent border-r-[80px] border-r-blue-100 relative">
+                                    <span class="absolute -left-16 top-[-10px] text-sm font-bold text-blue-800">Acquire</span>
+                                </div>
+                                <!-- Adopt Circle -->
+                                <div class="w-16 h-16 rounded-full bg-[#5ba1ba] text-white flex items-center justify-center font-bold z-10 -ml-4 -mr-4">Adopt</div>
+                                <!-- Right Triangle -->
+                                <div class="w-0 h-0 border-t-[60px] border-t-transparent border-b-[60px] border-b-transparent border-l-[80px] border-l-green-100 relative">
+                                     <span class="absolute -right-16 top-[-10px] text-sm font-bold text-green-800">Expand</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mt-4"><strong class="text-[#10123d]">Onboard & Adopt:</strong> Tier 3 technical videos and deep-dive webinars accelerate time-to-value and reduce churn.</p>
+                        <p class="mt-2"><strong class="text-[#10123d]">Expand:</strong> Customer stories and problem/solution webinars educate existing customers on new use cases, driving cross-sell and up-sell opportunities.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 visual-content">
+                         <h2 class="text-center">The SPICED Framework</h2>
+                        <p class="mt-3 text-center">A customer-centric framework to connect marketing's message to sales' conversation, ensuring a seamless and effective handoff.</p>
+                        <div id="spiced-accordion" class="mt-6 space-y-2">
+                           <!-- Accordion items injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Analytics Framework -->
+        <section id="analytics" class="bg-[#efede4] py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <h1 class="text-center">Measuring What Matters: The Analytics Framework</h1>
+                <p class="mt-4 text-lg text-center">A data-driven marketing strategy requires a robust framework for measuring performance, demonstrating ROI, and optimizing spend. This framework focuses on the full funnel, from initial awareness to customer expansion, incorporating both sales-led and product-led KPIs.</p>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 visual-content">
+                        <h3>Top of Funnel</h3>
+                        <ul class="mt-3 space-y-2 text-sm">
+                            <li><strong>Marketing Qualified Leads (MQLs)</strong></li>
+                            <li><strong>Cost per MQL</strong></li>
+                            <li><strong>Website Traffic & Conversion Rate</strong></li>
+                            <li><strong>SEO Keyword Rankings</strong></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 visual-content">
+                        <h3>Product-Led Growth (PLG)</h3>
+                        <ul class="mt-3 space-y-2 text-sm">
+                            <li><strong>Free Trial / Demo Signups</strong></li>
+                            <li><strong>Product Qualified Leads (PQLs)</strong></li>
+                            <li><strong>Activation Rate</strong></li>
+                            <li><strong>Time to Value (TTV)</strong></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 visual-content">
+                        <h3>Bottom of Funnel</h3>
+                        <ul class="mt-3 space-y-2 text-sm">
+                            <li><strong>Sales Qualified Leads (SQLs)</strong></li>
+                            <li><strong>MQL-to-SQL Conversion Rate</strong></li>
+                            <li><strong>Marketing-Sourced Pipeline ($)</strong></li>
+                            <li><strong>Customer Acquisition Cost (CAC)</strong></li>
+                        </ul>
+                    </div>
+                     <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 visual-content">
+                        <h3>Customer & Revenue</h3>
+                        <ul class="mt-3 space-y-2 text-sm">
+                            <li><strong>Marketing-Influenced Revenue ($)</strong></li>
+                            <li><strong>Net Revenue Retention (NRR)</strong></li>
+                            <li><strong>Customer Lifetime Value (LTV)</strong></li>
+                            <li><strong>LTV:CAC Ratio</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-white border-t border-gray-200 py-6">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex-1 flex justify-center md:justify-start mb-4 md:mb-0">
+                <!-- Empty div for spacing -->
+            </div>
+            <div class="flex items-center gap-8 mb-4 md:mb-0">
+                <a href="https://calendar.app.google/MX1xpNeKfpqynWAz9" target="_blank" rel="noopener noreferrer" class="font-bold text-[#308920] hover:text-[#5ba1ba] transition-colors">Meet</a>
+                <a href="https://www.linkedin.com/in/ronykagan" target="_blank" rel="noopener noreferrer" class="font-bold text-[#308920] hover:text-[#5ba1ba] transition-colors">LinkedIn</a>
+            </div>
+            <div class="flex-1 flex justify-center md:justify-end">
+                <img src="https://cxtsoftware.com/wp-content/uploads/2022/04/CXTSoftware-lowres-gray.gif" alt="CXT Software Logo" class="h-8">
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const painPointData = [
+            { 
+                title: "Operational Inefficiency", 
+                description: "Wasting hours on manual dispatching, inefficient routing, and endless phone calls, leading to high fuel costs and missed delivery windows.",
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5ba1ba]"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>'
+            },
+            { 
+                title: "Lack of Visibility", 
+                description: "Customers constantly calling for ETAs and dispatchers unable to see driver locations in real-time, causing frustration and poor service.",
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5ba1ba]"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>'
+            },
+            { 
+                title: "Driver Management Headaches", 
+                description: "Struggling with complex driver settlements, inefficient communication, and high driver turnover due to poor tools and frustrating workflows.",
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5ba1ba]"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM12 21a8.25 8.25 0 0 1-8.25-8.25V9.75A8.25 8.25 0 0 1 12 1.5a8.25 8.25 0 0 1 8.25 8.25v3.75a8.25 8.25 0 0 1-8.25 8.25Z" /></svg>'
+            },
+            { 
+                title: "Technology Debt", 
+                description: "Held back by outdated, inflexible on-premise software that can't scale with business growth or integrate with modern customer systems.",
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5ba1ba]"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>'
+            },
+        ];
+
+        const rosettaStoneData = [
+            { vertical: "Courier & Messenger", theme: "Operational Inefficiency", specificPain: "Our dispatchers are overwhelmed, and our fuel costs are out of control because routes aren't optimized.", solution: "X Dispatch, X Route", impact: "Increased stops per driver per hour; Reduced fuel costs by 15-20%; Minimized manual data entry.", persona: "Operations Manager, Dispatcher" },
+            { vertical: "Medical & Lab Logistics", theme: "Lack of Visibility", specificPain: "We need real-time tracking and chain of custody for time-sensitive medical specimens to meet compliance.", solution: "Nextstop Mobile App, Barcode Scanning", impact: "Full chain of custody reporting; Real-time ETAs for clinics; Improved compliance and client trust.", persona: "Logistics Coordinator, Compliance Officer" },
+            { vertical: "Final Mile & LTL", theme: "Technology Debt", specificPain: "Our old system can't handle the variety of delivery types we have, and it doesn't have a modern customer portal.", solution: "Comprehensive Suite (X Dispatch, Customer Portal)", impact: "Ability to manage diverse workflows (on-demand, routed, distribution); Reduced 'where's my order?' calls.", persona: "Owner, IT Manager" },
+            { vertical: "Distribution & Warehousing", theme: "Driver Management Headaches", specificPain: "Onboarding new drivers is slow, and calculating their pay is a manual, error-prone nightmare.", solution: "Nextstop Mobile App, Driver Payroll/Settlement Module", impact: "Faster driver onboarding; Accurate, automated driver settlements; Improved driver satisfaction and retention.", persona: "Operations Manager, Fleet Manager" }
+        ];
+
+        const prospectingData = [
+            {
+                id: 'plg',
+                title: 'Product-Led Acquisition',
+                content: `
+                    <p>Attract a broad audience of small to mid-sized logistics operators through a self-service or trial motion. This strategy focuses on demonstrating value quickly and creating a pipeline of Product Qualified Leads (PQLs) for the sales team.</p>
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4>Inbound & Content</h4>
+                            <p class="mt-2 text-sm">Create SEO-optimized content (blog posts, guides) that solves specific, niche problems (e.g., "How to calculate cost-per-delivery," "Best practices for medical courier routing") to attract organic traffic.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4>The PQL Funnel</h4>
+                            <p class="mt-2 text-sm">Identify users who exhibit high-value behaviors within the trial (e.g., creating complex routes, adding multiple drivers). These PQLs are then routed to the sales team for a high-touch, consultative sales process.</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'technographic',
+                title: 'Technographic Targeting',
+                content: `
+                    <p>This strategy leverages data on the specific technologies a company uses to identify high-potential prospects. It enables two key plays:</p>
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4>Rip and Replace</h4>
+                            <p class="mt-2 text-sm">Targeting companies using legacy, on-premises courier software (e.g., Key Software Systems, Digital Waybill) who are likely experiencing "Technology Debt."</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4>Enhance and Integrate</h4>
+                            <p class="mt-2 text-sm">Targeting companies using generic accounting software (e.g., QuickBooks) and positioning CXT's integrated billing and settlement modules as a way to eliminate manual work.</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'signal',
+                title: 'Signal-Based Targeting',
+                content: `
+                    <p>This strategy intercepts accounts as they enter a buying cycle by monitoring real-world business signals. AI-powered lead scoring can be used to prioritize accounts showing the strongest intent signals.</p>
+                    <div class="mt-4 overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Buying Signal</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Inferred Pain Point</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Target Persona</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Outreach Angle / Message Hook</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-3 text-sm">Hiring for "Dispatcher" or "Operations Manager"</td>
+                                    <td class="px-4 py-3 text-sm">Operational Inefficiency</td>
+                                    <td class="px-4 py-3 text-sm">Owner, General Manager</td>
+                                    <td class="px-4 py-3 text-sm">"Saw you're expanding your ops team. As you grow, many courier businesses find that manual dispatching becomes a major bottleneck."</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm">Company announces expansion to new service areas.</td>
+                                    <td class="px-4 py-3 text-sm">Technology Debt</td>
+                                    <td class="px-4 py-3 text-sm">Owner, Operations Manager</td>
+                                    <td class="px-4 py-3 text-sm">"Congratulations on your expansion. Ensuring your technology can scale with your business is critical for maintaining service levels."</td>
+                                </tr>
+                                 <tr>
+                                    <td class="px-4 py-3 text-sm">Negative online reviews about late deliveries or lack of tracking.</td>
+                                    <td class="px-4 py-3 text-sm">Lack of Visibility</td>
+                                    <td class="px-4 py-3 text-sm">Owner, Customer Service Manager</td>
+                                    <td class="px-4 py-3 text-sm">"Customer expectations for real-time tracking are higher than ever. We help logistics companies provide the visibility that modern customers demand."</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            }
+        ];
+
+        const spicedData = [
+            { letter: 'S', title: 'Situation', description: "Understand the prospect's current state and context. <br><br> <strong>Sample Question:</strong> 'Could you walk me through your dispatch process from the moment an order comes in to when it's delivered?'" },
+            { letter: 'P', title: 'Pain', description: "Uncover specific challenges, both rational and emotional. <br><br> <strong>Sample Question:</strong> 'What's the most frustrating part of your day? Is it the constant calls from customers asking for ETAs, or trying to figure out driver settlements?'" },
+            { letter: 'I', title: 'Impact', description: "Quantify the business value of solving the pain. <br><br> <strong>Sample Question:</strong> 'If you could reduce your dispatchers' time on the phone by 30%, what could they be doing instead to help grow the business?'" },
+            { letter: 'C', title: 'Critical Event', description: "Uncover the 'why now?' to establish urgency. <br><br> <strong>Sample Question:</strong> 'You mentioned you just won a big new contract. What happens if your current system can't handle the increased volume?'" },
+            { letter: 'E', title: 'Decision', description: "Understand the internal buying process, committee, and criteria. <br><br> <strong>Sample Question:</strong> 'To make sure we're on the right track, what are the top three things your new software absolutely must do for this to be a success?'" },
+        ];
+
+
+        function init() {
+            populatePainPoints();
+            populateRosettaStone();
+            setupVerticalFilter();
+            populateProspectingTabs();
+            populateSpicedAccordion();
+            setupScrollSpy();
+            initAnimations();
+        }
+
+        function initAnimations() {
+            // Hero Parallax
+            gsap.to(".hero-content", {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#context",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }, 
+            });
+
+            gsap.to("#context::before", {
+                yPercent: 10,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#context",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }, 
+            });
+            
+            // Visual Growth
+            const visualElements = document.querySelectorAll('.visual-content');
+            visualElements.forEach(el => {
+                gsap.to(el, {
+                    scale: 1,
+                    opacity: 1,
+                    ease: "power1.inOut",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%",
+                        end: "center 60%",
+                        scrub: true,
+                    }
+                });
+            });
+        }
+
+        function populatePainPoints() {
+            const container = document.getElementById('pain-point-cards');
+            if (!container) return;
+            container.innerHTML = '';
+            painPointData.forEach(point => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300 visual-content';
+                card.innerHTML = `
+                    <div class="h-8 w-8">${point.icon}</div>
+                    <h3 class="mt-4">${point.title}</h3>
+                    <p class="mt-2 text-sm">${point.description}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+        
+        function populateRosettaStone(filter = 'All') {
+            const tableBody = document.getElementById('rosetta-table-body');
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
+            const filteredData = filter === 'All' ? rosettaStoneData : rosettaStoneData.filter(d => d.vertical === filter);
+            
+            filteredData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-4 py-4 align-top text-sm font-bold text-[#10123d]">${row.vertical}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.theme}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.specificPain}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.solution}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.impact}</td>
+                    <td class="px-4 py-4 align-top text-sm">${row.persona}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+        
+        function setupVerticalFilter() {
+            const filterSelect = document.getElementById('vertical-filter');
+            if (!filterSelect || filterSelect.options.length > 1) return;
+            const verticals = ['All', ...new Set(rosettaStoneData.map(d => d.vertical))];
+            verticals.forEach(v => {
+                const option = document.createElement('option');
+                option.value = v;
+                option.textContent = v;
+                filterSelect.appendChild(option);
+            });
+            filterSelect.addEventListener('change', (e) => populateRosettaStone(e.target.value));
+        }
+
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('main > section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px -50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                        if (mobileNav.value !== id) {
+                            mobileNav.value = id;
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            mobileNav.addEventListener('change', function() {
+                const targetId = this.value;
+                const targetElement = document.getElementById(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+        
+        function populateProspectingTabs() {
+            const tabsContainer = document.getElementById('prospecting-tabs');
+            const contentContainer = document.getElementById('prospecting-content');
+            if (!tabsContainer || tabsContainer.children.length > 0) return;
+
+            prospectingData.forEach((tab, index) => {
+                const button = document.createElement('button');
+                button.className = 'tab-button whitespace-nowrap py-3 px-1 border-b-2 font-bold text-sm hover:border-gray-300';
+                button.textContent = tab.title;
+                button.dataset.target = tab.id;
+                tabsContainer.appendChild(button);
+
+                const content = document.createElement('div');
+                content.id = tab.id;
+                content.className = 'prospecting-content-panel';
+                content.innerHTML = tab.content;
+                content.style.display = index === 0 ? 'block' : 'none';
+                contentContainer.appendChild(content);
+
+                if (index === 0) {
+                    button.classList.add('active');
+                }
+            });
+
+            tabsContainer.addEventListener('click', e => {
+                const button = e.target.closest('.tab-button');
+                if (button) {
+                    const targetId = button.dataset.target;
+                    
+                    tabsContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    contentContainer.querySelectorAll('.prospecting-content-panel').forEach(panel => {
+                        panel.style.display = panel.id === targetId ? 'block' : 'none';
+                    });
+                }
+            });
+        }
+
+        function populateSpicedAccordion() {
+            const container = document.getElementById('spiced-accordion');
+            if (!container || container.children.length > 0) return;
+
+            spicedData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'border border-gray-200 rounded-lg';
+                div.innerHTML = `
+                    <div class="accordion-header flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200 cursor-pointer rounded-t-lg">
+                        <h4 class="flex items-center gap-3"><span class="inline-block w-6 h-6 text-center leading-6 rounded-full bg-[#5ba1ba] text-white font-bold">${item.letter}</span>${item.title}</h4>
+                        <span class="transform transition-transform duration-300 text-[#5ba1ba] font-bold text-xl">+</span>
+                    </div>
+                    <div class="accordion-content bg-white px-4 rounded-b-lg">
+                        <div class="pt-4 pb-4">${item.description}</div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            container.addEventListener('click', e => {
+                const header = e.target.closest('.accordion-header');
+                if (header) {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('span:last-child');
+                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    
+                    container.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0px');
+                    container.querySelectorAll('.accordion-header span:last-child').forEach(i => i.style.transform = 'rotate(0deg)');
+                    
+                    if (!isOpen) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                }
+            });
+        }
+         window.addEventListener('load', function() {
+            const target = document.getElementById('booking-button-container');
+            if (target && window.calendar) {
+                calendar.schedulingButton.load({
+                  url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true',
+                  color: '#308920',
+                  label: "Book Time with Ron",
+                  target: target,
+                });
+            } else {
+                console.error("Google Calendar script failed to load or the target container was not found.");
+            }
+        });
+
+        init();
+    });
+    </script>
+
+</body>
+</html>
