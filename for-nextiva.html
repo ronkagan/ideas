@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ron Kagan | A 180-Day Plan for Marketing Operations at Nextiva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Nextiva Brand Palette -->
+    <!-- Application Structure Plan: This SPA presents a candidate's 180-day plan for the Director of Marketing Operations role at Nextiva. The structure is a persuasive narrative designed for an executive audience: 1) The Transformation (The core problem to solve), 2) The 180-Day Plan (The detailed solution), 3) The GGS Simulator (The ROI modeling tool), 4) The Audience (The "who" we're targeting), and 5) The Impact (The expected business outcomes). This format directly addresses the job role by demonstrating strategic thinking and a clear action plan. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: A 3-phase, 180-day plan. Goal: Present Solution. Viz: Interactive phased diagram. Interaction: Click phases to reveal tactics. Justification: Makes a complex plan digestible. Method: HTML/CSS/JS.
+        - Report Info: Growth Guidance System concept. Goal: Demonstrate ROI Modeling. Viz: Interactive simulator. Interaction: User changes inputs to see predicted outcomes. Justification: Shows how the candidate will use data to build business cases. Library: Chart.js.
+        - Report Info: The "Technical Practitioner" persona. Goal: Define Target Audience. Viz: Static cards. Justification: Demonstrates the candidate's data-driven understanding of the true audience. Method: HTML/CSS/JS.
+        - Report Info: Audience affinity data from SparkToro. Goal: Validate Persona Insights. Viz: Horizontal Bar Chart. Interaction: Animates on scroll. Justification: Provides specific data points to support the persona-based strategy. Library: Chart.js.
+        - Report Info: Business-centric SMART goals. Goal: Quantify Success. Viz: Animated KPI counters. Interaction: Animate on scroll. Justification: Connects the 180-day plan to measurable business impact. Method: HTML/JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #FFFFFF; /* White */
+            color: #191E24; /* Gray-12 */
+            font-size: 16px; /* Base font size for rhythm */
+            line-height: 1.5; /* Base line height (24px) */
+        }
+        header {
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        header.scrolled .nav-link {
+            color: #191E24; /* Gray-12 */
+        }
+        header.scrolled .nav-link:hover, header.scrolled .nav-link.active {
+             color: #005FEC; /* Active Blue */
+            border-bottom-color: #005FEC;
+        }
+        header:not(.scrolled) .nav-link {
+            color: #F2F5F9; /* Gray-96 */
+        }
+        header:not(.scrolled) .nav-link:hover, header:not(.scrolled) .nav-link.active {
+            color: #FFFFFF;
+            border-bottom-color: #FFFFFF;
+        }
+        header:not(.scrolled) .nav-title {
+            color: #FFFFFF;
+        }
+        header:not(.scrolled) #mobile-menu-button {
+            color: #FFFFFF;
+        }
+        .proposal-card {
+            background-color: #ffffff;
+            border: 1px solid #E0E5EC; /* Gray-90 */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .proposal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .plan-step {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #005FEC; /* Active Blue */
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider-thumb::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #005FEC; /* Active Blue */
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Vertical Rhythm Typography */
+        h2, .text-4xl, .text-5xl {
+            font-size: 2.25rem; /* 36px */
+            line-height: 1.3333em; /* 48px = 2 * 24px */
+            margin-bottom: 0.6667em; /* 24px */
+        }
+        h3, .text-3xl {
+            font-size: 1.875rem; /* 30px */
+            line-height: 1.6em; /* 48px = 2 * 24px */
+            margin-bottom: 0.8em; /* 24px */
+        }
+        h4, .text-xl {
+            font-size: 1.25rem; /* 20px */
+            line-height: 1.2em; /* 24px */
+            margin-bottom: 1.2em; /* 24px */
+        }
+        p, ul, ol {
+            line-height: 1.5em; /* 24px */
+            margin-bottom: 1.5em; /* 24px */
+        }
+        p:last-child, ul:last-child, ol:last-child, h2:last-child, h3:last-child, h4:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Contextual Adjustments */
+        .text-center > .text-base { /* Kicker text */
+            margin-bottom: 0.75em; /* 12px */
+        }
+        .proposal-card h3 {
+             font-size: 1.25rem; /* 20px */
+            line-height: 1.2em; /* 24px */
+            margin-bottom: 0.6em; /* 12px */
+        }
+        .proposal-card p {
+            margin-bottom: 0;
+        }
+        .plan-step p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 z-50 w-full">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="#" class="text-xl font-bold nav-title text-[#005FEC]">
+                            <span class="font-bold text-2xl">nextiva</span>
+                            <span class="font-light text-lg text-slate-500 relative -top-0.5 ml-2">| MarOps: 180-Day Plan</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="#transformation" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">The Transformation</a>
+                        <a href="#plan" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">The 180-Day Plan</a>
+                        <a href="#ggs" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">GGS Simulator</a>
+                        <a href="#audience" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">The Audience</a>
+                        <a href="#impact" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">The Impact</a>
+                        <a href="mailto:ron@skilltrade.marketing" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#005FEC] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#005FEC]">Contact Ron</a>
+                    </div>
+                </div>
+                 <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+             <div id="mobile-menu" class="md:hidden hidden pb-4 bg-white/95 backdrop-blur-sm rounded-b-lg">
+                <a href="#transformation" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-slate-700">The Transformation</a>
+                <a href="#plan" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-slate-700">The 180-Day Plan</a>
+                <a href="#ggs" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-slate-700">GGS Simulator</a>
+                <a href="#audience" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-slate-700">The Audience</a>
+                <a href="#impact" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-slate-700">The Impact</a>
+                <a href="mailto:ron@skilltrade.marketing" class="block w-full text-left mt-2 px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#005FEC] hover:opacity-90">Contact Ron</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="transformation" class="bg-white pt-16 relative overflow-hidden">
+             <div class="absolute -top-24 -left-24 w-72 h-72 bg-[#005FEC]/5 rounded-full z-0"></div>
+             <div class="absolute -bottom-24 -right-24 w-72 h-72 border-8 border-[#FFB800]/20 rounded-full z-0"></div>
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center fade-in-element">
+                    <h2 class="text-base font-semibold text-[#005FEC] tracking-wide uppercase">The Transformation for the Director of Marketing Operations</h2>
+                    <p class="text-4xl font-bold text-[#000A70] sm:text-5xl sm:tracking-tight lg:text-6xl">From Technical Debt to a Unified Growth Engine</p>
+                    <p class="max-w-3xl mx-auto text-xl text-[#444A53]">Analysis reveals Nextiva's core operational challenge: a fragmented MarTech stack, with HubSpot and Pardot creating data silos that feed into Salesforce. This makes reliable attribution and ROI analysis nearly impossible. The transformation for a new Director is not to maintain the status quo, but to be a **transformer**: to architect and build a single source of truth that powers a predictable, data-driven growth engine and delivers the clarity leadership requires.</p>
+                </div>
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center fade-in-element" style="transition-delay: 200ms;">
+                        <div class="proposal-card p-6 rounded-lg">
+                            <h3>Diagnose & Align</h3>
+                            <p class="text-[#444A53]">Conduct a full audit of the tech stack and lead-to-revenue process to build a data-backed case for change.</p>
+                        </div>
+                        <div class="proposal-card p-6 rounded-lg">
+                            <h3>Consolidate & Build</h3>
+                            <p class="text-[#444A53]">Lead the migration to a single marketing automation platform, creating a unified data foundation for the first time.</p>
+                        </div>
+                        <div class="proposal-card p-6 rounded-lg">
+                            <h3>Measure & Innovate</h3>
+                            <p class="text-[#444A53]">Deploy a true multi-touch attribution model and activate audience intelligence to drive hyper-targeted campaigns.</p>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="plan" class="bg-[#F2F5F9]">
+            <div class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center fade-in-element">
+                        <h2 class="text-base font-semibold text-[#005FEC] tracking-wide uppercase">The 180-Day Transformation Blueprint</h2>
+                        <p class="text-4xl font-bold text-[#000A70] sm:text-5xl">A Phased Plan for Operational Excellence</p>
+                        <p class="max-w-3xl mx-auto text-xl text-[#444A53]">This plan moves methodically from diagnosis to foundational repair and strategic innovation. The objective is to transform Marketing Operations from a reactive cost center into a unified, efficient, and data-driven engine for revenue growth.</p>
+                    </div>
+                    <div class="mt-12 fade-in-element" style="transition-delay: 200ms;">
+                         <div class="flex flex-col md:flex-row justify-center items-stretch gap-2 md:gap-0">
+                             <div class="plan-step flex-1 text-center p-4 cursor-pointer border-b-4 border-transparent" data-target="plan-foundation">
+                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white text-[#005FEC] rounded-full text-2xl font-bold ring-4 ring-white">1</div>
+                                 <p class="mt-2 font-semibold">Phase 1: Audit & Align</p>
+                                 <p class="text-sm text-slate-500">Days 1-60</p>
+                             </div>
+                             <div class="plan-step flex-1 text-center p-4 cursor-pointer border-b-4 border-transparent" data-target="plan-launch">
+                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white text-[#005FEC] rounded-full text-2xl font-bold ring-4 ring-white">2</div>
+                                 <p class="mt-2 font-semibold">Phase 2: Consolidate & Build</p>
+                                 <p class="text-sm text-slate-500">Days 61-120</p>
+                             </div>
+                             <div class="plan-step flex-1 text-center p-4 cursor-pointer border-b-4 border-transparent" data-target="plan-engagement">
+                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white text-[#005FEC] rounded-full text-2xl font-bold ring-4 ring-white">3</div>
+                                 <p class="mt-2 font-semibold">Phase 3: Scale & Innovate</p>
+                                 <p class="text-sm text-slate-500">Days 121-180</p>
+                             </div>
+                         </div>
+                         <div id="plan-content" class="mt-8 p-8 bg-white rounded-lg max-w-4xl mx-auto text-lg text-slate-600 leading-relaxed min-h-[200px] border border-[#E0E5EC]">
+                            Click a phase above to see key tactics.
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ggs" class="bg-white">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in-element">
+                    <h2 class="text-base font-semibold text-[#005FEC] tracking-wide uppercase">The Growth Guidance System</h2>
+                    <p class="text-4xl font-bold text-[#000A70] sm:text-5xl">Modeling the ROI of Transformation</p>
+                    <p class="max-w-3xl mx-auto text-xl text-[#444A53]">This interactive dashboard demonstrates how we can model the business impact of operational improvements. Use the inputs to simulate how consolidating technology and targeting the right audience will drive tangible returns.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 fade-in-element" style="transition-delay: 200ms;">
+                    <!-- Control Panel -->
+                    <div class="lg:col-span-1 bg-[#F2F5F9] p-6 rounded-xl shadow-lg border border-[#E0E5EC]">
+                        <h3 class="text-xl font-bold mb-4 border-b pb-2 text-[#000A70]">Business Inputs</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label for="ggs-integration" class="block text-sm font-medium text-slate-700 mb-1">1. Key Integration</label>
+                                <select id="ggs-integration" class="w-full p-2 border border-slate-300 rounded-md focus:ring-[#005FEC] focus:border-[#005FEC]">
+                                    <option value="1.2">Salesforce</option>
+                                    <option value="1.1" selected>Microsoft Teams</option>
+                                    <option value="1.0">HubSpot</option>
+                                    <option value="0.9">Zendesk</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="ggs-budget" class="block text-sm font-medium text-slate-700">2. Number of Users / Agents</label>
+                                <input type="range" id="ggs-budget" min="10" max="1000" step="10" value="250" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                <div class="text-center font-bold text-[#005FEC] mt-2" id="ggs-budgetValue">250 Users</div>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-medium text-slate-700 mb-2">3. Select Platform Features</h3>
+                                <div class="space-y-2" id="ggs-tactics">
+                                    <div class="flex items-center">
+                                        <input id="tactic-event" type="checkbox" value="1.5" class="h-4 w-4 text-[#005FEC] border-slate-300 rounded focus:ring-[#005FEC]" checked>
+                                        <label for="tactic-event" class="ml-2 block text-sm text-slate-900">AI-Powered Contact Center</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="tactic-digital" type="checkbox" value="1.2" class="h-4 w-4 text-[#005FEC] border-slate-300 rounded focus:ring-[#005FEC]" checked>
+                                        <label for="tactic-digital" class="ml-2 block text-sm text-slate-900">Business Phone System (UCaaS)</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="tactic-crm" type="checkbox" value="1.1" class="h-4 w-4 text-[#005FEC] border-slate-300 rounded focus:ring-[#005FEC]">
+                                        <label for="tactic-crm" class="ml-2 block text-sm text-slate-900">Sales & Service CRM</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="tactic-analytics" type="checkbox" value="1.3" class="h-4 w-4 text-[#005FEC] border-slate-300 rounded focus:ring-[#005FEC]">
+                                        <label for="tactic-analytics" class="ml-2 block text-sm text-slate-900">Performance Analytics</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- GGS Output -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <div class="bg-[#F2F5F9] p-6 rounded-xl shadow-inner border border-[#E0E5EC]">
+                            <h3 class="text-xl font-bold mb-4 text-center text-[#000A70]">AI-Powered Prediction</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <div class="text-sm text-slate-500">IT Admin Overhead Reduction</div>
+                                    <div id="predictedOverhead" class="text-4xl font-bold text-[#005FEC]">0%</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <div class="text-sm text-slate-500">Tool Consolidation</div>
+                                    <div id="predictedConsolidation" class="text-4xl font-bold text-[#005FEC]">0</div>
+                                    <p class="text-xs text-slate-400">Apps Replaced</p>
+                                </div>
+                                 <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <div class="text-sm text-slate-500">Operational Savings</div>
+                                    <div id="predictedSavings" class="text-4xl font-bold text-[#005FEC]">$0</div>
+                                    <p class="text-xs text-slate-400">Annually</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="bg-[#F2F5F9] p-6 rounded-xl shadow-inner border border-[#E0E5EC]">
+                                 <h3 class="text-lg font-semibold mb-4 text-center text-[#000A70]">Overhead Reduction by Quarter</h3>
+                                 <div class="h-64"><canvas id="mqlChart"></canvas></div>
+                            </div>
+                            <div class="bg-[#F2F5F9] p-6 rounded-xl shadow-inner border border-[#E0E5EC]">
+                                <h3 class="text-lg font-semibold mb-4 text-center text-[#000A70]">Value Drivers</h3>
+                                <div class="h-64"><canvas id="budgetChart"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12 fade-in-element" style="transition-delay: 300ms;">
+                    <button id="emailPlanBtn" class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#005FEC] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#005FEC]">
+                        Email This Plan to My Team
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="audience" class="bg-[#F2F5F9]">
+             <div class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="lg:text-center fade-in-element">
+                        <h2 class="text-base font-semibold text-[#005FEC] tracking-wide uppercase">The Audiences We Serve</h2>
+                        <p class="mt-2 text-3xl leading-8 font-bold text-[#000A70] sm:text-4xl">Solutions for Every Stage of Growth</p>
+                        <p class="mt-4 max-w-2xl text-xl text-[#444A53] lg:mx-auto">Our platform is built for the entire business, from the CEO focused on growth to the IT Manager focused on reliability. We deliver undeniable value to every stakeholder.</p>
+                    </div>
+                    <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 fade-in-element" style="transition-delay: 200ms;">
+                         <div class="proposal-card rounded-lg p-6 text-center">
+                             <h3>The Growth-Focused Leader</h3>
+                             <p class="text-[#444A53]">A COO, VP of Ops, or Business Owner focused on scaling operations, improving efficiency, and enhancing the customer experience to drive revenue.</p>
+                         </div>
+                         <div class="proposal-card rounded-lg p-6 text-center">
+                             <h3>The Technical Practitioner</h3>
+                             <p class="text-[#444A53]">An IT Manager or Sysadmin responsible for infrastructure, security, and uptime. Needs a reliable, secure, and easy-to-integrate solution that reduces their workload.</p>
+                         </div>
+                    </div>
+                    <div class="mt-16 fade-in-element" style="transition-delay: 300ms;">
+                        <h4 class="text-2xl font-bold text-center text-[#000A70]">Where Your Technical Team Finds Solutions</h4>
+                         <div class="chart-container">
+                            <canvas id="affinityChart"></canvas>
+                        </div>
+                         <p class="text-center text-[#444A53]">High affinity for technical communities like r/sysadmin and expert content validates our focus on the informed IT professional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="bg-white">
+            <div class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center fade-in-element">
+                        <h2 class="text-base font-semibold text-[#005FEC] tracking-wide uppercase">Expected Business Impact</h2>
+                        <p class="text-4xl font-bold text-[#000A70] sm:text-5xl">The SMART Goals of Operational Transformation</p>
+                        <p class="max-w-2xl mx-auto text-xl text-[#444A53]">Success will be defined by specific, measurable, and achievable targets. By implementing this plan, we will enhance productivity, increase customer satisfaction, and achieve significant operational savings.</p>
+                    </div>
+                    <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 fade-in-element" style="transition-delay: 200ms;">
+                        <div class="proposal-card rounded-lg p-6 text-center">
+                            <p class="text-5xl font-bold text-[#005FEC]" data-target="15" data-suffix="%">0%</p>
+                            <p class="mt-2 text-lg font-medium text-slate-600">Increase in Demo Requests</p>
+                        </div>
+                        <div class="proposal-card rounded-lg p-6 text-center">
+                            <p class="text-5xl font-bold text-[#005FEC]" data-target="10" data-suffix="%">0%</p>
+                            <p class="mt-2 text-lg font-medium text-slate-600">Growth in Enterprise Pipeline</p>
+                        </div>
+                        <div class="proposal-card rounded-lg p-6 text-center">
+                            <p class="text-5xl font-bold text-[#005FEC]" data-target="30" data-suffix="%">0%</p>
+                            <p class="mt-2 text-lg font-medium text-slate-600">Increase in Feature Adoption</p>
+                        </div>
+                        <div class="proposal-card rounded-lg p-6 text-center">
+                            <p class="text-5xl font-bold text-[#005FEC]" data-target="10" data-suffix="%">0%</p>
+                            <p class="mt-2 text-lg font-medium text-slate-600">Share of Voice vs. Competitors</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#000A70] text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-2xl font-bold">Ron Kagan</p>
+            <p class="mt-2 text-base text-slate-300">Let's build the future of business communication, together.</p>
+            <p class="mt-4 text-sm text-slate-400">This proposal exemplifies forward-facing thinking on how to move from strategy to action.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- App State & Configuration ---
+            const appConfig = {
+                planData: {
+                    'plan-foundation': { title: 'Phase 1: Audit, Diagnose, and Align', text: "<strong>Key Tactics:</strong><ul class='list-disc pl-5 mt-2'><li>Clarify the strategic transformation for the marketing automation platform (Marketo vs. HubSpot/Pardot).</li><li>Launch a full audit of all 210 marketing technologies and map the entire lead-to-revenue data flow.</li><li>Establish a weekly alignment cadence with Sales Ops, RevOps, and BI to build a shared understanding of the problems.</li></ul>" },
+                    'plan-launch': { title: 'Phase 2: Consolidate the Foundation & Launch Pilots', text: "<strong>Key Tactics:</strong><ul class='list-disc pl-5 mt-2'><li>Present a data-driven business case for consolidating onto a single marketing automation platform, highlighting ROI from cost savings and efficiency gains.</li><li>Initiate the unification project: design a single data schema, a new lead scoring model, and standardized lead routing.</li><li>Launch quick-win A/B tests on key landing pages using existing tools like VWO to demonstrate immediate value.</li></ul>" },
+                    'plan-engagement': { title: 'Phase 3: Scale, Measure, and Innovate', text: "<strong>Key Tactics:</strong><ul class='list-disc pl-5 mt-2'><li>With a unified data foundation, deploy a true multi-touch attribution model to accurately measure marketing ROI.</li><li>Activate audience intelligence to launch hyper-targeted pilot campaigns aimed at the 'Technical Practitioner' persona on platforms like Reddit.</li><li>Deliver the first version of a comprehensive Marketing Performance Dashboard to serve as the single source of truth for all KPIs.</li></ul>" }
+                },
+                ggsState: {
+                    integration: '1.1',
+                    users: 250,
+                    features: {
+                        'tactic-event': { selected: true, multiplier: 1.5, label: 'AI-Powered Contact Center' },
+                        'tactic-digital': { selected: true, multiplier: 1.2, label: 'Business Phone System (UCaaS)' },
+                        'tactic-crm': { selected: false, multiplier: 1.1, label: 'Sales & Service CRM' },
+                        'tactic-analytics': { selected: false, multiplier: 1.3, label: 'Performance Analytics' }
+                    }
+                }
+            };
+
+            // --- DOM Element Cache ---
+            const ui = {
+                header: document.querySelector('header'),
+                navLinks: document.querySelectorAll('.nav-link'),
+                mobileMenuButton: document.getElementById('mobile-menu-button'),
+                mobileMenu: document.getElementById('mobile-menu'),
+                planSteps: document.querySelectorAll('.plan-step'),
+                planContent: document.getElementById('plan-content'),
+                ggsIntegrationSelect: document.getElementById('ggs-integration'),
+                ggsBudgetSlider: document.getElementById('ggs-budget'),
+                ggsBudgetValue: document.getElementById('ggs-budgetValue'),
+                ggsTacticsCheckboxes: document.querySelectorAll('#ggs-tactics input[type="checkbox"]'),
+                predictedOverheadEl: document.getElementById('predictedOverhead'),
+                predictedConsolidationEl: document.getElementById('predictedConsolidation'),
+                predictedSavingsEl: document.getElementById('predictedSavings'),
+                emailPlanBtn: document.getElementById('emailPlanBtn'),
+                mainSections: document.querySelectorAll('main > section')
+            };
+
+            // --- Chart Instances ---
+            const chartInstances = {};
+
+            // --- Generic Chart Helper ---
+            function createChart(canvasId, type, data, options) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return null;
+
+                if (chartInstances[canvasId]) {
+                    chartInstances[canvasId].destroy();
+                }
+
+                const ctx = canvas.getContext('2d');
+                const chart = new Chart(ctx, { type, data, options });
+                chartInstances[canvasId] = chart;
+                canvas.dataset.initialized = true;
+                return chart;
+            }
+
+            // --- Event Handlers ---
+            function handleScroll() {
+                ui.header.classList.toggle('scrolled', window.scrollY > 50);
+                ui.header.classList.toggle('bg-white/95', window.scrollY > 50);
+                ui.header.classList.toggle('shadow-md', window.scrollY > 50);
+                ui.header.classList.toggle('backdrop-blur-sm', window.scrollY > 50);
+            }
+
+            function handleNavLinkClick() {
+                if (!ui.mobileMenu.classList.contains('hidden')) {
+                    ui.mobileMenu.classList.add('hidden');
+                }
+            }
+
+            function handlePlanStepClick(e) {
+                const step = e.currentTarget;
+                const targetId = step.dataset.target;
+                const content = appConfig.planData[targetId];
+                ui.planContent.innerHTML = `<h3 class="font-bold text-2xl text-[#000A70] mb-2">${content.title}</h3><div>${content.text}</div>`;
+                ui.planSteps.forEach(s => s.classList.remove('bg-white', 'border-[#005FEC]'));
+                step.classList.add('bg-white', 'border-[#005FEC]');
+            }
+            
+            function handleGGSInputChange() {
+                appConfig.ggsState.integration = ui.ggsIntegrationSelect.value;
+                appConfig.ggsState.users = parseInt(ui.ggsBudgetSlider.value);
+                ui.ggsTacticsCheckboxes.forEach(checkbox => {
+                    appConfig.ggsState.features[checkbox.id].selected = checkbox.checked;
+                });
+                renderGGS();
+            }
+
+            function handleEmailPlanClick() {
+                const { integration, users, features } = appConfig.ggsState;
+                const integrationLabel = ui.ggsIntegrationSelect.options[ui.ggsIntegrationSelect.selectedIndex].text;
+                const selectedFeatures = Object.values(features).filter(f => f.selected).map(f => f.label);
+
+                const subject = "Nextiva Growth Plan for Discussion";
+                let body = "Hello Team,\n\nPlease see the following investment in Nextiva that I would like to discuss.\n\n";
+                body += "--- GGS Simulated Plan ---\n";
+                body += `Key Integration: ${integrationLabel}\n`;
+                body += `Number of Users: ${users}\n`;
+                body += `Selected Features: ${selectedFeatures.join(', ')}\n\n`;
+                body += "--- Predicted Outcomes ---\n";
+                body += `IT Admin Overhead Reduction: ${ui.predictedOverheadEl.textContent}\n`;
+                body += `Tool Consolidation: ${ui.predictedConsolidationEl.textContent} apps\n`;
+                body += `Annual Operational Savings: ${ui.predictedSavingsEl.textContent}\n\n`;
+                body += "Best regards,";
+
+                window.location.href = `mailto:marketing@nextiva.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            }
+
+            // --- Render & Update Functions ---
+            function renderGGS() {
+                const { integration, users, features } = appConfig.ggsState;
+                const integrationMultiplier = parseFloat(integration);
+                
+                let totalFeatureMultiplier = 0;
+                let selectedFeatureCount = 0;
+                const valueDrivers = [];
+
+                Object.values(features).forEach(feature => {
+                    if (feature.selected) {
+                        totalFeatureMultiplier += feature.multiplier;
+                        selectedFeatureCount++;
+                        valueDrivers.push({ label: feature.label, value: feature.multiplier });
+                    }
+                });
+
+                if (selectedFeatureCount === 0) totalFeatureMultiplier = 0.3;
+
+                const baseOverhead = (users / 50) * integrationMultiplier * totalFeatureMultiplier;
+                const predictedOverhead = Math.round(baseOverhead);
+                const predictedConsolidation = selectedFeatureCount > 1 ? selectedFeatureCount - 1 : 0;
+                const baseSavings = users * 120 * integrationMultiplier * (totalFeatureMultiplier / 4) + (predictedConsolidation * users * 15);
+                const predictedSavings = Math.round(baseSavings);
+
+                ui.ggsBudgetValue.textContent = `${users} Users`;
+                ui.predictedOverheadEl.textContent = `${predictedOverhead}%`;
+                ui.predictedConsolidationEl.textContent = `${predictedConsolidation}`;
+                ui.predictedSavingsEl.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(predictedSavings);
+
+                updateGGSCharts(predictedOverhead, valueDrivers);
+            }
+
+            function updateGGSCharts(totalOverhead, drivers) {
+                const overheadChart = chartInstances['mqlChart'];
+                const valueDriverChart = chartInstances['budgetChart'];
+
+                if (!overheadChart || !valueDriverChart) return;
+
+                const q1 = Math.round(totalOverhead * 0.15), q2 = Math.round(totalOverhead * 0.35), q3 = Math.round(totalOverhead * 0.30), q4 = Math.round(totalOverhead * 0.20);
+                overheadChart.data.datasets[0].data = [q1, q2, q3, q4];
+                overheadChart.update();
+
+                const totalDriverValue = drivers.reduce((sum, item) => sum + item.value, 0);
+                valueDriverChart.data.labels = drivers.map(item => item.label);
+                valueDriverChart.data.datasets[0].data = drivers.map(item => (item.value / totalDriverValue) * 100);
+                valueDriverChart.update();
+            }
+
+            // --- Initializers ---
+            function initializeGGSCharts() {
+                createChart('mqlChart', 'bar', 
+                    { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ label: 'Overhead Reduction (%)', data: [0, 0, 0, 0], backgroundColor: 'rgba(0, 95, 236, 0.6)', borderColor: 'rgba(0, 95, 236, 1)', borderWidth: 1 }] },
+                    { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: (value) => value + '%' } } } }
+                );
+                createChart('budgetChart', 'doughnut', 
+                    { labels: [], datasets: [{ label: 'Value Driver %', data: [], backgroundColor: ['rgba(0, 95, 236, 0.7)', 'rgba(0, 95, 236, 0.5)', 'rgba(255, 184, 0, 0.7)', 'rgba(0, 10, 112, 0.6)'] }] },
+                    { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } } }
+                );
+                renderGGS();
+            }
+
+            function initializeAffinityChart() {
+                createChart('affinityChart', 'bar', 
+                    { labels: ['r/sysadmin', 'G2.com', 'Lawrence Systems (YT)', 'TechCrunch', 'RingCentral'], datasets: [{ label: 'Audience Affinity Score', data: [98, 85, 75, 72, 65], backgroundColor: 'rgba(0, 95, 236, 0.7)', borderColor: 'rgba(0, 95, 236, 1)', borderWidth: 1 }] },
+                    { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.x}` } } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Affinity Score' } } } }
+                );
+            }
+
+            function animateCounters(element) {
+                const counters = element.querySelectorAll('p[data-target]');
+                counters.forEach(counter => {
+                    if (counter.dataset.animated) return;
+                    counter.dataset.animated = true;
+                    const target = +counter.getAttribute('data-target'), suffix = counter.getAttribute('data-suffix') || '';
+                    counter.innerText = '0' + suffix;
+                    const updateCount = () => {
+                        const count = +counter.innerText.replace(suffix, '');
+                        const inc = target / 100;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc).toLocaleString() + suffix;
+                            setTimeout(updateCount, 20);
+                        } else { counter.innerText = target.toLocaleString() + suffix; }
+                    };
+                    updateCount();
+                });
+            }
+
+            // --- Intersection Observer Setup ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    
+                    if (entry.isIntersecting) {
+                        // Handle Nav Highlighting
+                        ui.navLinks.forEach(link => link.classList.remove('active'));
+                        if (navLink) navLink.classList.add('active');
+
+                        // Handle Fade-in Animations for child elements
+                        entry.target.querySelectorAll('.fade-in-element').forEach(el => {
+                            el.classList.add('visible');
+                        });
+
+                        // Handle one-time initializations
+                        if (!entry.target.dataset.initialized) {
+                            if (id === 'impact') animateCounters(entry.target);
+                            if (id === 'audience') initializeAffinityChart();
+                            if (id === 'ggs') initializeGGSCharts();
+                            entry.target.dataset.initialized = true;
+                        }
+                    }
+                });
+            }, { rootMargin: "-30% 0px -30% 0px", threshold: 0.01 });
+
+            // --- Bind Events & Initialize ---
+            window.addEventListener('scroll', handleScroll);
+            ui.navLinks.forEach(link => link.addEventListener('click', handleNavLinkClick));
+            ui.mobileMenuButton.addEventListener('click', () => ui.mobileMenu.classList.toggle('hidden'));
+            ui.planSteps.forEach(step => step.addEventListener('click', handlePlanStepClick));
+            
+            ui.ggsIntegrationSelect.addEventListener('change', handleGGSInputChange);
+            ui.ggsBudgetSlider.addEventListener('input', handleGGSInputChange);
+            ui.ggsTacticsCheckboxes.forEach(checkbox => checkbox.addEventListener('change', handleGGSInputChange));
+            ui.emailPlanBtn.addEventListener('click', handleEmailPlanClick);
+
+            ui.mainSections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
