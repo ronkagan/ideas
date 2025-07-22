@@ -422,13 +422,13 @@
                     'plan-engagement': { title: 'Phase 3: Scale, Measure, and Innovate', text: "<strong>Key Tactics:</strong><ul class='list-disc pl-5 mt-2'><li>With a unified data foundation, deploy a true multi-touch attribution model to accurately measure marketing ROI.</li><li>Activate audience intelligence to launch hyper-targeted pilot campaigns aimed at the 'Technical Practitioner' persona on platforms like Reddit.</li><li>Deliver the first version of a comprehensive Marketing Performance Dashboard to serve as the single source of truth for all KPIs.</li></ul>" }
                 },
                 ggsState: {
-                    integration: '1.1',
+                    integration: '2.1',
                     users: 250,
                     features: {
-                        'tactic-event': { selected: true, multiplier: 1.5, label: 'AI-Powered Contact Center' },
-                        'tactic-digital': { selected: true, multiplier: 1.2, label: 'Business Phone System (UCaaS)' },
-                        'tactic-crm': { selected: false, multiplier: 1.1, label: 'Sales & Service CRM' },
-                        'tactic-analytics': { selected: false, multiplier: 1.3, label: 'Performance Analytics' }
+                        'tactic-event': { selected: true, multiplier: 2.5, label: 'AI-Powered Contact Center' },
+                        'tactic-digital': { selected: true, multiplier: 2.2, label: 'Business Phone System (UCaaS)' },
+                        'tactic-crm': { selected: false, multiplier: 2.1, label: 'Sales & Service CRM' },
+                        'tactic-analytics': { selected: false, multiplier: 2.3, label: 'Performance Analytics' }
                     }
                 }
             };
@@ -540,7 +540,7 @@
                     }
                 });
 
-                if (selectedFeatureCount === 0) totalFeatureMultiplier = 0.3;
+                if (selectedFeatureCount === 0) totalFeatureMultiplier = 0.05;
 
                 const baseOverhead = (users / 50) * integrationMultiplier * totalFeatureMultiplier;
                 const predictedOverhead = Math.round(baseOverhead);
