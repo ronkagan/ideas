@@ -306,7 +306,7 @@
                     <!-- GGS Output -->
                     <div class="lg:col-span-2 space-y-8">
                         <div class="bg-[#F2F5F9] p-6 rounded-xl shadow-inner border border-[#E0E5EC]">
-                            <h3 class="text-xl font-bold mb-4 text-center text-[#000A70]">AI-Powered Prediction</h3>
+                            <h3 class="text-xl font-bold mb-4 text-center text-[#000A70]">Forecasted Efficiency Gains</h3>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                                 <div class="bg-white p-4 rounded-lg shadow-md">
                                     <div class="text-sm text-slate-500">IT Admin Overhead Reduction</div>
@@ -422,13 +422,13 @@
                     'plan-engagement': { title: 'Phase 3: Scale, Measure, and Innovate', text: "<strong>Key Tactics:</strong><ul class='list-disc pl-5 mt-2'><li>With a unified data foundation, deploy a true multi-touch attribution model to accurately measure marketing ROI.</li><li>Activate audience intelligence to launch hyper-targeted pilot campaigns aimed at the 'Technical Practitioner' persona on platforms like Reddit.</li><li>Deliver the first version of a comprehensive Marketing Performance Dashboard to serve as the single source of truth for all KPIs.</li></ul>" }
                 },
                 ggsState: {
-                    integration: '2.1',
+                    integration: '5.1',
                     users: 250,
                     features: {
-                        'tactic-event': { selected: true, multiplier: 2.5, label: 'AI-Powered Contact Center' },
-                        'tactic-digital': { selected: true, multiplier: 2.2, label: 'Business Phone System (UCaaS)' },
-                        'tactic-crm': { selected: false, multiplier: 2.1, label: 'Sales & Service CRM' },
-                        'tactic-analytics': { selected: false, multiplier: 2.3, label: 'Performance Analytics' }
+                        'tactic-event': { selected: true, multiplier: 5.5, label: 'AI-Powered Contact Center' },
+                        'tactic-digital': { selected: true, multiplier: 3.2, label: 'Business Phone System (UCaaS)' },
+                        'tactic-crm': { selected: false, multiplier: 7.1, label: 'Sales & Service CRM' },
+                        'tactic-analytics': { selected: false, multiplier: 4.3, label: 'Performance Analytics' }
                     }
                 }
             };
@@ -540,7 +540,7 @@
                     }
                 });
 
-                if (selectedFeatureCount === 0) totalFeatureMultiplier = 0.05;
+                if (selectedFeatureCount === 0) totalFeatureMultiplier = 0.1;
 
                 const baseOverhead = (users / 50) * integrationMultiplier * totalFeatureMultiplier;
                 const predictedOverhead = Math.round(baseOverhead);
