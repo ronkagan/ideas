@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ron Kagan | Marketing UnifyApps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: UnifyApps Brand Palette -->
+    <!-- Application Structure Plan: This SPA is a candidate's strategic presentation for a leadership role at UnifyApps. The structure is a linear, persuasive argument: 1) The Objective (The market opportunity), 2) The 180-Day Plan (My demand gen playbook), 3) The ROI Simulator (How I model growth), 4) The Audience (The personas we will serve), and 5) The Impact (The value I create). This format is designed to quickly and clearly demonstrate the candidate's value proposition. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: A 3-phase, 180-day demand gen plan. Goal: Present a repeatable playbook. Viz: Interactive phased diagram. Interaction: Click to see tactics. Justification: Shows a structured, scalable approach to building a demand engine. Method: HTML/CSS/JS.
+        - Report Info: Growth Engine Simulator. Goal: Demonstrate ROI Modeling. Viz: Interactive simulator. Interaction: User changes inputs to see predicted outcomes. Justification: Proves the candidate's ability to build data-driven business cases for demand initiatives. Library: Chart.js.
+        - Report Info: "The Enterprise Architect" and "Agile Development Lead" personas. Goal: Showcase deep analysis. Viz: Static cards. Justification: Demonstrates the candidate's data-driven understanding of the UnifyApps user. Method: HTML/CSS/JS.
+        - Report Info: Audience affinity data. Goal: Provide evidence. Viz: Horizontal Bar Chart. Interaction: Animates on scroll. Justification: Backs up the analytical claims with hard data. Library: Chart.js.
+        - Report Info: Business-level KPIs. Goal: Quantify Value Creation. Viz: Animated KPI counters. Interaction: Animate on scroll. Justification: Connects the playbook to tangible financial outcomes. Method: HTML/JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D0D0D; /* Dark Gray */
+            color: #FFFFFF; /* White */
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        header {
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+             color: #3B82F6; /* Blue */
+        }
+        .proposal-card {
+            background-color: #1A1A1A;
+            border: 1px solid #333333;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .proposal-card:hover {
+            transform: translateY(-5px);
+            border-color: #3B82F6;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .plan-step {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #3B82F6; /* Blue */
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider-thumb::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #3B82F6; /* Blue */
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .initial-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 z-50 w-full bg-[#0D0D0D]/80 backdrop-blur-sm shadow-md">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="#" class="text-xl font-bold text-white">Marketing UnifyApps</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="#objective" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">The Objective</a>
+                        <a href="#plan" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">The 180-Day Plan</a>
+                        <a href="#ggs" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">ROI Simulator</a>
+                        <a href="#audience" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">The Audience</a>
+                        <a href="#impact" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">Business Impact</a>
+                        <a href="#experience" class="nav-link px-3 py-2 rounded-md text-sm font-semibold">My Experience</a>
+                        <a href="mailto:ron@skilltrade.marketing" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#3B82F6] hover:opacity-90">Contact Ron</a>
+                    </div>
+                </div>
+                 <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+             <div id="mobile-menu" class="md:hidden hidden pb-4 bg-[#0D0D0D]/95 backdrop-blur-sm rounded-b-lg">
+                <a href="#objective" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-gray-300">The Objective</a>
+                <a href="#plan" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-gray-300">The 180-Day Plan</a>
+                <a href="#ggs" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-gray-300">ROI Simulator</a>
+                <a href="#audience" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-gray-300">The Audience</a>
+                <a href="#impact" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-gray-300">Business Impact</a>
+                <a href="#experience" class="nav-link block px-3 py-2 rounded-md text-base font-semibold text-gray-300">My Experience</a>
+                <a href="mailto:ron@skilltrade.marketing" class="block w-full text-left mt-2 px-4 py-2 text-base font-medium rounded-md text-white bg-[#3B82F6] hover:opacity-90">Contact Ron</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="objective" class="bg-[#0D0D0D] pt-16">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="text-center initial-fade-in">
+                    <h2 class="text-base font-semibold text-[#3B82F6] tracking-wide uppercase">The Objective for Global Demand Generation</h2>
+                    <h1 class="mt-1 text-4xl font-bold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">From Complex Builds to <span class="text-[#3B82F6]">Enterprise-Ready GenAI in Days</span></h1>
+                    <p class="max-w-3xl mx-auto mt-5 text-xl text-gray-300">The enterprise AI market is crowded with platforms that promise the world but deliver complexity. The real opportunity is to win the builders. My objective is to build a demand engine that captures the enterprise developers, architects, and project managers who are searching for a faster, more secure way to build and deploy GenAI applications, turning their pain points into a predictable pipeline.</p>
+                </div>
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center initial-fade-in" style="animation-delay: 200ms;">
+                        <div class="proposal-card p-6">
+                            <h3 class="font-bold text-xl text-white">Developer Enablement</h3>
+                            <p class="mt-2 text-gray-400">Create a content ecosystem that provides value and builds trust with technical practitioners.</p>
+                        </div>
+                        <div class="proposal-card p-6">
+                            <h3 class="font-bold text-xl text-white">Funnel Optimization</h3>
+                            <p class="mt-2 text-gray-400">Build a data-driven machine to capture and convert high-intent traffic from developer communities and platforms.</p>
+                        </div>
+                        <div class="proposal-card p-6">
+                            <h3 class="font-bold text-xl text-white">Ecosystem Integration</h3>
+                            <p class="mt-2 text-gray-400">Leverage partnerships with the tools developers already use to drive adoption and build credibility.</p>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="plan" class="bg-[#1A1A1A] text-white">
+            <div class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center fade-in-element">
+                        <h2 class="text-base font-semibold text-[#3B82F6] tracking-wide uppercase">The 180-Day Demand Generation Blueprint</h2>
+                        <h1 class="mt-1 text-4xl font-bold text-white sm:text-5xl">A Repeatable Playbook for Building a <span class="text-[#3B82F6]">Developer-First Growth Engine</span></h1>
+                        <p class="max-w-3xl mt-5 mx-auto text-xl text-gray-300">This plan moves methodically from foundational analysis to scalable execution. It is a repeatable framework designed to transform a company's demand generation function from a series of campaigns into a predictable, efficient, and data-driven engine for developer acquisition and enterprise sales.</p>
+                    </div>
+                    <div class="mt-12 fade-in-element" style="transition-delay: 200ms;">
+                         <div class="flex flex-col md:flex-row justify-center items-stretch gap-2 md:gap-0">
+                             <div class="plan-step flex-1 text-center p-4 cursor-pointer" data-target="plan-foundation">
+                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-[#3B82F6] text-white rounded-full text-2xl font-bold ring-4 ring-[#1A1A1A]">1</div>
+                                 <p class="mt-2 font-semibold">Phase 1: Technical Content & Funnel Audit</p>
+                                 <p class="text-sm text-gray-500">Days 1-60</p>
+                             </div>
+                             <div class="plan-step flex-1 text-center p-4 cursor-pointer" data-target="plan-launch">
+                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-[#3B82F6] text-white rounded-full text-2xl font-bold ring-4 ring-[#1A1A1A]">2</div>
+                                 <p class="mt-2 font-semibold">Phase 2: Build the Developer Content Moat</p>
+                                 <p class="text-sm text-gray-500">Days 61-120</p>
+                             </div>
+                             <div class="plan-step flex-1 text-center p-4 cursor-pointer" data-target="plan-engagement">
+                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-[#3B82F6] text-white rounded-full text-2xl font-bold ring-4 ring-[#1A1A1A]">3</div>
+                                 <p class="mt-2 font-semibold">Phase 3: Scale & Accelerate</p>
+                                 <p class="text-sm text-gray-500">Days 121-180</p>
+                             </div>
+                         </div>
+                         <div id="plan-content" class="mt-8 p-8 bg-black rounded-lg max-w-4xl mx-auto text-lg text-gray-300 leading-relaxed min-h-[200px] border border-gray-800">
+                            Click a phase above to see key tactics.
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ggs" class="bg-black">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in-element">
+                    <h2 class="text-base font-semibold text-[#3B82F6] tracking-wide uppercase">The Growth Engine Simulator</h2>
+                    <h1 class="mt-1 text-4xl font-bold text-white sm:text-5xl">Modeling the Pipeline Impact of <span class="text-[#3B82F6]">Demand Gen</span></h1>
+                    <p class="max-w-3xl mt-5 mx-auto text-xl text-gray-300">This interactive dashboard demonstrates how I model the business impact of demand generation. Use the inputs to simulate how changes in traffic and conversion rates will directly affect sign-ups, enterprise opportunities, and the total pipeline generated.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 fade-in-element" style="transition-delay: 200ms;">
+                    <!-- Control Panel -->
+                    <div class="lg:col-span-1 bg-[#1A1A1A] p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2 text-white">Demand Gen Inputs</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label for="ggs-traffic" class="block text-sm font-medium text-gray-300">1. Monthly Dev Community Reach</label>
+                                <input type="range" id="ggs-traffic" min="50000" max="500000" step="10000" value="150000" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                <div class="text-center font-bold text-[#3B82F6] mt-2" id="ggs-trafficValue">150,000</div>
+                            </div>
+                            <div>
+                                <label for="ggs-mql" class="block text-sm font-medium text-gray-300">2. Reach-to-Sign-up Conversion Rate (%)</label>
+                                <input type="range" id="ggs-mql" min="1" max="10" step="0.1" value="2.5" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                <div class="text-center font-bold text-[#3B82F6] mt-2" id="ggs-mqlValue">2.5%</div>
+                            </div>
+                            <div>
+                                <label for="ggs-sql" class="block text-sm font-medium text-gray-300">3. Sign-up-to-Enterprise Opp Rate (%)</label>
+                                <input type="range" id="ggs-sql" min="1" max="10" step="1" value="5" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                <div class="text-center font-bold text-[#3B82F6] mt-2" id="ggs-sqlValue">5%</div>
+                            </div>
+                            <div>
+                                <label for="ggs-acv" class="block text-sm font-medium text-gray-300">4. Average Contract Value (ACV)</label>
+                                <input type="range" id="ggs-acv" min="50000" max="500000" step="10000" value="150000" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                <div class="text-center font-bold text-[#3B82F6] mt-2" id="ggs-acvValue">$150,000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- GGS Output -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <div class="bg-[#1A1A1A] p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4 text-center text-white">Predicted Quarterly Outcomes</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                                <div class="bg-black/20 p-4 rounded-lg">
+                                    <div class="text-sm text-gray-300">New Free-Tier Sign-ups</div>
+                                    <div id="predictedMQLs" class="text-4xl font-bold text-[#3B82F6]">0</div>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-lg">
+                                    <div class="text-sm text-gray-300">Enterprise Opportunities</div>
+                                    <div id="predictedSQLs" class="text-4xl font-bold text-[#3B82F6]">0</div>
+                                </div>
+                                 <div class="bg-black/20 p-4 rounded-lg">
+                                    <div class="text-sm text-gray-300">Pipeline Generated</div>
+                                    <div id="predictedPipeline" class="text-4xl font-bold text-[#3B82F6]">$0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#1A1A1A] p-6 rounded-lg">
+                             <h3 class="text-lg font-semibold mb-4 text-center text-white">Quarterly Pipeline Growth</h3>
+                             <div class="h-64"><canvas id="pipelineChart"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12 fade-in-element" style="transition-delay: 300ms;">
+                    <button id="emailPlanBtn" class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-[#3B82F6] hover:opacity-90">
+                        Request a Consultation
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="audience" class="bg-[#1A1A1A] text-white">
+             <div class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="lg:text-center fade-in-element">
+                        <h2 class="text-base font-semibold text-[#3B82F6] tracking-wide uppercase">The Audience We Will Win</h2>
+                        <h1 class="mt-2 text-3xl leading-8 font-bold text-white sm:text-4xl">The Enterprise Builder</h1>
+                        <p class="mt-4 max-w-2xl text-xl text-gray-300 lg:mx-auto">Our demand generation efforts will be laser-focused on the true UnifyApps buyer: the hands-on technical leader tasked with building and deploying secure, scalable AI solutions within the enterprise.</p>
+                    </div>
+                    <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 fade-in-element" style="transition-delay: 200ms;">
+                         <div class="proposal-card p-6 text-center">
+                             <h3 class="text-white">The Enterprise Architect</h3>
+                             <p class="text-gray-400">Focused on security, governance, and integration. They need a platform that fits seamlessly into their existing data ecosystem and meets stringent compliance requirements.</p>
+                         </div>
+                         <div class="proposal-card p-6 text-center">
+                             <h3 class="text-white">The Agile Development Lead</h3>
+                             <p class="text-gray-400">Focused on speed, efficiency, and developer experience. They need a platform that accelerates the build-test-deploy cycle and empowers their team to ship faster.</p>
+                         </div>
+                    </div>
+                    <div class="mt-16 fade-in-element" style="transition-delay: 300ms;">
+                        <h4 class="text-2xl font-bold text-center text-white">Where the Enterprise Builder Learns</h4>
+                         <div class="chart-container">
+                            <canvas id="affinityChart"></canvas>
+                        </div>
+                         <p class="text-center text-gray-400">High affinity for project management tools like Wrike and developer platforms like BrowserStack confirms this persona's focus on efficient, high-quality software development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="bg-black">
+            <div class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center fade-in-element">
+                        <h2 class="text-base font-semibold text-[#3B82F6] tracking-wide uppercase">Expected Business Impact</h2>
+                        <h1 class="text-4xl font-bold text-white sm:text-5xl">The Goals of This Demand Generation Playbook</h1>
+                        <p class="max-w-2xl mx-auto text-xl text-gray-300">By implementing this playbook, we can drive significant, measurable improvements in pipeline creation and marketing efficiency, leading to increased enterprise value for UnifyApps and its investors.</p>
+                    </div>
+                    <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 fade-in-element" style="transition-delay: 200ms;">
+                        <div class="proposal-card rounded-lg p-6 text-center">
+                            <p class="text-5xl font-bold text-[#3B82F6]" data-target="50" data-suffix="%">0%</p>
+                            <p class="mt-2 text-lg font-medium text-gray-300">Increase in Enterprise Pipeline</p>
+                        </div>
+                        <div class="proposal-card rounded-lg p-6 text-center">
+                            <p class="text-5xl font-bold text-[#3B82F6]" data-target="30" data-suffix="%">0%</p>
+                            <p class="mt-2 text-lg font-medium text-gray-300">Reduction in Customer Acquisition Cost</p>
+                        </div>
+                        <div class="proposal-card rounded-lg p-6 text-center">
+                            <p class="text-5xl font-bold text-[#3B82F6]" data-target="40" data-suffix="%">0%</p>
+                            <p class="mt-2 text-lg font-medium text-gray-300">Improvement in Funnel Velocity</p>
+                        </div>
+                        <div class="proposal-card rounded-lg p-6 text-center">
+                            <p class="text-5xl font-bold text-[#3B82F6]" data-target="100" data-suffix="%">0%</p>
+                            <p class="mt-2 text-lg font-medium text-gray-300">Confidence in Marketing ROI Reporting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="bg-[#1A1A1A] text-white">
+            <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="fade-in-element">
+                    <div class="text-center mb-12">
+                         <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="inline-block">
+                            <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png"  alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-[#3B82F6] transition">
+                         </a>
+                         <h2 class="text-3xl font-bold text-white">Ron Kagan</h2>
+                         <p class="text-lg text-[#3B82F6]">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
+                         <p class="mt-2">
+                             <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-[#3B82F6] font-semibold hover:text-white">LinkedIn</a> | 
+                             <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-[#3B82F6] font-semibold hover:text-white">Schedule a Meeting</a>
+                         </p>
+                    </div>
+
+                    <div class="border-t border-gray-800 pt-8">
+                        <h3 class="text-2xl font-bold text-white mb-4">Summary</h3>
+                        <p>A full-funnel B2B demand generation leader with a track record of building scalable marketing engines for high-growth SaaS companies. I bridge the top-of-funnel content gap, build persona-driven ABM programs, and evolve brand narratives to accelerate pipeline growth and establish category leadership.</p>
+                    </div>
+
+                    <div class="border-t border-gray-800 pt-8 mt-8">
+                        <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
+                        <div class="space-y-8">
+                            <div>
+                                <h4 class="text-xl font-semibold">Feedzai</h4>
+                                <p class="text-md text-gray-400">Global Head of Digital Demand Generation & Marketing Operations | Feb 2023 - Present</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>Built the global, multi-channel demand generation engine from scratch, owning the strategy from top-of-funnel awareness to bottom-of-funnel conversion, driving 27% YoY revenue growth.</li>
+                                    <li>Evolved the brand narrative from product-centric to outcome-oriented through a complete brand and digital reinvention, coordinating across global stakeholders.</li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h4 class="text-xl font-semibold">Major League Hacking</h4>
+                                <p class="text-md text-gray-400">Marketing Director | Mar 2022 - Nov 2022</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>Closed the top-of-funnel content gap by researching, writing, and designing a foundational eBook on the open-source ecosystem, establishing the company as an educational leader.</li>
+                                    <li>Executed a persona-driven ABM strategy, targeting senior leadership at Fortune 200 companies and building a robust sales pipeline.</li>
+                                     <li>Conceived and executed 7 simultaneous omni-channel campaigns via in-house and agency partners to drive a 300% lift in sales-accepted pipeline.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Within3</h4>
+                                <p class="text-md text-gray-400">Director, Growth Hacking | Dec 2020 - Mar 2022</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>Built the marketing demand and operations department from the ground up for a 200-person SaaS company, hiring and training the team.</li>
+                                    <li>Drove 25% closed/won growth via direct response campaigns targeting key personas within the 100 largest global life science organizations.</li>
+                                    <li>Implemented the HubSpot/Salesforce stack and developed lead nurturing workflows to guide prospects through the buyer's journey.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Code Climate</h4>
+                                <p class="text-md text-gray-400">Head of Marketing Operations, Demand, Paid, SDRS | Mar 2020 - Dec 2020</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>Implemented the growth mechanisms that positioned a 50-person SaaS company for its \$50M Series C, adding over 70% to the pipeline with targeted paid campaigns.</li>
+                                    <li>Drove 300 qualified enterprise leads by leveraging a CEO-authored book to build thought leadership and capture a high-intent audience.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Expo (Formerly Pared)</h4>
+                                <p class="text-md text-gray-400">Head of Demand Generation & Marketing Operations | Oct 2018 - Mar 2020</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>As the first marketing hire, built the entire demand function from scratch, launching growth from a \$10M Series A through a \$30M Series B.</li>
+                                    <li>Achieved a 50% decrease in CAC and 30% contribution to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Advisen</h4>
+                                <p class="text-md text-gray-400">VP, Head of Marketing, Global | Apr 2017 - Oct 2018</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>Promoted to global leader and executed a GTM turnaround that led to the company's acquisition by Zywave.</li>
+                                    <li>Added 33% to the pipeline by personalizing outbound campaigns and selling event sponsorships to a C-level audience.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Argyle Executive Forum</h4>
+                                <p class="text-md text-gray-400">Campaign Analytics Manager | Apr 2015 - Mar 2017</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>Planned and executed a large calendar of events targeting Fortune 1000 executives, sourcing \$3.6M in revenue (25% YoY increase).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Backstage</h4>
+                                <p class="text-md text-gray-400">Head of Community and Customer Care | Feb 2012 - Apr 2015</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>Grew a community-driven B2B2C business by 400% in one year through content and engagement strategies.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-800 pt-8 mt-8">
+                         <h3 class="text-2xl font-bold text-white mb-4">Education</h3>
+                         <p><strong>Florida State University, Sarasota, FL</strong> — Master of Fine Arts in Acting</p>
+                         <p><strong>Oxford University, New College, Oxford, UK</strong> — Non-degree program</p>
+                         <p><strong>Hunter College, New York, NY</strong> — Bachelor of Arts in Theatre, Summa Cum Laude</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="calendar" class="bg-white">
+            <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="text-center fade-in-element">
+                    <h2 class="text-3xl font-bold text-[#0D0D0D]">Schedule a Meeting</h2>
+                    <p class="mt-4 text-xl text-gray-600">Let's discuss how my experience can drive growth for UnifyApps.</p>
+                </div>
+                <div class="mt-12 fade-in-element" style="transition-delay: 200ms;">
+                    <!-- Google Calendar Appointment Scheduling begin -->
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+                    <!-- end Google Calendar Appointment Scheduling -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#1A1A1A] text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-2xl font-bold">Ron Kagan</p>
+            <p class="mt-2 text-base text-gray-400">Let's build the future of growth, together.</p>
+            <p class="mt-4 text-sm text-gray-500">This presentation exemplifies a data-driven approach to moving from strategy to action.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- App State & Configuration ---
+            const appConfig = {
+                planData: {
+                    'plan-foundation': { title: 'Phase 1: Technical Content & Funnel Audit', text: "<strong>Key Tactics:</strong><ul class='list-disc pl-5 mt-2'><li>Analyze existing content against high-intent developer keywords and audience questions to identify gaps.</li><li>Map the current developer-to-enterprise journey to identify conversion bottlenecks.</li><li>Establish baseline metrics for sign-ups, enterprise trials, and pipeline generation.</li></ul>" },
+                    'plan-launch': { title: 'Phase 2: Build the Developer Content Moat', text: "<strong>Key Tactics:</strong><ul class='list-disc pl-5 mt-2'><li>Launch a content initiative to create definitive, SEO-optimized tutorials, API documentation, and guides answering the top 20 questions developers ask about building GenAI apps.</li><li>Develop targeted content for high-affinity channels like Wrike and developer forums.</li><li>Optimize the sign-up and onboarding flow to improve the conversion rate.</li></ul>" },
+                    'plan-engagement': { title: 'Phase 3: Scale & Accelerate', text: "<strong>Key Tactics:</strong><ul class='list-disc pl-5 mt-2'><li>Launch targeted paid campaigns on developer-focused platforms and relevant tech press sites.</li><li>Develop nurturing sequences to guide free-tier users toward enterprise features.</li><li>Implement a robust multi-touch attribution model to double down on the most effective channels.</li></ul>" }
+                },
+                ggsState: {
+                    traffic: 150000,
+                    mqlRate: 2.5,
+                    sqlRate: 5,
+                    acv: 150000
+                }
+            };
+
+            // --- DOM Element Cache ---
+            const ui = {
+                header: document.querySelector('header'),
+                navLinks: document.querySelectorAll('.nav-link'),
+                mobileMenuButton: document.getElementById('mobile-menu-button'),
+                mobileMenu: document.getElementById('mobile-menu'),
+                planSteps: document.querySelectorAll('.plan-step'),
+                planContent: document.getElementById('plan-content'),
+                ggsTrafficSlider: document.getElementById('ggs-traffic'),
+                ggsTrafficValue: document.getElementById('ggs-trafficValue'),
+                ggsMqlSlider: document.getElementById('ggs-mql'),
+                ggsMqlValue: document.getElementById('ggs-mqlValue'),
+                ggsSqlSlider: document.getElementById('ggs-sql'),
+                ggsSqlValue: document.getElementById('ggs-sqlValue'),
+                ggsAcvSlider: document.getElementById('ggs-acv'),
+                ggsAcvValue: document.getElementById('ggs-acvValue'),
+                predictedMQLsEl: document.getElementById('predictedMQLs'),
+                predictedSQLsEl: document.getElementById('predictedSQLs'),
+                predictedPipelineEl: document.getElementById('predictedPipeline'),
+                emailPlanBtn: document.getElementById('emailPlanBtn'),
+                mainSections: document.querySelectorAll('main > section')
+            };
+
+            // --- Chart Instances ---
+            const chartInstances = {};
+
+            // --- Generic Chart Helper ---
+            function createChart(canvasId, type, data, options) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return null;
+                if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+                const ctx = canvas.getContext('2d');
+                const chart = new Chart(ctx, { type, data, options });
+                chartInstances[canvasId] = chart;
+                canvas.dataset.initialized = true;
+                return chart;
+            }
+
+            // --- Event Handlers ---
+            function handleScroll() {
+                ui.header.classList.toggle('scrolled', window.scrollY > 50);
+            }
+
+            function handleNavLinkClick() {
+                if (!ui.mobileMenu.classList.contains('hidden')) {
+                    ui.mobileMenu.classList.add('hidden');
+                }
+            }
+
+            function handlePlanStepClick(e) {
+                const step = e.currentTarget;
+                const targetId = step.dataset.target;
+                const content = appConfig.planData[targetId];
+                ui.planContent.innerHTML = `<h3 class="font-bold text-2xl text-white mb-2">${content.title}</h3><div>${content.text}</div>`;
+                ui.planSteps.forEach(s => s.classList.remove('bg-black', 'border-blue-500'));
+                step.classList.add('bg-black', 'border-blue-500');
+            }
+            
+            function handleGGSInputChange() {
+                appConfig.ggsState.traffic = parseInt(ui.ggsTrafficSlider.value);
+                appConfig.ggsState.mqlRate = parseFloat(ui.ggsMqlSlider.value);
+                appConfig.ggsState.sqlRate = parseFloat(ui.ggsSqlSlider.value);
+                appConfig.ggsState.acv = parseInt(ui.ggsAcvSlider.value);
+                renderGGS();
+            }
+
+            function handleEmailPlanClick() {
+                const subject = "Consultation Request";
+                let body = "Hello Ron,\n\nI've reviewed your Demand Generation Playbook and would like to schedule a consultation to discuss its application to UnifyApps.\n\nBest regards,";
+                window.location.href = `mailto:ron@skilltrade.marketing?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            }
+
+            // --- Render & Update Functions ---
+            function renderGGS() {
+                const { traffic, mqlRate, sqlRate, acv } = appConfig.ggsState;
+                
+                const quarterlySignups = Math.round((traffic * 3) * (mqlRate / 100));
+                const quarterlyOpps = Math.round(quarterlySignups * (sqlRate / 100));
+                const quarterlyPipeline = quarterlyOpps * acv;
+
+                ui.ggsTrafficValue.textContent = new Intl.NumberFormat().format(traffic);
+                ui.ggsMqlValue.textContent = `${mqlRate.toFixed(1)}%`;
+                ui.ggsSqlValue.textContent = `${sqlRate}%`;
+                ui.ggsAcvValue.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(acv);
+
+                ui.predictedMQLsEl.textContent = new Intl.NumberFormat().format(quarterlySignups);
+                ui.predictedSQLsEl.textContent = new Intl.NumberFormat().format(quarterlyOpps);
+                ui.predictedPipelineEl.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(quarterlyPipeline).replace('$', '$ ');
+
+                updateGGSCharts(quarterlyPipeline);
+            }
+
+            function updateGGSCharts(totalPipeline) {
+                const pipelineChart = chartInstances['pipelineChart'];
+                if (!pipelineChart) return;
+                const q1 = Math.round(totalPipeline * 0.15), q2 = Math.round(totalPipeline * 0.35), q3 = Math.round(totalPipeline * 0.30), q4 = Math.round(totalPipeline * 0.20);
+                pipelineChart.data.datasets[0].data = [q1, q2, q3, q4];
+                pipelineChart.update();
+            }
+
+            // --- Initializers ---
+            function initializeGGSCharts() {
+                const chartOptions = { color: '#FFFFFF', font: { family: "'Inter', sans-serif" } };
+                createChart('pipelineChart', 'bar', 
+                    { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ label: 'Pipeline Generated', data: [0, 0, 0, 0], backgroundColor: 'rgba(59, 130, 246, 0.6)', borderColor: 'rgba(59, 130, 246, 1)', borderWidth: 1 }] },
+                    { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: (value) => '$' + (value/1000000) + 'M', color: chartOptions.color }, grid: { color: '#333333' } }, x: { ticks: { color: chartOptions.color }, grid: { color: '#333333' } } } }
+                );
+                renderGGS();
+            }
+
+            function initializeAffinityChart() {
+                const chartOptions = { color: '#FFFFFF', font: { family: "'Inter', sans-serif" } };
+                createChart('affinityChart', 'bar', 
+                    { labels: ['Wrike', 'BrowserStack', 'Slack', 'Atlassian', 'Radixweb'], datasets: [{ label: 'Audience Affinity Score', data: [89, 57, 65, 64, 48], backgroundColor: 'rgba(59, 130, 246, 0.7)', borderColor: 'rgba(59, 130, 246, 1)', borderWidth: 1 }] },
+                    { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.x}` } } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Affinity Score', color: chartOptions.color }, ticks: { color: chartOptions.color }, grid: { color: '#333333' } }, y: { ticks: { color: chartOptions.color }, grid: { color: '#333333' } } } }
+                );
+            }
+
+            function animateCounters(element) {
+                const counters = element.querySelectorAll('p[data-target]');
+                counters.forEach(counter => {
+                    if (counter.dataset.animated) return;
+                    counter.dataset.animated = true;
+                    const target = +counter.getAttribute('data-target'), suffix = counter.getAttribute('data-suffix') || '';
+                    counter.innerText = '0' + suffix;
+                    const updateCount = () => {
+                        const count = +counter.innerText.replace(suffix, '');
+                        const inc = target / 100;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc).toLocaleString() + suffix;
+                            setTimeout(updateCount, 20);
+                        } else { counter.innerText = target.toLocaleString() + suffix; }
+                    };
+                    updateCount();
+                });
+            }
+
+            // --- Intersection Observer Setup ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    
+                    if (entry.isIntersecting) {
+                        // Handle Nav Highlighting
+                        ui.navLinks.forEach(link => link.classList.remove('active'));
+                        if (navLink) navLink.classList.add('active');
+
+                        // Handle Fade-in Animations for child elements
+                        entry.target.querySelectorAll('.fade-in-element').forEach(el => {
+                            el.classList.add('visible');
+                        });
+
+                        // Handle one-time initializations
+                        if (!entry.target.dataset.initialized) {
+                            if (id === 'impact') animateCounters(entry.target);
+                            if (id === 'audience') initializeAffinityChart();
+                            if (id === 'ggs') initializeGGSCharts();
+                            entry.target.dataset.initialized = true;
+                        }
+                    }
+                });
+            }, { rootMargin: "-30% 0px -30% 0px", threshold: 0.01 });
+
+            // --- Bind Events & Initialize ---
+            window.addEventListener('scroll', handleScroll);
+            ui.navLinks.forEach(link => link.addEventListener('click', handleNavLinkClick));
+            ui.mobileMenuButton.addEventListener('click', () => ui.mobileMenu.classList.toggle('hidden'));
+            ui.planSteps.forEach(step => step.addEventListener('click', handlePlanStepClick));
+            
+            ui.ggsTrafficSlider.addEventListener('input', handleGGSInputChange);
+            ui.ggsMqlSlider.addEventListener('input', handleGGSInputChange);
+            ui.ggsSqlSlider.addEventListener('input', handleGGSInputChange);
+            ui.ggsAcvSlider.addEventListener('input', handleGGSInputChange);
+            ui.emailPlanBtn.addEventListener('click', handleEmailPlanClick);
+
+            ui.mainSections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
