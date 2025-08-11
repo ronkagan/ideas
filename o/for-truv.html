@@ -8,19 +8,55 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@font-face {
+    font-family: 'Gilroy';
+    src: url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/gilroy/Gilroy-Medium.eot);
+    src: url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/gilroy/Gilroy-Medium.eot) format("embedded-opentype"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/gilroy/Gilroy-Medium.woff2) format("woff2"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/gilroy/Gilroy-Medium.woff) format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/gilroy-of/Gilroy-Medium.woff2) format("woff2"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/gilroy-of/Gilroy-Medium.woff) format("woff");
+    font-weight: 500;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/gilroy-of/Gilroy-SemiBold.woff2) format("woff2"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/gilroy-of/Gilroy-SemiBold.woff) format("woff");
+    font-weight: 600;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'Graphik';
+    src: url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Semibold.eot);
+    src: url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Semibold.eot) format("embedded-opentype"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Semibold.woff2) format("woff2"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Semibold.woff) format("woff"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Semibold.ttf) format("truetype");
+    font-weight: 600;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'Graphik';
+    src: url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Medium.eot);
+    src: url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Medium.eot) format("embedded-opentype"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Medium.woff2) format("woff2"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Medium.woff) format("woff"),url(truv.com/wp-content/themes/twentytwentyone/assets_truv/style/../fonts/graphik/Graphik-Medium.ttf) format("truetype");
+    font-weight: 500;
+    font-style: normal
+}
 
     :root {
-        --brand-primary: #1b0e33;
-        --brand-secondary: #5FDBD3;
-        --brand-accent: #5FDBD3;
+        --brand-primary: #2C64E3;
+        --brand-secondary: #eaeaea;
+        --brand-accent: #2C64E3;
         --text-primary: #0D0D0D;
         --text-secondary: #4A4A4A;
-        --bg-light: #F8F9FA;
+        --bg-light: #eaeaea;
         --color-danger: #F44336;
         --color-warning: #FFC107;
         --color-success: #4CAF50;
-        --font-stack: 'Inter', 'Helvetica Neue', sans-serif;
+        --font-stack: 'Gilroy', 'Graphik', sans-serif;
     }
 
     body {
@@ -72,9 +108,11 @@
 </style>
 </head>
 <body class="bg-white">
-
+<section id="proof">
 <iframe src="https://sadly-shop-23256937.figma.site/" width="100%" height="550" frameborder="0"></iframe>
-
+             <div class="absolute -top-24 -left-24 w-72 h-72 bg-[#005FEC]/5 rounded-full z-0"></div>
+             <div class="absolute -bottom-24 -right-24 w-72 h-72 border-8 border-[#FFB800]/20 rounded-full z-0"></div>
+</section>
 <main class="max-w-6xl mx-auto p-4 md:p-8">
     
     <section id="executive-summary" class="my-16 fade-in-element">
@@ -164,24 +202,24 @@
                 <path d="M 300,50 L 100,50" fill="none" stroke="#F44336" stroke-width="3" marker-end="url(#arrow-danger)" stroke-dasharray="5,5"/>
 
                 <g text-anchor="middle">
-                    <text x="50" y="100" font-family="Inter" font-size="12" fill="#0D0D0D">1. Search Intent</text>
-                    <text x="50" y="115" font-family="Inter" font-size="10" fill="#4A4A4A">User searches for</text>
-                    <text x="50" y="127" font-family="Inter" font-size="10" fill="#4A4A4A">"employment verification"</text>
+                    <text x="50" y="100" font-family="Gilroy-Medium" font-size="12" fill="#0D0D0D">1. Search Intent</text>
+                    <text x="50" y="115" font-family="Gilroy-Medium" font-size="10" fill="#4A4A4A">User searches for</text>
+                    <text x="50" y="127" font-family="Gilroy-Medium" font-size="10" fill="#4A4A4A">"employment verification"</text>
                 </g>
                  <g text-anchor="middle">
-                    <text x="190" y="170" font-family="Inter" font-size="12" fill="#0D0D0D">2. Organic Discovery</text>
-                    <text x="200" y="185" font-family="Inter" font-size="10" fill="#4A4A4A">User lands on a Truv</text>
-                    <text x="200" y="197" font-family="Inter" font-size="10" fill="#4A4A4A">verification page from Google</text>
+                    <text x="190" y="170" font-family="Gilroy-Medium" font-size="12" fill="#0D0D0D">2. Organic Discovery</text>
+                    <text x="200" y="185" font-family="Gilroy-Medium" font-size="10" fill="#4A4A4A">User lands on a Truv</text>
+                    <text x="200" y="197" font-family="Gilroy-Medium" font-size="10" fill="#4A4A4A">verification page from Google</text>
                 </g>
                 <g text-anchor="middle">
-                    <text x="350" y="100" font-family="Inter" font-size="12" fill="#0D0D0D">3. Product Usage</text>
-                    <text x="350" y="115" font-family="Inter" font-size="10" fill="#4A4A4A">User completes</text>
-                    <text x="350" y="127" font-family="Inter" font-size="10" fill="#4A4A4A">a verification</text>
+                    <text x="350" y="100" font-family="Gilroy-Medium" font-size="12" fill="#0D0D0D">3. Product Usage</text>
+                    <text x="350" y="115" font-family="Gilroy-Medium" font-size="10" fill="#4A4A4A">User completes</text>
+                    <text x="350" y="127" font-family="Gilroy-Medium" font-size="10" fill="#4A4A4A">a verification</text>
                 </g>
                 <g text-anchor="middle">
-                    <text x="200" y="10" font-family="Inter" font-size="12" font-weight="bold" fill="#F44336">BOTTLENECK</text>
-                    <text x="200" y="25" font-family="Inter" font-size="10" fill="#F44336">No paid acquisition to accelerate</text>
-                    <text x="200" y="35" font-family="Inter" font-size="10" fill="#F44336">the loop and reach non-searching users.</text>
+                    <text x="200" y="10" font-family="Gilroy-Medium" font-size="12" font-weight="bold" fill="#F44336">BOTTLENECK</text>
+                    <text x="200" y="25" font-family="Gilroy-Medium" font-size="10" fill="#F44336">No paid acquisition to accelerate</text>
+                    <text x="200" y="35" font-family="Gilroy-Medium" font-size="10" fill="#F44336">the loop and reach non-searching users.</text>
                 </g>
             </svg>
             <p class="text-center text-sm text-text-secondary mt-4">Truv's growth is powered by a Content/SEO loop. While effective, it's being starved by a lack of investment in paid channels to accelerate user acquisition and reach a broader audience beyond those with immediate high search intent. This throttles the speed and scale of the entire growth engine.</p>
@@ -223,30 +261,30 @@
 
 </main>
 
-<section id="experience" class="bg-brand-primary text-white">
+<section id="experience" class="bg-brand-secondary text-black">
     <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <div class="fade-in-element">
             <div class="text-center mb-12">
                  <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="inline-block">
                     <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-brand-secondary transition">
                  </a>
-                 <h2 class="text-3xl font-bold text-white">Ron Kagan</h2>
-                         <p class="text-lg text-[#3B82F6]">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
+                 <h2 class="text-3xl font-bold text-black">Ron Kagan</h2>
+                         <p class="text-lg text-#000000">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
                          <p class="mt-2">
-                             <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-[#3B82F6] font-semibold hover:text-white">LinkedIn</a> | 
-                             <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-[#3B82F6] font-semibold hover:text-white">Schedule a Meeting</a>
+                             <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-#000000 font-semibold hover:text-gray">LinkedIn</a> | 
+                             <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-#000000 font-semibold hover:text-gray">Schedule a Meeting</a>
                  </p>
             </div>
             <div class="border-t border-gray-700 pt-8">
-                <h3 class="text-2xl font-bold text-white mb-4">Summary</h3>
+                <h3 class="text-2xl font-bold text-black mb-4">Summary</h3>
                 <p>A full-funnel B2B marketing leader with a track record of building scalable demand generation engines for high-growth SaaS companies. I specialize in diagnosing and solving the primary bottlenecks that limit growth, implementing data-driven, multi-channel strategies that create sustainable pipeline and accelerate revenue.</p>
             </div>
             <div class="border-t border-gray-700 pt-8 mt-8">
-                <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
+                <h3 class="text-2xl font-bold text-black mb-6">Experience</h3>
                 <div class="space-y-8">
                     <div>
                         <h4 class="text-xl font-semibold">Feedzai</h4>
-                        <p class="text-md text-gray-400">Global Head of Digital Demand Generation & Marketing Operations | Feb 2023 - Present</p>
+                        <p class="text-md text-black-400">Global Head of Digital Demand Generation & Marketing Operations | Feb 2023 - Present</p>
                         <ul class="list-disc list-inside mt-2 space-y-1">
                             <li>Architected the global, multi-channel demand generation engine from the ground up, owning strategy from top-of-funnel to conversion and driving 27% YoY revenue growth.</li>
                             <li>Led a complete brand and digital reinvention, evolving the narrative from product-centric to outcome-oriented to better resonate with the target market.</li>
@@ -255,7 +293,7 @@
                     </div>
                      <div>
                         <h4 class="text-xl font-semibold">Major League Hacking</h4>
-                        <p class="text-md text-gray-400">Marketing Director | Mar 2022 - Nov 2022</p>
+                        <p class="text-md text-black-400">Marketing Director | Mar 2022 - Nov 2022</p>
                         <ul class="list-disc list-inside mt-2 space-y-1">
                             <li>Executed a comprehensive, multi-channel demand generation strategy that resulted in a 300% lift in sales-accepted pipeline without increasing acquisition costs.</li>
                              <li>Developed and executed persona-driven ABM campaigns targeting senior leadership at Fortune 200 companies, successfully building a robust sales pipeline.</li>
@@ -264,7 +302,7 @@
                     </div>
                     <div>
                         <h4 class="text-xl font-semibold">Within3</h4>
-                        <p class="text-md text-gray-400">Director, Growth Hacking | Dec 2020 - Mar 2022</p>
+                        <p class="text-md text-black-400">Director, Growth Hacking | Dec 2020 - Mar 2022</p>
                         <ul class="list-disc list-inside mt-2 space-y-1">
                             <li>Built the marketing demand and operations department from scratch, hiring, and training the team to support a 200-person SaaS company.</li>
                             <li>Drove 25% growth in closed/won revenue by executing direct response campaigns targeting key personas within the 100 largest global life science organizations.</li>
@@ -273,7 +311,7 @@
                     </div>
                     <div>
                         <h4 class="text-xl font-semibold">Code Climate</h4>
-                        <p class="text-md text-gray-400">Head of Marketing Operations, Demand, Paid, SDRS | Mar 2020 - Dec 2020</p>
+                        <p class="text-md text-black-400">Head of Marketing Operations, Demand, Paid, SDRS | Mar 2020 - Dec 2020</p>
                         <ul class="list-disc list-inside mt-2 space-y-1">
                             <li>Implemented scalable growth mechanisms that added over 70% to the pipeline and positioned the company for its \$50M Series C funding.</li>
                             <li>Streamlined marketing spend by over 90% on competitive keywords by implementing a data-driven approach to paid acquisition.</li>
@@ -281,7 +319,7 @@
                     </div>
                     <div>
                         <h4 class="text-xl font-semibold">Expo (Formerly Pared)</h4>
-                        <p class="text-md text-gray-400">Head of Demand Generation & Marketing Operations | Oct 2018 - Mar 2020</p>
+                        <p class="text-md text-black-400">Head of Demand Generation & Marketing Operations | Oct 2018 - Mar 2020</p>
                         <ul class="list-disc list-inside mt-2 space-y-1">
                             <li>As the first marketing hire, built the entire demand function, fueling growth from a \$10M Series A through a \$30M Series B.</li>
                             <li>Achieved a 50% decrease in CAC and contributed 30% to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
@@ -290,7 +328,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 pt-8 mt-8">
-                 <h3 class="text-2xl font-bold text-white mb-4">Education</h3>
+                 <h3 class="text-2xl font-bold text-black mb-4">Education</h3>
                  <p><strong>Florida State University, Sarasota, FL</strong> — Master of Fine Arts in Acting</p>
                  <p><strong>Oxford University, New College, Oxford, UK</strong> — Non-degree program</p>
                  <p><strong>Hunter College, New York, NY</strong> — Bachelor of Arts in Theatre, Summa Cum Laude</p>
@@ -386,7 +424,7 @@
                             text: 'Paid Search Traffic Share by Competitor',
                             font: {
                                 size: 16,
-                                family: 'Inter'
+                                family: 'Gilroy'
                             }
                         }
                     }
