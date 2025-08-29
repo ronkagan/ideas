@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Blueprint for Feedzai | Ron Kagan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS */
+        :root {
+            --brand-primary: #6934FF; /* Feedzai Purple */
+            --brand-accent: #00E5A1;   /* Feedzai Green */
+            --brand-dark: #140E24;
+            --brand-light: #F8F9FA;
+            --font-stack: 'Figtree', 'Inter', 'Helvetica Neue', sans-serif;
+            --color-success: #4CAF50;
+            --color-warning: #FFC107;
+            --color-danger: #F44336;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--brand-light);
+            color: var(--brand-dark);
+        }
+
+        .header {
+            background-color: var(--brand-dark);
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-primary);
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #5528d1;
+        }
+        
+        .section-title {
+            color: var(--brand-dark);
+            font-weight: 700;
+        }
+
+        .kpi-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .kpi-value {
+            color: var(--brand-primary);
+        }
+
+        .learning-loop-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .learning-loop-card-header {
+            background-color: #f1f5f9;
+            color: var(--brand-dark);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .learning-loop-card-header.priority {
+            background-color: var(--brand-primary);
+            color: white;
+        }
+
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        
+        .growth-loop-svg .loop-path {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: draw 5s ease-in-out forwards;
+        }
+        
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        .growth-loop-svg .momentum-arrow {
+            animation: spin 4s linear infinite;
+            transform-origin: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header p-6 md:p-10 text-center">
+        <div class="max-w-4xl mx-auto">
+            <img src="https://storage.googleapis.com/brand-assets.feedzai.com/FZ_Logo_White.svg" alt="Feedzai Logo" class="h-10 mx-auto mb-6">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight">A Growth Blueprint for Enterprise Dominance</h1>
+            <p class="mt-4 text-xl md:text-2xl text-gray-300">An Account-Based Strategy to Accelerate Pipeline and Unseat Competitors</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-6 md:p-10">
+        <section id="executive-summary" class="max-w-5xl mx-auto mb-16">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 bg-white p-8 rounded-xl shadow-lg">
+                    <h2 class="section-title text-2xl mb-4">Executive Summary: Solving the Revenue Bottleneck</h2>
+                    <p class="text-lg text-gray-700">
+                        Feedzai's primary growth bottleneck is a hypothesized **Signal-Metric Fit** discrepancy. The current go-to-market motion relies on a traditional lead-based (MQL) model, which is ill-suited for complex, multi-stakeholder enterprise sales. This creates significant friction between Marketing and Sales, as individual content downloads are poor indicators of an account's true buying intent.
+                        <br><br>
+                        This blueprint outlines a strategic shift from a volume-based MQL model to a value-based **Marketing Qualified Account (MQA)** model. By focusing on account-level engagement signals across the entire buying committee, we can ensure Sales' resources are deployed only on accounts demonstrating genuine readiness to buy, thereby increasing pipeline velocity and win rates.
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-xl border border-gray-200">
+                    <h3 class="font-bold text-xl text-gray-800 mb-3">Strategic Context</h3>
+                    <p class="text-gray-600">
+                        Feedzai is transitioning from the <span class="font-semibold text-gray-800">Engine Room</span> (scaling the growth loop) to the <span class="font-semibold text-gray-800">Broadcast Tower</span> (building market leadership). This requires the discipline of a **Systems Architect** to build a scalable, data-driven MQA process, balanced with the insight of a **Brand Evangelist** to engage the entire C-suite at our target accounts.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="campaign-simulator" class="bg-white p-8 rounded-xl shadow-lg max-w-6xl mx-auto mb-16">
+            <h2 class="section-title text-3xl text-center mb-8">Account-Based Campaign Simulator</h2>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-end">
+                <div class="md:col-span-3 grid grid-cols-2 gap-6">
+                    <div>
+                        <label for="numAccounts" class="block text-sm font-medium text-gray-700">Target Accounts</label>
+                        <input type="number" id="numAccounts" value="200" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="teamEfficiency" class="block text-sm font-medium text-gray-700">Team Engagement Efficiency (%)</label>
+                        <input type="number" id="teamEfficiency" value="40" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                     <div>
+                        <label for="revenueGoal" class="block text-sm font-medium text-gray-700">Projected Revenue ($M)</label>
+                        <input type="number" id="revenueGoal" value="15" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="committeeSize" class="block text-sm font-medium text-gray-700">Buying Committee Size</label>
+                        <input type="number" id="committeeSize" value="8" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 grid grid-cols-2 gap-4">
+                    <div class="kpi-card p-4 text-center">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Engaged Accounts</h4>
+                        <p id="engagedAccounts" class="text-4xl font-bold kpi-value">80</p>
+                    </div>
+                    <div class="kpi-card p-4 text-center">
+                        <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Contacts to Engage</h4>
+                        <p id="contactsToEngage" class="text-4xl font-bold kpi-value">1,600</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 text-center">
+                <canvas id="pipelineChart" height="100"></canvas>
+            </div>
+        </section>
+
+        <section id="alignment-gap" class="max-w-5xl mx-auto mb-16">
+            <h2 class="section-title text-3xl text-center mb-8">Target Account Alignment</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-[var(--brand-primary)]">
+                    <h3 class="text-2xl font-bold text-[var(--brand-primary)]">The Aspiration</h3>
+                    <p class="text-6xl font-bold text-gray-800 my-4" id="aspirationValue">200</p>
+                    <p class="text-lg text-gray-600">Total accounts identified for the "Competitive Replacement" campaign.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md border-l-4 border-[var(--color-danger)]">
+                    <h3 class="text-2xl font-bold text-[var(--color-danger)]">The Execution Gap</h3>
+                    <p class="text-6xl font-bold text-gray-800 my-4" id="executionValue">80</p>
+                    <p class="text-lg text-gray-600">Accounts the team can realistically engage due to systemic impediments.</p>
+                </div>
+            </div>
+            <div class="mt-8 bg-gray-100 p-6 rounded-xl border border-gray-200">
+                <h4 class="font-semibold text-lg mb-2 text-gray-800">Primary Impediments:</h4>
+                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Lack of enforced SLAs between Marketing and Sales on account engagement.</li>
+                    <li>Shallow account research that fails to empower personalized outreach.</li>
+                    <li>Absence of joint planning, leading to disconnected activities and messaging.</li>
+                    <li>A deep-seated focus on individual leads (MQLs) instead of account-level buying signals (MQAs).</li>
+                </ul>
+                <p class="mt-4 text-center font-semibold text-lg text-gray-800 p-4 bg-yellow-100 border border-yellow-300 rounded-lg">
+                    Insight: The gap isn't a lack of effort, but a misaligned system. By shifting focus from individual leads to account-wide readiness, we bridge this gap and multiply our impact.
+                </p>
+            </div>
+        </section>
+        
+        <section id="growth-loop" class="max-w-5xl mx-auto mb-16 text-center">
+            <h2 class="section-title text-3xl mb-8">From Funnel to Flywheel</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">Traditional funnels are linear and lose momentum. A growth loop creates a self-reinforcing system where each stage fuels the next. Our ABM campaign acts as an accelerator, spinning the loop faster with each targeted interaction.</p>
+            <div class="relative w-full max-w-2xl mx-auto">
+                <svg class="growth-loop-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <path id="loop" d="M 200, 50 A 150,150 0 1,1 199,50 Z" />
+                    </defs>
+                    
+                    <path d="M 200, 50 A 150,150 0 1,1 199,50 Z" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-dasharray="5,5" />
+                    
+                    <g class="momentum-arrow">
+                        <path class="loop-path" d="M 200, 50 A 150,150 0 1,1 199,50 Z" fill="none" stroke="url(#gradient)" stroke-width="6" stroke-linecap="round"/>
+                    </g>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:var(--brand-accent);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:var(--brand-primary);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <g transform="translate(200 50)">
+                        <circle cx="0" cy="0" r="10" fill="var(--brand-primary)" />
+                        <text x="0" y="-15" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--brand-dark)">IDENTIFY PROBLEM</text>
+                    </g>
+                    <g transform="translate(350 200)">
+                        <circle cx="0" cy="0" r="10" fill="var(--brand-primary)" />
+                        <text x="15" y="5" text-anchor="start" font-size="14" font-weight="bold" fill="var(--brand-dark)">RESEARCH SOLUTIONS</text>
+                    </g>
+                    <g transform="translate(200 350)">
+                        <circle cx="0" cy="0" r="10" fill="var(--brand-primary)" />
+                        <text x="0" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--brand-dark)">EVALUATE VENDORS</text>
+                    </g>
+                    <g transform="translate(50 200)">
+                        <circle cx="0" cy="0" r="10" fill="var(--brand-primary)" />
+                        <text x="-15" y="5" text-anchor="end" font-size="14" font-weight="bold" fill="var(--brand-dark)">BUILD CONSENSUS</text>
+                    </g>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center">
+                        <p class="text-lg font-bold text-gray-800">CAMPAIGN ACCELERATION</p>
+                        <p class="text-sm text-gray-600">Targeted Ads, C-Suite Roundtables, <br>Sales Intelligence & Bespoke Content</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiments" class="max-w-6xl mx-auto mb-16">
+            <h2 class="section-title text-3xl text-center mb-8">Prioritized Experiments: A Learning-Oriented Approach</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="learning-loop-card">
+                    <div class="learning-loop-card-header priority p-4">
+                        <h3 class="text-xl font-bold">1. Implement a Marketing Qualified Account (MQA) Model</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Hypothesis</h4>
+                            <p class="text-gray-600">Shifting from MQLs to MQAs, based on a weighted account engagement score, will increase pipeline velocity by ensuring Sales engages accounts only when the entire buying committee shows intent.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Test</h4>
+                            <p class="text-gray-600">Define an MQA threshold based on multiple contacts from a target account engaging with high-value content. Run a pilot comparing the MQA-to-Opportunity conversion rate against the historical MQL-to-Opp rate.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Bottleneck Addressed</h4>
+                            <p class="font-bold text-[var(--brand-primary)]">Signal-Metric Fit</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="learning-loop-card">
+                    <div class="learning-loop-card-header p-4">
+                        <h3 class="text-xl font-bold">2. Launch C-Suite Executive Content</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Hypothesis</h4>
+                            <p class="text-gray-600">Bespoke, C-level content addressing the strategic pains of CROs (ROI, regulatory risk) will secure more executive meetings than our current tactical, user-focused content.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Test</h4>
+                            <p class="text-gray-600">Create a "Future of AML Automation" virtual roundtable exclusively for CROs at Tier 1 accounts. Track meeting acceptance rate vs. standard webinar sign-ups from the same persona.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Bottleneck Addressed</h4>
+                            <p class="font-bold text-[var(--brand-primary)]">Content-ICP Fit</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="learning-loop-card">
+                    <div class="learning-loop-card-header p-4">
+                        <h3 class="text-xl font-bold">3. Restructure Paid Channel Investment</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Hypothesis</h4>
+                            <p class="text-gray-600">High-cost LinkedIn ads are inefficient for top-of-funnel awareness but highly effective for mid-funnel engagement of known, qualified accounts.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Test</h4>
+                            <p class="text-gray-600">Reallocate budget. Use lower-cost programmatic display for "air cover" to the TAL. Use LinkedIn ads *only* to retarget engaged contacts from MQAs with decision-stage assets. Measure cost-per-meeting.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Bottleneck Addressed</h4>
+                            <p class="font-bold text-[var(--brand-primary)]">Model-Channel Fit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <iframe src="https://sadly-shop-23256937.figma.site/" width="100%" height="550" frameborder="0"></iframe>
+
+        <section id="experience" class="bg-[var(--brand-dark)] text-white mt-16 -mx-6 md:-mx-10 py-16 px-6 md:px-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="fade-in-element">
+                    <div class="text-center mb-12">
+                         <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="inline-block">
+                            <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-[var(--brand-accent)] transition">
+                         </a>
+                         <h2 class="text-3xl font-bold text-white">Ron Kagan</h2>
+                         <p class="text-lg text-[var(--brand-accent)]">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
+                         <p class="mt-2">
+                             <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-[var(--brand-accent)] font-semibold hover:text-white">LinkedIn</a> |
+                              <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-[var(--brand-accent)] font-semibold hover:text-white">Schedule a Meeting</a>
+                         </p>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8">
+                        <h3 class="text-2xl font-bold text-white mb-4">Summary</h3>
+                        <p class="text-gray-300">A full-funnel B2B marketing leader with a track record of building scalable marketing engines for high-growth SaaS companies. I bridge the top-of-funnel content gap, build persona-driven ABM programs, and evolve brand narratives to accelerate pipeline growth and establish category leadership in complex, AI-driven enterprise environments.</p>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8 mt-8">
+                        <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
+                        <div class="space-y-8">
+                            <div>
+                                <h4 class="text-xl font-semibold">Feedzai</h4>
+                                <p class="text-md text-gray-400">Global Head of Digital Demand Generation & Marketing Operations | Feb 2023 - Present</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300">
+                                    <li>Architected the global, multi-channel demand engine from the ground up, owning the GTM strategy from top-of-funnel awareness to bottom-of-funnel conversion, driving 27% YoY revenue growth.</li>
+                                    <li>Championed an AI-first approach, transforming SEM workflows to accelerate engagement signals while achieving 22% cost savings.</li>
+                                    <li>Orchestrated a complete brand and digital reinvention, coordinating global stakeholders to position Feedzai as the premier AI-driven RiskOps platform.</li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h4 class="text-xl font-semibold">Major League Hacking</h4>
+                                <p class="text-md text-gray-400">Marketing Director | Mar 2022 - Nov 2022</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300">
+                                     <li>Executed a persona-driven ABM strategy, targeting senior leadership at Fortune 200 companies and building a robust sales pipeline.</li>
+                                     <li>Conceived and executed 7 simultaneous omni-channel campaigns via in-house and agency partners to drive a 300% lift in sales-accepted pipeline.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Within3</h4>
+                                <p class="text-md text-gray-400">Director, Growth Marketing and Operations | Dec 2020 - Mar 2022</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300">
+                                    <li>Built the marketing demand and operations department from scratch for a 200-person SaaS company, hiring and training the team.</li>
+                                    <li>Drove 25% closed/won growth via direct response campaigns targeting key personas within the 100 largest global life science organizations.</li>
+                                    <li>Architected the HubSpot/Salesforce stack to enable sophisticated lead nurturing and account-based engagement tracking.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Code Climate</h4>
+                                <p class="text-md text-gray-400">Head of Marketing Operations, Demand, Paid, & SDRs | Mar 2020 - Dec 2020</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300">
+                                    <li>Implemented the growth mechanisms that positioned a 50-person SaaS company for its \$50M Series C, adding over 70% to the pipeline with targeted paid campaigns.</li>
+                                    <li>Deployed programmatic ABM campaigns using advanced AdTech to engage high-value enterprise accounts across social platforms.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Expo (Formerly Pared)</h4>
+                                <p class="text-md text-gray-400">Head of Demand Generation & Marketing Operations | Oct 2018 - Mar 2020</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300">
+                                    <li>As the first marketing hire, built the entire demand function from scratch, launching growth from a \$10M Series A through a \$30M Series B.</li>
+                                    <li>Achieved a 50% decrease in CAC and 30% contribution to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Advisen</h4>
+                                <p class="text-md text-gray-400">VP, Head of Marketing, Global | Apr 2017 - Oct 2018</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300">
+                                    <li>Promoted to global leader and executed a GTM turnaround that led to the company's acquisition by Zywave.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Argyle Executive Forum</h4>
+                                <p class="text-md text-gray-400">Campaign Analytics Manager | Apr 2015 - Mar 2017</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300">
+                                    <li>Planned and executed a large calendar of events targeting Fortune 1000 executives, sourcing \$3.6M in revenue (25% YoY increase).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Backstage</h4>
+                                <p class="text-md text-gray-400">Head of Community and Customer Care | Feb 2012 - Apr 2015</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300">
+                                    <li>Grew a community-driven B2B2C business by 400% in one year through content and engagement strategies.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8 mt-8">
+                         <h3 class="text-2xl font-bold text-white mb-4">Education</h3>
+                         <p class="text-gray-300"><strong>Florida State University, Sarasota, FL</strong> — Master of Fine Arts in Acting</p>
+                         <p class="text-gray-300"><strong>Oxford University, New College, Oxford, UK</strong> — Non-degree program</p>
+                         <p class="text-gray-300"><strong>Hunter College, New York, NY</strong> — Bachelor of Arts in Theatre, Summa Cum Laude</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calendar" class="bg-white -mx-6 md:-mx-10 py-16 px-6 md:px-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center fade-in-element">
+                    <h2 class="text-3xl font-bold text-[var(--brand-dark)]">Schedule a Meeting</h2>
+                    <p class="mt-4 text-xl text-gray-600">Let's discuss how my experience can drive growth at Feedzai.</p>
+                </div>
+                <div class="mt-12 fade-in-element" style="transition-delay: 200ms;">
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+                    </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade-in elements on scroll
+            const fadeInElements = document.querySelectorAll('.fade-in-element');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            fadeInElements.forEach(el => observer.observe(el));
+            
+            // Simulator logic
+            const numAccountsInput = document.getElementById('numAccounts');
+            const teamEfficiencyInput = document.getElementById('teamEfficiency');
+            const revenueGoalInput = document.getElementById('revenueGoal');
+            const committeeSizeInput = document.getElementById('committeeSize');
+
+            const engagedAccountsOutput = document.getElementById('engagedAccounts');
+            const contactsToEngageOutput = document.getElementById('contactsToEngage');
+            
+            const aspirationValue = document.getElementById('aspirationValue');
+            const executionValue = document.getElementById('executionValue');
+
+            let chart;
+
+            function updateSimulator() {
+                const numAccounts = parseInt(numAccountsInput.value) || 0;
+                const teamEfficiency = (parseInt(teamEfficiencyInput.value) || 0) / 100;
+                const revenueGoal = parseInt(revenueGoalInput.value) || 0;
+                const committeeSize = parseInt(committeeSizeInput.value) || 0;
+
+                const engagedAccounts = Math.round(numAccounts * teamEfficiency);
+                const contactsToEngage = numAccounts * committeeSize;
+
+                engagedAccountsOutput.textContent = engagedAccounts.toLocaleString();
+                contactsToEngageOutput.textContent = contactsToEngage.toLocaleString();
+                
+                aspirationValue.textContent = numAccounts.toLocaleString();
+                executionValue.textContent = engagedAccounts.toLocaleString();
+                
+                updateChart(revenueGoal, engagedAccounts);
+            }
+            
+            function updateChart(revenueGoal, engagedAccounts) {
+                if (chart) {
+                    chart.destroy();
+                }
+                const ctx = document.getElementById('pipelineChart').getContext('2d');
+                
+                // Assuming some conversion rates for visualization
+                const opportunities = Math.round(engagedAccounts * 0.25); // 25% of engaged accounts become ops
+                const closedWon = Math.round(opportunities * 0.3); // 30% win rate
+                const avgDealSize = closedWon > 0 ? (revenueGoal * 1000000) / closedWon : 0;
+
+                chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Engaged Accounts', 'Opportunities', 'Closed Won'],
+                        datasets: [{
+                            label: 'Campaign Funnel',
+                            data: [engagedAccounts, opportunities, closedWon],
+                            backgroundColor: [
+                                'rgba(105, 52, 255, 0.7)',
+                                'rgba(0, 229, 161, 0.7)',
+                                'rgba(75, 192, 192, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(105, 52, 255, 1)',
+                                'rgba(0, 229, 161, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y;
+                                        }
+                                        if (context.label === 'Closed Won') {
+                                           label += ` (Avg. Deal Size: $${(avgDealSize/1000).toFixed(0)}k)`;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: `Projected Path to $${revenueGoal}M Revenue`,
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            [numAccountsInput, teamEfficiencyInput, revenueGoalInput, committeeSizeInput].forEach(input => {
+                input.addEventListener('input', updateSimulator);
+            });
+
+            updateSimulator();
+        });
+    </script>
+</body>
+</html>
