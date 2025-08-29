@@ -166,7 +166,7 @@
                         <input type="number" id="teamEfficiency" value="50" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                      <div>
-                        <label for="revenueGoal" class="block text-sm font-medium text-gray-700">Projected Revenue ($M)</label>
+                        <label for="revenueGoal" class="block text-sm font-medium text-gray-700">Revenue ($M)</label>
                         <input type="number" id="revenueGoal" value="1" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                     <div>
@@ -550,7 +550,7 @@
                                             label += context.parsed.y;
                                         }
                                         if (context.label === 'Closed Won') {
-                                           label += ` (Avg. Deal Size: $${(avgDealSize/100).toFixed(0)}M)`;
+                                           label += ` (Won: $${(1)}M)`;
                                         }
                                         return label;
                                     }
