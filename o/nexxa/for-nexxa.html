@@ -654,11 +654,15 @@ vegaEmbed(id, spec, { actions: false }).catch(console.error);
 }
 
 // Embed all visualizations
-embedVisualization(&#39;#vis-1&#39;, &#39;vis1_social_platforms.json&#39;);
-embedVisualization(&#39;#vis-2&#39;, &#39;vis2_ai_adoption.json&#39;);
-embedVisualization(&#39;#vis-3&#39;, &#39;vis3_thematic_influence.json&#39;);
-embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
+embedVisualization('#vis-1', 'vis1_social_platforms.json');
+embedVisualization('#vis-2', 'vis2_ai_adoption.json');
+embedVisualization('#vis-3', 'vis3_thematic_influence.json');
+embedVisualization('#vis-4', 'vis4_influencer_matrix.json');
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
 </head>
 <body class="bg-glow-container">
@@ -700,12 +704,9 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
         <p class="section-subtitle">The fight to achieve market dominance.</p>
 <h3>Growth Strategy Dashboard: Targeting Industrial Engineers Seeking AI Solutions</h3>
 
-<div class="vis-container">
-    <div id="vis-7" style="width: 100%; height: 500px;"></div>
-
 <h4>1. Channel Strategy: Prioritize Specialized, Technical Platforms</h4>
 <div class="vis-container">
-<div id="vis-1" style="width: 100%;"></div>
+<div id="vis-1" style="width: 100%; height: 500px;"></div>
 <div class="explanation">
 <h5>Top 15 Social Platforms by Audience Affinity</h5>
 
@@ -774,10 +775,6 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
             </ul>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
 <script>
     fetch('search_modifiers_chart.json')
