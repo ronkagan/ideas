@@ -5,7 +5,7 @@
         {
             "continuousWidth": 400,
             "continuousHeight": 300,
-            "strokeWidth": 0
+            "strokeWidth": 1
         },
         "background": "transparent",
         "style":
@@ -21,10 +21,17 @@
         },
         "title":
         {
+            "color": "#e3e5e4",
             "anchor": "start",
-            "fontSize": 16
-        }
-    },
+            "fontSize": 16,
+            "offset": 24,
+            "lineHeight": 24,
+            "fontWeight": 500,
+            "limit":
+            {
+                "expr": "containerSize()[0] - 32 - 40"
+            }
+        },
     "data":
     {
         "name": "data-d999e55bcc688b4bee74c345875951bd"
