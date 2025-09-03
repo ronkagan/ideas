@@ -12,7 +12,7 @@
         {
             "cell":
             {
-                "stroke": "transparent"
+                "stroke": "bluegreen"
             },
         "axis":
         {
@@ -210,5 +210,10 @@
                 "Affinity_Change_Label": "+7.1%"
             }
         ]
-    }
+    },
+    "usermeta":
+    {
+        "theme": "dark",
+        "bgColor": "#282a2c"
+    },
 }
