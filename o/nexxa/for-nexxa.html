@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growth Diagnostic and Strategy | Nexxa.AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         /* --- Nexxa.AI Style Kit & Global Styles --- */
         :root {
@@ -32,8 +33,18 @@
             --color-success: #34D399;
             --color-warning: #FACC15;
             --color-danger: #EF4444;
+            
+            /* Apply Poppins to all heading tags */
+            h1, h2, h3, h4, h5, h6 {
+              font-family: 'Poppins', sans-serif;
+            }
+            
+            /* Apply Inter to the body and other text elements */
+            body {
+              font-family: 'Inter', sans-serif;
+            }
 
-            --font-stack: 'Inter', sans-serif;
+
         }
 
         /* Enable smooth scrolling for anchor links */
@@ -137,12 +148,33 @@
             z-index: 2;
         }
 
-        h1, h2, h3, h4, h5 {
-            margin-top: 0;
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 1;
+            margin-bottom: -1;
             color: white;
             font-weight: 700;
             letter-spacing: -0.01em;
         }
+
+                    /* Specify sizes for each header individually */
+            h1 {
+                font-size: 6rem; /* 5 times the root font size */
+            }
+            h2 {
+                font-size: 4rem; /* 3 times the root font size */
+            }
+            h3 {
+                font-size: 3rem; /* 3 times the root font size */
+            }
+            h4 {
+                font-size: 2rem; /* 3 times the root font size */
+            }
+            h5 {
+                font-size: 1.5rem; /* 3 times the root font size */
+            }
+            h6 {
+                font-size: 1.25rem; /* 3 times the root font size */
+            }
 
         p {
             color: var(--nexxa-text-secondary);
