@@ -642,7 +642,8 @@
         <div class="nav-container">
             <a href="#" class="logo">Nexxa<span>.AI</span></a>
             <nav class="nav-links">
-                <a href="#prototype">Prototype</a>
+                <a href="#prototype">Ron Rocks</a>
+                <a href="#battlefield">Battlefield</a>
                 <a href="#diagnostic">Diagnostic</a>
                 <a href="#tension">Tension Analysis</a>
                 <a href="#growth-loop">Growth Loop</a>
@@ -670,6 +671,100 @@
 
     <div class="content-wrapper">
 
+        <h2 class="section-title">Battlefield</h2>
+        <p class="section-subtitle">The fight to achieve market dominance.</p>
+
+       <div class="vis-container">
+    <div id="vis-1" style="width: 100%; height: 500px;"></div>
+    <div class="explanation">
+        <h3>Where Industrial Engineers Are Searching for AI</h3>
+        <p>This chart reveals the profound interest in <b>"AI mode"</b> among industrial engineers, with an Affinity score of 90. This is a critical signal that the target audience is actively searching for AI-enabled solutions, making it the central pillar of the go-to-market messaging.</p>
+        <p><b>GTM Application:</b> Marketing should be laser-focused on AI. Use phrases like "AI for industrial engineering," "intelligent automation," and "AI-driven data solutions" across all channels. This is not a secondary feature; it's the primary value proposition this audience is seeking.</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+<script>
+    fetch('search_modifiers_chart.json')
+        .then(res => res.json())
+        .then(data => {
+            vegaEmbed('#vis-1', data, { actions: false });
+        });
+</script>
+
+            <div class="vis-container">
+    <div id="vis-2" style="width: 100%; height: 500px;"></div>
+    <div class="explanation">
+        <h3>Addressing Pain Points and Knowledge Gaps</h3>
+        <p>This chart highlights the key questions industrial engineers are asking. Their top concerns are centered on lean manufacturing principles and the use of modern languages like Python and C++ in PLC programming. This shows a desire for greater efficiency and modernization.</p>
+        <p><b>GTM Application:</b> Create a content marketing strategy that directly answers these questions. Develop blog posts, webinars, and tutorials titled, "How Nexxa's AI solutions can enhance lean manufacturing" or "The future of PLC programming: Why industrial engineers are turning to AI."</p>
+    </div>
+</div>
+
+<script>
+    fetch('search_questions_chart.json')
+        .then(res => res.json())
+        .then(data => {
+            vegaEmbed('#vis-2', data, { actions: false });
+        });
+</script>
+
+        <div class="vis-container">
+    <div id="vis-3" style="width: 100%; height: 500px;"></div>
+    <div class="explanation">
+        <h3>Optimizing for Content and Platform</h3>
+        <p>This chart reveals that this audience significantly over-indexes on videos, news boxes, and Twitter search results. This is a clear signal about their content consumption preferences. They favor dynamic, quick, and engaging formats over traditional static content.</p>
+        <p><b>GTM Application:</b> Prioritize video content production. Develop short video tutorials, product demonstrations, and explainer videos. Create a strong presence on Twitter and other social media platforms to engage in real-time conversations and share company news. This approach will maximize your organic reach and engagement with the target audience.</p>
+    </div>
+</div>
+
+<script>
+    fetch('serp_features_chart.json')
+        .then(res => res.json())
+        .then(data => {
+            vegaEmbed('#vis-3', data, { actions: false });
+        });
+</script>
+
+        <div class="vis-container">
+    <div id="vis-4" style="width: 100%; height: 500px;"></div>
+    <div class="explanation">
+        <h3>Visualization Significance</h3>
+        <p>This chart reveals the websites where industrial engineers seek information. Their high affinity for pages on "PLC programming" and general "Engineer" definitions shows a mix of foundational and specific technical interests.</p>
+        <p><b>GTM Application:</b> To build trust and authority, create content that caters to both audiences. Provide foundational, educational content to attract new professionals while also publishing deep-dive technical articles that solve specific problems for experts. Consider exploring content partnerships or advertising with these high-affinity publications.</p>
+    </div>
+</div>
+
+<script>
+    fetch('ranking_pages_chart.json')
+        .then(res => res.json())
+        .then(data => {
+            vegaEmbed('#vis-4', data, { actions: false });
+        });
+</script>
+
+<div class="vis-container">
+    <div id="vis-5" style="width: 100%; height: 500px;"></div>
+    <div class="explanation">
+        <h3>Understanding the Competitive and Community Landscape</h3>
+        <p>This chart highlights the social accounts that the audience engages with most. The presence of major industry publications and research firms like <b>IndustryWeek</b>, <b>DATAVERSITY</b>, and <b>Gartner</b> indicates that this audience values professional, authoritative content.</p>
+        <p><b>GTM Application:</b> Your social media strategy should focus on establishing Nexxa as a credible thought leader. Share insights from your own research and content, and actively engage with the content from these top accounts to build brand awareness and demonstrate your expertise.</p>
+    </div>
+</div>
+
+<script>
+    fetch('social_accounts_chart.json')
+        .then(res => res.json())
+        .then(data => {
+            vegaEmbed('#vis-5', data, { actions: false });
+        });
+</script>
+
+
+        
         <h2 class="section-title">Growth Diagnostic Scorecard</h2>
         <p class="section-subtitle">Assessing the four fundamental fits to identify the primary growth bottleneck.</p>
         
