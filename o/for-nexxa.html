@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Growth Diagnostic and Strategy | Nexxa Style</title>
+    <title>Growth Diagnostic and Strategy | Nexxa</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         /* --- Nexxa.AI Style Kit & Global Styles --- */
@@ -28,12 +28,113 @@
             /* Dark card background rgb(12, 5, 18) with slight transparency */
             --nexxa-card-bg: rgba(12, 5, 18, 0.7); 
 
-            /* Utility Colors (From for-nexxa.html) */
+            /* Utility Colors */
             --color-success: #34D399;
             --color-warning: #FACC15;
             --color-danger: #EF4444;
 
             --font-stack: 'Inter', sans-serif;
+        }
+
+        /* Enable smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--nexxa-bg-primary);
+            color: var(--nexxa-text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* --- Header Navigation --- */
+        .nexxa-header {
+            position: sticky;
+            top: 0;
+            /* Semi-transparent background matching Nexxa style */
+            background-color: rgba(4, 7, 13, 0.8); 
+            /* Glass effect */
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid var(--nexxa-border);
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--nexxa-accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nexxa-text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .cta-button {
+            background-color: var(--nexxa-accent-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #3a4cc7;
+        }
+
+        /* --- Layout & Typography --- */
+
+        /* Added specific styling for the iframe section */
+        .figma-section {
+             /* Spacing below the sticky header */
+             padding-top: 4rem; 
+             max-width: 1200px;
+             margin: 0 auto;
+             padding-left: 2rem;
+             padding-right: 2rem;
+             position: relative;
+             z-index: 2;
+        }
+
+        .content-wrapper {
+            padding: 4rem 2rem 4rem 2rem; 
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         body {
