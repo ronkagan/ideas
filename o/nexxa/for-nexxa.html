@@ -758,8 +758,8 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
     </ul>
 </div>
 </div>
-       <div class="vis-container">
-    <div id="vis-1" style="width: 100%; height: 500px;"></div>
+<div class="vis-container">
+    <div id="vis-5" style="width: 100%; height: 500px;"></div>
     <div class="explanation">
         <h3>Where Industrial Engineers Are Searching for AI</h3>
         <p>This chart reveals the profound interest in <b>"AI mode"</b> among industrial engineers, with an Affinity score of 90. This is a critical signal that the target audience is actively searching for AI-enabled solutions, making it the central pillar of the go-to-market messaging.</p>
@@ -775,12 +775,12 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
     fetch('search_modifiers_chart.json')
         .then(res => res.json())
         .then(data => {
-            vegaEmbed('#vis-1', data, { actions: false });
+            vegaEmbed('#vis-5', data, { actions: false });
         });
 </script>
 
-            <div class="vis-container">
-    <div id="vis-2" style="width: 100%; height: 500px;"></div>
+<div class="vis-container">
+    <div id="vis-6" style="width: 100%; height: 500px;"></div>
     <div class="explanation">
         <h3>Addressing Pain Points and Knowledge Gaps</h3>
         <p>This chart highlights the key questions industrial engineers are asking. Their top concerns are centered on lean manufacturing principles and the use of modern languages like Python and C++ in PLC programming. This shows a desire for greater efficiency and modernization.</p>
@@ -792,12 +792,12 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
     fetch('search_questions_chart.json')
         .then(res => res.json())
         .then(data => {
-            vegaEmbed('#vis-2', data, { actions: false });
+            vegaEmbed('#vis-6', data, { actions: false });
         });
 </script>
 
-        <div class="vis-container">
-    <div id="vis-3" style="width: 100%; height: 500px;"></div>
+<div class="vis-container">
+    <div id="vis-7" style="width: 100%; height: 500px;"></div>
     <div class="explanation">
         <h3>Optimizing for Content and Platform</h3>
         <p>This chart reveals that this audience significantly over-indexes on videos, news boxes, and Twitter search results. This is a clear signal about their content consumption preferences. They favor dynamic, quick, and engaging formats over traditional static content.</p>
@@ -809,12 +809,12 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
     fetch('serp_features_chart.json')
         .then(res => res.json())
         .then(data => {
-            vegaEmbed('#vis-3', data, { actions: false });
+            vegaEmbed('#vis-7', data, { actions: false });
         });
 </script>
 
-        <div class="vis-container">
-    <div id="vis-4" style="width: 100%; height: 500px;"></div>
+<div class="vis-container">
+    <div id="vis-8" style="width: 100%; height: 500px;"></div>
     <div class="explanation">
         <h3>Visualization Significance</h3>
         <p>This chart reveals the websites where industrial engineers seek information. Their high affinity for pages on "PLC programming" and general "Engineer" definitions shows a mix of foundational and specific technical interests.</p>
@@ -826,12 +826,12 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
     fetch('ranking_pages_chart.json')
         .then(res => res.json())
         .then(data => {
-            vegaEmbed('#vis-4', data, { actions: false });
+            vegaEmbed('#vis-8', data, { actions: false });
         });
 </script>
 
 <div class="vis-container">
-    <div id="vis-5" style="width: 100%; height: 500px;"></div>
+    <div id="vis-9" style="width: 100%; height: 500px;"></div>
     <div class="explanation">
         <h3>Understanding the Competitive and Community Landscape</h3>
         <p>This chart highlights the social accounts that the audience engages with most. The presence of major industry publications and research firms like <b>IndustryWeek</b>, <b>DATAVERSITY</b>, and <b>Gartner</b> indicates that this audience values professional, authoritative content.</p>
@@ -843,7 +843,7 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
     fetch('social_accounts_chart.json')
         .then(res => res.json())
         .then(data => {
-            vegaEmbed('#vis-5', data, { actions: false });
+            vegaEmbed('#vis-9', data, { actions: false });
         });
 </script>
 
