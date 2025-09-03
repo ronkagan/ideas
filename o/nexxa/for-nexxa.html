@@ -705,6 +705,14 @@ embedVisualization(&#39;#vis-4&#39;, &#39;vis4_influencer_matrix.json&#39;);
 <div id="vis-1" style="width: 100%;"></div>
 <div class="explanation">
 <h5>Top 15 Social Platforms by Audience Affinity</h5>
+
+<script>
+    fetch('serp_features_chart.json')
+        .then(res => res.json())
+        .then(data => {
+            vegaEmbed('#vis-7', data, { actions: false });
+</script>
+
 <p>This chart visualizes the Top 15 social platforms used by industrial engineers interested in AI, ranked by overall reach (Audience Affinity). The color saturation indicates the "Specialization" (Affinity Change)—how much more this audience uses the platform compared to the general population.</p>
 <p>The data reveals that while broad networks are used, the audience significantly <b>over-indexes on technical and professional platforms</b>.</p>
 
