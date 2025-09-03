@@ -28,12 +28,17 @@
             /* Dark card background rgb(12, 5, 18) with slight transparency */
             --nexxa-card-bg: rgba(12, 5, 18, 0.7); 
 
-            /* Utility Colors (From for-nexxa.html) */
+            /* Utility Colors */
             --color-success: #34D399;
             --color-warning: #FACC15;
             --color-danger: #EF4444;
 
             --font-stack: 'Inter', sans-serif;
+        }
+
+        /* Enable smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -48,9 +53,84 @@
             overflow-x: hidden;
         }
 
+        /* --- Header Navigation --- */
+        .nexxa-header {
+            position: sticky;
+            top: 0;
+            /* Semi-transparent background matching Nexxa style */
+            background-color: rgba(4, 7, 13, 0.8); 
+            /* Glass effect */
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid var(--nexxa-border);
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--nexxa-accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nexxa-text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .cta-button {
+            background-color: var(--nexxa-accent-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #3a4cc7;
+        }
+
         /* --- Layout & Typography --- */
+
+        /* Added specific styling for the iframe section */
+        .figma-section {
+             /* Spacing below the sticky header */
+             padding-top: 4rem; 
+             max-width: 1200px;
+             margin: 0 auto;
+             padding-left: 2rem;
+             padding-right: 2rem;
+             position: relative;
+             z-index: 2;
+        }
+
         .content-wrapper {
-            padding: 4rem 2rem;
+            padding: 4rem 2rem 4rem 2rem; 
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
@@ -76,6 +156,8 @@
             color: white;
             margin-top: 5rem;
             letter-spacing: -0.02em;
+            /* Adding scroll margin so navigation doesn't cover the title */
+            scroll-margin-top: 7rem; 
         }
 
         .section-subtitle {
@@ -124,7 +206,7 @@
             z-index: 1;
             width: 1000px;
             height: 800px;
-            top: 200px;
+            top: 400px; /* Adjusted slightly lower due to iframe */
             left: 50%;
             transform: translate(-50%, -50%);
         }
@@ -407,6 +489,18 @@
             background-image: radial-gradient(80% 100px at 50% 0px, rgba(98, 29, 209, 0.25) 0%, rgba(27, 14, 51, 0) 100%);
         }
 
+        /* --- Calendar Section (refining to White) --- */
+        .calendar-section {
+            /* Using the specific color defined in for-nexxa.html */
+            background-color: #ffffff; 
+            color: white;
+            padding: 6rem 1rem;
+            margin-top: 0rem;
+            border-top: 1px solid var(--nexxa-border);
+             /* Adding a top gradient fade, common in Nexxa footers/sections */
+            background-image: radial-gradient(80% 100px at 50% 0px, rgba(98, 29, 209, 0.25) 0%, rgba(27, 14, 51, 0) 100%);
+        }
+
         .resume-container {
             max-width: 900px;
             margin: 0 auto;
@@ -529,26 +623,50 @@
             .diagnostic-scorecard, .experiment-container, .analogy-section {
                 padding: 1.5rem;
             }
+            .nav-links {
+                display: none; /* Hide nav links on mobile (could be replaced with a hamburger menu) */
+            }
+            .content-wrapper {
+                 padding-top: 2rem;
+            }
+            .figma-section {
+                padding-top: 3rem;
+            }
         }
-
-        /* --- Calendar Section (refining to White) --- */
-        .calendar-section {
-            /* Using the specific color defined in for-nexxa.html */
-            background-color: #ffffff; 
-            color: white;
-            padding: 6rem 1rem;
-            margin-top: 0rem;
-            border-top: 1px solid var(--nexxa-border);
-             /* Adding a top gradient fade, common in Nexxa footers/sections */
-            background-image: radial-gradient(80% 100px at 50% 0px, rgba(98, 29, 209, 0.25) 0%, rgba(27, 14, 51, 0) 100%);
-        }
-
 
     </style>
 </head>
 <body class="bg-glow-container">
 
+    <header class="nexxa-header">
+        <div class="nav-container">
+            <a href="#" class="logo">Nexxa<span>.AI</span></a>
+            <nav class="nav-links">
+                <a href="#prototype">Prototype</a>
+                <a href="#diagnostic">Diagnostic</a>
+                <a href="#tension">Tension Analysis</a>
+                <a href="#growth-loop">Growth Loop</a>
+                <a href="#strategy">Strategy</a>
+                <a href="#experiments">Experiments</a>
+                <a href="#calendar">Calendar</a>
+            </nav>
+            <a href="#contact" class="cta-button">Contact</a>
+        </div>
+    </header>
+
     <div class="bg-glow-effect"></div>
+
+    <div class="figma-section" id="prototype">
+        <iframe 
+            src="https://sadly-shop-23256937.figma.site/" 
+            width="100%" 
+            height="550"
+            frameborder="0"
+            title="Figma Embed"
+            style="border-radius: 12px; border: 1px solid var(--nexxa-border);"
+            >
+        </iframe>
+    </div>
 
     <div class="content-wrapper">
 
@@ -822,8 +940,8 @@
 <section id="calendar" class="calendar-section">
     <div class="calendar-container">
         <div class="calendar-header">
-            <h2>Schedule a Meeting</h2>
-            <p>Let's discuss how my experience can drive growth.</p>
+            <h2 style="color: black;">Schedule a Meeting</h2>
+            <p style="color: black;">Let's discuss how my experience can drive growth.</p>
         </div>
         <div class="calendar-embed">
             <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0" title="Schedule a Meeting"></iframe>
