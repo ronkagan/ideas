@@ -7,28 +7,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Avenir+Next:wght@400;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Avenir+Next:wght@400;600;700&display=swap');
+        
         :root {
-            /* Brand Kit */
-            --brand-primary: #284A58; /* Blue Dianne */
+            /* Brand Kit - Inferred from Sendoso's visual identity */
+            --brand-primary: #0076a8; /* A vibrant blue inferred from logo and marketing */
+            --brand-secondary: #f3f3f3; /* A soft, clean background color */
             --brand-accent: #f47a20;   /* A contrasting CTA color for emphasis */
+            --brand-text: #2c3e50; /* A dark, professional blue-gray */
             --font-stack: 'Inter', 'Avenir Next', 'Helvetica Neue', sans-serif;
             --color-success: #28a745;
             --color-warning: #ffc107;
             --color-danger: #dc3545;
-            --sendoso-blue: #007bff;
-            --sendoso-purple: #6f42c4;
-            --sendoso-pink: #e83e8c;
-            --sendoso-green: #28a745;
-            --sendoso-teal: #17a2b8;
         }
 
         body {
             font-family: var(--font-stack);
-            background-color: #F8F9FA;
-            color: #212529;
+            background-color: var(--brand-secondary);
+            color: var(--brand-text);
         }
 
         .fade-in-element {
@@ -46,7 +43,7 @@
 
         .diagnostic-card {
             background-color: #fff;
-            border-left: 4px solid var(--sendoso-blue);
+            border-left: 4px solid var(--brand-primary);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
@@ -81,7 +78,7 @@
         }
     </style>
 </head>
-<body class="bg-[#F8F9FA]">
+<body class="bg-brand-secondary text-brand-text">
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -95,7 +92,7 @@
                 <a href="#loops" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Growth Loops</a>
                 <a href="#experiments" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Experiments</a>
                 <a href="#experience" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Experience</a>
-                <a href="#calendar" class="bg-brand-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#203D49]">Schedule a Call</a>
+                <a href="#calendar" class="bg-brand-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#005a82]">Schedule a Call</a>
             </nav>
         </div>
     </header>
@@ -149,13 +146,57 @@
                     <blockquote class="italic text-gray-700 border-l-4 border-brand-primary pl-4">
                         "Lead Sendoso's demand generation strategy to fuel predictable and consistent pipeline growth and new revenue across all regions... ensure every channel is optimized for ROI... drive conversion improvements across the funnel..."
                     </blockquote>
-                    [cite_start]<p class="text-sm text-gray-500 mt-2">— Director of Demand Generation Job Description [cite: 34, 35, 38, 36]</p>
+                    [cite_start]<p class="text-sm text-gray-500 mt-2">— Director of Demand Generation Job Description [cite: 7063, 7064, 7065, 7066]</p>
                 </div>
                 <div class="flex-1 p-6 rounded-lg bg-gray-50 border-t-4 border-brand-primary fade-in-element" style="--delay: 0.2s;">
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">The Execution Gap</h3>
                     <p class="text-gray-700">
-                        [cite_start]While the aspiration is to drive predictable, ROI-positive growth at scale, the **Marketing Department's employee headcount has seen zero growth over the past year** despite a 9% company-wide increase in employee count over the past two years[cite: 136, 137, 138, 139]. This indicates a systemic impediment to scaling growth with the necessary human capital. The focus on "efficiency" and "ROI" in the job description suggests an awareness that growth must now be achieved without a proportionate increase in headcount, highlighting the need to optimize the existing team and channels rather than simply adding more people.
+                        [cite_start]While the aspiration is to drive predictable, ROI-positive growth at scale, the **Marketing Department's employee headcount has seen zero growth over the past year** despite a 9% company-wide increase in employee count over the past two years[cite: 7158, 7166]. This indicates a systemic impediment to scaling growth with the necessary human capital. The focus on "efficiency" and "ROI" in the job description suggests an awareness that growth must now be achieved without a proportionate increase in headcount, highlighting the need to optimize the existing team and channels rather than simply adding more people.
                     </p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="insights" class="bg-white py-16 px-6 rounded-lg shadow-md mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8 fade-in-element" style="--delay: 0s;">Audience Insights & Data-Driven Strategy</h2>
+            <p class="text-center text-gray-600 mb-12 fade-in-element" style="--delay: 0.1s;">Leveraging audience data to inform strategic content and channel choices.</p>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                <div class="fade-in-element" style="--delay: 0.2s;">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What Our Audience Cares About</h3>
+                    <p class="text-gray-700 mb-4">The top search keywords and questions reveal a clear focus on **corporate gifting** and **employee appreciation**. Our audience is actively looking for effective and meaningful ways to show appreciation, not just make a transactional purchase. This is a critical insight for a content strategy focused on empathy and human connection, not just product features. We can win by creating content that answers their questions directly, positioning Sendoso as the expert in human-first engagement.</p>
+                    <p class="text-gray-700">The data also highlights an interest in **"swag"** and branded promotional items, suggesting a dual need for both personal gifts and branded corporate items. A content strategy that addresses both of these needs will resonate strongly with our target market.</p>
+                </div>
+                <div class="fade-in-element" style="--delay: 0.3s;">
+                    <div class="chart-container">
+                        <canvas id="keywordsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+                <div class="fade-in-element" style="--delay: 0.4s;">
+                    <div class="chart-container">
+                        <canvas id="serpChart"></canvas>
+                    </div>
+                </div>
+                <div class="fade-in-element" style="--delay: 0.5s;">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">How Our Audience Consumes Content</h3>
+                    <p class="text-gray-700 mb-4">The audience's search behavior shows a significant over-indexing on visual content. Specifically, they interact with **"Popular Products"** and **"Videos"** at a rate significantly higher than the global average. This indicates a strong preference for visual, product-focused content that quickly demonstrates value. Our content strategy must prioritize video demonstrations, product showcases, and interactive galleries to meet this preference and capture attention effectively.</p>
+                    <p class="text-gray-700">Other over-indexed features, like **"Related Questions,"** further reinforce the need for content that provides direct answers and solves real-world problems for the user.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in-element" style="--delay: 0.6s;">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Where Our Audience Spends Their Time</h3>
+                    <p class="text-gray-700 mb-4">Our audience is highly engaged on both professional and personal networks. The data shows high affinity for **YouTube, Facebook, and LinkedIn**. This calls for a multi-channel go-to-market strategy that leverages each platform's unique strengths.</p>
+                    <p class="text-gray-700 mb-4">The websites our audience visits are a mix of AI tools (`claude.ai`), promotional companies (`vistaprint.com`), and B2B software providers (`apollo.io`). This paints a picture of a tech-savvy and results-oriented professional who is actively seeking solutions. We can use this information to target advertising and explore strategic partnerships on these sites.</p>
+                </div>
+                <div class="fade-in-element" style="--delay: 0.7s;">
+                    <div class="chart-container">
+                        <canvas id="socialChart"></canvas>
+                    </div>
                 </div>
             </div>
         </section>
@@ -167,41 +208,40 @@
                 <svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse">
-                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#284A58" />
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#0076a8" />
                         </marker>
                         <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse">
                             <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc3545" />
                         </marker>
                         <linearGradient id="gradient-loop" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#284A58;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#007bff;stop-opacity:1" />
+                            <stop offset="0%" style="stop-color:#0076a8;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#005a82;stop-opacity:1" />
                         </linearGradient>
                     </defs>
 
                     <g class="fade-in-element" style="--delay: 0.2s;">
-                        <circle cx="200" cy="200" r="80" fill="#fff" stroke="#284A58" stroke-width="2" />
-                        <text x="200" y="200" text-anchor="middle" font-size="16" fill="#212529" font-weight="bold">Paid & Organic Traffic</text>
+                        <circle cx="200" cy="200" r="80" fill="#fff" stroke="#0076a8" stroke-width="2" />
+                        <text x="200" y="200" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">Paid & Organic Traffic</text>
                     </g>
                     <g class="fade-in-element" style="--delay: 0.4s;">
-                        <circle cx="400" cy="100" r="80" fill="#fff" stroke="#284A58" stroke-width="2" />
-                        <text x="400" y="100" text-anchor="middle" font-size="16" fill="#212529" font-weight="bold">Website Engagement</text>
+                        <circle cx="400" cy="100" r="80" fill="#fff" stroke="#0076a8" stroke-width="2" />
+                        <text x="400" y="100" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">Website Engagement</text>
                     </g>
                     <g class="fade-in-element" style="--delay: 0.6s;">
-                        <circle cx="600" cy="200" r="80" fill="#fff" stroke="#284A58" stroke-width="2" />
-                        <text x="600" y="200" text-anchor="middle" font-size="16" fill="#212529" font-weight="bold">MQL to SQL Conversion</text>
+                        <circle cx="600" cy="200" r="80" fill="#fff" stroke="#0076a8" stroke-width="2" />
+                        <text x="600" y="200" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">MQL to SQL Conversion</text>
                     </g>
                     <g class="fade-in-element" style="--delay: 0.8s;">
-                        <circle cx="400" cy="300" r="80" fill="#fff" stroke="#284A58" stroke-width="2" />
-                        <text x="400" y="300" text-anchor="middle" font-size="16" fill="#212529" font-weight="bold">Customer Advocacy & Referrals</text>
+                        <circle cx="400" cy="300" r="80" fill="#fff" stroke="#0076a8" stroke-width="2" />
+                        <text x="400" y="300" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">Customer Advocacy & Referrals</text>
                     </g>
 
-                    <path d="M260,170 C300,120 350,120 370,120" fill="none" stroke="#284A58" stroke-width="3" marker-end="url(#arrow)" />
-                    <path d="M480,110 C530,120 550,170 550,200" fill="none" stroke="#284A58" stroke-width="3" marker-end="url(#arrow)" />
+                    <path d="M260,170 C300,120 350,120 370,120" fill="none" stroke="#0076a8" stroke-width="3" marker-end="url(#arrow)" />
+                    <path d="M480,110 C530,120 550,170 550,200" fill="none" stroke="#0076a8" stroke-width="3" marker-end="url(#arrow)" />
                     <path d="M550,230 C530,280 480,280 430,280" fill="none" stroke="#dc3545" stroke-width="3" marker-end="url(#arrow-red)" />
                     <text x="500" y="280" text-anchor="middle" font-size="14" fill="#dc3545" font-weight="bold">The Friction Point</text>
                     <text x="500" y="300" text-anchor="middle" font-size="12" fill="#dc3545">High CAC starves the loop of new fuel.</text>
-                    <path d="M370,300 C300,280 250,230 250,200" fill="none" stroke="#284A58" stroke-width="3" marker-end="url(#arrow)" />
-
+                    <path d="M370,300 C300,280 250,230 250,200" fill="none" stroke="#0076a8" stroke-width="3" marker-end="url(#arrow)" />
                 </svg>
             </div>
         </section>
@@ -265,13 +305,13 @@
                 <div class="fade-in-element">
                     <div class="text-center mb-12">
                          <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="inline-block">
-                            <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-sendoso-teal transition">
+                            <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-brand-primary transition">
                          </a>
                          <h2 class="text-3xl font-bold text-white">Ron Kagan</h2>
-                         <p class="text-lg text-sendoso-teal">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
+                         <p class="text-lg text-brand-primary">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
                          <p class="mt-2">
-                             <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-sendoso-teal font-semibold hover:text-white">LinkedIn</a> |
-                              <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-sendoso-teal font-semibold hover:text-white">Schedule a Meeting</a>
+                             <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-brand-primary font-semibold hover:text-white">LinkedIn</a> |
+                              <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-brand-primary font-semibold hover:text-white">Schedule a Meeting</a>
                          </p>
                     </div>
                     <div class="border-t border-gray-700 pt-8">
@@ -387,6 +427,191 @@
                 observer.observe(element);
             });
         });
+
+        const keywordsChartConfig = {
+            type: 'bar',
+            data: {
+                labels: ["corporate gifts high end", "good gifts for employee", "swag idea", "best swag companies", "employee leaving gift", "colleague thank you gifts", "postcards mailing rates", "lead-gen", "5x7 postcard postage", "b2b lead management"],
+                datasets: [{
+                    label: 'Affinity',
+                    data: [63, 54.07, 40.61, 38.86, 38.45, 36.59, 34.15, 33.81, 33.68, 33.55],
+                    backgroundColor: 'rgba(0, 118, 168, 0.8)',
+                    borderColor: 'rgba(0, 118, 168, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Top 10 Search Keywords by Affinity',
+                        color: 'rgb(31, 41, 55)',
+                        font: {
+                            size: 16
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Affinity',
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        ticks: {
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        };
+
+        const serpChartConfig = {
+            type: 'bar',
+            data: {
+                labels: ["popular_products", "videos", "site_links", "spelling", "related_questions", "related_searches", "image_pack", "featured_snippet"],
+                datasets: [{
+                    label: '+/- Vs Global',
+                    data: [318.06, 192.61, 68.28, 66.67, 43.86, 13.85, -4.53, -13.12],
+                    backgroundColor: (context) => {
+                        const value = context.dataset.data[context.dataIndex];
+                        return value > 0 ? 'rgba(0, 118, 168, 0.8)' : 'rgba(220, 53, 69, 0.8)';
+                    },
+                    borderColor: (context) => {
+                        const value = context.dataset.data[context.dataIndex];
+                        return value > 0 ? 'rgba(0, 118, 168, 1)' : 'rgba(220, 53, 69, 1)';
+                    },
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'SERP Features Over-Indexed by Audience',
+                        color: 'rgb(31, 41, 55)',
+                        font: {
+                            size: 16
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Affinity Difference vs. Global (%)',
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        ticks: {
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        };
+
+        const socialChartConfig = {
+            type: 'bar',
+            data: {
+                labels: ["youtube.com", "facebook.com", "linkedin.com", "instagram.com", "reddit.com", "x.com", "pinterest.com", "tiktok.com", "quora.com", "medium.com"],
+                datasets: [{
+                    label: 'Audience Affinity',
+                    data: [95.8, 88.4, 83.6, 83.5, 82.4, 66.8, 65.9, 64.7, 64.5, 51.4],
+                    backgroundColor: 'rgba(0, 118, 168, 0.8)',
+                    borderColor: 'rgba(0, 118, 168, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Top 10 Social Networks by Affinity',
+                        color: 'rgb(31, 41, 55)',
+                        font: {
+                            size: 16
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Audience Affinity',
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        ticks: {
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'rgb(75, 85, 99)'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        };
+        
+        new Chart(
+            document.getElementById('keywordsChart'),
+            keywordsChartConfig
+        );
+        new Chart(
+            document.getElementById('serpChart'),
+            serpChartConfig
+        );
+        new Chart(
+            document.getElementById('socialChart'),
+            socialChartConfig
+        );
+
     </script>
 </body>
 </html>
