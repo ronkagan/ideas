@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sendoso Growth Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Avenir+Next:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        :root {
+            /* Brand Kit */
+            --brand-primary: #284A58; /* Blue Dianne */
+            --brand-accent: #f47a20;   /* A contrasting CTA color for emphasis */
+            --font-stack: 'Inter', 'Avenir Next', 'Helvetica Neue', sans-serif;
+            --color-success: #28a745;
+            --color-warning: #ffc107;
+            --color-danger: #dc3545;
+            --sendoso-blue: #007bff;
+            --sendoso-purple: #6f42c4;
+            --sendoso-pink: #e83e8c;
+            --sendoso-green: #28a745;
+            --sendoso-teal: #17a2b8;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: #F8F9FA;
+            color: #212529;
+        }
+
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition-delay: var(--delay);
+            will-change: opacity, transform;
+        }
+
+        .fade-in-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .diagnostic-card {
+            background-color: #fff;
+            border-left: 4px solid var(--sendoso-blue);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .diagnostic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        }
+        .diagnostic-card.bottleneck {
+            border-left: 4px solid var(--color-danger);
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+
+        .learning-loop-card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        .learning-loop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#F8F9FA]">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="https://www.sendoso.com/hs-fs/hubfs/sendoso-logo-wordmark-blue-2x.png?width=250&name=sendoso-logo-wordmark-blue-2x.png" alt="Sendoso Logo" class="h-8">
+                <h1 class="text-xl font-bold text-gray-900">Growth Blueprint</h1>
+            </div>
+            <nav>
+                <a href="#diagnostic" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Diagnostic</a>
+                <a href="#tension" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Tension</a>
+                <a href="#loops" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Growth Loops</a>
+                <a href="#experiments" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Experiments</a>
+                <a href="#experience" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Experience</a>
+                <a href="#calendar" class="bg-brand-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#203D49]">Schedule a Call</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+
+        <section class="mb-16 fade-in-element" style="--delay: 0s;">
+            <h2 class="text-4xl font-bold text-gray-900 text-center mb-6">Executive Summary</h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto text-center">
+                Sendoso’s primary growth bottleneck is hypothesized to be **Model-Channel Fit**. The core challenge is ensuring that expensive acquisition strategies remain economically viable as the market matures and competition increases. While the current model is effective, optimizing it for efficiency is the key to maintaining market leadership and sustainable growth.
+            </p>
+        </section>
+
+        <section id="diagnostic" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8 fade-in-element" style="--delay: 0.1s;">The 5 Fits Diagnostic Scorecard</h2>
+            <p class="text-center text-gray-600 mb-8 fade-in-element" style="--delay: 0.2s;">A diagnostic overview of Sendoso's growth health. Scores are based on public data analysis.</p>
+            <div class="grid md:grid-cols-5 gap-8">
+                <div class="diagnostic-card p-6 rounded-lg text-center fade-in-element" style="--delay: 0.3s;">
+                    <h3 class="font-bold text-lg mb-2 text-gray-800">Market-Product Fit</h3>
+                    <div class="text-4xl font-bold text-brand-primary mb-2">★★★★★</div>
+                    <p class="text-gray-600">High G2 ratings validate strong demand.</p>
+                </div>
+                <div class="diagnostic-card p-6 rounded-lg text-center fade-in-element" style="--delay: 0.4s;">
+                    <h3 class="font-bold text-lg mb-2 text-gray-800">Market-Model Fit</h3>
+                    <div class="text-4xl font-bold text-brand-primary mb-2">★★★☆☆</div>
+                    <p class="text-gray-600">SaaS model is proven, but pricing complexity can create friction.</p>
+                </div>
+                <div class="diagnostic-card p-6 rounded-lg text-center fade-in-element" style="--delay: 0.5s;">
+                    <h3 class="font-bold text-lg mb-2 text-gray-800">Market-Brand Fit</h3>
+                    <div class="text-4xl font-bold text-brand-primary mb-2">★★★★★</div>
+                    <p class="text-gray-600">Messaging around "human-first marketing" resonates deeply.</p>
+                </div>
+                <div class="diagnostic-card p-6 rounded-lg text-center fade-in-element" style="--delay: 0.6s;">
+                    <h3 class="font-bold text-lg mb-2 text-gray-800">Market-Channel Fit</h3>
+                    <div class="text-4xl font-bold text-brand-primary mb-2">★★★★☆</div>
+                    <p class="text-gray-600">Effective use of paid media and SEO, but opportunity for more efficiency.</p>
+                </div>
+                <div class="diagnostic-card bottleneck p-6 rounded-lg text-center fade-in-element" style="--delay: 0.7s;">
+                    <h3 class="font-bold text-lg mb-2 text-red-600">Model-Channel Fit</h3>
+                    <div class="text-4xl font-bold text-red-600 mb-2">★★☆☆☆</div>
+                    <p class="text-gray-600">**Primary Bottleneck:** The high cost of acquisition channels strains profitability at scale.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tension" class="bg-white py-16 px-6 rounded-lg shadow-md mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8 fade-in-element" style="--delay: 0s;">The Core Tension</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="flex-1 p-6 rounded-lg bg-gray-50 border-t-4 border-gray-300 fade-in-element" style="--delay: 0.1s;">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">The Aspiration</h3>
+                    <blockquote class="italic text-gray-700 border-l-4 border-brand-primary pl-4">
+                        "Lead Sendoso's demand generation strategy to fuel predictable and consistent pipeline growth and new revenue across all regions... ensure every channel is optimized for ROI... drive conversion improvements across the funnel..."
+                    </blockquote>
+                    [cite_start]<p class="text-sm text-gray-500 mt-2">— Director of Demand Generation Job Description [cite: 34, 35, 38, 36]</p>
+                </div>
+                <div class="flex-1 p-6 rounded-lg bg-gray-50 border-t-4 border-brand-primary fade-in-element" style="--delay: 0.2s;">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">The Execution Gap</h3>
+                    <p class="text-gray-700">
+                        [cite_start]While the aspiration is to drive predictable, ROI-positive growth at scale, the **Marketing Department's employee headcount has seen zero growth over the past year** despite a 9% company-wide increase in employee count over the past two years[cite: 136, 137, 138, 139]. This indicates a systemic impediment to scaling growth with the necessary human capital. The focus on "efficiency" and "ROI" in the job description suggests an awareness that growth must now be achieved without a proportionate increase in headcount, highlighting the need to optimize the existing team and channels rather than simply adding more people.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="loops" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8 fade-in-element" style="--delay: 0s;">The Sendoso Growth Loop</h2>
+            <p class="text-center text-gray-600 mb-8 fade-in-element" style="--delay: 0.1s;">Visualizing the core flywheel of growth and its primary bottleneck.</p>
+            <div class="flex justify-center">
+                <svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#284A58" />
+                        </marker>
+                        <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc3545" />
+                        </marker>
+                        <linearGradient id="gradient-loop" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#284A58;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#007bff;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <g class="fade-in-element" style="--delay: 0.2s;">
+                        <circle cx="200" cy="200" r="80" fill="#fff" stroke="#284A58" stroke-width="2" />
+                        <text x="200" y="200" text-anchor="middle" font-size="16" fill="#212529" font-weight="bold">Paid & Organic Traffic</text>
+                    </g>
+                    <g class="fade-in-element" style="--delay: 0.4s;">
+                        <circle cx="400" cy="100" r="80" fill="#fff" stroke="#284A58" stroke-width="2" />
+                        <text x="400" y="100" text-anchor="middle" font-size="16" fill="#212529" font-weight="bold">Website Engagement</text>
+                    </g>
+                    <g class="fade-in-element" style="--delay: 0.6s;">
+                        <circle cx="600" cy="200" r="80" fill="#fff" stroke="#284A58" stroke-width="2" />
+                        <text x="600" y="200" text-anchor="middle" font-size="16" fill="#212529" font-weight="bold">MQL to SQL Conversion</text>
+                    </g>
+                    <g class="fade-in-element" style="--delay: 0.8s;">
+                        <circle cx="400" cy="300" r="80" fill="#fff" stroke="#284A58" stroke-width="2" />
+                        <text x="400" y="300" text-anchor="middle" font-size="16" fill="#212529" font-weight="bold">Customer Advocacy & Referrals</text>
+                    </g>
+
+                    <path d="M260,170 C300,120 350,120 370,120" fill="none" stroke="#284A58" stroke-width="3" marker-end="url(#arrow)" />
+                    <path d="M480,110 C530,120 550,170 550,200" fill="none" stroke="#284A58" stroke-width="3" marker-end="url(#arrow)" />
+                    <path d="M550,230 C530,280 480,280 430,280" fill="none" stroke="#dc3545" stroke-width="3" marker-end="url(#arrow-red)" />
+                    <text x="500" y="280" text-anchor="middle" font-size="14" fill="#dc3545" font-weight="bold">The Friction Point</text>
+                    <text x="500" y="300" text-anchor="middle" font-size="12" fill="#dc3545">High CAC starves the loop of new fuel.</text>
+                    <path d="M370,300 C300,280 250,230 250,200" fill="none" stroke="#284A58" stroke-width="3" marker-end="url(#arrow)" />
+
+                </svg>
+            </div>
+        </section>
+
+        <section id="experiments" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8 fade-in-element" style="--delay: 0s;">Prioritized Experiments</h2>
+            <p class="text-center text-gray-600 mb-8 fade-in-element" style="--delay: 0.1s;">A strategic playbook to address the core bottleneck through validated learning.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="learning-loop-card fade-in-element" style="--delay: 0.2s;">
+                    <h3 class="text-xl font-bold mb-4 bg-brand-primary text-white p-4 rounded-t-md -mx-4 -mt-4">Experiment 1: The Unified "Quant-Based" Demand Model</h3>
+                    <div class="flex-1">
+                        <p class="text-gray-600 mb-4">
+                            <span class="font-bold">Hypothesis:</span> We hypothesize that by consolidating our demand strategy and budget around a unified "Quant-Based" model, we will identify and double down on the most profitable Model-Channel Fit, thereby improving our LTV:CAC ratio and overall efficiency post-acquisition.
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            <span class="font-bold">Test:</span> Centralize reporting to analyze LTV:CAC and payback period across different customer segments and product lines (Sendoso, Alyce, Postal). Reallocate 20% of the paid media budget to the channels with the most favorable ratios for a 90-day period.
+                        </p>
+                        <p class="text-gray-600">
+                            <span class="font-bold">Bottleneck Addressed:</span> Model-Channel Fit. This experiment will directly reveal which channels are truly profitable at scale, providing a data-driven path to more efficient growth.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="learning-loop-card fade-in-element" style="--delay: 0.3s;">
+                    <h3 class="text-xl font-bold mb-4 bg-gray-200 text-gray-800 p-4 rounded-t-md -mx-4 -mt-4">Experiment 2: The QBG Acceleration Loop</h3>
+                    <div class="flex-1">
+                        <p class="text-gray-600 mb-4">
+                            <span class="font-bold">Hypothesis:</span> We hypothesize that by shifting from a purely top-of-funnel MQL focus to "Qualified Buying Group" (QBG) engagement during the active sales cycle, we will accelerate deal velocity and increase Closed-Won rates more efficiently.
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            <span class="font-bold">Test:</span> Identify 50 high-value target accounts in the "Evaluation" stage. Use Demand Gen resources (Ads, Content, Gifting) to simultaneously launch an "acceleration play" targeting every member of the QBG with personalized, value-based messaging.
+                        </p>
+                        <p class="text-gray-600">
+                            <span class="font-bold">Bottleneck Addressed:</span> Model-Channel Fit. A faster sales cycle directly improves the efficiency of sales and marketing channels, making each dollar spent more impactful.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="learning-loop-card fade-in-element" style="--delay: 0.4s;">
+                    <h3 class="text-xl font-bold mb-4 bg-gray-200 text-gray-800 p-4 rounded-t-md -mx-4 -mt-4">Experiment 3: The "Digital Unboxing" Conversion Lift</h3>
+                    <div class="flex-1">
+                        <p class="text-gray-600 mb-4">
+                            <span class="font-bold">Hypothesis:</span> We hypothesize that by creating a "Digital Unboxing Experience" on our website, we will more effectively convey the emotional value of Sendoso, thereby increasing address confirmation rates and improving our MQL-to-SQL conversion velocity.
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            <span class="font-bold">Test:</span> Apply Laja's diagnostic methodology (user tests, heuristic analysis) to the core conversion flow. A/B test a high-intent landing page with a video or interactive visual that simulates the physical unboxing experience, replacing a static form.
+                        </p>
+                        <p class="text-gray-600">
+                            <span class="font-bold">Bottleneck Addressed:</span> Model-Channel Fit. A higher conversion rate on the website directly improves the efficiency of all channels driving traffic to the site.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<iframe src="https://sadly-shop-23256937.figma.site/" width="100%" height="550" frameborder="0"></iframe>
+
+    </main>
+<section id="experience" class="bg-gray-800 text-white">
+            <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="fade-in-element">
+                    <div class="text-center mb-12">
+                         <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="inline-block">
+                            <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-sendoso-teal transition">
+                         </a>
+                         <h2 class="text-3xl font-bold text-white">Ron Kagan</h2>
+                         <p class="text-lg text-sendoso-teal">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
+                         <p class="mt-2">
+                             <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-sendoso-teal font-semibold hover:text-white">LinkedIn</a> |
+                              <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-sendoso-teal font-semibold hover:text-white">Schedule a Meeting</a>
+                         </p>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8">
+                        <h3 class="text-2xl font-bold text-white mb-4">Summary</h3>
+                        <p class="text-gray-400">A full-funnel B2B marketing leader with a track record of building scalable marketing engines for high-growth SaaS companies. I bridge the top-of-funnel content gap, build persona-driven ABM programs, and evolve brand narratives to accelerate pipeline growth and establish category leadership.</p>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8 mt-8">
+                        <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
+                        <div class="space-y-8">
+                            <div>
+                                <h4 class="text-xl font-semibold">Feedzai</h4>
+                                <p class="text-md text-gray-400">Global Head of Digital Demand Generation & Marketing Operations | Feb 2023 - Present</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                    <li>Built the global, multi-channel demand generation engine from scratch, owning the strategy from top-of-funnel awareness to bottom-of-funnel conversion, driving 27% YoY revenue growth.</li>
+                                    <li>Evolved the brand narrative from product-centric to outcome-oriented through a complete brand and digital reinvention, coordinating across global stakeholders.</li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h4 class="text-xl font-semibold">Major League Hacking</h4>
+                                <p class="text-md text-gray-400">Marketing Director | Mar 2022 - Nov 2022</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                    <li>Closed the top-of-funnel content gap by researching, writing, and designing a foundational eBook on the open-source ecosystem, establishing the company as an educational leader.</li>
+                                    <li>Executed a persona-driven ABM strategy, targeting senior leadership at Fortune 200 companies and building a robust sales pipeline.</li>
+                                     <li>Conceived and executed 7 simultaneous omni-channel campaigns via in-house and agency partners to drive a 300% lift in sales-accepted pipeline.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Within3</h4>
+                                <p class="text-md text-gray-400">Director, Growth Hacking | Dec 2020 - Mar 2022</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                    <li>Built the marketing demand and operations department from the ground up for a 200-person SaaS company, hiring and training the team.</li>
+                                    <li>Drove 25% closed/won growth via direct response campaigns targeting key personas within the 100 largest global life science organizations.</li>
+                                    <li>Implemented the HubSpot/Salesforce stack and developed lead nurturing workflows to guide prospects through the buyer's journey.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Code Climate</h4>
+                                <p class="text-md text-gray-400">Head of Marketing Operations, Demand, Paid, SDRS | Mar 2020 - Dec 2020</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                    <li>Implemented the growth mechanisms that positioned a 50-person SaaS company for its $50M Series C, adding over 70% to the pipeline with targeted paid campaigns.</li>
+                                    <li>Drove 300 qualified enterprise leads by leveraging a CEO-authored book to build thought leadership and capture a high-intent audience.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Expo (Formerly Pared)</h4>
+                                <p class="text-md text-gray-400">Head of Demand Generation & Marketing Operations | Oct 2018 - Mar 2020</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                    <li>As the first marketing hire, built the entire demand function from scratch, launching growth from a $10M Series A through a $30M Series B.</li>
+                                    <li>Achieved a 50% decrease in CAC and 30% contribution to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Advisen</h4>
+                                <p class="text-md text-gray-400">VP, Head of Marketing, Global | Apr 2017 - Oct 2018</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                    <li>Promoted to global leader and executed a GTM turnaround that led to the company's acquisition by Zywave.</li>
+                                    <li>Added 33% to the pipeline by personalizing outbound campaigns and selling event sponsorships to a C-level audience.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Argyle Executive Forum</h4>
+                                <p class="text-md text-gray-400">Campaign Analytics Manager | Apr 2015 - Mar 2017</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                    <li>Planned and executed a large calendar of events targeting Fortune 1000 executives, sourcing $3.6M in revenue (25% YoY increase).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Backstage</h4>
+                                <p class="text-md text-gray-400">Head of Community and Customer Care | Feb 2012 - Apr 2015</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                    <li>Grew a community-driven B2B2C business by 400% in one year through content and engagement strategies.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8 mt-8">
+                         <h3 class="text-2xl font-bold text-white mb-4">Education</h3>
+                         <p class="text-gray-400"><strong>Florida State University, Sarasota, FL</strong> — Master of Fine Arts in Acting</p>
+                         <p class="text-gray-400"><strong>Oxford University, New College, Oxford, UK</strong> — Non-degree program</p>
+                         <p class="text-gray-400"><strong>Hunter College, New York, NY</strong> — Bachelor of Arts in Theatre, Summa Cum Laude</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="calendar" class="bg-white">
+            <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="text-center fade-in-element">
+                    <h2 class="text-3xl font-bold text-[#0D0D0D]">Schedule a Meeting</h2>
+                    <p class="mt-4 text-xl text-gray-600">Let's discuss how my experience can drive growth.</p>
+                </div>
+                <div class="mt-12 fade-in-element" style="transition-delay: 200ms;">
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+                    </div>
+            </div>
+        </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fadeInElements = document.querySelectorAll('.fade-in-element');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: "0px",
+                threshold: 0.1
+            });
+
+            fadeInElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
