@@ -6,9 +6,18 @@
     <title>Sendoso Growth Blueprint</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            WebFont.load({
+                google: {
+                    families: ["Creepster:regular", "Mountains of Christmas:700", "News Cycle:regular,700", "Roboto:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic", "Bricolage Grotesque:regular,500,600,700,800"]
+                }
+            });
+        </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Avenir+Next:wght@400;600;700&display=swap');
+        
         
         :root {
             /* Brand Kit - Inferred from Sendoso's visual identity */
@@ -16,10 +25,10 @@
             --brand-secondary: #f3f3f3; /* A soft, clean background color */
             --brand-accent: #f47a20;   /* A contrasting CTA color for emphasis */
             --brand-text: #2c3e50; /* A dark, professional blue-gray */
-            --font-stack: 'Inter', 'Avenir Next', 'Helvetica Neue', sans-serif;
+            --font-stack: ["Creepster:regular", "Mountains of Christmas:700", "News Cycle:regular,700", "Roboto:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic", "Bricolage Grotesque:regular,500,600,700,800"], sans-serif;
             --color-success: #28a745;
             --color-warning: #ffc107;
-            --color-danger: #dc3545;
+            --color-danger: #ef4562;
         }
 
         body {
@@ -42,24 +51,30 @@
         }
 
         .diagnostic-card {
-            background-color: #fff;
+            background-color: #f8a97a;
             border-left: 4px solid var(--brand-primary);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
         .diagnostic-card:hover {
+            background-color: #fff;
             transform: translateY(-5px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
         }
         .diagnostic-card.bottleneck {
             border-left: 4px solid var(--color-danger);
             animation: pulse-red 2s infinite;
+            transition: all 0.3s ease;
         }
 
         @keyframes pulse-red {
             0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
             100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+            90% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+            50% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
         }
 
         .learning-loop-card {
