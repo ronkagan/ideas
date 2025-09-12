@@ -128,6 +128,27 @@
 
         /* --- Layout & Typography --- */
 
+        /* Handle Loom */
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* This creates a 16:9 aspect ratio (9 / 16 * 100) */
+            height: 0; /* Set height to 0 to make padding-bottom control the height */
+            overflow: hidden; /* Important for containing absolutely positioned content */
+            background-color: #000; /* Optional: Sets a black background if video is smaller or loading */
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0; /* Remove default iframe border */
+        }
+
+
         /* Added specific styling for the iframe section */
         .figma-section {
              /* Spacing below the sticky header */
@@ -738,16 +759,14 @@ embedVisualization('#vis-4', 'vis4_influencer_matrix.json');
         <h2 class="section-title">Video Walkthrough of This Content</h2>
         <p class="section-subtitle">Enjoy this video that outlines some of the insights or explore below...</p>
         <div>
-    <a href="https://www.loom.com/share/34b7b3ac5638425ca4e6decbaf02ed41">
-      <p>Winning the Fight for Market Dominance in Industrial AI 🚀 - Watch Video</p>
-    </a>
-    <a href="https://www.loom.com/share/34b7b3ac5638425ca4e6decbaf02ed41">
-      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/34b7b3ac5638425ca4e6decbaf02ed41-1fb1560a77ccda91-full-play.gif">
-    </a>
-  </div>
-
+            <div class="video-container"><div style="position: relative; padding-bottom: 55.43393275996872%; height: 0;">
+                <iframe src="https://www.loom.com/embed/34b7b3ac5638425ca4e6decbaf02ed41?sid=d225e9b9-5b74-460e-a133-152805365197" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; aspect-ratio:16/9;"></iframe></div>
+      </div>
+        </div>
+        
         <h2 class="section-title" id="battlefield">Battlefield</h2>
         <p class="section-subtitle">The fight to achieve market dominance.</p>
+        
 <h3>Growth Strategy Dashboard: Targeting Industrial Engineers Seeking AI Solutions</h3>
 
 <h4>1. Channel Strategy: Prioritize Specialized, Technical Platforms</h4>
