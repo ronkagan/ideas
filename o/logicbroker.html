@@ -426,7 +426,32 @@
         <p class="text-left text-lg max-w-3xl mx-auto mb-12" style="color: rgba(27, 27, 27, 0.8);">
             This data is based off of 1 conversation with K1 and publicly available data, particular that made available by audience research engine Sparktoro.<br><br>It will not be completely accurate. Hopefully, though it represents seriousness of thought.
         </p>
-        
+        <!-- New Section: Market & Competitive Landscape -->
+        <div class="mt-12">
+            <div class="card">
+                <h3 class="text-2xl font-bold mb-4">Market & Competitive Landscape</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Market Size Chart -->
+                    <div class="p-6 rounded-lg border-2 border-gray-400 bg-white">
+                        <h4 class="text-xl font-bold mb-2 text-[#ee3224]">Market Sizing</h4>
+                        <p class="text-sm text-gray-600 mb-4">Logicbroker's software TAM is a fraction of the broader dropshipping and SCM markets it influences.</p>
+                        <div class="w-full h-64">
+                            <canvas id="marketChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Competitive Analysis Chart -->
+                    <div class="p-6 rounded-lg border-2 border-gray-400 bg-white">
+                        <h4 class="text-xl font-bold mb-2 text-[#ee3224]">Competitive Analysis (G2 Data)</h4>
+                        <p class="text-sm text-gray-600 mb-4">Logicbroker leads in Order Tracking but lags in key areas like Ease of Setup and Product Direction.</p>
+                        <div class="w-full h-64">
+                            <canvas id="g2Chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         <!-- Key Metrics Section -->
       <div class="container mx-auto p-6 relative z-10">
         <h1 class="section-title">Where We Are Today</h1>
@@ -625,6 +650,56 @@
                 }
             };
 
+            //
+
+            
+            const marketData = {
+                labels: ['Dropshipping Software TAM', 'SCM Market'],
+                datasets: [{
+                    label: 'Market Size ($B)',
+                    data: [0.67, 26.25],
+                    backgroundColor: ['#ee3224', '#1b1b1b'],
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                }]
+            };
+
+            const g2Data = {
+                labels: ['Ease of Setup', 'Product Direction', 'Quality of Support', 'Order Tracking'],
+                datasets: [
+                    {
+                        label: 'Logicbroker',
+                        data: [6.2, 4.6, 7.0, 9.3],
+                        borderColor: '#ee3224',
+                        backgroundColor: 'rgba(238, 50, 36, 0.2)',
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'SPS Commerce',
+                        data: [7.9, 7.5, 8.5, 8.8],
+                        borderColor: '#1b1b1b',
+                        backgroundColor: 'rgba(27, 27, 27, 0.2)',
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Orderful',
+                        data: [8.5, 9.6, 9.6, 8.9],
+                        borderColor: '#0000ff',
+                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                        fill: false,
+                        tension: 0.1
+                    }
+                ]
+            };
+            
+            const createChart = (ctx, type, data, options) => new Chart(ctx, { type, data, options });
+
+
+
+            //
+
             const arrData = {
                 labels: ['Existing Customer Revenue', 'New Business Quota'],
                 datasets: [{
@@ -777,6 +852,47 @@
                 }, 1000);
             });
         });
+            const marketChartCtx = document.getElementById('marketChart').getContext('2d');
+            createChart(marketChartCtx, 'bar', marketData, {
+                responsive: true,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Market Size in Billions ($B)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'right',
+                        color: '#1b1b1b',
+                        formatter: (value) => `$${value}B`,
+                    }
+                }
+            });
+
+            const g2ChartCtx = document.getElementById('g2Chart').getContext('2d');
+            createChart(g2ChartCtx, 'radar', g2Data, {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        pointLabels: {
+                            color: '#1b1b1b',
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    datalabels: {
+                        display: false
+                    }
+                }
+            });
     </script>
 </body>
 </html>
