@@ -121,18 +121,18 @@
         /* responsive iframe embed */
 
         .responsive-container {
-          position: relative; /* Establish a positioning context for the iframe */
-          overflow: hidden; /* Hide any overflowing content from the iframe */
-          width: 100%; /* Make the container take up 100% of its parent's width */
-          padding-top: 56.25%; /* This sets the height based on a 16:9 aspect ratio */
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%;
         }
 
         .responsive-container iframe {
-          position: absolute; /* Position the iframe absolutely within the container */
-          top: 0;
-          left: 0;
-          width: 100%; /* Force the iframe to fill the entire width of the container */
-          height: 100%; /* Force the iframe to fill the entire height of the container */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         /*glass cards*/
@@ -422,19 +422,31 @@
     </div>
 
     <div class="container mx-auto p-6 relative z-10">
-        <h1 class="section-title">Ron Kagan's Point of View</h1>
+        <h1 class="section-title">Marketing Dossier</h1>
         <p class="text-left text-lg max-w-3xl mx-auto mb-12" style="color: rgba(27, 27, 27, 0.8);">
-            This data is based off of 1 conversation with K1 and publicly available data, particular that made available by audience research engine Sparktoro.<br><br>It will not be completely accurate. Hopefully, though it represents seriousness of thought.
+            This data is based off of 1 conversation with K1 and publicly available data.
         </p>
+    <div class="mt-12">
+        <div class="glass-card grid-glow">
+            <iframe 
+                src="https://sadly-shop-23256937.figma.site/" 
+                width="100%" 
+                height="600"
+                frameborder="0"
+                title="logos"
+                >
+            </iframe>
+        </div>
+    </div>
         <!-- New Section: Market & Competitive Landscape -->
         <div class="mt-12">
-            <div class="card">
-                <h3 class="text-2xl font-bold mb-4">Market & Competitive Landscape</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-card grid-glow">
+                <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--brand-dark);">Market & Competitive Landscape</h3>
+                <div class="grid grid-cols-1 gap-6">
                     <!-- Market Size Chart -->
                     <div class="p-6 rounded-lg border-2 border-gray-400 bg-white">
-                        <h4 class="text-xl font-bold mb-2 text-[#ee3224]">Market Sizing</h4>
-                        <p class="text-sm text-gray-600 mb-4">Logicbroker's software TAM is a fraction of the broader dropshipping and SCM markets it influences.</p>
+                        <h4 class="text-xl font-bold mb-2 text-brand-red text-center">Market Sizing</h4>
+                        <p class="text-sm text-gray-600 mb-4 text-center">Logicbroker's software TAM is a fraction of the broader dropshipping and SCM markets it influences.</p>
                         <div class="w-full h-64">
                             <canvas id="marketChart"></canvas>
                         </div>
@@ -442,85 +454,110 @@
 
                     <!-- Competitive Analysis Chart -->
                     <div class="p-6 rounded-lg border-2 border-gray-400 bg-white">
-                        <h4 class="text-xl font-bold mb-2 text-[#ee3224]">Competitive Analysis (G2 Data)</h4>
-                        <p class="text-sm text-gray-600 mb-4">Logicbroker leads in Order Tracking but lags in key areas like Ease of Setup and Product Direction.</p>
+                        <h4 class="text-xl font-bold mb-2 text-brand-red text-center">Competitive Analysis (G2 Data)</h4>
+                        <p class="text-sm text-gray-600 mb-4 text-center">Logicbroker leads in Order Tracking but lags in key areas like Ease of Setup and Product Direction.</p>
                         <div class="w-full h-64">
                             <canvas id="g2Chart"></canvas>
                         </div>
                     </div>
                 </div>
+                <!-- New Section: The Core Tension -->
+                <div class="mt-8">
+                    <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--brand-dark);">The Core Tension</h3>
+                    <!-- The Core Tension Chart -->
+                    <div class="p-6 rounded-lg border-2 border-gray-400 bg-white mt-8">
+                        <h4 class="text-xl font-bold mb-2 text-brand-red text-center">Marketing Aspiration vs. Public Customer Feedback</h4>
+                        <p class="text-sm text-gray-600 mb-4 text-center">A comparison of Logicbroker's marketing claims versus customer feedback on G2.</p>
+                        <div class="w-full h-64">
+                            <canvas id="tensionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass-card">
+                            <h4 class="text-xl font-bold mb-2 text-brand-red">The Aspiration</h4>
+                            <p class="text-sm leading-relaxed" style="color: rgba(27, 27, 27, 0.8);">
+                                The marketing team has created effective customer success stories highlighting impressive ROI and product achievements.
+                            </p>
+                        </div>
+                        <div class="glass-card">
+                            <h4 class="text-xl font-bold mb-2 text-brand-red">The Execution Gap</h4>
+                            <p class="text-sm leading-relaxed" style="color: rgba(27, 27, 27, 0.8);">
+                                However, public customer feedback undermines company messaging that emphasizes ease of use and a "white glove" support experience. This is an impediment to growth that must be remedied.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
         <!-- Key Metrics Section -->
-      <div class="container mx-auto p-6 relative z-10">
-        <h1 class="section-title">Where We Are Today</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <div class="glass-card metric-card grid-glow">
-                <h2 class="metric-label">Current ARR</h2>
-                <div class="metric-value pulse-animation">$14M</div>
-                <p class="metric-description">Annual Recurring Revenue</p>
-            </div>
-            <div class="glass-card metric-card grid-glow">
-                <h2 class="metric-label">AE Team Quota</h2>
-                <div class="metric-value">$2.2M</div>
-                <p class="metric-description">New business quota for 5 AEs</p>
-            </div>
-            <div class="glass-card metric-card grid-glow">
-                <h2 class="metric-label">Average ACV</h2>
-                <div class="metric-value">$50k</div>
-                <p class="metric-description">Average contract value</p>
-            </div>
-            <div class="glass-card metric-card grid-glow">
-                <h2 class="metric-label">Customer Count</h2>
-                <div class="metric-value">~280</div>
-                <p class="metric-description">Calculated from ARR and ACV</p>
+        <div class="container mx-auto p-6 relative z-10">
+            <h1 class="section-title">Where We Are Today</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="glass-card metric-card grid-glow">
+                    <h2 class="metric-label">Current ARR</h2>
+                    <div class="metric-value pulse-animation">$14M</div>
+                    <p class="metric-description">Annual Recurring Revenue</p>
+                </div>
+                <div class="glass-card metric-card grid-glow">
+                    <h2 class="metric-label">AE Team Quota</h2>
+                    <div class="metric-value">$2.2M</div>
+                    <p class="metric-description">New business quota for 5 AEs</p>
+                </div>
+                <div class="glass-card metric-card grid-glow">
+                    <h2 class="metric-label">Average ACV</h2>
+                    <div class="metric-value">$50k</div>
+                    <p class="metric-description">Average contract value</p>
+                </div>
+                <div class="glass-card metric-card grid-glow">
+                    <h2 class="metric-label">Customer Count</h2>
+                    <div class="metric-value">~280</div>
+                    <p class="metric-description">Calculated from ARR and ACV</p>
+                </div>
             </div>
         </div>
-      </div>
 
         <!-- Charts and Commentary Section -->
         <div class="container mx-auto p-6 relative z-10">
-          <h1 class="section-title">Observations & Assumptions</h1>
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-            <!-- ARR by Revenue Type Chart -->
-            <div class="glass-card grid-glow">
-                <h3 class="text-2xl font-bold mb-4" style="color: var(--brand-dark);">ARR Breakdown</h3>
-                <div class="chart-container">
-                    <canvas id="arrChart"></canvas>
+            <h1 class="section-title">Observations & Assumptions</h1>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+                <!-- ARR by Revenue Type Chart -->
+                <div class="glass-card grid-glow">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--brand-dark);">ARR Breakdown</h3>
+                    <div class="chart-container">
+                        <canvas id="arrChart"></canvas>
+                    </div>
+                    <p class="text-sm mt-4 leading-relaxed" style="color: rgba(27, 27, 27, 0.7);">
+                        Most of the $14M ARR comes from <strong>expansion revenue</strong>. This indicates exceptional 
+                        product-market fit and customer retention, making retention initiatives mission-critical.
+                    </p>
                 </div>
-                <p class="text-sm mt-4 leading-relaxed" style="color: rgba(27, 27, 27, 0.7);">
-                    Most of the $14M ARR comes from <strong>expansion revenue</strong>. This indicates exceptional 
-                    product-market fit and customer retention, making retention initiatives mission-critical.
-                </p>
-            </div>
-            
-            <!-- AE Performance Chart -->
-            <div class="glass-card grid-glow">
-                <h3 class="text-2xl font-bold mb-4" style="color: var(--brand-dark);">AE New Business Quota</h3>
-                <div class="chart-container">
-                    <canvas id="aeChart"></canvas>
+                
+                <!-- AE Performance Chart -->
+                <div class="glass-card grid-glow">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--brand-dark);">AE New Business Quota</h3>
+                    <div class="chart-container">
+                        <canvas id="aeChart"></canvas>
+                    </div>
+                    <p class="text-sm mt-4 leading-relaxed" style="color: rgba(27, 27, 27, 0.7);">
+                        Force-ranked quota distribution optimizes for top performers. With $50k ACV, 
+                        this model demands a focused <strong>ABM strategy</strong> over broad demand generation.
+                    </p>
                 </div>
-                <p class="text-sm mt-4 leading-relaxed" style="color: rgba(27, 27, 27, 0.7);">
-                    Force-ranked quota distribution optimizes for top performers. With $50k ACV, 
-                    this model demands a focused <strong>ABM strategy</strong> over broad demand generation.
-                </p>
             </div>
-        </div>
 
-        <!-- Growth Projection Section -->
-        <div class="mb-12">
-            <div class="glass-card-dark grid-glow">
-                <h3 class="text-2xl font-bold mb-4 text-white">ARR Growth Trajectory (3-6 Years)</h3>
-                <div class="chart-container">
-                    <canvas id="growthChart"></canvas>
+            <!-- Growth Projection Section -->
+            <div class="mb-12">
+                <div class="glass-card-dark grid-glow">
+                    <h3 class="text-2xl font-bold mb-4 text-white">ARR Growth Trajectory (3-6 Years)</h3>
+                    <div class="chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                    <p class="text-sm text-white/70 mt-4 leading-relaxed">
+                        To achieve a successful exit in 3-6 years, scale ARR beyond <strong>$100M</strong>. 
+                        This requires a sophisticated marketing engine to fuel enterprise pipeline velocity.
+                    </p>
                 </div>
-                <p class="text-sm text-white/70 mt-4 leading-relaxed">
-                    To achieve a successful exit in 3-6 years, scale ARR beyond <strong>$100M</strong>. 
-                    This requires a sophisticated marketing engine to fuel enterprise pipeline velocity.
-                </p>
             </div>
-        </div>
         </div>
 
         <!-- Marketing Recommendations -->
@@ -557,24 +594,44 @@
                         Evolve brand narrative. Transform "Agentic Commerce" concept into 
                         quantifiable business outcomes that resonate with C-suite decision-makers.
                     </p>
-                    </div>   
-                </div>
-            </div>
-
-
-
-            <!-- Timeline -->
-        <div class="glass-card grid-glow" style="margin-top:50px">
-            <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--brand-dark);">Timeline</h3>
-                    <div class="responsive-container">
-                        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTCjrv7zgCDmdiqXyqEoLphEZNVF7Z6i3bl2wX3WG1hWUYzbYQ8nYqCUC0ilu5k2HM7bVl4sKUBOGrd/pubhtml?widget=true&amp;headers=false"></iframe>
-                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Timeline Section - Left as-is per user request -->
+        <div class="glass-card grid-glow mt-12">
+            <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--brand-dark);">Timeline</h3>
+            <div class="responsive-container">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTCjrv7zgCDmdiqXyqEoLphEZNVF7Z6i3bl2wX3WG1hWUYzbYQ8nYqCUC0ilu5k2HM7bVl4sKUBOGrd/pubhtml?widget=true&amp;headers=false"></iframe>
+            </div>
+        </div>
+        
+        <!-- New combined section for Data Sources and Calendar on a white background -->
+        <div class="glass-card grid-glow mt-12">
+            <div class="pb-12 mb-12 border-b border-gray-300">
+                <h3 class="text-2xl font-bold mb-4 text-center text-brand-red">Data Sources</h3>
+                <p class="text-center text-sm" style="color: var(--brand-dark);">
+                    [1] Dropshipping Market: <a href="https://example.com/dropship-market" class="text-brand-dark hover:underline" target="_blank">Research Report</a> | 
+                    [2] SCM Market: <a href="https://example.com/scm-market" class="text-brand-dark hover:underline" target="_blank">Research Report</a> | 
+                    [3] G2 Reviews: <a href="https://www.g2.com/products/logicbroker/reviews" class="text-brand-dark hover:underline" target="_blank">G2.com</a> |
+                    [4] K1 Investment & GMV: <a href="https://www.logicbroker.com/press-release/logicbroker-secures-135-million-from-k1-to-modernize-digital-commerce-fulfillment" class="text-brand-dark hover:underline" target="_blank">Logicbroker Press Release</a> |
+                    [5] Microsoft Partnership: <a href="https://www.logicbroker.com/harness-the-power-of-microsoft-azure-for-your-ecommerce-platform-with-logicbroker" class="text-brand-dark hover:underline" target="_blank">Logicbroker Insight</a>
+                </p>
+            </div>
+            
+            <section id="calendar" class="calendar-section">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h2 class="text-2xl font-bold text-center text-brand-red">Schedule a Meeting</h2>
+                        <p class="text-center text-sm" style="color: var(--brand-dark);">Let's discuss how my experience can drive growth.</p>
+                    </div>
+                    <div class="calendar-embed mt-4">
+                        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0" title="Schedule a Meeting"></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -650,9 +707,6 @@
                 }
             };
 
-            //
-
-            
             const marketData = {
                 labels: ['Dropshipping Software TAM', 'SCM Market'],
                 datasets: [{
@@ -694,11 +748,25 @@
                 ]
             };
             
-            const createChart = (ctx, type, data, options) => new Chart(ctx, { type, data, options });
-
-
-
-            //
+            const tensionData = {
+                labels: ['Ease of Setup', 'Quality of Support'],
+                datasets: [
+                    {
+                        label: 'Marketing Aspiration',
+                        data: [9.5, 9.8],
+                        backgroundColor: '#ee3224',
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                     {
+                        label: 'Customer Reality (G2)',
+                        data: [6.2, 7.0],
+                        backgroundColor: '#1b1b1b',
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    }
+                ]
+            };
 
             const arrData = {
                 labels: ['Existing Customer Revenue', 'New Business Quota'],
@@ -746,15 +814,15 @@
                     pointHoverRadius: 8
                 }]
             };
-            
+
             const createChart = (ctx, type, data, options) => new Chart(ctx, { type, data, options });
             const createDarkChart = (ctx, type, data, options) => new Chart(ctx, { type, data, options: { ...darkChartOptions, ...options } });
+            const createWhiteChart = (ctx, type, data, options) => new Chart(ctx, { type, data, options: { ...chartOptions, ...options } });
 
             // ARR Chart with enhanced styling and white legend
             const arrChartCtx = document.getElementById('arrChart').getContext('2d');
             arrChartCtx.canvas.height = 300;
-            createChart(arrChartCtx, 'doughnut', arrData, {
-                ...chartOptions,
+            createWhiteChart(arrChartCtx, 'doughnut', arrData, {
                 plugins: {
                     legend: { 
                         position: 'bottom',
@@ -783,8 +851,7 @@
             // AE Chart with enhanced styling
             const aeChartCtx = document.getElementById('aeChart').getContext('2d');
             aeChartCtx.canvas.height = 300;
-            createChart(aeChartCtx, 'bar', aeData, {
-                ...chartOptions,
+            createWhiteChart(aeChartCtx, 'bar', aeData, {
                 scales: {
                     ...chartOptions.scales,
                     y: {
@@ -833,6 +900,79 @@
                 }
             });
 
+            // Market Chart
+            const marketChartCtx = document.getElementById('marketChart').getContext('2d');
+            marketChartCtx.canvas.height = 300;
+            createWhiteChart(marketChartCtx, 'bar', marketData, {
+                indexAxis: 'y',
+                scales: {
+                    ...chartOptions.scales,
+                    x: {
+                        ...chartOptions.scales.x,
+                        beginAtZero: true,
+                        title: { display: true, text: 'Market Size in Billions ($B)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'right',
+                        color: '#1b1b1b',
+                        formatter: (value) => `$${value}B`,
+                    }
+                }
+            });
+
+            // G2 Chart
+            const g2ChartCtx = document.getElementById('g2Chart').getContext('2d');
+            g2ChartCtx.canvas.height = 300;
+            createWhiteChart(g2ChartCtx, 'radar', g2Data, {
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        pointLabels: {
+                            color: '#1b1b1b',
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    datalabels: {
+                        display: false
+                    }
+                }
+            });
+
+            // Tension Chart
+            const tensionChartCtx = document.getElementById('tensionChart').getContext('2d');
+            tensionChartCtx.canvas.height = 300;
+            createWhiteChart(tensionChartCtx, 'bar', tensionData, {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 10,
+                        title: { display: true, text: 'Score (out of 10)' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: '#1b1b1b',
+                        font: { weight: 'bold', family: 'Poppins' },
+                        formatter: (value) => `${value}`,
+                        padding: {
+                            left: 10
+                        }
+                    }
+                }
+            });
+
             // Add smooth scroll behavior
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -852,47 +992,6 @@
                 }, 1000);
             });
         });
-            const marketChartCtx = document.getElementById('marketChart').getContext('2d');
-            createChart(marketChartCtx, 'bar', marketData, {
-                responsive: true,
-                indexAxis: 'y',
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        title: { display: true, text: 'Market Size in Billions ($B)' }
-                    }
-                },
-                plugins: {
-                    legend: { display: false },
-                    datalabels: {
-                        anchor: 'end',
-                        align: 'right',
-                        color: '#1b1b1b',
-                        formatter: (value) => `$${value}B`,
-                    }
-                }
-            });
-
-            const g2ChartCtx = document.getElementById('g2Chart').getContext('2d');
-            createChart(g2ChartCtx, 'radar', g2Data, {
-                responsive: true,
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 10,
-                        pointLabels: {
-                            color: '#1b1b1b',
-                            font: { size: 12 }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: { position: 'top' },
-                    datalabels: {
-                        display: false
-                    }
-                }
-            });
     </script>
 </body>
 </html>
