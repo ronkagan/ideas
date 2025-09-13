@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logicbroker Strategic Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <style>
+        :root {
+            --brand-red: #ee3224;
+            --brand-dark: #1b1b1b;
+            --brand-white: #fafafa;
+            --primary-gradient: linear-gradient(135deg, #ee3224 0%, #c42a1f 100%);
+            --secondary-gradient: linear-gradient(135deg, #1b1b1b 0%, #2d2d2d 100%);
+            --accent-gradient: linear-gradient(135deg, #ee3224 0%, #ff4a3a 100%);
+            --dark-gradient: linear-gradient(135deg, #1b1b1b 0%, #000000 100%);
+            --white-gradient: linear-gradient(135deg, #fafafa 0%, #f8f9fa 100%);
+            --glass-bg: rgba(238, 50, 36, 0.1);
+            --glass-bg-white: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(238, 50, 36, 0.2);
+            --glass-border-white: rgba(238, 50, 36, 0.15);
+            --shadow-color: rgba(27, 27, 27, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fafafa 0%, #f8f9fa 20%, #1b1b1b 60%, #ee3224 90%);
+            min-height: 100vh;
+            color: #1b1b1b;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background cogs */
+        .background-cogs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.03;
+        }
+
+        .cog-element {
+            position: absolute;
+            animation: rotateCog 60s linear infinite;
+        }
+
+        .cog-1 {
+            top: 10%;
+            right: 10%;
+            width: 80px;
+            height: 80px;
+            animation-direction: normal;
+        }
+
+        .cog-2 {
+            bottom: 20%;
+            left: 5%;
+            width: 120px;
+            height: 120px;
+            animation-direction: reverse;
+            animation-duration: 80s;
+        }
+
+        .cog-3 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            animation-duration: 100s;
+        }
+
+        @keyframes rotateCog {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(238, 50, 36, 0.2);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; top: 20%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; top: 60%; left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; top: 40%; left: 70%; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; top: 80%; left: 60%; animation-delay: 1.5s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; top: 30%; left: 90%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+        /* responsive iframe embed */
+
+        .responsive-container {
+          position: relative; /* Establish a positioning context for the iframe */
+          overflow: hidden; /* Hide any overflowing content from the iframe */
+          width: 100%; /* Make the container take up 100% of its parent's width */
+          padding-top: 56.25%; /* This sets the height based on a 16:9 aspect ratio */
+        }
+
+        .responsive-container iframe {
+          position: absolute; /* Position the iframe absolutely within the container */
+          top: 0;
+          left: 0;
+          width: 100%; /* Force the iframe to fill the entire width of the container */
+          height: 100%; /* Force the iframe to fill the entire height of the container */
+        }
+
+        /*glass cards*/
+
+        .glass-card {
+            background: var(--glass-bg-white);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border-white);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(238, 50, 36, 0.1);
+            color: var(--brand-dark);
+        }
+
+        .glass-card-dark {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px var(--shadow-color);
+            color: white;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(238,50,36,0.3), transparent);
+        }
+
+        .glass-card-dark::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(238,50,36,0.6), transparent);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(238, 50, 36, 0.2);
+            border-color: rgba(238, 50, 36, 0.3);
+        }
+
+        .glass-card-dark:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(238, 50, 36, 0.3);
+            border-color: rgba(238, 50, 36, 0.4);
+        }
+
+        .metric-card {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .metric-label {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--brand-dark);
+        }
+
+        .metric-description {
+            font-size: 0.875rem;
+            color: rgba(27, 27, 27, 0.7);
+            margin-top: 0.5rem;
+        }
+
+        .chart-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--brand-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .recommendation-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tier-1 {
+            background: linear-gradient(135deg, rgba(238, 50, 36, 0.1) 0%, rgba(238, 50, 36, 0.05) 100%);
+            border: 2px solid rgba(238, 50, 36, 0.3);
+        }
+
+        .tier-2, .tier-3 {
+            background: var(--glass-bg-white);
+            border: 1px solid rgba(238, 50, 36, 0.15);
+        }
+
+        .tier-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transform: rotate(12deg);
+            box-shadow: 0 4px 12px rgba(238, 50, 36, 0.4);
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .7;
+            }
+        }
+
+        .loading-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(238,50,36,0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .grid-glow {
+            position: relative;
+        }
+
+        .grid-glow::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ee3224, #ff4a3a, #1b1b1b, #2d2d2d);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-glow:hover::before {
+            opacity: 0.5;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(27, 27, 27, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gradient);
+            border-radius: 4px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .metric-value {
+                font-size: 2rem;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Chart styling overrides */
+        canvas {
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .chart-legend {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-radius: 10px !important;
+            padding: 10px !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Animated background cogs -->
+    <div class="background-cogs">
+        <div class="cog-element cog-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 454.918 471.041">
+                <g data-name="Group 1050" opacity=".15" fill="none" stroke="#1b1b1b" stroke-miterlimit="10" stroke-width="8">
+                    <g data-name="Group 1047">
+                        <path data-name="Rectangle 122" d="M164.397 8.007h126.124v126.124H164.397z"/>
+                        <path data-name="Rectangle 123" d="M290.521 172.459v126.124H164.397V172.459z"/>
+                        <path data-name="Rectangle 124" d="M290.521 336.912v126.124H164.397V336.912z"/>
+                        <path data-name="Path 901" d="M125.704 209.216H8V71.07h156.394"/>
+                        <path data-name="Path 902" d="M89.102 172.374l36.84 33.477v6.2l-36.84 34"/>
+                        <g data-name="Group 1046">
+                            <path data-name="Path 903" d="M329.037 373.752h117.88V236.265H290.521"/>
+                            <path data-name="Path 904" d="M365.582 336.912l-36.842 33.477v6.2l36.842 34"/>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="cog-element cog-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 663.207 661.361">
+                <g data-name="Group 1033">
+                    <g data-name="Group 1008">
+                        <path data-name="Path 837" d="M663.207 331.6c0 3.617-.148 7.184-.269 10.755l-25.74 5.561a301.168 301.168 0 01-9.522 62.55l23.031 11.27a330.588 330.588 0 01-30.855 73.82l-25.026-6.938a301.86 301.86 0 01-35.656 48.206l15.156 20.671a334.809 334.809 0 01-61.91 52.041l-19.168-17.986a301.4 301.4 0 01-51.062 25.072l3.914 26.282a330.03 330.03 0 01-79.26 18.454l-9.03-26.032c-7.606.566-15.231.932-22.934.932a309.845 309.845 0 01-31.843-1.647l-9.178 26.4a329.5 329.5 0 01-79.256-19.071l4.327-28.717a301.758 301.758 0 01-47.885-25.174l-21.826 20.476a331.952 331.952 0 01-61.813-52.611l18.213-24.8a299.42 299.42 0 01-31.968-44.685l-30.633 8.487a330.275 330.275 0 01-30.86-74.312l28.889-14.127a303.4 303.4 0 01-8.441-56.572l-32.33-6.984c-.125-3.766-.274-7.509-.274-11.321a333.518 333.518 0 016.966-67.888l33.146.955a299.544 299.544 0 0119.511-57.064l-25.935-21.7a332.631 332.631 0 0142.617-65.9l29.037 16.316A304.572 304.572 0 01151.605 92.7L138.86 61.868a331.247 331.247 0 0168.083-37.529l17.693 27.317a301.029 301.029 0 0164.03-17.3l2.926-31.843a321.465 321.465 0 0177.34-.343l2.88 31a302.32 302.32 0 0165.973 15.653l16.409-25.3a330.812 330.812 0 0168.116 36.889l-11.173 27.117a305.318 305.318 0 0150.246 45.325L586.043 119a333.318 333.318 0 0142.691 65.379L607.6 202.074a299.55 299.55 0 0121.923 62.326l26.7-.761a334.274 334.274 0 016.984 67.961zm-121.826 2.583c0-114.99-93.211-208.2-208.177-208.2-114.985 0-208.2 93.211-208.2 208.2s93.216 208.177 208.2 208.177c114.966.004 208.177-93.183 208.177-208.173z" opacity=".1" fill="#1b1b1b"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="cog-element cog-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 69 95.316">
+                <g data-name="Group 2304">
+                    <path data-name="Line 96" fill="none" stroke="#ee3224" stroke-width="2" d="M35.5 60.316v35"/>
+                    <path data-name="Path 3456" d="M68.972 35.619c.013-.371.028-.742.028-1.119a34.805 34.805 0 00-.727-7.071l-2.778.079a31.166 31.166 0 00-2.281-6.484l2.2-1.841a34.666 34.666 0 00-4.442-6.8l-2.565 1.441a31.773 31.773 0 00-5.228-4.716l1.162-2.821a34.4 34.4 0 00-7.086-3.838l-1.707 2.632a31.471 31.471 0 00-6.864-1.628l-.3-3.226a33.427 33.427 0 00-8.047.036l-.3 3.313a31.348 31.348 0 00-6.661 1.8l-1.841-2.842a34.452 34.452 0 00-7.084 3.9l1.326 3.208a31.676 31.676 0 00-4.813 4.539l-3.021-1.7a34.586 34.586 0 00-4.434 6.856l2.7 2.258a31.181 31.181 0 00-2.03 5.937l-3.448-.1a34.732 34.732 0 00-.724 7.063c0 .4.015.786.028 1.178l3.364.727a31.571 31.571 0 00.878 5.886l-3.006 1.469a34.385 34.385 0 003.21 7.732l3.187-.883a31.109 31.109 0 003.326 4.649l-1.895 2.581a34.528 34.528 0 006.431 5.474l2.271-2.13a31.38 31.38 0 004.982 2.619l-.451 2.988a34.3 34.3 0 008.246 1.984l.955-2.747a32.192 32.192 0 003.313.171c.8 0 1.6-.038 2.386-.1l.94 2.709a34.344 34.344 0 008.246-1.92l-.407-2.734a31.363 31.363 0 005.303-2.603l2 1.871a34.825 34.825 0 006.441-5.415l-1.577-2.151a31.386 31.386 0 003.71-5.015l2.6.722a34.376 34.376 0 003.21-7.68l-2.4-1.173a31.342 31.342 0 00.991-6.508zm-34.3 20.8a21.66 21.66 0 1121.659-21.663 21.658 21.658 0 01-21.658 21.659z" fill="#ee3224" opacity="0.8"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-6 relative z-10">
+        <h1 class="section-title">Ron Kagan's Point of View</h1>
+        <p class="text-left text-lg max-w-3xl mx-auto mb-12" style="color: rgba(27, 27, 27, 0.8);">
+            This data is based off of 1 conversation with K1 and publicly available data, particular that made available by audience research engine Sparktoro.<br><br>It will not be completely accurate. Hopefully, though it represents seriousness of thought.
+        </p>
+        
+        <!-- Key Metrics Section -->
+      <div class="container mx-auto p-6 relative z-10">
+        <h1 class="section-title">Where We Are Today</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="glass-card metric-card grid-glow">
+                <h2 class="metric-label">Current ARR</h2>
+                <div class="metric-value pulse-animation">$14M</div>
+                <p class="metric-description">Annual Recurring Revenue</p>
+            </div>
+            <div class="glass-card metric-card grid-glow">
+                <h2 class="metric-label">AE Team Quota</h2>
+                <div class="metric-value">$2.2M</div>
+                <p class="metric-description">New business quota for 5 AEs</p>
+            </div>
+            <div class="glass-card metric-card grid-glow">
+                <h2 class="metric-label">Average ACV</h2>
+                <div class="metric-value">$50k</div>
+                <p class="metric-description">Average contract value</p>
+            </div>
+            <div class="glass-card metric-card grid-glow">
+                <h2 class="metric-label">Customer Count</h2>
+                <div class="metric-value">~280</div>
+                <p class="metric-description">Calculated from ARR and ACV</p>
+            </div>
+        </div>
+      </div>
+
+        <!-- Charts and Commentary Section -->
+        <div class="container mx-auto p-6 relative z-10">
+          <h1 class="section-title">Observations & Assumptions</h1>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+            <!-- ARR by Revenue Type Chart -->
+            <div class="glass-card grid-glow">
+                <h3 class="text-2xl font-bold mb-4" style="color: var(--brand-dark);">ARR Breakdown</h3>
+                <div class="chart-container">
+                    <canvas id="arrChart"></canvas>
+                </div>
+                <p class="text-sm mt-4 leading-relaxed" style="color: rgba(27, 27, 27, 0.7);">
+                    Most of the $14M ARR comes from <strong>expansion revenue</strong>. This indicates exceptional 
+                    product-market fit and customer retention, making retention initiatives mission-critical.
+                </p>
+            </div>
+            
+            <!-- AE Performance Chart -->
+            <div class="glass-card grid-glow">
+                <h3 class="text-2xl font-bold mb-4" style="color: var(--brand-dark);">AE New Business Quota</h3>
+                <div class="chart-container">
+                    <canvas id="aeChart"></canvas>
+                </div>
+                <p class="text-sm mt-4 leading-relaxed" style="color: rgba(27, 27, 27, 0.7);">
+                    Force-ranked quota distribution optimizes for top performers. With $50k ACV, 
+                    this model demands a focused <strong>ABM strategy</strong> over broad demand generation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Growth Projection Section -->
+        <div class="mb-12">
+            <div class="glass-card-dark grid-glow">
+                <h3 class="text-2xl font-bold mb-4 text-white">ARR Growth Trajectory (3-6 Years)</h3>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+                <p class="text-sm text-white/70 mt-4 leading-relaxed">
+                    To achieve a successful exit in 3-6 years, scale ARR beyond <strong>$100M</strong>. 
+                    This requires a sophisticated marketing engine to fuel enterprise pipeline velocity.
+                </p>
+            </div>
+        </div>
+        </div>
+
+        <!-- Marketing Recommendations -->
+        <div class="glass-card grid-glow">
+            <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--brand-dark); padding-bottom:20px">Strategic Marketing Recommendations</h3>
+            <p class="text-sm mb-8 text-center max-w-4xl mx-auto leading-relaxed" style="color: rgba(27, 27, 27, 0.7);">
+                High-impact initiatives for a new VP of Marketing to transform the go-to-market engine and accelerate growth.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tier 1 Card -->
+                <div class="glass-card tier-1 recommendation-card">
+                    <div class="tier-badge">Priority</div>
+                    <h4 class="text-xl font-bold mb-3" style="color: var(--brand-dark);">Tier 1: Foundation</h4>
+                    <p class="text-sm leading-relaxed" style="color: rgba(27, 27, 27, 0.8);">
+                        Align marketing with customer experience to address usability friction. 
+                        Amplify "white glove" support narrative to maximize retention and LTV.
+                    </p>
+                </div>
+
+                <!-- Tier 2 Card -->
+                <div class="glass-card tier-2 recommendation-card">
+                    <h4 class="text-xl font-bold mb-3" style="color: var(--brand-dark);">Tier 2: Acceleration</h4>
+                    <p class="text-sm leading-relaxed" style="color: rgba(27, 27, 27, 0.8);">
+                        Supercharge the <strong>ABM strategy</strong>. For high-ACV accounts, 
+                        hyper-personalized approaches deliver superior ROI than volume plays.
+                    </p>
+                </div>
+
+                <!-- Tier 3 Card -->
+                <div class="glass-card tier-3 recommendation-card">
+                    <h4 class="text-xl font-bold mb-3" style="color: var(--brand-dark);">Tier 3: Strategic</h4>
+                    <p class="text-sm leading-relaxed" style="color: rgba(27, 27, 27, 0.8);">
+                        Evolve brand narrative. Transform "Agentic Commerce" concept into 
+                        quantifiable business outcomes that resonate with C-suite decision-makers.
+                    </p>
+                    </div>   
+                </div>
+            </div>
+
+
+
+            <!-- Timeline -->
+        <div class="glass-card grid-glow" style="margin-top:50px">
+            <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--brand-dark);">Timeline</h3>
+                    <div class="responsive-container">
+                        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTCjrv7zgCDmdiqXyqEoLphEZNVF7Z6i3bl2wX3WG1hWUYzbYQ8nYqCUC0ilu5k2HM7bVl4sKUBOGrd/pubhtml?widget=true&amp;headers=false"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Chart.register(ChartDataLabels);
+
+            // Enhanced chart configurations with improved contrast
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#1b1b1b',
+                            font: {
+                                family: 'Poppins',
+                                weight: '600'
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'rgba(27, 27, 27, 0.8)'
+                        },
+                        grid: {
+                            color: 'rgba(27, 27, 27, 0.1)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'rgba(27, 27, 27, 0.8)'
+                        },
+                        grid: {
+                            color: 'rgba(27, 27, 27, 0.1)'
+                        }
+                    }
+                }
+            };
+
+            // Dark chart options for growth chart
+            const darkChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'rgba(255, 255, 255, 0.9)',
+                            font: {
+                                family: 'Poppins',
+                                weight: '600'
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.8)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.8)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            };
+
+            const arrData = {
+                labels: ['Existing Customer Revenue', 'New Business Quota'],
+                datasets: [{
+                    label: 'ARR Contribution',
+                    data: [11.8, 2.2], 
+                    backgroundColor: [
+                        'rgba(238, 50, 36, 0.8)',
+                        'rgba(27, 27, 27, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(238, 50, 36, 1)',
+                        'rgba(27, 27, 27, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            };
+
+            const aeData = {
+                labels: ['AE1', 'AE2', 'AE3', 'AE4', 'AE5'],
+                datasets: [{
+                    label: 'Individual AE Quota ($k)',
+                    data: [510, 500, 440, 400, 350], 
+                    backgroundColor: 'rgba(238, 50, 36, 0.8)',
+                    borderColor: 'rgba(238, 50, 36, 1)',
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            };
+
+            const growthData = {
+                labels: ['Year 0', 'Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6'],
+                datasets: [{
+                    label: 'ARR ($M)',
+                    data: [14, 25.2, 45.36, 81.65, 114.31, 148.6, 180.7], 
+                    borderColor: 'rgba(238, 50, 36, 1)',
+                    backgroundColor: 'rgba(238, 50, 36, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(238, 50, 36, 1)',
+                    pointBorderColor: '#fafafa',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            };
+            
+            const createChart = (ctx, type, data, options) => new Chart(ctx, { type, data, options });
+            const createDarkChart = (ctx, type, data, options) => new Chart(ctx, { type, data, options: { ...darkChartOptions, ...options } });
+
+            // ARR Chart with enhanced styling and white legend
+            const arrChartCtx = document.getElementById('arrChart').getContext('2d');
+            arrChartCtx.canvas.height = 300;
+            createChart(arrChartCtx, 'doughnut', arrData, {
+                ...chartOptions,
+                plugins: {
+                    legend: { 
+                        position: 'bottom',
+                        labels: {
+                            color: '#1b1b1b',
+                            font: {
+                                family: 'Poppins',
+                                weight: '600'
+                            }
+                        }
+                    },
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let sum = 0;
+                            let dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => { sum += data; });
+                            let percentage = (value * 100 / sum).toFixed(0) + "%";
+                            return percentage;
+                        },
+                        color: '#fafafa',
+                        font: { weight: 'bold', family: 'Poppins' }
+                    }
+                }
+            });
+
+            // AE Chart with enhanced styling
+            const aeChartCtx = document.getElementById('aeChart').getContext('2d');
+            aeChartCtx.canvas.height = 300;
+            createChart(aeChartCtx, 'bar', aeData, {
+                ...chartOptions,
+                scales: {
+                    ...chartOptions.scales,
+                    y: {
+                        ...chartOptions.scales.y,
+                        beginAtZero: true,
+                        title: { display: true, text: 'Quota in $k', color: 'rgba(27, 27, 27, 0.8)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        color: '#1b1b1b',
+                        font: { weight: 'bold', family: 'Poppins' },
+                        formatter: (value) => `${value}k`,
+                    }
+                }
+            });
+
+            // Growth Chart with dark styling
+            const growthChartCtx = document.getElementById('growthChart').getContext('2d');
+            growthChartCtx.canvas.height = 300;
+            createDarkChart(growthChartCtx, 'line', growthData, {
+                scales: {
+                    ...darkChartOptions.scales,
+                    y: {
+                        ...darkChartOptions.scales.y,
+                        beginAtZero: false,
+                        title: { display: true, text: 'ARR ($M)', color: 'rgba(255, 255, 255, 0.9)' }
+                    },
+                    x: {
+                        ...darkChartOptions.scales.x,
+                        title: { display: true, text: 'Year', color: 'rgba(255, 255, 255, 0.9)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        color: '#fafafa',
+                        font: { weight: 'bold', family: 'Poppins' },
+                        formatter: (value) => `${value}M`,
+                    }
+                }
+            });
+
+            // Add smooth scroll behavior
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Add loading animation to charts
+            const chartContainers = document.querySelectorAll('.chart-container');
+            chartContainers.forEach(container => {
+                container.classList.add('loading-shimmer');
+                setTimeout(() => {
+                    container.classList.remove('loading-shimmer');
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
