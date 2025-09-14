@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Blueprint for Sendoso by Ron Kagan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #FF6B4A; /* Extracted from Sendoso's website */
+            --brand-accent: #1B0E33;   /* A common dark purple from their branding */
+            --brand-secondary: #F2F2F2;
+            --font-stack: 'Inter', 'Helvetica Neue', sans-serif;
+            --color-success: #4CAF50;
+            --color-warning: #FFC107;
+            --color-danger: #F44336;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4D4D4D;
+        }
+        body {
+            font-family: var(--font-stack);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .hero {
+            background-color: var(--brand-secondary);
+        }
+        .highlight {
+            color: var(--brand-primary);
+        }
+        .btn-primary {
+            background-color: var(--brand-primary);
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #E05A3E;
+        }
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .scorecard-item {
+            border: 1px solid #E5E7EB;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .scorecard-item.bottleneck {
+            border-color: var(--color-danger);
+            box-shadow: 0 0 15px rgba(244, 67, 54, 0.2);
+        }
+        .score-bar {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #E5E7EB;
+        }
+        .score-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+        .loop-step {
+            position: relative;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .loop-step.bottleneck-step {
+            border-color: var(--color-danger);
+            color: var(--color-danger);
+            font-weight: 700;
+        }
+        .loop-arrow {
+            position: absolute;
+            font-size: 2.5rem;
+            color: #ccc;
+        }
+        .experiment-card {
+            border: 1px solid #E5E7EB;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .experiment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .experiment-card h3 {
+            background-color: #f9fafb;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .experiment-card.priority-1 h3 {
+            background-color: var(--brand-accent);
+            color: white;
+        }
+        .chart-bar {
+            transition: height 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <section class="hero py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="fade-in-element">
+                <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight">
+                    A Strategic Growth Blueprint for <span class="highlight">Sendoso</span>
+                </h1>
+                <p class="mt-4 text-lg text-gray-600">Prepared by Ron Kagan</p>
+            </div>
+            <div class="mt-8 fade-in-element" style="animation-delay: 200ms;">
+                <p class="text-xl max-w-3xl mx-auto text-gray-700">
+                    Sendoso's primary growth bottleneck is hypothesized to be a <strong class="highlight">Market-Brand Fit</strong> issue. While the aspiration is to be the indispensable revenue engine for ABM, the market data indicates a perception as a tactical swag vendor, constraining pipeline quality and limiting scalable growth.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+             <iframe src="https://sadly-shop-23256937.figma.site/" width="100%" height="550" frameborder="0"></iframe>
+        </div>
+    </section>
+
+    <section id="diagnostic" class="py-16 bg-gray-50 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12 fade-in-element">
+                <h2 class="text-3xl font-bold text-gray-900">The 5 Fits Diagnostic</h2>
+                <p class="mt-4 text-lg text-gray-600">Identifying the System's Primary Constraint</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 fade-in-element" style="animation-delay: 200ms;">
+                <div class="scorecard-item bg-white">
+                    <h3 class="text-lg font-semibold text-gray-800">Market-Product</h3>
+                    <p class="text-3xl font-bold mt-2" style="color: var(--color-success);">85%</p>
+                    <div class="score-bar mt-4"><div class="score-fill" style="width: 85%; background-color: var(--color-success);"></div></div>
+                    [cite_start]<p class="text-sm text-gray-500 mt-2">Strong user reviews indicate people want the product. [cite: 223, 224, 225, 226, 227]</p>
+                </div>
+                <div class="scorecard-item bottleneck bg-white">
+                    <h3 class="text-lg font-semibold text-gray-800">Market-Brand</h3>
+                    <p class="text-3xl font-bold mt-2" style="color: var(--color-danger);">40%</p>
+                    <div class="score-bar mt-4"><div class="score-fill" style="width: 40%; background-color: var(--color-danger);"></div></div>
+                    [cite_start]<p class="text-sm text-gray-500 mt-2">Messaging resonates as a "swag tool," not a strategic ABM platform. [cite: 477, 1206]</p>
+                </div>
+                <div class="scorecard-item bg-white">
+                    <h3 class="text-lg font-semibold text-gray-800">Market-Channel</h3>
+                    <p class="text-3xl font-bold mt-2" style="color: var(--color-warning);">65%</p>
+                    <div class="score-bar mt-4"><div class="score-fill" style="width: 65%; background-color: var(--color-warning);"></div></div>
+                    [cite_start]<p class="text-sm text-gray-500 mt-2">Organic search is tactical; audience affinities show untapped strategic channels. [cite: 429, 477]</p>
+                </div>
+                <div class="scorecard-item bg-white">
+                    <h3 class="text-lg font-semibold text-gray-800">Market-Model</h3>
+                    <p class="text-3xl font-bold mt-2" style="color: var(--color-success);">80%</p>
+                    <div class="score-bar mt-4"><div class="score-fill" style="width: 80%; background-color: var(--color-success);"></div></div>
+                    [cite_start]<p class="text-sm text-gray-500 mt-2">Pricing page exists, suggesting alignment with market expectations. [cite: 376]</p>
+                </div>
+                 <div class="scorecard-item bg-white">
+                    <h3 class="text-lg font-semibold text-gray-800">Model-Channel</h3>
+                    <p class="text-3xl font-bold mt-2" style="color: var(--color-warning);">70%</p>
+                    <div class="score-bar mt-4"><div class="score-fill" style="width: 70%; background-color: var(--color-warning);"></div></div>
+                    [cite_start]<p class="text-sm text-gray-500 mt-2">High PPC competition on tactical keywords limits sustainable, scalable acquisition. [cite: 454, 460]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tension" class="py-20 bg-white px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12 fade-in-element">
+                <h2 class="text-3xl font-bold text-gray-900">The Core Tension</h2>
+                <p class="mt-4 text-lg text-gray-600">The gap between strategic aspiration and market perception.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-start fade-in-element" style="animation-delay: 200ms;">
+                <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-800">The Aspiration</h3>
+                    <p class="mt-4 text-gray-600 italic">
+                        [cite_start]"Lead Sendoso’s demand generation strategy to fuel <strong class="highlight">predictable and consistent pipeline growth</strong> and new revenue... Design creative, bold, multi-channel programs that combine Sendoso gifting, <strong class="highlight">ABM</strong>... to <strong class="highlight">engage and convert high-value accounts</strong>." [cite: 1536, 1537]
+                    </p>
+                    <p class="text-right mt-2 text-sm text-gray-500">- Director of Demand Generation, Job Description</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-800">The Execution Gap</h3>
+                    <div class="mt-4">
+                        <p class="text-sm text-center text-gray-500 mb-2">Audience Affinity: Where the Market Spends Attention</p>
+                        ```svg
+                        <svg width="100%" height="220" viewBox="0 0 400 220" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+                            <style>
+                                .bar-label { font-family: Inter, sans-serif; font-size: 12px; fill: #333; text-anchor: middle; }
+                                .axis-label { font-family: Inter, sans-serif; font-size: 10px; fill: #666; text-anchor: middle; }
+                                .group-label { font-family: Inter, sans-serif; font-size: 12px; font-weight: bold; fill: var(--text-primary); text-anchor: middle; }
+                            </style>
+                            <line x1="40" y1="50" x2="380" y2="50" stroke="#e5e5e5" stroke-dasharray="2"/>
+                            <line x1="40" y1="100" x2="380" y2="100" stroke="#e5e5e5" stroke-dasharray="2"/>
+                            <line x1="40" y1="150" x2="380" y2="150" stroke="#e5e5e5" stroke-dasharray="2"/>
+                            <text x="35" y="50" class="axis-label" text-anchor="end" dominant-baseline="middle">50%</text>
+                            <text x="35" y="100" class="axis-label" text-anchor="end" dominant-baseline="middle">25%</text>
+                            <text x="35" y="150" class="axis-label" text-anchor="end" dominant-baseline="middle">0%</text>
+                            
+                            <rect x="70" y="50" width="40" height="100" fill="var(--brand-primary)" class="chart-bar" />
+                            <text x="90" y="45" class="bar-label">50%</text>
+                            <text x="90" y="165" class="axis-label">4imprint</text>
+                            
+                            <rect x="120" y="80" width="40" height="70" fill="var(--brand-primary)" class="chart-bar" />
+                            <text x="140" y="75" class="bar-label">35%</text>
+                            <text x="140" y="165" class="axis-label">swag.com</text>
+
+                            <rect x="240" y="132" width="40" height="18" fill="#cccccc" class="chart-bar" />
+                            <text x="260" y="127" class="bar-label">9%</text>
+                            <text x="260" y="165" class="axis-label">Gong</text>
+                            
+                            <rect x="290" y="136" width="40" height="14" fill="#cccccc" class="chart-bar" />
+                            <text x="310" y="131" class="bar-label">7%</text>
+                            <text x="310" y="165" class="axis-label">Salesloft</text>
+                            
+                            <text x="115" y="185" class="group-label">Transactional Vendors</text>
+                            <text x="285" y="185" class="group-label">Strategic Platforms</text>
+                            <line x1="70" y1="195" x2="160" y2="195" stroke="var(--brand-primary)" stroke-width="2" />
+                            <line x1="240" y1="195" x2="330" y2="195" stroke="#cccccc" stroke-width="2" />
+
+                            <line x1="40" y1="150" x2="380" y2="150" stroke="#333"/>
+                        </svg>
+                        ```
+                    </div>
+                     [cite_start]<p class="text-right mt-2 text-sm text-gray-500">- Audience Data (SparkToro) [cite: 477]</p>
+                </div>
+            </div>
+            <div class="mt-8 text-center fade-in-element" style="animation-delay: 400ms;">
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+                    <strong>Synthesis:</strong> The audience affinity data above clearly visualizes the gap. The market shows significantly higher affinity for tactical swag vendors than for strategic GTM platforms. [cite_start]This perception attracts tactical buyers, fuels competition on low-intent keywords (e.g., "swag fulfillment"), and starves the growth loop of the high-value accounts needed for scalable revenue. [cite: 426, 477]
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="growth-loop" class="py-16 bg-gray-50 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 fade-in-element">
+                <h2 class="text-3xl font-bold text-gray-900">Sendoso's Growth Loop</h2>
+                <p class="mt-4 text-lg text-gray-600">A system constrained by brand perception.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8 fade-in-element" style="animation-delay: 200ms;">
+                <div class="w-full flex justify-center">
+                    ```svg
+                    <svg width="100%" height="400" viewBox="0 0 800 400" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#888" />
+                            </marker>
+                        </defs>
+                        <g transform="translate(100, 200)">
+                            <circle cx="0" cy="0" r="80" fill="#fff" stroke="#ccc" stroke-width="2"/>
+                            <text x="0" y="0" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" dominant-baseline="middle">
+                                <tspan x="0" dy="-1.2em">Revenue Teams</tspan>
+                                <tspan x="0" dy="1.2em">Seek ABM Solutions</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(400, 80)">
+                            <circle cx="0" cy="0" r="80" fill="#fff" stroke="var(--color-danger)" stroke-width="3"/>
+                            <text x="0" y="0" font-family="Inter, sans-serif" font-size="14" font-weight="bold" fill="var(--color-danger)" text-anchor="middle" dominant-baseline="middle">
+                                <tspan x="0" dy="-1.2em">Search for Tactical</tspan>
+                                <tspan x="0" dy="1.2em">"Gifting Tools"</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(700, 200)">
+                            <circle cx="0" cy="0" r="80" fill="#fff" stroke="#ccc" stroke-width="2"/>
+                            <text x="0" y="0" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" dominant-baseline="middle">
+                                <tspan x="0" dy="-1.2em">Sendoso Delivers</tspan>
+                                <tspan x="0" dy="1.2em">Tactical Win</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(400, 320)">
+                             <circle cx="0" cy="0" r="80" fill="#fff" stroke="#ccc" stroke-width="2"/>
+                            <text x="0" y="0" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" dominant-baseline="middle">
+                                <tspan x="0" dy="-1.2em">Reinforces "Tool"</tspan>
+                                <tspan x="0" dy="1.2em">Perception</tspan>
+                            </text>
+                        </g>
+                        <path d="M 175 200 A 150 150 0 0 1 325 100" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 475 100 A 150 150 0 0 1 625 200" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 625 280 A 150 150 0 0 1 475 300" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 325 300 A 150 150 0 0 1 175 280" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        
+                        <text x="400" y="25" font-family="Inter, sans-serif" font-size="12" fill="var(--color-danger)" text-anchor="middle">
+                            BOTTLENECK: Brand-Fit mismatch attracts lower-intent users, starving the loop.
+                        </text>
+                    </svg>
+                    ```
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiments" class="py-20 bg-white px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 fade-in-element">
+                <h2 class="text-3xl font-bold text-gray-900">Prioritized Experiments</h2>
+                <p class="mt-4 text-lg text-gray-600">A hypothesis-driven plan to address the bottleneck and unlock growth.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in-element" style="animation-delay: 200ms;">
+                
+                <div class="experiment-card priority-1">
+                    <h3>Priority 1: Strategic Content Shift</h3>
+                    <div class="card-content">
+                        <p class="font-semibold text-gray-700">Hypothesis:</p>
+                        <p class="text-gray-600 mb-4">By shifting from tactical, item-focused content to strategic, revenue-focused "ABM Pipeline Playbooks," we will attract a higher-intent audience searching for solutions, not just products.</p>
+                        <p class="font-semibold text-gray-700">Test:</p>
+                        <p class="text-gray-600 mb-4">Launch a new pillar content piece and associated webinar titled "The ABM Pipeline Acceleration Playbook," promoted via LinkedIn and targeted content syndication, measuring MQL-to-SQL conversion rate against existing content benchmarks.</p>
+                        <p class="font-semibold text-gray-700">Bottleneck Addressed:</p>
+                        <p class="font-bold highlight">Market-Brand Fit</p>
+                    </div>
+                </div>
+
+                <div class="experiment-card">
+                    <h3>Priority 2: Website Messaging Refinement</h3>
+                    <div class="card-content">
+                        <p class="font-semibold text-gray-700">Hypothesis:</p>
+                        <p class="text-gray-600 mb-4">Reframing the homepage value proposition from "The Sending Platform" to "The Revenue Engine for ABM" will increase demo requests from visitors with strategic, high-value titles.</p>
+                        <p class="font-semibold text-gray-700">Test:</p>
+                        <p class="text-gray-600 mb-4">A/B test the current homepage headline and sub-headline against new, ROI-focused messaging. Analyze the title and company size of demo requests from each variant over a 30-day period.</p>
+                        <p class="font-semibold text-gray-700">Bottleneck Addressed:</p>
+                        <p class="font-bold highlight">Market-Brand Fit</p>
+                    </div>
+                </div>
+
+                <div class="experiment-card">
+                    <h3>Priority 3: Channel & Influence Expansion</h3>
+                    <div class="card-content">
+                        <p class="font-semibold text-gray-700">Hypothesis:</p>
+                        <p class="text-gray-600 mb-4">By building influence on channels where our target audience already pays attention (e.g., strategic ABM communities on LinkedIn), we can generate higher-quality demand than by competing on expensive, tactical paid search terms.</p>
+                        <p class="font-semibold text-gray-700">Test:</p>
+                        <p class="text-gray-600 mb-4">Launch a thought-leadership video series on LinkedIn featuring interviews with ABM leaders. Track engagement rates and direct traffic to a dedicated landing page, comparing the cost-per-qualified-lead to existing paid search campaigns.</p>
+                        <p class="font-semibold text-gray-700">Bottleneck Addressed:</p>
+                        <p class="font-bold highlight">Market-Channel Fit</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white">
+        <section id="experience" class="bg-[#1b0e33] text-white">
+            <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="fade-in-element">
+                    <div class="text-center mb-12">
+                        <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="inline-block">
+                            <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-[#5FDBD3] transition">
+                        </a>
+                        <h2 class="text-3xl font-bold text-white">Ron Kagan</h2>
+                        <p class="text-lg text-[#5FDBD3]">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
+                        <p class="mt-2">
+                            <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-[#5FDBD3] font-semibold hover:text-white">LinkedIn</a> |
+                            <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-[#5FDBD3] font-semibold hover:text-white">Schedule a Meeting</a>
+                        </p>
+                    </div>
+
+                    <div class="border-t border-gray-800 pt-8">
+                        <h3 class="text-2xl font-bold text-white mb-4">Summary</h3>
+                        <p class="text-gray-300">3x exits. Drives 25%+ YoY revenue growth as a sales-aligned demand generator with scalable multichannel programs (email, paid media, webinars, events, ABM, and content syndication) powering B2B SaaS in regulated industries. Expert in campaign measurement, reporting, and engineering GTM tech stacks. [cite_start]Excels in strategic planning, team leadership, and detailed execution. [cite: 1328, 1329]</p>
+                    </div>
+
+                    <div class="border-t border-gray-800 pt-8 mt-8">
+                        <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
+                        <div class="space-y-8">
+                            
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Global Head of Digital Demand Generation & Marketing Operations</h4>
+                                <p class="text-md text-[#5FDBD3] font-semibold">Feedzai | Feb 2023-Aug 2025</p>
+                                <ul class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                                    [cite_start]<li>Rebuilt the global demand function, architecting an omni-channel ABM strategy that drove a 27% YoY increase in revenue pipeline. [cite: 1331]</li>
+                                    [cite_start]<li>Directed a global brand and digital transformation, aligning executive, product, and sales stakeholders on a unified GTM strategy. [cite: 1332]</li>
+                                    [cite_start]<li>Reduced SEM spend by 22% while increasing conversions by bringing paid media in-house and optimizing for high-intent keywords. [cite: 1333]</li>
+                                    [cite_start]<li>Improved field marketing ROI by 100% YoY through optimized targeting, rigorous attribution, and integrated campaign strategies. [cite: 1334]</li>
+                                </ul>
+                            </div>
+
+                             <div>
+                                <h4 class="text-xl font-bold text-white">Marketing Director</h4>
+                                <p class="text-md text-[#5FDBD3] font-semibold">Major League Hacking (MLH) | Mar 2022-Nov 2022</p>
+                                <ul class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                                    [cite_start]<li>Lifted sales-accepted pipeline by 300% through high-velocity, multi-channel ABM campaigns targeting Fortune 200 leaders. [cite: 1337, 1338]</li>
+                                    [cite_start]<li>Established a Global Center of Excellence, authoring an eBook on the open-source ecosystem that became a primary lead magnet. [cite: 1339]</li>
+                                    [cite_start]<li>Executed 7 simultaneous omni-channel campaigns, resulting in qualified opportunities with 9 Fortune 200 companies. [cite: 1338]</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Director, Growth Marketing and Operations</h4>
+                                <p class="text-md text-[#5FDBD3] font-semibold">Within3 | Dec 2020-Mar 2022</p>
+                                <ul class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                                    [cite_start]<li>Built and led the global SDR and marketing operations teams, driving 25% closed/won growth via ABM campaigns. [cite: 1343, 1344]</li>
+                                    [cite_start]<li>Architected the global MarTech stack (Salesforce, HubSpot, Gong, 6sense) to establish a single source of truth for GTM operations. [cite: 1345]</li>
+                                    [cite_start]<li>Partnered with global sales leadership to optimize GTM operations across NA, EMEA, and APAC. [cite: 1346]</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-800 pt-8 mt-8">
+                        <h3 class="text-2xl font-bold text-white mb-4">Education</h3>
+                         <div>
+                            <h4 class="text-xl font-bold text-white">Florida State University</h4>
+                            [cite_start]<p class="text-md text-gray-300">Master, Acting (Full-merit scholar) [cite: 1369]</p>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-xl font-bold text-white">Hunter College (CUNY Macaulay Honors)</h4>
+                            [cite_start]<p class="text-md text-gray-300">Bachelor, Theatre and Interdisciplinary Honors Studies (Summa Cum Laude, Full-merit scholar) [cite: 1369]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calendar" class="bg-white">
+            <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="text-center fade-in-element">
+                    <h2 class="text-3xl font-bold text-[#0D0D0D]">Schedule a Meeting</h2>
+                    <p class="mt-4 text-xl text-gray-600">Let's discuss how this strategic blueprint can drive growth at Sendoso.</p>
+                </div>
+                <div class="mt-12 fade-in-element" style="transition-delay: 200ms;">
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in-element');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = entry.target.style.animationDelay || '0s';
+                        entry.target.classList.add('fade-in-start');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
