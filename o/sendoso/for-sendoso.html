@@ -27,52 +27,52 @@
     html {
       scroll-behavior: smooth;
     }
-    
+
     input[type="range"] {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 100%;
-        height: 8px;
-        background: #e2e8f0;
-        border-radius: 5px;
-        outline: none;
-        opacity: 0.7;
-        transition: opacity .2s;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      outline: none;
+      opacity: 0.7;
+      transition: opacity .2s;
     }
 
     input[type="range"]:hover {
-        opacity: 1;
+      opacity: 1;
     }
 
     input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        background: var(--brand-primary);
-        cursor: pointer;
-        border-radius: 50%;
-        border: 2px solid var(--card-bg);
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--brand-primary);
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid var(--card-bg);
     }
 
     input[type="range"]::-moz-range-thumb {
-        width: 20px;
-        height: 20px;
-        background: var(--brand-primary);
-        cursor: pointer;
-        border-radius: 50%;
-        border: 2px solid var(--card-bg);
+      width: 20px;
+      height: 20px;
+      background: var(--brand-primary);
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid var(--card-bg);
     }
 
     .custom-select {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234D4D4D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 0.75rem center;
-        background-size: 1.2em;
-        padding-right: 2.5rem;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234D4D4D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1.2em;
+      padding-right: 2.5rem;
     }
 
     body {
@@ -140,10 +140,20 @@
     }
 
     .experiment-card {
+      display: block;
       border: 1px solid #E5E7EB;
       border-radius: 0.75rem;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 583px;
+      background-color: #f9fafb;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #E5E7EB;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      unicode-bidi: isolate;
     }
 
     .card-content {
@@ -160,11 +170,12 @@
       padding: 1rem 1.5rem;
       border-bottom: 1px solid #E5E7EB;
       display: block;
+      max-width: 583px;
       margin-block-start: 1em;
       margin-block-end: 1em;
       margin-inline-start: 0px;
       margin-inline-end: 0px;
-      unicode-bidi: isolate;a
+      unicode-bidi: isolate;
     }
 
     /*
@@ -173,11 +184,12 @@
       color: white;
     }
     */
-
     .center-me {
-      width: 50%; /* Give the element a width */
-      margin: 0 auto; /* Set left and right margins to auto */
-}
+      width: 50%;
+      /* Give the element a width */
+      margin: 0 auto;
+      /* Set left and right margins to auto */
+    }
 
     .chart-bar {
       transition: height 0.5s ease-out;
@@ -223,17 +235,17 @@
     </div>
   </nav>
 
-  <section id="home" class="hero pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <div class="fade-in-element">
-        <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight">
-          A Strategic Growth Blueprint for <span class="highlight">Sendoso</span>
+  <section id="home" class="hero pt-32 pb-0 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-4xl mx-auto text-center bg-white">
+      <div class="fade-in-element bg-white">
+        <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight bg-white">
+          A Strategic Growth Blueprint for <span class="highlight bg-white">Sendoso</span>
         </h1>
-        <p class="mt-4 text-lg text-gray-600">Prepared by Ron Kagan</p>
+        <p class="mt-4 text-lg text-gray-600 bg-white">Prepared by Ron Kagan</p>
       </div>
-      <div class="mt-8 fade-in-element" style="animation-delay: 200ms;">
-        <p class="text-xl max-w-3xl mx-auto text-gray-700">
-          Sendoso's primary growth bottleneck is a <strong class="highlight">Market-Brand Fit</strong> issue.
+      <div class="mt-8 fade-in-element bg-white" style="animation-delay: 200ms;">
+        <p class="text-xl max-w-3xl mx-auto text-gray-700 bg-white">
+          Sendoso's primary growth bottleneck is a <strong class="highlight bg-white">Market-Brand Fit</strong> issue.
           <br>
           <br>
           While Kris Rudeegraap's aspiration is to be "as strategic and measurable as digital", the market data show a perception of Sendoso as a tactical swag vendor along the lines of 4imprint or Swag.com.
@@ -257,7 +269,7 @@
         <h2 class="text-3xl font-bold text-gray-900">The 5 Fits Diagnostic</h2>
         <p class="mt-4 text-lg text-gray-600">Identifying Growth System Constraints</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-6 fade-in-element" style="animation-delay: 200ms;">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-6 fade-in-element bg-white" style="animation-delay: 200ms;">
         <div class="scorecard-item bg-white">
           <h3 class="text-lg font-semibold text-gray-800">Market-Product</h3>
           <p class="text-3xl font-bold mt-2" style="color: var(--color-success);">85%</p>
@@ -309,7 +321,7 @@
         <h3 class="text-2xl font-bold text-gray-700">Be a <strong class="highlight">strategic partner</strong>, not just a tool or plugin.</h3>
         <p class="mt-4 text-lg text-gray-600">The gap between strategic aspiration and market perception.</p>
       </div>
-      <div class="grid md:grid-cols-2 gap-8 items-start fade-in-element" style="animation-delay: 200ms;">
+      <div class="grid md:grid-cols-2 gap-8 items-start fade-in-element bg-white" style="animation-delay: 200ms;">
         <div class="bg-white/70 p-6 rounded-lg border border-gray-200">
           <h3 class="text-xl font-semibold text-gray-800">The Aspiration</h3>
           <p class="mt-4 text-gray-600 italic">
@@ -460,7 +472,7 @@
         <h2 class="text-3xl font-bold text-gray-900">Prioritized Experiments to Unlock <strong class="highlight">Transformational</strong> Enterprise Growth</h2>
       </div>
       <div class="grid grid-cols-1 gap-8 fade-in-element" style="animation-delay: 200ms;">
-
+<div class="center-me">
         <div class="experiment-card bg-white">
           <h3 class="font-bold">1: Focus Content on our <strong class="highlight">buyer's buyer</strong> to gain enterprise credibility</h3>
           <div class="card-content">
@@ -500,7 +512,7 @@
             <p class="font-semibold text-gray-700">Hypothesis:</p>
             <p class="text-gray-600 mb-4">What buyers visualize, they are much more likely to buy. A guided growth system (GGS) let's them do that.</p>
             <p class="font-semibold text-gray-700">Test: I took a crack at building one below!</p>
-            <p class="text-gray-600 mb-4"></p>
+            <p class="text-gray-600 mb-4 bg-white"></p>
 
           </div>
         </div>
@@ -510,48 +522,48 @@
 
   <div class="min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-7xl mx-auto">
-      
-      <header class="text-center mb-8 md:mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-[--brand-accent]">Sendoso Guided Growth System</h1>
-        <p class="text-lg text-[--text-secondary] mt-2 max-w-3xl mx-auto">Discover how AI-powered personalization can amplify your campaign ROI. Adjust your baseline metrics and see the Sendoso difference.</p>
+
+      <header class="text-center mb-8 md:mb-12 bg-white">
+        <h1 class="text-4xl md:text-5xl font-bold text  bg-white">Sendoso Guided Growth System</h1>
+        <p class="text-lg text-[--text-secondary] mt-2 max-w-3xl mx-auto bg-white">Discover how AI-powered personalization can amplify your campaign ROI. Adjust your baseline metrics and see the Sendoso difference.</p>
       </header>
 
       <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
+
         <!-- Left Column: Inputs -->
         <div class="bg-[--card-bg] p-6 md:p-8 rounded-2xl shadow-lg space-y-8">
-          
+
           <!-- Personalization Levers -->
           <div>
-            <h2 class="text-2xl font-semibold text-[--brand-accent] border-b pb-2 mb-4">Personalization Levers</h2>
+            <h2 class="text-2xl font-semibold text border-b pb-2 mb-4 bg-white">Personalization Levers</h2>
             <p class="text-sm text-[--text-secondary] mb-6">Leverage Sendoso's data from millions of sends to find the perfect gift. Select a persona and gift to see the 'Resonance Score' - a measure of how likely the gift is to engage the recipient.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="recipientPersona" class="text-sm font-medium text-[--text-secondary]">Recipient Persona</label>
-                    <select id="recipientPersona" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[--brand-primary] focus:border-[--brand-primary] sm:text-sm rounded-md custom-select">
-                        <option>C-Suite Executive</option>
-                        <option>Sales Manager</option>
-                        <option>Marketing Ops</option>
-                        <option>Engineer</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="giftCategory" class="text-sm font-medium text-[--text-secondary]">Gift Category</label>
-                    <select id="giftCategory" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[--brand-primary] focus:border-[--brand-primary] sm:text-sm rounded-md custom-select">
-                        <option>Coffee eGift</option>
-                        <option>High-Tech Gadget</option>
-                        <option>Charity Donation</option>
-                        <option>Gourmet Food Basket</option>
-                    </select>
-                </div>
+              <div>
+                <label for="recipientPersona" class="text-sm font-medium text-[--text-secondary]">Recipient Persona</label>
+                <select id="recipientPersona" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[--brand-primary] focus:border-[--brand-primary] sm:text-sm rounded-md custom-select">
+                  <option>C-Suite Executive</option>
+                  <option>Sales Manager</option>
+                  <option>Marketing Ops</option>
+                  <option>Engineer</option>
+                </select>
+              </div>
+              <div>
+                <label for="giftCategory" class="text-sm font-medium text-[--text-secondary]">Gift Category</label>
+                <select id="giftCategory" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[--brand-primary] focus:border-[--brand-primary] sm:text-sm rounded-md custom-select">
+                  <option>Coffee eGift</option>
+                  <option>High-Tech Gadget</option>
+                  <option>Charity Donation</option>
+                  <option>Gourmet Food Basket</option>
+                </select>
+              </div>
             </div>
             <div id="resonanceScoreDisplay" class="mt-6 p-4 rounded-lg bg-[--brand-secondary] flex items-center justify-center text-center">
-                <span class="font-semibold text-[--brand-accent]">Resonance Score: <span id="resonanceValue" class="text-[--brand-primary]">Excellent Match</span></span>
+              <span class="font-semibold text-[--brand-accent]">Resonance Score: <span id="resonanceValue" class="text-[--brand-primary]">Excellent Match</span></span>
             </div>
           </div>
-          
+
           <!-- Funnel & Cost Inputs -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8  bg-white">
             <div class="space-y-6">
               <h2 class="text-2xl font-semibold text-[--brand-accent] border-b pb-2">Funnel Inputs</h2>
               <div>
@@ -591,59 +603,65 @@
 
         <!-- Right Column: Results -->
         <div class="space-y-8">
-            <div class="bg-gray-200 p-6 md:p-8 rounded-2xl shadow-inner">
-                <h3 class="text-2xl font-semibold text-center text-[--text-secondary]">Typical Direct Mail Program</h3>
-                <div class="grid grid-cols-2 gap-4 mt-6">
-                    <div class="text-center">
-                        <p class="text-sm text-gray-600">Expected ROI</p>
-                        <p id="typicalRoiResult" class="text-4xl font-bold text-[--text-primary]">2.38x</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-sm text-gray-600">Est. Revenue</p>
-                        <p id="typicalRevenueResult" class="text-4xl font-bold text-[--text-primary]">$17,000</p>
-                    </div>
-                </div>
+          <div class="bg-gray-200 p-6 md:p-8 rounded-2xl shadow-inner">
+            <h3 class="text-2xl font-semibold text-center text-[--text-secondary]">Typical Direct Mail Program</h3>
+            <div class="grid grid-cols-2 gap-4 mt-6">
+              <div class="text-center">
+                <p class="text-sm text-gray-600">Expected ROI</p>
+                <p id="typicalRoiResult" class="text-4xl font-bold text-[--text-primary]">2.38x</p>
+              </div>
+              <div class="text-center">
+                <p class="text-sm text-gray-600">Est. Revenue</p>
+                <p id="typicalRevenueResult" class="text-4xl font-bold text-[--text-primary]">$17,000</p>
+              </div>
             </div>
-            <div class="bg-[--brand-accent] text-white p-6 md:p-8 rounded-2xl shadow-lg">
-                <h3 class="text-2xl font-semibold text-center text-white/90 flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
-                    Sendoso AI-Powered Growth
-                </h3>
-                 <div class="grid grid-cols-2 gap-4 mt-6">
-                    <div class="text-center">
-                        <p class="text-sm text-gray-300">AI-Powered ROI</p>
-                        <p id="aiRoiResult" class="text-5xl font-bold text-[--brand-primary]">4.03x</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-sm text-gray-300">AI-Powered Revenue</p>
-                        <p id="aiRevenueResult" class="text-5xl font-bold text-[--brand-primary]">$32,000</p>
-                    </div>
-                </div>
-                 <div class="mt-8 pt-6 border-t border-white/20 grid grid-cols-3 gap-4 text-center">
-                     <div>
-                         <p class="text-sm text-gray-300">Pipeline</p>
-                         <p id="aiPipelineResult" class="text-xl font-bold">$188,235</p>
-                     </div>
-                     <div>
-                         <p class="text-sm text-gray-300">Total Cost</p>
-                         <p id="aiCostResult" class="text-xl font-bold">$7,950</p>
-                     </div>
-                     <div>
-                         <p class="text-sm text-gray-300">Leads</p>
-                         <p id="aiLeadsResult" class="text-xl font-bold">9</p>
-                     </div>
-                 </div>
+          </div>
+          <div class="bg-[--brand-accent] text-white p-6 md:p-8 rounded-2xl shadow-lg">
+            <h3 class="text-2xl font-semibold text-center text-white/90 flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                <path d="M5 3v4" />
+                <path d="M19 17v4" />
+                <path d="M3 5h4" />
+                <path d="M17 19h4" />
+              </svg>
+              Sendoso AI-Powered Growth
+            </h3>
+            <div class="grid grid-cols-2 gap-4 mt-6">
+              <div class="text-center">
+                <p class="text-sm text-gray-300">AI-Powered ROI</p>
+                <p id="aiRoiResult" class="text-5xl font-bold text-[--brand-primary]">4.03x</p>
+              </div>
+              <div class="text-center">
+                <p class="text-sm text-gray-300">AI-Powered Revenue</p>
+                <p id="aiRevenueResult" class="text-5xl font-bold text-[--brand-primary]">$32,000</p>
+              </div>
             </div>
-             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-md text-center">
-                <p class="font-bold text-lg">Sendoso AI delivers a <span id="roiUplift" class="text-2xl">69%</span> increase in ROI!</p>
+            <div class="mt-8 pt-6 border-t border-white/20 grid grid-cols-3 gap-4 text-center">
+              <div>
+                <p class="text-sm text-gray-300">Pipeline</p>
+                <p id="aiPipelineResult" class="text-xl font-bold">$188,235</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-300">Total Cost</p>
+                <p id="aiCostResult" class="text-xl font-bold">$7,950</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-300">Leads</p>
+                <p id="aiLeadsResult" class="text-xl font-bold">9</p>
+              </div>
             </div>
-             <div class="bg-white mt-8 p-6 rounded-2xl shadow-lg text-center">
-                <h3 class="text-xl font-semibold text-[--brand-accent]">Ready to Grow?</h3>
-                <p class="text-[--text-secondary] mt-2 mb-4">Let our experts help you build the perfect gifting campaign.</p>
-                <a id="emailGiftGeniusBtn" href="#" class="inline-block bg-[--brand-primary] text-white font-bold py-3 px-8 rounded-lg text-lg hover:opacity-90 transition-opacity">
-                    Contact a Gift Genius
-                </a>
-            </div>
+          </div>
+          <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-md text-center">
+            <p class="font-bold text-lg">Sendoso AI delivers a <span id="roiUplift" class="text-2xl">69%</span> increase in ROI!</p>
+          </div>
+          <div class="bg-white mt-8 p-6 rounded-2xl shadow-lg text-center">
+            <h3 class="text-xl font-semibold text-[--brand-accent]">Ready to Grow?</h3>
+            <p class="text-[--text-secondary] mt-2 mb-4">Let our experts help you build the perfect gifting campaign.</p>
+            <a id="emailGiftGeniusBtn" href="#" class="inline-block bg-[--brand-primary] text-white font-bold py-3 px-8 rounded-lg text-lg hover:opacity-90 transition-opacity">
+              Contact a Gift Genius
+            </a>
+          </div>
         </div>
       </main>
     </div>
@@ -686,21 +704,43 @@
       };
       const upliftDisplay = document.getElementById('roiUplift');
       const emailBtn = document.getElementById('emailGiftGeniusBtn');
-
       // --- DATA & CONFIG ---
       const resonanceMatrix = {
-          "C-Suite Executive": { "Coffee eGift": 0.8, "High-Tech Gadget": 1.2, "Charity Donation": 1.5, "Gourmet Food Basket": 1.3 },
-          "Sales Manager": { "Coffee eGift": 1.4, "High-Tech Gadget": 1.3, "Charity Donation": 0.9, "Gourmet Food Basket": 1.1 },
-          "Marketing Ops": { "Coffee eGift": 1.3, "High-Tech Gadget": 1.4, "Charity Donation": 1.0, "Gourmet Food Basket": 1.2 },
-          "Engineer": { "Coffee eGift": 1.2, "High-Tech Gadget": 1.5, "Charity Donation": 0.8, "Gourmet Food Basket": 0.9 },
+        "C-Suite Executive": {
+          "Coffee eGift": 0.8,
+          "High-Tech Gadget": 1.2,
+          "Charity Donation": 1.5,
+          "Gourmet Food Basket": 1.3
+        },
+        "Sales Manager": {
+          "Coffee eGift": 1.4,
+          "High-Tech Gadget": 1.3,
+          "Charity Donation": 0.9,
+          "Gourmet Food Basket": 1.1
+        },
+        "Marketing Ops": {
+          "Coffee eGift": 1.3,
+          "High-Tech Gadget": 1.4,
+          "Charity Donation": 1.0,
+          "Gourmet Food Basket": 1.2
+        },
+        "Engineer": {
+          "Coffee eGift": 1.2,
+          "High-Tech Gadget": 1.5,
+          "Charity Donation": 0.8,
+          "Gourmet Food Basket": 0.9
+        },
       };
       const AI_UPLIFT_FACTOR = 1.75; // 75% general uplift from better targeting
       const AI_GIFT_COST_FACTOR = 1; // AI-suggested gifts are 0% more premium
-
       // --- FORMATTING HELPERS ---
-      const formatCurrency = (value) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+      const formatCurrency = (value) => new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(value);
       const formatNumber = (value) => new Intl.NumberFormat('en-US').format(value);
-
       // --- CALCULATION LOGIC ---
       const calculateAll = () => {
         // 1. Get Base Values
@@ -713,7 +753,6 @@
           costPerSend: parseFloat(inputs.costPerSend.value),
           costPerGift: parseFloat(inputs.costPerGift.value),
         };
-
         // 2. Calculate Typical Scenario
         const typical = {};
         typical.leads = baseValues.numSends * baseValues.conversionRate;
@@ -722,35 +761,29 @@
         typical.revenue = typical.pipeline * baseValues.winRate;
         typical.cost = (baseValues.numSends * baseValues.costPerSend) + (typical.redemptions * baseValues.costPerGift);
         typical.roi = typical.cost > 0 ? typical.revenue / typical.cost : 0;
-
         // 3. Calculate AI Scenario
         const resonanceScore = resonanceMatrix[inputs.recipientPersona.value][inputs.giftCategory.value];
         const ai = {};
         const aiCtr = baseValues.ctr * resonanceScore * AI_UPLIFT_FACTOR;
         const aiConversionRate = baseValues.conversionRate * resonanceScore * AI_UPLIFT_FACTOR;
         const aiCostPerGift = baseValues.costPerGift * AI_GIFT_COST_FACTOR;
-        
         ai.leads = baseValues.numSends * aiConversionRate;
         ai.redemptions = baseValues.numSends * aiCtr;
         ai.pipeline = ai.leads * baseValues.aov;
         ai.revenue = ai.pipeline * baseValues.winRate;
         ai.cost = (baseValues.numSends * baseValues.costPerSend) + (ai.redemptions * aiCostPerGift);
         ai.roi = ai.cost > 0 ? ai.revenue / ai.cost : 0;
-        
         const roiUplift = typical.roi > 0 ? ((ai.roi - typical.roi) / typical.roi) * 100 : 0;
-
         // 4. Update UI & Mailto Link
         updateUI(baseValues, typical, ai, roiUplift, resonanceScore);
         updateMailtoLink(baseValues, ai);
       };
-      
       const getResonanceLabel = (score) => {
-          if (score >= 1.4) return "Excellent Match";
-          if (score >= 1.2) return "Great Match";
-          if (score >= 1.0) return "Good Match";
-          return "Standard Match";
+        if (score >= 1.4) return "Excellent Match";
+        if (score >= 1.2) return "Great Match";
+        if (score >= 1.0) return "Good Match";
+        return "Standard Match";
       }
-      
       const updateMailtoLink = (base, ai) => {
         const subject = "My Gift Sending Plan";
         const body = `Hi Sendoso Gift Genius!
@@ -779,7 +812,6 @@ Looking forward to connecting!
 `;
         emailBtn.href = `mailto:sales@sendoso.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       };
-
       // --- UI UPDATE LOGIC ---
       const updateUI = (base, typical, ai, uplift, resonance) => {
         // Input values
@@ -791,27 +823,22 @@ Looking forward to connecting!
         valueDisplays.costPerSend.textContent = formatCurrency(base.costPerSend);
         valueDisplays.costPerGift.textContent = formatCurrency(base.costPerGift);
         valueDisplays.resonance.textContent = getResonanceLabel(resonance);
-
         // Typical results
         typicalResults.roi.textContent = `${typical.roi.toFixed(2)}x`;
         typicalResults.revenue.textContent = formatCurrency(typical.revenue);
-
         // AI results
         aiResults.roi.textContent = `${ai.roi.toFixed(2)}x`;
         aiResults.revenue.textContent = formatCurrency(ai.revenue);
         aiResults.pipeline.textContent = formatCurrency(ai.pipeline);
         aiResults.cost.textContent = formatCurrency(ai.cost);
         aiResults.leads.textContent = Math.round(ai.leads);
-
         // Uplift
         upliftDisplay.textContent = `${Math.round(uplift)}%`;
       };
-
       // --- EVENT LISTENERS ---
       Object.values(inputs).forEach(input => {
         input.addEventListener('input', calculateAll);
       });
-
       // --- INITIAL CALCULATION ---
       calculateAll();
     });
@@ -853,112 +880,112 @@ Looking forward to connecting!
               </div>
 
               <div class="border-t border-white-800 pt-8 mt-8">
-              <div class="max-w-5xl mx-auto">
-                <div class="text-center mb-12 fade-in-element">
-                  <h3 class="text-3xl font-bold text-white-900">Demand Gen Copywriting</h3>
-                  <h3 class="text-2xl font-bold text-white-700">Ron writes extraordinarily high-performing demand copy.</h3>
-                  <p class="mt-4 text-lg text-white-600">Here is a cold email to 378 people that <strong class="highlight">set 53 meetings</strong>.</p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 items-start fade-in-element" style="animation-delay: 200ms;">
-                  <div class="bg-white/70 p-6 rounded-lg border border-gray-200">
-                    <div class="center-me">
+                <div class="max-w-5xl mx-auto">
+                  <div class="text-center mb-12 fade-in-element">
+                    <h3 class="text-3xl font-bold text-white-900">Demand Gen Copywriting</h3>
+                    <h3 class="text-2xl font-bold text-white-700">Ron writes extraordinarily high-performing demand copy.</h3>
+                    <p class="mt-4 text-lg text-white-600">Here is a cold email to 378 people that <strong class="highlight">set 53 meetings</strong>.</p>
+                  </div>
+                  <div class="grid md:grid-cols-2 gap-8 items-start fade-in-element bg-white" style="animation-delay: 200ms;">
+                    <div class="bg-white/70 p-6 rounded-lg border border-gray-200">
+                      <div class="center-me">
                         <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/107834/414678_663618.png">
+                      </div>
                     </div>
-                  </div>
-                  <div class="bg-white/70 p-6 rounded-lg border border-gray-200">
-                    <h3 class="text-xl font-semibold text-gray-800">Why did the decision maker give Ron his cellphone number?</h3>
-                    <div class="mt-4">
-                      <p style="padding-bottom:10px; color: black;" class="mb-2">This results from killer demand gen + sensational data hygiene.<br><br>I have a track record of making this happen.<br><br>Repeatedly.<br><br>At scale.</p>
+                    <div class="bg-white/70 p-6 rounded-lg border border-gray-200">
+                      <h3 class="text-xl font-semibold text-gray-800">Why did the decision maker give Ron his cellphone number?</h3>
+                      <div class="mt-4">
+                        <p style="padding-bottom:10px; color: black;" class="mb-2">This results from killer demand gen + sensational data hygiene.<br><br>I have a track record of making this happen.<br><br>Repeatedly.<br><br>At scale.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
                 <img style="padding:20px" src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/107834/725780_74854.png">
 
-            <div class="border-t border-white-800 pt-8 mt-8">
+                <div class="border-t border-white-800 pt-8 mt-8">
 
-                <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
-                <div class="space-y-8">
-                  <h4 class="text-xl font-bold text-white">Global Head of Digital Demand Generation & Marketing Operations</h4>
-                  <p class="text-md text-[#FF6B4A] font-semibold">Feedzai | Feb 2023-Aug 2025</p>
-                  <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
-                    <li>Rebuilt the global demand function, architecting an omni-channel ABM strategy that drove a 27% YoY increase in revenue pipeline.</li>
-                    <li>Directed a global brand and digital transformation, aligning executive, product, and sales stakeholders on a unified GTM strategy.</li>
-                    <li>Reduced SEM spend by 22% while increasing conversions by bringing paid media in-house and optimizing for high-intent keywords.</li>
-                    <li>Improved field marketing ROI by 100% YoY through optimized targeting, rigorous attribution, and integrated campaign strategies.</li>
-                  </ul>
-                </div>
+                  <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
+                  <div class="space-y-8">
+                    <h4 class="text-xl font-bold text-white">Global Head of Digital Demand Generation & Marketing Operations</h4>
+                    <p class="text-md text-[#FF6B4A] font-semibold">Feedzai | Feb 2023-Aug 2025</p>
+                    <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                      <li>Rebuilt the global demand function, architecting an omni-channel ABM strategy that drove a 27% YoY increase in revenue pipeline.</li>
+                      <li>Directed a global brand and digital transformation, aligning executive, product, and sales stakeholders on a unified GTM strategy.</li>
+                      <li>Reduced SEM spend by 22% while increasing conversions by bringing paid media in-house and optimizing for high-intent keywords.</li>
+                      <li>Improved field marketing ROI by 100% YoY through optimized targeting, rigorous attribution, and integrated campaign strategies.</li>
+                    </ul>
+                  </div>
 
-                <div>
-                  <h4 class="text-xl font-bold text-white">Marketing Director</h4>
-                  <p class="text-md text-[#FF6B4A] font-semibold">Major League Hacking (MLH) | Mar 2022-Nov 2022</p>
-                  <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
-                    <li>Lifted sales-accepted pipeline by 300% through high-velocity, multi-channel ABM campaigns targeting Fortune 200 leaders.</li>
-                    <li>Established a Global Center of Excellence, authoring an eBook on the open-source ecosystem that became a primary lead magnet.</li>
-                    <li>Executed 7 simultaneous omni-channel campaigns, resulting in qualified opportunities with 9 Fortune 200 companies.</li>
-                  </ul>
-                </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-white">Marketing Director</h4>
+                    <p class="text-md text-[#FF6B4A] font-semibold">Major League Hacking (MLH) | Mar 2022-Nov 2022</p>
+                    <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                      <li>Lifted sales-accepted pipeline by 300% through high-velocity, multi-channel ABM campaigns targeting Fortune 200 leaders.</li>
+                      <li>Established a Global Center of Excellence, authoring an eBook on the open-source ecosystem that became a primary lead magnet.</li>
+                      <li>Executed 7 simultaneous omni-channel campaigns, resulting in qualified opportunities with 9 Fortune 200 companies.</li>
+                    </ul>
+                  </div>
 
-                <div>
-                  <h4 class="text-xl font-bold text-white">Director, Growth Marketing and Operations</h4>
-                  <p class="text-md text-[#FF6B4A] font-semibold">Within3 | Dec 2020-Mar 2022</p>
-                  <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
-                    <li>Built and led the global SDR and marketing operations teams, driving 25% closed/won growth via ABM campaigns.</li>
-                    <li>Architected the global MarTech stack (Salesforce, HubSpot, Gong, 6sense) to establish a single source of truth for GTM operations.</li>
-                    <li>Partnered with global sales leadership to optimize GTM operations across NA, EMEA, and APAC.</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 class="text-xl font-bold text-white">Head of Demand Generation & Marketing Operations</h4>
-                  <p class="text-md text-[#FF6B4A] font-semibold">Expo (Formerly Pared) | Oct 2018 - Mar 2020</p>
-                  <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
-                    <li>As the first marketing hire, built the entire demand function from scratch, launching growth from a \$10M Series A through a \$30M Series B.</li>
-                    <li>Achieved a 50% decrease in CAC and 30% contribution to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
-                  </ul>
-                </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-white">Director, Growth Marketing and Operations</h4>
+                    <p class="text-md text-[#FF6B4A] font-semibold">Within3 | Dec 2020-Mar 2022</p>
+                    <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                      <li>Built and led the global SDR and marketing operations teams, driving 25% closed/won growth via ABM campaigns.</li>
+                      <li>Architected the global MarTech stack (Salesforce, HubSpot, Gong, 6sense) to establish a single source of truth for GTM operations.</li>
+                      <li>Partnered with global sales leadership to optimize GTM operations across NA, EMEA, and APAC.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-white">Head of Demand Generation & Marketing Operations</h4>
+                    <p class="text-md text-[#FF6B4A] font-semibold">Expo (Formerly Pared) | Oct 2018 - Mar 2020</p>
+                    <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                      <li>As the first marketing hire, built the entire demand function from scratch, launching growth from a \$10M Series A through a \$30M Series B.</li>
+                      <li>Achieved a 50% decrease in CAC and 30% contribution to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
+                    </ul>
+                  </div>
 
-                <div>
-                  <h4 class="text-xl font-bold text-white">VP, Head of Marketing, Global</h4>
-                  <p class="text-md text-[#FF6B4A] font-semibold">Advisen | Apr 2017 - Oct 2018</p>
-                  <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
-                    <li>Promoted to global leader and executed a GTM turnaround that led to the company's acquisition by Zywave.</li>
-                    <li>Added 33% to the pipeline by personalizing outbound campaigns and selling event sponsorships to a C-level audience.</li>
-                  </ul>
-                </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-white">VP, Head of Marketing, Global</h4>
+                    <p class="text-md text-[#FF6B4A] font-semibold">Advisen | Apr 2017 - Oct 2018</p>
+                    <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                      <li>Promoted to global leader and executed a GTM turnaround that led to the company's acquisition by Zywave.</li>
+                      <li>Added 33% to the pipeline by personalizing outbound campaigns and selling event sponsorships to a C-level audience.</li>
+                    </ul>
+                  </div>
 
-                <div>
-                  <h4 class="text-xl font-bold text-white">Campaign Analytics Manager</h4>
-                  <p class="text-md text-[#FF6B4A] font-semibold">Argyle Executive Forum | Apr 2015 - Mar 2017</p>
-                  <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
-                    <li>Planned and executed a large calendar of events targeting Fortune 1000 executives, sourcing \$3.6M in revenue (25% YoY increase).</li>
-                  </ul>
-                </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-white">Campaign Analytics Manager</h4>
+                    <p class="text-md text-[#FF6B4A] font-semibold">Argyle Executive Forum | Apr 2015 - Mar 2017</p>
+                    <ul style="padding-bottom:30px" class="list-disc list-inside mt-2 space-y-2 text-gray-300">
+                      <li>Planned and executed a large calendar of events targeting Fortune 1000 executives, sourcing \$3.6M in revenue (25% YoY increase).</li>
+                    </ul>
+                  </div>
 
-                <div>
-                  <h4 class="text-xl font-bold text-white">Head of Community and Customer Care</h4>
-                  <p class="text-md text-[#FF6B4A] font-semibold">Backstage | Feb 2012 - Apr 2015</p>
-                  <ul style="padding-bottom:30px" class="list-disc list-inside mt</li>-2 space-y-2 text-gray-300">
-                    <li>Grew a top-300 most visited site in the world, a sister publication of Billboard Magazine and The Hollywood Reporter through 2x acquistiions via hands-on community-engagement including forum moderation, email marketing, Zendesk implementation and running a bicoastal tradeshow franchise attended by over +4,000 customers.</li>
-                    <li>Grew B2B2C business by 400% in one year by teaching myself Python/Ruby and automating engagement strategies with HubSpot.</li>
-                  </ul>
+                  <div>
+                    <h4 class="text-xl font-bold text-white">Head of Community and Customer Care</h4>
+                    <p class="text-md text-[#FF6B4A] font-semibold">Backstage | Feb 2012 - Apr 2015</p>
+                    <ul style="padding-bottom:30px" class="list-disc list-inside mt</li>-2 space-y-2 text-gray-300">
+                      <li>Grew a top-300 most visited site in the world, a sister publication of Billboard Magazine and The Hollywood Reporter through 2x acquistiions via hands-on community-engagement including forum moderation, email marketing, Zendesk implementation and running a bicoastal tradeshow franchise attended by over +4,000 customers.</li>
+                      <li>Grew B2B2C business by 400% in one year by teaching myself Python/Ruby and automating engagement strategies with HubSpot.</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="border-t border-white-800 pt-8 mt-8">
-              <h3 class="text-2xl font-bold text-white mb-4">Education</h3>
-              <div>
-                <h4 class="text-xl font-bold text-white">Florida State University</h4>
-                <p class="text-md text-gray-300">Master, Acting (Full-merit scholar)</p>
-              </div>
-              <div class="mt-4">
-                <h4 class="text-xl font-bold text-white">Hunter College (CUNY Macaulay Honors)</h4>
-                <p class="text-md text-gray-300">Bachelor, Theatre and Interdisciplinary Honors Studies (Summa Cum Laude, Full-merit scholar)</p>
+              <div class="border-t border-white-800 pt-8 mt-8">
+                <h3 class="text-2xl font-bold text-white mb-4">Education</h3>
+                <div>
+                  <h4 class="text-xl font-bold text-white">Florida State University</h4>
+                  <p class="text-md text-gray-300">Master, Acting (Full-merit scholar)</p>
+                </div>
+                <div class="mt-4">
+                  <h4 class="text-xl font-bold text-white">Hunter College (CUNY Macaulay Honors)</h4>
+                  <p class="text-md text-gray-300">Bachelor, Theatre and Interdisciplinary Honors Studies (Summa Cum Laude, Full-merit scholar)</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
     </section>
 
     <section id="calendar" class="bg-transparent">
