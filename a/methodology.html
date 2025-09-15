@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Diagnostic and Strategy | Nexxa Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- Nexxa.AI Style Kit & Global Styles --- */
+        :root {
+            /* Core Nexxa Palette (Derived from analysis of Nexxa.AI.html) */
+            /* Primary dark background rgb(4, 7, 13) */
+            --nexxa-bg-primary: #04070d; 
+            /* Slightly different dark tone rgb(19, 10, 23) */
+            --nexxa-bg-secondary: #130a17; 
+            /* Vibrant blue accent rgb(79, 96, 250) */
+            --nexxa-accent-blue: #4f60fa; 
+            /* Purple accent rgb(98, 29, 209) */
+            --nexxa-accent-purple: #621dd1; 
+
+            /* Main text color rgb(213, 219, 230) */
+            --nexxa-text-primary: #d5dbe6; 
+            /* Muted text rgb(167, 173, 190) */
+            --nexxa-text-secondary: #a7adbe; 
+            
+            /* Subtle light border rgba(255, 255, 255, .12) */
+            --nexxa-border: rgba(216, 231, 242, 0.12); 
+            /* Dark card background rgb(12, 5, 18) with slight transparency */
+            --nexxa-card-bg: rgba(12, 5, 18, 0.7); 
+
+            /* Utility Colors (From for-nexxa.html) */
+            --color-success: #34D399;
+            --color-warning: #FACC15;
+            --color-danger: #EF4444;
+
+            --font-stack: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--nexxa-bg-primary);
+            color: var(--nexxa-text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* --- Layout & Typography --- */
+        .content-wrapper {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1, h2, h3, h4, h5 {
+            margin-top: 0;
+            color: white;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            color: var(--nexxa-text-secondary);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: white;
+            margin-top: 5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            font-size: 1.1rem;
+            color: var(--nexxa-text-secondary);
+        }
+
+        /* --- Utility: Card Style (Nexxa Style) --- */
+        /* Mimicking the bordered, slightly glowing look */
+        .nexxa-card {
+            background-color: var(--nexxa-card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--nexxa-border);
+            /* Subtle shadow and backdrop filter for depth */
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Internal ambient light effect on the card */
+        .nexxa-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(100% 150% at 50% 0%, rgba(79, 96, 250, 0.07) 0%, rgba(4, 7, 13, 0) 60%);
+            pointer-events: none;
+        }
+
+
+        /* --- Background Glow Effect (Common in Nexxa.ai) --- */
+        .bg-glow-container {
+            position: relative;
+        }
+
+        /* Central ambient glow */
+        .bg-glow-effect {
+            position: absolute;
+            background: radial-gradient(50% 50% at 50% 50%, var(--nexxa-accent-blue) 0%, rgba(4, 7, 13, 0) 100%);
+            border-radius: 50%;
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: 1;
+            width: 1000px;
+            height: 800px;
+            top: 200px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        /* --- Diagnostic Scorecard --- */
+        .diagnostic-scorecard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            padding: 2.5rem;
+        }
+
+        .fit-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.03); /* Slight glass effect */
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--nexxa-border);
+            transition: all 0.3s ease;
+        }
+
+        .fit-card:hover {
+             border-color: rgba(255, 255, 255, 0.3);
+             background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .fit-card.bottleneck {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-color: var(--color-danger);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+        }
+
+        .fit-score {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .fit-score.high { background-color: var(--color-success); }
+        .fit-score.medium { background-color: var(--color-warning); color: var(--nexxa-bg-primary); border-color: var(--nexxa-bg-primary);}
+        .fit-score.low { background-color: var(--color-danger); }
+
+        .fit-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .fit-description {
+            font-size: 0.9rem;
+        }
+
+        /* --- Core Tension Analysis --- */
+        .tension-container {
+            display: flex;
+            gap: 2rem;
+            padding: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tension-column {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .tension-column h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Styling these based on the concept rather than the original colors */
+        .aspiration {
+            /* Blue/Futuristic aspiration */
+            background-color: rgba(79, 96, 250, 0.1);
+            border: 1px solid rgba(79, 96, 250, 0.4);
+        }
+
+        .aspiration h4 {
+            color: var(--nexxa-accent-blue);
+        }
+
+        .execution-gap {
+            /* Red/Warning gap */
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .execution-gap h4 {
+            color: var(--color-danger);
+        }
+
+        .quote-box {
+            font-style: italic;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+            color: var(--nexxa-text-secondary);
+        }
+
+        .annotation {
+            background-color: var(--nexxa-bg-secondary);
+            border-left: 4px solid var(--nexxa-accent-purple);
+            padding: 1rem;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* --- Growth Loop SVG Styles --- */
+        .growth-loop-svg {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .loop-text {
+            font-family: var(--font-stack);
+            font-weight: 500;
+            fill: var(--nexxa-text-primary); /* Update fill color for dark mode */
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+
+        .loop-arrow {
+            stroke-width: 3px;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke: var(--nexxa-accent-blue); /* Update stroke color */
+        }
+
+        .loop-fill {
+            fill: var(--nexxa-accent-blue); /* Update fill color */
+        }
+
+        /* --- Analogy Section --- */
+        .analogy-section {
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .analogy-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            font-size: 1.1rem;
+        }
+        .analogy-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .analogy-step {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--nexxa-bg-secondary);
+            border-radius: 12px;
+            flex: 1;
+            min-width: 250px;
+            border: 1px solid var(--nexxa-border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+
+         /* Adding the Nexxa-style subtle gradient border effect on hover */
+        .analogy-step:hover {
+            transform: translateY(-5px);
+            border-color: transparent;
+        }
+
+        /* Advanced CSS for gradient border on hover */
+        .analogy-step:hover::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--nexxa-accent-blue), var(--nexxa-accent-purple));
+            /* Masking technique to create a border from a gradient background */
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .analogy-step h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .analogy-stage {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--nexxa-accent-blue);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- Prioritized Experiments --- */
+        .experiment-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .experiment-card {
+            background-color: var(--nexxa-bg-secondary);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--nexxa-border);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+        }
+
+        .experiment-card-header {
+            color: white;
+            padding: 1rem 1.5rem;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem; /* Pull header to the edges */
+            border-radius: 16px 16px 0 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Using Nexxa accents for headers */
+        .header-primary { background-color: var(--nexxa-accent-blue); }
+        .header-secondary { background-color: var(--nexxa-accent-purple); }
+        /* Using colors from the original for-nexxa file for the third option */
+        .header-tertiary { background-color: #6B21A8; }
+
+
+        .experiment-card h5 {
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .experiment-card p {
+            font-size: 0.95rem;
+        }
+
+        /* --- Resume Section (Already Dark, refining to match Nexxa) --- */
+        .resume-section {
+            /* Using the specific color defined in for-nexxa.html */
+            background-color: #1b0e33; 
+            color: white;
+            padding: 6rem 0;
+            margin-top: 6rem;
+            border-top: 1px solid var(--nexxa-border);
+             /* Adding a top gradient fade, common in Nexxa footers/sections */
+            background-image: radial-gradient(80% 100px at 50% 0px, rgba(98, 29, 209, 0.25) 0%, rgba(27, 14, 51, 0) 100%);
+        }
+
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .resume-avatar {
+            height: 8rem;
+            width: 8rem;
+            border-radius: 50%;
+            margin: 0 auto 1rem auto;
+            border: 4px solid var(--nexxa-border);
+            transition: border-color 0.3s ease;
+            object-fit: cover;
+        }
+
+        /* Color from for-nexxa.html */
+        .resume-accent {
+            color: #5FDBD3;
+        }
+
+        .resume-avatar:hover {
+            border-color: #5FDBD3;
+        }
+
+        .resume-name {
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        .resume-contact {
+            font-size: 1.125rem;
+        }
+
+        .resume-links {
+            margin-top: 0.5rem;
+        }
+
+        .resume-links a {
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .resume-links a:hover {
+            color: white;
+        }
+
+        .resume-block {
+            border-top: 1px solid var(--nexxa-border);
+            padding-top: 2.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .resume-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-item {
+            margin-bottom: 2rem;
+        }
+
+        .resume-item-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .resume-item-meta {
+            font-size: 1rem;
+            color: var(--nexxa-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background-color: rgba(95, 219, 211, 0.2);
+            color: #5FDBD3;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background-color: rgba(95, 219, 211, 0.3);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .tension-container {
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+            .diagnostic-scorecard, .experiment-container, .analogy-section {
+                padding: 1.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-glow-container">
+
+    <div class="bg-glow-effect"></div>
+
+    <div class="content-wrapper">
+
+        <h2 class="section-title">Growth Diagnostic Scorecard</h2>
+        <p class="section-subtitle">Assessing the four fundamental fits to identify the primary growth bottleneck.</p>
+        
+        <div class="diagnostic-scorecard nexxa-card">
+            <div class="fit-card">
+                <div class="fit-score high">9</div>
+                <h3 class="fit-title">Product/Market Fit</h3>
+                <p class="fit-description">Strong validation, high retention, and clear value proposition for the target market.</p>
+            </div>
+            <div class="fit-card">
+                <div class="fit-score high">8</div>
+                <h3 class="fit-title">Market/Model Fit</h3>
+                <p class="fit-description">The market size and willingness to pay aligns effectively with the proposed business model.</p>
+            </div>
+            <div class="fit-card bottleneck">
+                <div class="fit-score low">3</div>
+                <h3 class="fit-title">Model/Channel Fit</h3>
+                <p class="fit-description">BOTTLENECK: Current acquisition channels are inefficient for the model. High CAC, low scalability.</p>
+            </div>
+            <div class="fit-card">
+                <div class="fit-score medium">6</div>
+                <h3 class="fit-title">Channel/Product Fit</h3>
+                <p class="fit-description">The product requires more education and onboarding friction than the channels easily allow.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Core Tension Analysis</h2>
+        <p class="section-subtitle">Mapping the delta between strategic ambition and current operational reality.</p>
+
+        <div class="tension-container nexxa-card">
+            <div class="tension-column aspiration">
+                <h4>Aspiration (The Strategic Vision)</h4>
+                <div class="quote-box">"We have a product that users genuinely love and retain. If we could just reach them efficiently, we believe we can dominate the mid-market segment and achieve $50M ARR."</div>
+                <p>The core belief is rooted in strong Product/Market Fit. The vision is market leadership based on product superiority and scalable acquisition.</p>
+            </div>
+            <div class="tension-column execution-gap">
+                <h4>Execution Gap (The Operational Reality)</h4>
+                <div class="quote-box">"Our sales cycles are long, and CAC is climbing unsustainably. We rely heavily on outbound sales, which doesn't scale well for our ACV. We are struggling to acquire customers efficiently."</div>
+                <p>The reality is a severe Model/Channel mismatch. The high-touch acquisition strategy conflicts with the efficiency required for the mid-market.</p>
+            </div>
+            <div class="annotation">
+                <strong>Strategic Implication:</strong> The primary bottleneck to growth is not the product or the market demand, but the mechanism of acquisition. The strategy must focus on evolving the Model/Channel Fit.
+            </div>
+        </div>
+
+        <h2 class="section-title">Visualizing the Growth Loop</h2>
+        <p class="section-subtitle">Analyzing the current acquisition loop highlights the friction points and opportunities for optimization.</p>
+
+<svg class="growth-loop-svg" viewBox="0 0 800 300" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+            <rect x="50" y="120" width="120" height="60" rx="10" fill="var(--nexxa-bg-secondary)" stroke="var(--nexxa-border)" stroke-width="1"/>
+            <text x="110" y="155" text-anchor="middle" class="loop-text">Awareness</text>
+
+            <rect x="250" y="120" width="120" height="60" rx="10" fill="var(--nexxa-bg-secondary)" stroke="var(--nexxa-border)" stroke-width="1"/>
+            <text x="310" y="155" text-anchor="middle" class="loop-text">Acquisition</text>
+
+            <rect x="450" y="120" width="120" height="60" rx="10" fill="var(--nexxa-bg-secondary)" stroke="var(--nexxa-border)" stroke-width="1"/>
+            <text x="510" y="155" text-anchor="middle" class="loop-text">Activation</text>
+
+            <rect x="650" y="120" width="120" height="60" rx="10" fill="var(--nexxa-bg-secondary)" stroke="var(--nexxa-border)" stroke-width="1"/>
+            <text x="710" y="155" text-anchor="middle" class="loop-text">Retention</text>
+
+            <path d="M170 150 H 230" class="loop-arrow"/>
+            <polygon points="230,145 250,150 230,155" class="loop-fill"/>
+            <text x="210" y="130" text-anchor="middle" font-size="0.8rem" fill="var(--nexxa-text-secondary)">(Outbound/Paid)</text>
+
+
+            <path d="M370 150 H 430" class="loop-arrow" stroke-dasharray="5,5" stroke="var(--color-danger)"/>
+            <polygon points="430,145 450,150 430,155" class="loop-fill" fill="var(--color-danger)"/>
+            <text x="410" y="130" text-anchor="middle" font-size="0.8rem" fill="var(--color-danger)">(High Friction)</text>
+
+            <path d="M570 150 H 630" class="loop-arrow"/>
+            <polygon points="630,145 650,150 630,155" class="loop-fill"/>
+            <text x="610" y="130" text-anchor="middle" font-size="0.8rem" fill="var(--nexxa-text-secondary)">(Strong)</text>
+
+
+            <path d="M710 180 Q 710 250, 410 250 Q 110 250, 110 180" class="loop-arrow" stroke-width="2"/>
+            <polygon points="115,185 110,180 105,185" class="loop-fill"/>
+            <text x="410" y="270" text-anchor="middle" font-size="0.8rem" fill="var(--nexxa-text-secondary)">(Referrals/Expansion)</text>
+</svg>
+
+<h2 class="section-title">Analogy: The High-Performance Engine</h2>
+    <p class="section-subtitle">Visualizing the strategy as optimizing components of a complex machine.</p>
+
+    <div class="analogy-section nexxa-card">
+        <p class="analogy-intro">
+            Your business has a finely-tuned engine (the Product) designed for a specific racetrack (the Market). However, the fuel delivery system (the Channels) is currently clogged and inefficient, preventing the engine from reaching peak performance.
+        </p>
+        <div class="analogy-container">
+            <div class="analogy-step">
+                <div class="analogy-stage">The Product</div>
+                <h4>The Engine</h4>
+                <p>High-performance, specialized, and delivers exceptional results when utilized. Loved by those who use it (Strong Product/Market Fit).</p>
+            </div>
+            <div class="analogy-step">
+                <div class="analogy-stage">The Market</div>
+                <h4>The Racetrack</h4>
+                <p>A large, defined environment where the engine can perform optimally. Demand exists and the market is willing to pay (Strong Market/Model Fit).</p>
+            </div>
+            <div class="analogy-step">
+                <div class="analogy-stage">The Bottleneck</div>
+                <h4>Clogged Fuel Injectors</h4>
+                <p>The current acquisition channels (Model/Channel Fit) are slow, expensive (high CAC), and deliver inconsistent fuel (leads) to the engine.</p>
+            </div>
+            <div class="analogy-step">
+                <div class="analogy-stage">The Strategy</div>
+                <h4>Upgrade the Fuel System</h4>
+                <p>The goal is to build scalable, efficient infrastructure (new channels like PLG or specialized content) to deliver high-octane fuel (qualified leads) efficiently.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="section-title">Prioritized Growth Experiments</h2>
+    <p class="section-subtitle">Actionable initiatives designed to address the bottleneck and accelerate the growth loop.</p>
+
+    <div class="experiment-container">
+        <div class="experiment-card">
+            <div class="experiment-card-header header-primary">Experiment 1: Product-Led Growth (PLG) Feasibility</div>
+            <h5>Hypothesis</h5>
+            <p>By introducing a self-serve onboarding flow and a limited free trial, we can reduce the reliance on high-touch sales and decrease CAC by 30%.</p>
+            <h5>Metric to Move</h5>
+            <p>CAC, Sales Cycle Length, Trial-to-Paid Conversion Rate.</p>
+            <h5>Why Now?</h5>
+            <p>Addresses the core Model/Channel mismatch directly. Leverages existing product strength.</p>
+        </div>
+        <div class="experiment-card">
+            <div class="experiment-card-header header-secondary">Experiment 2: Specialized Content Hub</div>
+            <h5>Hypothesis</h5>
+            <p>Creating a hub of high-value, specialized content (e.g., industry benchmarks, advanced tutorials) will attract qualified inbound leads and improve Channel/Product Fit.</p>
+            <h5>Metric to Move</h5>
+            <p>Inbound Lead Velocity, Lead Quality Score, Content Engagement Rate.</p>
+            <h5>Why Now?</h5>
+            <p>The product requires education; this channel provides it scalably and builds authority.</p>
+        </div>
+        <div class="experiment-card">
+            <div class="experiment-card-header header-tertiary">Experiment 3: Partnership/Ecosystem Strategy</div>
+            <h5>Hypothesis</h5>
+            <p>Integrating with complementary tools in the ecosystem will expose the product to a wider audience and generate high-intent leads through partner channels.</p>
+            <h5>Metric to Move</h5>
+            <p>Partner-Sourced Revenue, Integration Adoption Rate.</p>
+            <h5>Why Now?</h5>
+            <p>Explores alternative, lower-cost channels to diversify acquisition efforts.</p>
+        </div>
+    </div>
+
+</div>
+
+<section class="resume-section">
+    <div class="resume-container">
+        <header class="resume-header">
+            <a href="https://www.linkedin.com/in/ronykagan" target="_blank" rel="noopener noreferrer">
+                <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="resume-avatar">
+            </a>
+            <h2 class="resume-name">Ron Kagan</h2>
+            <p class="resume-contact">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
+            <p class="resume-links">
+                <a href="https://www.linkedin.com/in/ronykagan" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+                <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" rel="noopener noreferrer">Schedule a Meeting</a>
+            </p>
+        </header>
+
+        <div class="resume-block">
+            <h2 class="resume-title resume-accent">Summary</h2>
+            <p>Data-driven growth leader specializing in B2B SaaS, focusing on identifying and resolving growth bottlenecks. Proven expertise in Product-Led Growth (PLG), acquisition channel optimization, and aligning business models with market realities. Adept at translating complex data into actionable strategies.</p>
+        </div>
+
+        <div class="resume-block">
+            <h2 class="resume-title resume-accent">Core Competencies</h2>
+            <div class="resume-skills">
+                <span class="skill-tag">Growth Modeling</span>
+                <span class="skill-tag">Product-Led Growth (PLG)</span>
+                <span class="skill-tag">CAC Optimization</span>
+                <span class="skill-tag">Go-To-Market Strategy</span>
+                <span class="skill-tag">Data Analysis &amp; SQL</span>
+                <span class="skill-tag">A/B Testing &amp; Experimentation</span>
+                <span class="skill-tag">Channel Strategy</span>
+                <span class="skill-tag">Pricing &amp; Packaging</span>
+            </div>
+        </div>
+
+        <div class="resume-block">
+            <h2 class="resume-title resume-accent">Experience</h2>
+            
+            <div class="resume-block">
+            <h3>Summary</h3>
+            <p>A full-funnel B2B marketing leader with a track record of building scalable marketing engines for high-growth SaaS companies. I bridge the top-of-funnel content gap, build persona-driven ABM programs, and evolve brand narratives to accelerate pipeline growth and establish category leadership.</p>
+        </div>
+
+        <div class="resume-block">
+            <h3>Experience</h3>
+            <div class="experience-entries">
+                <div class="experience-entry">
+                    <h4 class="experience-title">Feedzai</h4>
+                    <p class="experience-meta">Global Head of Digital Demand Generation & Marketing Operations | Feb 2023 - Present</p>
+                    <ul class="experience-list">
+                        <li>Built the global, multi-channel demand generation engine from scratch, owning the strategy from top-of-funnel awareness to bottom-of-funnel conversion, driving 27% YoY revenue growth.</li>
+                        <li>Evolved the brand narrative from product-centric to outcome-oriented through a complete brand and digital reinvention, coordinating across global stakeholders.</li>
+                    </ul>
+                </div>
+                <div class="experience-entry">
+                    <h4 class="experience-title">Major League Hacking</h4>
+                    <p class="experience-meta">Marketing Director | Mar 2022 - Nov 2022</p>
+                    <ul class="experience-list">
+                        <li>Closed the top-of-funnel content gap by researching, writing, and designing a foundational eBook on the open-source ecosystem, establishing the company as an educational leader.</li>
+                        <li>Executed a persona-driven ABM strategy, targeting senior leadership at Fortune 200 companies and building a robust sales pipeline.</li>
+                        <li>Conceived and executed 7 simultaneous omni-channel campaigns via in-house and agency partners to drive a 300% lift in sales-accepted pipeline.</li>
+                    </ul>
+                </div>
+                <div class="experience-entry">
+                    <h4 class="experience-title">Within3</h4>
+                    <p class="experience-meta">Director, Growth Hacking | Dec 2020 - Mar 2022</p>
+                    <ul class="experience-list">
+                        <li>Built the marketing demand and operations department from the ground up for a 200-person SaaS company, hiring and training the team.</li>
+                        <li>Drove 25% closed/won growth via direct response campaigns targeting key personas within the 100 largest global life science organizations.</li>
+                        <li>Implemented the HubSpot/Salesforce stack and developed lead nurturing workflows to guide prospects through the buyer's journey.</li>
+                    </ul>
+                </div>
+                <div class="experience-entry">
+                    <h4 class="experience-title">Code Climate</h4>
+                    <p class="experience-meta">Head of Marketing Operations, Demand, Paid, SDRS | Mar 2020 - Dec 2020</p>
+                    <ul class="experience-list">
+                        <li>Implemented the growth mechanisms that positioned a 50-person SaaS company for its $50M Series C, adding over 70% to the pipeline with targeted paid campaigns.</li>
+                        <li>Drove 300 qualified enterprise leads by leveraging a CEO-authored book to build thought leadership and capture a high-intent audience.</li>
+                    </ul>
+                </div>
+                <div class="experience-entry">
+                    <h4 class="experience-title">Expo (Formerly Pared)</h4>
+                    <p class="experience-meta">Head of Demand Generation & Marketing Operations | Oct 2018 - Mar 2020</p>
+                    <ul class="experience-list">
+                        <li>As the first marketing hire, built the entire demand function from scratch, launching growth from a $10M Series A through a $30M Series B.</li>
+                        <li>Achieved a 50% decrease in CAC and 30% contribution to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
+                    </ul>
+                </div>
+                <div class="experience-entry">
+                    <h4 class="experience-title">Advisen</h4>
+                    <p class="experience-meta">VP, Head of Marketing, Global | Apr 2017 - Oct 2018</p>
+                    <ul class="experience-list">
+                        <li>Promoted to global leader and executed a GTM turnaround that led to the company's acquisition by Zywave.</li>
+                        <li>Added 33% to the pipeline by personalizing outbound campaigns and selling event sponsorships to a C-level audience.</li>
+                    </ul>
+                </div>
+                <div class="experience-entry">
+                    <h4 class="experience-title">Argyle Executive Forum</h4>
+                    <p class="experience-meta">Campaign Analytics Manager | Apr 2015 - Mar 2017</p>
+                    <ul class="experience-list">
+                        <li>Planned and executed a large calendar of events targeting Fortune 1000 executives, sourcing $3.6M in revenue (25% YoY increase).</li>
+                    </ul>
+                </div>
+                <div class="experience-entry">
+                    <h4 class="experience-title">Backstage</h4>
+                    <p class="experience-meta">Head of Community and Customer Care | Feb 2012 - Apr 2015</p>
+                    <ul class="experience-list">
+                        <li>Grew a community-driven B2B2C business by 400% in one year through content and engagement strategies.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-block">
+            <h3>Education</h3>
+            <p><strong>Florida State University, Sarasota, FL</strong> — Master of Fine Arts in Acting</p>
+            <p><strong>Oxford University, New College, Oxford, UK</strong> — Non-degree program</p>
+            <p><strong>Hunter College, New York, NY</strong> — Bachelor of Arts in Theatre, Summa Cum Laude</p>
+        </div>
+    </div>
+</section>
+
+<section id="calendar" class="calendar-section">
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h2>Schedule a Meeting</h2>
+            <p>Let's discuss how my experience can drive growth.</p>
+        </div>
+        <div class="calendar-embed">
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0" title="Schedule a Meeting"></iframe>
+        </div>
+    </div>
+</section>
+</body>
+</html>
