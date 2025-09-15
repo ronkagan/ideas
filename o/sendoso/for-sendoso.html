@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -199,6 +200,103 @@
       padding-top: 1.25rem;
       padding-bottom: 1.25rem;
     }
+    
+    /* This CSS provides the keyframes and styles for a button 
+  that has a glowing effect, a radiating pulse, and a cycling gradient background.
+*/
+
+/* Define the keyframes for the radiating pulse effect 
+@keyframes radiate {
+  0% {
+     Start with no extra size and full opacity 
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    End scaled up and fully transparent 
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Define the keyframes for the main button's subtle glow, now with cycling colors */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(238, 119, 82, 0.6);
+  }
+  25% {
+    box-shadow: 0 0 20px rgba(231, 60, 126, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 5px rgba(35, 166, 213, 0.6);
+  }
+  75% {
+    box-shadow: 0 0 20px rgba(35, 213, 171, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(238, 119, 82, 0.6);
+  }
+}
+
+/* Define the keyframes for the background gradient animation */
+@keyframes gradient-cycle {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* Add this class to the button you want to animate.
+  For example: <button class="glowing-button">Schedule Time</button>
+*/
+.glowing-button {
+  /* This is crucial for positioning the pseudo-element */
+  position: relative; 
+  
+  /* Apply the combined animations: gradient cycle and color glow */
+  animation: gradient-cycle 30s ease infinite, glow 10s infinite linear;
+
+  /* Basic button styling to match the example */
+  /* background-color is replaced with a gradient */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  color: white;
+  border: none;
+  border-radius: 9999px; /* Pill shape */
+  padding: 12px 24px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* Create the radiating pulse using a pseudo-element */
+.glowing-button::before {
+  content: '';
+  position: absolute;
+  /* Position it perfectly behind the button */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Use the same background, size, and border-radius */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  border-radius: 9999px;
+  
+  /* Apply the radiating and gradient animations */
+  animation: radiate 10s infinite ease-out, gradient-cycle 30s ease infinite;
+  
+  /* Place the pulse behind the button's text */
+  z-index: -1;
+}
+    
   </style>
 </head>
 
@@ -214,7 +312,7 @@
           <a href="#growth-loop" class="text-gray-600 hover:text-[var(--brand-primary)] transition">Growth Loop</a>
           <a href="#experiments" class="text-gray-600 hover:text-[var(--brand-primary)] transition">Experiments</a>
           <a href="#experience" class="text-gray-600 hover:text-[var(--brand-primary)] transition">Experience</a>
-          <a href="#calendar" class="btn-primary">Schedule a Meeting</a>
+          <a href="#calendar" class="glowing-button">Steal Time with Ron</a>
         </div>
         <div class="md:hidden">
           <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-800 focus:outline-none">
