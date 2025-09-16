@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Blueprint for OnPay | by Ron Kagan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --brand-primary: #014296;
+            --brand-secondary: #00A87B;
+            --brand-accent: #99D5C9;
+            --neutral-dark: #2c3e50;
+            --neutral-light: #f8f9fa;
+            --color-danger: #e74c3c;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--neutral-dark);
+            scroll-behavior: smooth;
+        }
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .bottleneck-card {
+            border: 2px solid var(--color-danger);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+        }
+        .loop-node {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .loop-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .experiment-card {
+            transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .experiment-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-4px);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            height: 300px;
+        }
+
+        .bg-fit-brand { background-color: #AA2E00; }
+        .bg-fit-brand:hover { background-color: #C53A00; }
+        .bg-fit-brand-product { background-color: #830083; }
+        .bg-fit-brand-product:hover { background-color: #9F009F; }
+        .bg-fit-brand-channel { background-color: #833600; }
+        .bg-fit-brand-channel:hover { background-color: #A04200; }
+        .bg-fit-brand-model { background-color: #571397; }
+        .bg-fit-brand-model:hover { background-color: #6B17B9; }
+        
+        @keyframes glow {
+         0% { box-shadow: 0 0 5px rgba(238, 119, 82, 0.6); }
+         25% { box-shadow: 0 0 20px rgba(231, 60, 126, 0.8); }
+         50% { box-shadow: 0 0 5px rgba(35, 166, 213, 0.6); }
+         75% { box-shadow: 0 0 20px rgba(35, 213, 171, 0.8); }
+         100% { box-shadow: 0 0 5px rgba(238, 119, 82, 0.6); }
+        }
+
+        @keyframes gradient-cycle {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes radiate {
+          0% {
+            transform: scale(1);
+            opacity: 0.7;
+          }
+          100% {
+            transform: scale(1.4);
+            opacity: 0;
+          }
+        }
+
+        .glowing-button {
+            position: relative;  
+            animation: gradient-cycle 30s ease infinite, glow 10s infinite linear;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .glowing-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            border-radius: 9999px;
+            animation: radiate 10s infinite ease-out, gradient-cycle 30s ease infinite;
+            z-index: -1;
+        }
+    </style>
+    <!-- Chosen Palette: OnPay Primary Blue, Secondary Green, Accent Light Green, Dark Neutral, Light Neutral, Danger Red -->
+    <!-- Application Structure Plan: A strategic narrative microsite. It starts with the main hypothesis (the bottleneck), provides diagnostic evidence (5 Fits Scorecard with supporting data), frames the core problem (The Core Tension with specific audience data), visualizes the systemic impact (Growth Loop with data callouts), and proposes a clear action plan (Prioritized Experiments). The flow is top-down, hypothesis-first, designed for executive audiences. -->
+    <!-- Visualization & Content Choices: 
+        1. 5 Fits Scorecard -> Goal: Inform/Diagnose -> Method: HTML/CSS Cards -> Interaction: Visual emphasis on bottleneck -> Justification: High-level diagnostic.
+        2. Traffic Source -> Goal: Inform -> Method: Donut Chart (Chart.js) -> Justification: Visualizes the 98% SEO reliance, supporting the Market-Channel assessment.
+        3. Top Organic Keywords -> Goal: Inform -> Method: Tag List (HTML/CSS) -> Justification: Shows the *type* of content driving traffic (transactional), supporting the channel analysis.
+        4. G2 Ratings -> Goal: Compare -> Method: Bar Chart (Chart.js) -> Justification: Backs the strong Market-Product fit with hard data against competitors.
+        5. Audience Affinity -> Goal: Organize/Inform -> Method: Multi-column Card Layout (HTML/CSS) -> Justification: Replaces a generic tag cloud with specific, sourced examples of audience media habits from SparkToro, making the brand disconnect tangible.
+        6. Growth Loop -> Goal: Organize/Relationships -> Method: Vertical Flowchart (HTML/CSS with SVG icons) -> Justification: Provides a clear, step-by-step visualization of the acquisition funnel and highlights the bottleneck more effectively than a circular diagram.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used for decoration, only for informational icons. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#014296] shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="https://onpay.com/wp-content/themes/onpay-2024/images/OnPay_Wordmark_White.svg" alt="OnPay Logo" class="h-7">
+                <span class="text-xl font-light text-gray-300 hidden sm:inline">| Growth Blueprint</span>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-200">
+                <a href="#diagnosis" class="hover:text-white transition">Diagnosis</a>
+                <a href="#evidence" class="hover:text-white transition">Evidence</a>
+                <a href="#tension" class="hover:text-white transition">Tension</a>
+                <a href="#growth-loop" class="hover:text-white transition">Loop</a>
+                <a href="#experiments" class="hover:text-white transition">Experiments</a>
+                <a href="#experience" class="hover:text-white transition">Author</a>
+                <a href="#calendar" class="glowing-button">Steal Time with Ron</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-white text-center py-16 md:py-24 px-4 fade-in-element">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-[var(--neutral-dark)]">GTM Blueprint for OnPay</h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">By Ron Kagan: A data-driven analysis of the primary growth constraint and a plan to unlock scalable acquisition.</p>
+            <p class="mt-8 text-md text-gray-800 max-w-3xl mx-auto font-medium">
+                <span class="text-gray-500">Executive Summary:</span> OnPay's growth is throttled by a weak <strong class="font-semibold text-[var(--brand-primary)]">Market-Brand Fit</strong>. The brand lacks resonance with key influencers (accountants), limiting trust and constraining the growth loop to a tactical, search-driven model that is reaching its ceiling.
+            </p>
+        </section>
+
+        <section class="py-12 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <iframe src="https://sadly-shop-23256937.figma.site/" width="100%" height="550" frameborder="0"></iframe>
+            </div>
+        </section>
+
+        <section id="diagnosis" class="bg-[#014296] text-white py-16 md:py-24 fade-in-element">
+            <div class="text-center px-4">
+                <h2 class="text-3xl font-bold">The 5 Fits Diagnostic</h2>
+                <p class="mt-2 text-gray-300 max-w-2xl mx-auto">This assessment of OnPay's GTM strategy reveals a critical bottleneck, with each fit scored based on available data.</p>
+            </div>
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-5 gap-6 max-w-6xl mx-auto text-center px-4">
+                <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Market-Product</h3><div class="text-4xl font-bold text-[var(--brand-secondary)] mt-3">85%</div></div>
+                <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Market-Model</h3><div class="text-4xl font-bold text-[var(--brand-secondary)] mt-3">80%</div></div>
+                <div class="p-4 bg-white text-gray-800 rounded-lg shadow-lg bottleneck-card"><h3 class="font-bold text-lg">Market-Brand</h3><div class="text-4xl font-bold text-[var(--color-danger)] mt-3">35%</div></div>
+                <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Market-Channel</h3><div class="text-4xl font-bold text-gray-700 mt-3">75%</div></div>
+                <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Model-Channel</h3><div class="text-4xl font-bold text-gray-700 mt-3">60%</div></div>
+            </div>
+        </section>
+
+        <section id="evidence" class="bg-white py-16 md:py-24 fade-in-element">
+             <div class="text-center max-w-3xl mx-auto px-4 mb-12">
+                <p class="text-2xl font-bold text-gray-800">Diagnostic Deep Dive:</p>
+                <p class="text-gray-600 mt-2">While Product and Model are strong, the data reveals the core issue lies in Brand resonance and Channel strategy.</p>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-center mb-6">Strengths: Product & Channel Mechanics</h3>
+                    <div class="space-y-8">
+                        <div class="p-6 bg-slate-50 rounded-lg shadow border">
+                            <h4 class="font-semibold text-center">Market-Product Fit: Competitive & Well-Regarded</h4>
+                            <div class="chart-container mt-4"><canvas id="g2Chart"></canvas></div>
+                            <p class="text-xs text-center mt-2 text-gray-500">OnPay holds its own against market leaders on key usability metrics. The product is not the problem.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50 rounded-lg shadow border">
+                            <h4 class="font-semibold text-center">Market-Channel Fit: An SEO Powerhouse</h4>
+                            <div class="chart-container mt-4"><canvas id="trafficSourceChart"></canvas></div>
+                             <p class="text-xs text-center mt-2 text-gray-500">A massive 98% of traffic comes from organic search, showing strong SEO execution.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                     <h3 class="text-2xl font-bold text-center mb-6 text-[var(--color-danger)]">Bottleneck: The Brand Disconnect</h3>
+                     <div class="space-y-8">
+                        <div class="p-6 bg-red-50 rounded-lg shadow border border-red-200">
+                             <h4 class="font-semibold text-center text-red-800">Market-Brand Fit: Failing to Resonate</h4>
+                             <p class="text-center mt-2 text-sm text-red-700">The data shows a massive gap between OnPay's brand presence and where their target audience (SMBs advised by accountants) spends time and builds trust.</p>
+                             <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                                 <div class="bg-white p-3 rounded">
+                                     <h5 class="font-semibold text-sm">Websites They Visit</h5>
+                                     <ul class="text-xs mt-2 space-y-1 text-gray-600"><li>Journal of Accountancy</li><li>CPA Trendlines</li><li>Accounting Today</li></ul>
+                                 </div>
+                                 <div class="bg-white p-3 rounded">
+                                     <h5 class="font-semibold text-sm">Social They Follow</h5>
+                                     <ul class="text-xs mt-2 space-y-1 text-gray-600"><li>@CPAcom</li><li>@AccountingToday</li><li>@BlakeTOliver</li></ul>
+                                 </div>
+                                 <div class="bg-white p-3 rounded">
+                                     <h5 class="font-semibold text-sm">Podcasts They Listen To</h5>
+                                     <ul class="text-xs mt-2 space-y-1 text-gray-600"><li>The Accounting Podcast</li><li>Journal of Accountancy</li><li>Cloud Accounting</li></ul>
+                                 </div>
+                             </div>
+                             <p class="text-xs text-center mt-4 text-red-600">Source: SparkToro Audience Research. OnPay has near-zero presence in these channels.</p>
+                        </div>
+                        <div class="p-6 bg-amber-50 rounded-lg shadow border border-amber-200">
+                            <h4 class="font-semibold text-center text-amber-800">Model-Channel Fit: Risky Over-reliance</h4>
+                            <p class="text-center mt-2 text-sm text-amber-700">The SEO-driven model relies on capturing bottom-of-funnel, transactional searches, which is expensive and not scalable for brand-building.</p>
+                            <div class="mt-4 bg-white p-3 rounded">
+                                 <h5 class="font-semibold text-sm text-center">Top Organic Keywords</h5>
+                                 <div class="flex flex-wrap gap-2 justify-center mt-2">
+                                     <span class="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full">fica</span>
+                                     <span class="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full">1099 form</span>
+                                     <span class="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full">w9 form</span>
+                                     <span class="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full">ein</span>
+                                 </div>
+                                <p class="text-xs text-center mt-3 text-gray-500">This keyword profile shows a tactical, not a strategic, brand presence.</p>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tension" class="bg-[#014296] text-white py-16 md:py-24 fade-in-element">
+             <div class="text-center px-4">
+                <h2 class="text-3xl font-bold">The Core Tension</h2>
+                <p class="mt-2 text-gray-300 max-w-3xl mx-auto">The conflict: a product accountants would love, but a brand they don't know or trust.</p>
+            </div>
+            <div class="mt-8 text-center max-w-3xl mx-auto p-4 bg-white/10 rounded-md border-l-4 border-[var(--brand-accent)]">
+                <p class="text-md text-white"><strong class="font-semibold text-[var(--brand-accent)]">Synthesis:</strong> OnPay wins on product but loses on influence. It efficiently captures existing search demand but fails to create new demand or build a defensible brand moat with the accountant community, which severely constrains long-term, scalable growth.</p>
+            </div>
+        </section>
+
+        <section id="growth-loop" class="bg-white text-gray-800 py-16 md:py-24 fade-in-element">
+            <div class="text-center px-4">
+                <h2 class="text-3xl font-bold">The Constrained Growth Loop</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">OnPay's SEO loop is starved by a lack of brand authority from trusted influencers.</p>
+            </div>
+            <div class="mt-12 max-w-md mx-auto flex flex-col items-center space-y-4 px-4">
+                <!-- Step 1: Search -->
+                <div class="loop-node text-center w-full p-4 bg-slate-100 rounded-lg shadow-sm border">
+                    <div class="w-12 h-12 mx-auto text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.774ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold mt-2">1. Search</h4>
+                    <p class="text-sm text-gray-600 mt-1">130k+ monthly SEO clicks from SMBs searching for payroll solutions.</p>
+                </div>
+                
+                <div class="text-4xl text-gray-300 font-light">↓</div>
+
+                <!-- Step 2: Content -->
+                <div class="loop-node text-center w-full p-4 bg-slate-100 rounded-lg shadow-sm border">
+                     <div class="w-12 h-12 mx-auto text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold mt-2">2. Content</h4>
+                    <p class="text-sm text-gray-600 mt-1">High-ranking SEO content (e.g., 'W9 form') captures traffic effectively.</p>
+                </div>
+
+                <div class="text-4xl text-gray-300 font-light">↓</div>
+
+                <!-- Step 3: Trust Gap (The Bottleneck) -->
+                <div class="loop-node text-center w-full p-4 bg-white rounded-lg shadow-lg border-2 border-red-400 transform scale-105">
+                    <div class="w-12 h-12 mx-auto text-[var(--color-danger)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold mt-2 text-[var(--color-danger)]">3. Trust Gap</h4>
+                    <p class="text-sm text-gray-600 mt-1">Prospects seek validation from trusted sources (accountants) but find OnPay has low affinity in key CPA media channels.</p>
+                </div>
+
+                <div class="text-4xl text-red-400 font-light animate-pulse">↓</div>
+
+                <!-- Step 4: Conversion -->
+                <div class="loop-node text-center w-full p-4 bg-slate-100 rounded-lg shadow-sm border">
+                    <div class="w-12 h-12 mx-auto text-yellow-500">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold mt-2">4. Conversion</h4>
+                    <p class="text-sm text-gray-600 mt-1">The conversion rate for valuable SEO traffic is capped by this lack of brand trust and authority.</p>
+                </div>
+            </div>
+             <div class="mt-8 text-center max-w-3xl mx-auto p-4 bg-red-100 border-l-4 border-red-400">
+                <p class="text-md text-red-900"><strong class="font-semibold">Bottleneck Diagnosis:</strong> The loop breaks at the "Trust Gap." Without validation from trusted sources (accountants), the value of expensive SEO traffic is diminished, capping growth potential.</p>
+            </div>
+        </section>
+
+        <section id="experiments" class="bg-black text-white py-16 md:py-24 fade-in-element">
+            <div class="text-center px-4">
+                <h2 class="text-3xl font-bold">Experiments to Fix the Loop</h2>
+                <p class="mt-2 text-gray-300 max-w-2xl mx-auto">A portfolio of hypothesis-driven learning loops to solve the Market-Brand Fit bottleneck and build a scalable growth engine.</p>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 mt-8">
+                <div class="flex flex-wrap gap-4 justify-center items-center bg-gray-800 p-4 rounded-lg shadow-inner">
+                    <p class="text-gray-300 font-semibold">Filter by:</p>
+                    
+                    <select id="filter-fit" class="bg-gray-700 text-white p-2 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500">
+                        <option value="all">All Fits</option>
+                        <option value="Market-Brand">Market-Brand</option>
+                        <option value="Market-Brand & Product">Market-Brand & Product</option>
+                        <option value="Market-Brand & Channel">Market-Brand & Channel</option>
+                        <option value="Market-Brand & Model">Market-Brand & Model</option>
+                    </select>
+
+                    <select id="filter-cost" class="bg-gray-700 text-white p-2 rounded-md text-sm focus:ring-green-500 focus:border-green-500">
+                        <option value="all">All Costs</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+
+                    <select id="filter-roi" class="bg-gray-700 text-white p-2 rounded-md text-sm focus:ring-yellow-500 focus:border-yellow-500">
+                        <option value="all">All ROI</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                        <option value="Very High">Very High</option>
+                    </select>
+
+                     <select id="filter-length" class="bg-gray-700 text-white p-2 rounded-md text-sm focus:ring-purple-500 focus:border-purple-500">
+                        <option value="all">All Lengths</option>
+                        <option value="2 Months">2 Months</option>
+                        <option value="4 Months">4 Months</option>
+                        <option value="2 Quarters">2 Quarters</option>
+                        <option value="Ongoing">Ongoing</option>
+                    </select>
+                    
+                    <button id="reset-filters" class="text-sm text-gray-400 hover:text-white transition">Reset</button>
+                </div>
+            </div>
+            <div id="experiments-grid" class="mt-10 max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand" data-fit="Market-Brand" data-cost="High" data-roi="High" data-length="2 Quarters">
+                    <h3 class="font-bold text-lg text-white">1. "Accountant-in-Residence"</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">Partnering with a trusted CPA influencer will rapidly build brand credibility in the channels where our audience lives.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Sponsor a top accounting podcast. Co-create authentic content. Measure referral traffic and brand search lift.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-red-400">High</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Quarters</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-red-200">Fit Addressed: <span class="font-medium">Market-Brand</span></p>
+                </div>
+                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand" data-fit="Market-Brand" data-cost="Low" data-roi="High" data-length="2 Months">
+                    <h3 class="font-bold text-lg text-white">2. Vertical-Specific Landing Pages</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">Tailored messaging for specific industries (e.g., restaurants, dentists) will increase conversion rates over generic messaging.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Create 3 industry-specific landing pages with unique copy and imagery. Drive targeted PPC traffic and compare conversion rates.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-green-400">Low</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Months</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-red-200">Fit Addressed: <span class="font-medium">Market-Brand</span></p>
+                </div>
+
+                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-product" data-fit="Market-Brand & Product" data-cost="Medium" data-roi="High" data-length="2 Quarters">
+                    <h3 class="font-bold text-lg text-white">3. CPA White-Glove Onboarding</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">A premium, frictionless onboarding for firms will create powerful, vocal advocates.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Offer free migration & a dedicated success manager. Track clients added per firm and solicit G2 reviews.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Quarters</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-purple-200">Fits Addressed: <span class="font-medium">Market-Brand & Product</span></p>
+                </div>
+                 <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-product" data-fit="Market-Brand & Product" data-cost="Medium" data-roi="High" data-length="Ongoing">
+                    <h3 class="font-bold text-lg text-white">4. Accountant Advisory Council</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">Formalizing a relationship with a core group of accountants will create powerful brand champions and an invaluable feedback loop.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Invite 10 influential CPAs to a paid advisory council with quarterly meetings. Track product suggestions and social media advocacy.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">Ongoing</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-purple-200">Fits Addressed: <span class="font-medium">Market-Brand & Product</span></p>
+                </div>
+                
+                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-channel" data-fit="Market-Brand & Channel" data-cost="Medium" data-roi="Medium" data-length="4 Months">
+                    <h3 class="font-bold text-lg text-white">5. Content Pivot to Firm Strategy</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">Shifting content from tactical SEO to strategic advice will build a loyal audience and differentiate our brand.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Launch a "Modern Firm" content series on pricing & marketing. Promote in CPA communities & measure engagement.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">4 Months</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-orange-200">Fits Addressed: <span class="font-medium">Market-Brand & Channel</span></p>
+                </div>
+                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-channel" data-fit="Market-Brand & Channel" data-cost="High" data-roi="Medium" data-length="2 Months">
+                    <h3 class="font-bold text-lg text-white">6. Strategic Content Partnership</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">Co-creating content with a major accounting publication will lend OnPay significant authority and reach.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Partner with 'Journal of Accountancy' on a webinar/whitepaper about payroll trends. Measure leads and brand mentions.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-red-400">High</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Months</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-orange-200">Fits Addressed: <span class="font-medium">Market-Brand & Channel</span></p>
+                </div>
+                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-channel" data-fit="Market-Brand & Channel" data-cost="Medium" data-roi="High" data-length="4 Months">
+                    <h3 class="font-bold text-lg text-white">7. Free Payroll Audit Tool</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">A valuable, free tool for accountants will generate high-quality leads and position OnPay as a helpful expert.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Develop a simple online tool for CPAs to audit a new client's payroll for common tax errors. Promote it as a lead magnet.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">4 Months</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-orange-200">Fits Addressed: <span class="font-medium">Market-Brand & Channel</span></p>
+                </div>
+                
+                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-model" data-fit="Market-Brand & Model" data-cost="Low" data-roi="Very High" data-length="2 Quarters">
+                    <h3 class="font-bold text-lg text-white">8. "First Five Free" CPA Referral</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">A compelling financial incentive will motivate accountants to actively trial and refer OnPay to their client base.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Launch a formal program where accountants get their first 5 client payrolls free for a year. Track adoption rate and client LTV.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-green-400">Low</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Quarters</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">Very High</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-indigo-200">Fit Addressed: <span class="font-medium">Market-Brand & Model</span></p>
+                </div>
+                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-model" data-fit="Market-Brand & Model" data-cost="Medium" data-roi="High" data-length="2 Quarters">
+                    <h3 class="font-bold text-lg text-white">9. "Switcher" Campaign vs. Legacy</h3>
+                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                    <p class="text-sm mt-1">Targeting SMBs and accountants using outdated, expensive providers (e.g., ADP, Paychex) will yield high-value customers.</p>
+                    <p class="text-sm font-semibold mt-3">Test:</p>
+                    <p class="text-sm mt-1">Create comparison content and targeted ads highlighting OnPay's ease of use and transparent pricing vs. legacy providers.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
+                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Quarters</p></div>
+                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
+                    </div>
+                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-indigo-200">Fit Addressed: <span class="font-medium">Market-Brand & Model</span></p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience" class="bg-[#014296] text-white">
+            <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 fade-in-element">
+                <div class="text-center mb-12">
+                    <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="inline-block">
+                        <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-[#5FDBD3] transition">
+                    </a>
+                    <h2 class="text-3xl font-bold">Ron Kagan</h2>
+                    <p class="text-lg text-gray-300">Olmsted Falls, OH | (917) 653-7410 | ron@skilltrade.marketing</p>
+                    <p class="mt-2">
+                        <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="font-semibold hover:underline transition text-gray-100">LinkedIn</a> |
+                        <a href="#calendar" class="font-semibold hover:underline transition text-gray-100">Schedule a Meeting</a>
+                    </p>
+                </div>
+                <div class="border-t border-gray-700 pt-8">
+                    <h3 class="text-2xl font-bold mb-4">Summary</h3>
+                    <p class="text-gray-300">A results-driven Go-to-Market leader with 15+ years of experience architecting growth for B2B SaaS companies. I translate complex data into actionable insights to build scalable acquisition engines and resolve systemic growth bottlenecks.</p>
+                </div>
+                <div class="border-t border-gray-700 pt-8 mt-8">
+                    <h3 class="text-2xl font-bold mb-6">Experience</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="text-xl font-bold text-[#5FDBD3]">Global Head of Digital Demand Generation & Marketing Operations</h4>
+                                    <p class="text-lg font-semibold text-white">Feedzai</p>
+                                </div>
+                                <p class="text-sm text-gray-400 flex-shrink-0 ml-4 pt-1">Feb 2023 - Aug 2025</p>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Rebuilt the global demand function, architecting an omni-channel ABM strategy that drove a 27% YoY increase in revenue pipeline.</li>
+                                <li>Directed a global brand and digital transformation, aligning executive, product, and sales stakeholders on a unified GTM strategy.</li>
+                                <li>Reduced SEM spend by 22% while increasing conversions by bringing paid media in-house and optimizing for high-intent keywords.</li>
+                                <li>Improved field marketing ROI by 100% YoY through optimized targeting, rigorous attribution, and integrated campaign strategies.</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="text-xl font-bold text-[#5FDBD3]">Marketing Director</h4>
+                                    <p class="text-lg font-semibold text-white">Major League Hacking (MLH)</p>
+                                </div>
+                                <p class="text-sm text-gray-400 flex-shrink-0 ml-4 pt-1">Mar 2022 - Nov 2022</p>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Lifted sales-accepted pipeline by 300% through high-velocity, multi-channel ABM campaigns targeting Fortune 200 leaders.</li>
+                                <li>Established a Global Center of Excellence, authoring an eBook on the open-source ecosystem that became a primary lead magnet.</li>
+                                <li>Executed 7 simultaneous omni-channel campaigns, resulting in qualified opportunities with 9 Fortune 200 companies.</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="text-xl font-bold text-[#5FDBD3]">Director, Growth Marketing and Operations</h4>
+                                    <p class="text-lg font-semibold text-white">Within3</p>
+                                </div>
+                                <p class="text-sm text-gray-400 flex-shrink-0 ml-4 pt-1">Dec 2020 - Mar 2022</p>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Built and led the global SDR and marketing operations teams, driving 25% closed/won growth via ABM campaigns.</li>
+                                <li>Architected the global MarTech stack (Salesforce, HubSpot, Gong, 6sense) to establish a single source of truth for GTM operations.</li>
+                                <li>Partnered with global sales leadership to optimize GTM operations across NA, EMEA, and APAC.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="text-xl font-bold text-[#5FDBD3]">Head of Demand Generation & Marketing Operations</h4>
+                                    <p class="text-lg font-semibold text-white">Expo (Formerly Pared)</p>
+                                </div>
+                                <p class="text-sm text-gray-400 flex-shrink-0 ml-4 pt-1">Oct 2018 - Mar 2020</p>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>As the first marketing hire, built the entire demand function from scratch, launching growth from a \$10M Series A through a \$30M Series B.</li>
+                                <li>Achieved a 50% decrease in CAC and 30% contribution to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="text-xl font-bold text-[#5FDBD3]">VP, Head of Marketing, Global</h4>
+                                    <p class="text-lg font-semibold text-white">Advisen</p>
+                                </div>
+                                <p class="text-sm text-gray-400 flex-shrink-0 ml-4 pt-1">Apr 2017 - Oct 2018</p>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Promoted to global leader and executed a GTM turnaround that led to the company's acquisition by Zywave.</li>
+                                <li>Added 33% to the pipeline by personalizing outbound campaigns and selling event sponsorships to a C-level audience.</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="text-xl font-bold text-[#5FDBD3]">Campaign Analytics Manager</h4>
+                                    <p class="text-lg font-semibold text-white">Argyle Executive Forum</p>
+                                </div>
+                                <p class="text-sm text-gray-400 flex-shrink-0 ml-4 pt-1">Apr 2015 - Mar 2017</p>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Planned and executed a large calendar of events targeting Fortune 1000 executives, sourcing \$3.6M in revenue (25% YoY increase).</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="text-xl font-bold text-[#5FDBD3]">Head of Community and Customer Care</h4>
+                                    <p class="text-lg font-semibold text-white">Backstage</p>
+                                </div>
+                                <p class="text-sm text-gray-400 flex-shrink-0 ml-4 pt-1">Feb 2012 - Apr 2015</p>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Grew a top-300 most visited site in the world, a sister publication of Billboard Magazine and The Hollywood Reporter through 2x acquistiions via hands-on community-engagement including forum moderation, email marketing, Zendesk implementation and running a bicoastal tradeshow franchise attended by over +4,000 customers.</li>
+                                <li>Grew B2B2C business by 400% in one year by teaching myself Python/Ruby and automating engagement strategies with HubSpot.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calendar" class="bg-white">
+            <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                <div class="text-center fade-in-element">
+                    <h2 class="text-3xl font-bold text-gray-800">Steal Time with Ron</h2>
+                    <p class="mt-4 text-xl text-gray-600">Let's discuss solving OnPay's core growth constraint.</p>
+                </div>
+                <div class="mt-12 fade-in-element bg-white rounded-lg shadow-2xl p-2">
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0" class="rounded-md"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-element').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // G2 Chart
+            const g2Ctx = document.getElementById('g2Chart');
+            if(g2Ctx) {
+                new Chart(g2Ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Ease of Use', 'Ease of Setup', 'Support Quality'],
+                        datasets: [
+                            { label: 'OnPay', data: [8.9, 8.4, 9.1], backgroundColor: 'rgba(1, 66, 150, 0.8)' },
+                            { label: 'Gusto', data: [9.1, 8.6, 8.5], backgroundColor: 'rgba(0, 168, 123, 0.8)' },
+                            { label: 'QuickBooks Payroll', data: [8.6, 8.2, 7.5], backgroundColor: 'rgba(44, 62, 80, 0.5)' }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true, max: 10, title: { display: true, text: 'G2 Rating (out of 10)' }}},
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                });
+            }
+
+            // Traffic Source Chart
+            const trafficCtx = document.getElementById('trafficSourceChart');
+            if(trafficCtx) {
+                new Chart(trafficCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Organic (SEO)', 'Paid (PPC)'],
+                        datasets: [{
+                            data: [98, 2],
+                            backgroundColor: ['#00A87B', '#2c3e50'],
+                            borderColor: '#f8f9fa',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom' },
+                            title: { display: true, text: 'Traffic Source Distribution' }
+                        }
+                    }
+                });
+            }
+
+            // --- Experiment Filtering (New) ---
+            const experimentsGrid = document.getElementById('experiments-grid');
+            if (experimentsGrid) {
+                const cards = experimentsGrid.querySelectorAll('.experiment-card');
+                
+                const filterFit = document.getElementById('filter-fit');
+                const filterCost = document.getElementById('filter-cost');
+                const filterRoi = document.getElementById('filter-roi');
+                const filterLength = document.getElementById('filter-length');
+                const resetFilters = document.getElementById('reset-filters');
+
+                function applyFilters() {
+                    const fitValue = filterFit.value;
+                    const costValue = filterCost.value;
+                    const roiValue = filterRoi.value;
+                    const lengthValue = filterLength.value;
+
+                    cards.forEach(card => {
+                        const cardFit = card.getAttribute('data-fit');
+                        const cardCost = card.getAttribute('data-cost');
+                        const cardRoi = card.getAttribute('data-roi');
+                        const cardLength = card.getAttribute('data-length');
+
+                        // Check if the card matches the selected filters
+                        const fitMatch = (fitValue === 'all' || cardFit === fitValue);
+                        const costMatch = (costValue === 'all' || cardCost === costValue);
+                        const roiMatch = (roiValue === 'all' || cardRoi === roiValue);
+                        const lengthMatch = (lengthValue === 'all' || cardLength === lengthValue);
+
+                        if (fitMatch && costMatch && roiMatch && lengthMatch) {
+                            // Use 'flex' because the original CSS defines .experiment-card as flex
+                            card.style.display = 'flex'; 
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+
+                // Attach event listeners
+                if (filterFit) filterFit.addEventListener('change', applyFilters);
+                if (filterCost) filterCost.addEventListener('change', applyFilters);
+                if (filterRoi) filterRoi.addEventListener('change', applyFilters);
+                if (filterLength) filterLength.addEventListener('change', applyFilters);
+                
+                // Reset button functionality
+                if (resetFilters) {
+                    resetFilters.addEventListener('click', function() {
+                        filterFit.value = 'all';
+                        filterCost.value = 'all';
+                        filterRoi.value = 'all';
+                        filterLength.value = 'all';
+                        applyFilters();
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
