@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ron Kagan | Vanta Growth Blueprint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Vanta Brand Kit as CSS Variables */
+            --brand-primary: #AC55FF; /* Vanta Purple */
+            --brand-dark: #240642;   /* Vanta Dark Purple */
+            --brand-white: #F8F4F3;  /* Vanta White */
+            --brand-cta: #5FDBD3;    /* A contrasting CTA color */
+            --font-stack: 'Inter', 'Helvetica Neue', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --color-success: #4CAF50;
+            --color-warning: #FFC107;
+            --color-danger: #F44336;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--brand-white);
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        header {
+            background-color: var(--brand-dark);
+            color: var(--brand-white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--brand-primary);
+            max-width: 600px;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+        
+        section h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--brand-dark);
+            font-weight: 700;
+        }
+
+        .scorecard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .scorecard-item {
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scorecard-item h3 {
+            font-family: var(--font-stack);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+        }
+
+        .score-visual {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .score-visual.strong {
+            color: var(--color-success);
+        }
+
+        .score-visual.medium {
+            color: var(--color-warning);
+        }
+
+        .score-visual.weak {
+            color: var(--color-danger);
+            animation: pulse-danger 1.5s infinite;
+        }
+
+        @keyframes pulse-danger {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .core-tension {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .core-tension {
+                flex-direction: row;
+            }
+        }
+
+        .tension-column {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            flex: 1;
+        }
+        
+        .tension-column h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--brand-dark);
+            margin-bottom: 1rem;
+        }
+
+        .tension-column p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .tension-column h4 {
+            font-family: var(--font-stack);
+            font-weight: 700;
+            color: var(--brand-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tension-column .annotation {
+            padding-top: 1rem;
+            border-top: 2px solid #eee;
+            color: var(--color-danger);
+            font-weight: bold;
+        }
+
+        .growth-loop-viz {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .loop-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            position: relative;
+        }
+        
+        .loop-step {
+            width: 200px;
+            height: 200px;
+            background-color: var(--brand-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .loop-step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .loop-step p {
+            font-size: 0.9rem;
+            padding: 0 1rem;
+        }
+        
+        .loop-step.bottleneck {
+            background-color: var(--color-danger);
+            animation: pulse-danger 1.5s infinite;
+        }
+
+        .growth-loop-viz svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
+            z-index: 5;
+        }
+
+        .experiment-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .experiment-card.priority {
+            border: 2px solid var(--brand-primary);
+        }
+        
+        .experiment-card h3 {
+            font-family: var(--font-stack);
+            font-size: 1.5rem;
+            color: var(--brand-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--brand-primary);
+        }
+
+        .experiment-card.priority h3 {
+             border-bottom-color: var(--brand-cta);
+        }
+
+        .experiment-card-content h4 {
+            font-weight: bold;
+            color: var(--brand-primary);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .experiment-card-content p {
+            margin: 0;
+            color: #555;
+        }
+        .experiment-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Vanta Growth Blueprint</h1>
+        <p>A strategic diagnosis of Vanta's growth model and a blueprint for accelerating its GTM engine, presented as a candidate for Director, Go-to-Market Systems.</p>
+    </div>
+</header>
+
+<section id="executive-summary">
+    <div class="container">
+        <h2>Executive Summary: The Primary Bottleneck</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.2rem; line-height: 1.8;">
+            Vanta's primary growth bottleneck is hypothesized to be a **Model-Channel Fit** issue. While the job description highlights an aspiration for a best-in-class, sales-led Go-to-Market motion, the data from the Vanta audience shows a highly technical, self-service-oriented audience that lives on channels better suited for a product-led or developer-centric approach. This creates a core tension that limits the efficiency of the GTM engine and constrains scalable growth.
+        </p>
+    </div>
+</section>
+
+<section id="fives-fits">
+    <div class="container">
+        <h2>5 Fits Diagnostic Scorecard</h2>
+        <div class="scorecard-grid">
+            <div class="scorecard-item">
+                <h3>Market-Product Fit</h3>
+                <div class="score-visual strong">🟢</div>
+                <p><strong>Strong Fit.</strong> The Vanta mission aligns perfectly with a high-affinity audience interested in security, compliance, and frameworks like SOC 2 and ISO 27001.</p>
+            </div>
+            <div class="scorecard-item">
+                <h3>Market-Model Fit</h3>
+                <div class="score-visual strong">🟢</div>
+                <p><strong>Strong Fit.</strong> The B2B SaaS sales-led model is well-aligned with the enterprise-level needs of security and compliance tools.</p>
+            </div>
+            <div class="scorecard-item">
+                <h3>Market-Brand Fit</h3>
+                <div class="score-visual strong">🟢</div>
+                <p><strong>Strong Fit.</strong> The brand messaging and mission of building trust resonate with the language and interests of the target audience, as evidenced by their online behavior.</p>
+            </div>
+            <div class="scorecard-item">
+                <h3>Market-Channel Fit</h3>
+                <div class="score-visual strong">🟢</div>
+                <p><strong>Strong Fit.</strong> The audience is active on highly technical channels, forums, and websites, which are ideal for reaching them.</p>
+            </div>
+            <div class="scorecard-item">
+                <h3>Model-Channel Fit</h3>
+                <div class="score-visual weak">🔴</div>
+                <p><strong>Primary Bottleneck.</strong> The sales-led GTM model is misaligned with the audience's preference for self-service, product-led, and community-driven channels. This is the core tension limiting growth.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="core-tension">
+    <div class="container">
+        <h2>The Core Tension</h2>
+        <div class="core-tension">
+            <div class="tension-column">
+                <h3>The Aspiration</h3>
+                <p>"Own the complete end-to-end delivery and improvement of Go-to-Market systems... ensuring our tools and systems help our go-to-market teams effectively serve our reps, customers and prospects with a best-in-class experience."</p>
+                <h4>From the Vanta Job Description</h4>
+            </div>
+            <div class="tension-column">
+                <h3>The Execution Gap</h3>
+                <p>Audience data shows a strong affinity for developer-focused platforms like `claude.ai`, `serverfault.com`, and `docker.com`, indicating a user base that prefers a self-service or product-led journey. A traditional sales-led GTM motion may not be optimized for these channels, creating a disconnect between how the company sells and how the audience prefers to buy.</p>
+                <div class="annotation">
+                    <p><strong>Synthesis:</strong> The aspiration for a world-class sales-led GTM system is in tension with a highly technical audience that thrives in a product-led or developer-centric environment, starving the growth loop.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="growth-loop">
+    <div class="container">
+        <h2>Visualizing the Growth Loop Bottleneck</h2>
+        <div class="growth-loop-viz">
+            <div class="loop-container">
+                 <svg width="100%" height="100%" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
+                    <path d="M 250,150 A 100,100 0 0,1 450,150 A 100,100 0 0,1 450,350 A 100,100 0 0,1 250,350 A 100,100 0 0,1 250,150 Z"
+                          fill="none" stroke="#240642" stroke-width="4" />
+                    <polygon points="460,250 480,240 480,260" fill="#240642" />
+                    <polygon points="440,250 420,240 420,260" fill="#240642" />
+                    <polygon points="350,140 360,120 340,120" fill="#240642" />
+                    <polygon points="350,360 360,380 340,380" fill="#240642" />
+                    <polygon points="240,250 220,240 220,260" fill="#240642" />
+
+                    <circle cx="250" cy="150" r="10" fill="#240642" />
+                    <circle cx="450" cy="150" r="10" fill="#240642" />
+                    <circle cx="450" cy="350" r="10" fill="#240642" />
+                    <circle cx="250" cy="350" r="10" fill="#240642" />
+                </svg>
+
+                <div class="loop-step bottleneck" style="position: absolute; top: 10%; left: 30%;">
+                    <h4>1. Audience discovers content</h4>
+                    <p>Via search or community. The bottleneck is here; the sales-led system is not optimized for these channels.</p>
+                </div>
+
+                <div class="loop-step" style="position: absolute; top: 55%; left: 30%;">
+                    <h4>2. Users engage with product</h4>
+                    <p>They begin a trial or self-service experience.</p>
+                </div>
+
+                <div class="loop-step" style="position: absolute; top: 55%; left: 60%;">
+                    <h4>3. Users become customers</h4>
+                    <p>High-value customers are identified and passed to sales.</p>
+                </div>
+                
+                <div class="loop-step" style="position: absolute; top: 10%; left: 60%;">
+                    <h4>4. Customers create value</h4>
+                    <p>They generate referrals or use cases that fuel content and brand.</p>
+                </div>
+
+                <div style="position: absolute; top: 35%; left: 45%; text-align: center;">
+                    <h3 style="color: var(--color-danger); font-size: 1.5rem;">Growth Loop Starved</h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="prioritized-experiments">
+    <div class="container">
+        <h2>Prioritized Experiments</h2>
+        <div class="experiment-card-grid">
+            <div class="experiment-card priority">
+                <h3>Hypothesis: AI-Powered Self-Serve Engine</h3>
+                <div class="experiment-card-content">
+                    <h4>The Learning Goal</h4>
+                    <p>We hypothesize that by integrating AI-powered self-service tools and educational content into the GTM motion, we can reduce friction for our technical, developer-centric audience, leading to higher engagement and more qualified leads for the sales team.</p>
+                    <h4>The Execution</h4>
+                    <p>Develop an AI-powered "Trust Diagnostic" tool on the website that provides a personalized security and compliance report based on user input. Promote this tool on developer communities and forums identified in the SparkToro data.</p>
+                    <h4>Bottleneck Addressed</h4>
+                    <p>Model-Channel Fit. This experiment directly addresses the misalignment between the sales-led model and the audience's self-serve channel preference.</p>
+                </div>
+            </div>
+            <div class="experiment-card">
+                <h3>Hypothesis: Developer Relations Channel</h3>
+                <div class="experiment-card-content">
+                    <h4>The Learning Goal</h4>
+                    <p>We hypothesize that building a robust developer relations (DevRel) program and creating technical content for channels like `serverfault.com` and `docker.com` will create a low-CAC, high-LTV channel.</p>
+                    <h4>The Execution</h4>
+                    <p>Hire a DevRel lead to create and distribute technical tutorials, API documentation, and code examples. Measure the number of new sign-ups originating from these channels and compare their LTV to those from traditional sales channels.</p>
+                    <h4>Bottleneck Addressed</h4>
+                    <p>Model-Channel Fit and Market-Channel Fit.</p>
+                </div>
+            </div>
+            <div class="experiment-card">
+                <h3>Hypothesis: AI-Enabled Sales Reps</h3>
+                <div class="experiment-card-content">
+                    <h4>The Learning Goal</h4>
+                    <p>We hypothesize that by enabling sales reps with AI-driven insights about a prospect's technical background, we can improve the user experience and increase close rates.</p>
+                    <h4>The Execution</h4>
+                    <p>Implement an AI tool that analyzes a prospect's digital footprint and provides sales reps with a "technical persona" score and relevant talking points before a call, ensuring a more tailored and effective conversation.</p>
+                    <h4>Bottleneck Addressed</h4>
+                    <p>Market-Brand Fit and GTM Efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<iframe src="https://sadly-shop-23256937.figma.site/" width="100%" height="550" frameborder="0"></iframe>
+
+<section id="experience" class="bg-[#1b0e33] text-white">
+    <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="fade-in-element">
+            <div class="text-center mb-12">
+                 <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="inline-block">
+                    <img src="https://miro.medium.com/v2/resize:fill:96:96/1*PQRZqWkKKJ4k2i2xUsQ8tw.png" alt="Ron Kagan" class="h-32 w-32 rounded-full mx-auto mb-4 border-4 border-transparent hover:border-[#5FDBD3] transition">
+                 </a>
+                 <h2 class="text-3xl font-bold text-white">Ron Kagan</h2>
+                 <p class="text-lg text-[#5FDBD3]">Olmsted Falls, OH 44138 | (917) 653-7410 | ron@skilltrade.marketing</p>
+                 <p class="mt-2">
+                     <a href="https://www.linkedin.com/in/ronykagan" target="_blank" class="text-[#5FDBD3] font-semibold hover:text-white">LinkedIn</a> |
+                      <a href="https://calendar.app.google/HQrQjKRJHrFL9Urp6" target="_blank" class="text-[#5FDBD3] font-semibold hover:text-white">Schedule a Meeting</a>
+                 </p>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <h3 class="text-2xl font-bold text-white mb-4">Summary</h3>
+                <p>A full-funnel B2B marketing leader with a track record of building scalable GTM systems for high-growth SaaS companies. I bridge the top-of-funnel content gap, build persona-driven ABM programs, and evolve brand narratives to accelerate pipeline growth and establish category leadership, leveraging AI and modern tooling to drive excellence in GTM operations.</p>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-8">
+                <h3 class="text-2xl font-bold text-white mb-6">Experience</h3>
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="text-xl font-semibold">Feedzai</h4>
+                        <p class="text-md text-gray-400">Global Head of Digital Demand Generation & Marketing Operations | Feb 2023 - Present</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Built the global, multi-channel demand generation engine from scratch, owning the strategy from top-of-funnel awareness to bottom-of-funnel conversion, driving 27% YoY revenue growth.</li>
+                            <li>Evolved the brand narrative from product-centric to outcome-oriented through a complete brand and digital reinvention, coordinating across global stakeholders.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4 class="text-xl font-semibold">Major League Hacking</h4>
+                        <p class="text-md text-gray-400">Marketing Director | Mar 2022 - Nov 2022</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Closed the top-of-funnel content gap by researching, writing, and designing a foundational eBook on the open-source ecosystem, establishing the company as an educational leader.</li>
+                            <li>Executed a persona-driven ABM strategy, targeting senior leadership at Fortune 200 companies and building a robust sales pipeline.</li>
+                             <li>Conceived and executed 7 simultaneous omni-channel campaigns via in-house and agency partners to drive a 300% lift in sales-accepted pipeline.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold">Within3</h4>
+                        <p class="text-md text-gray-400">Director, Growth Hacking | Dec 2020 - Mar 2022</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Built the marketing demand and operations department from the ground up for a 200-person SaaS company, hiring and training the team.</li>
+                            <li>Drove 25% closed/won growth via direct response campaigns targeting key personas within the 100 largest global life science organizations.</li>
+                            <li>Implemented the HubSpot/Salesforce stack and developed lead nurturing workflows to guide prospects through the buyer's journey.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold">Code Climate</h4>
+                        <p class="text-md text-gray-400">Head of Marketing Operations, Demand, Paid, SDRS | Mar 2020 - Dec 2020</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Implemented the growth mechanisms that positioned a 50-person SaaS company for its $50M Series C, adding over 70% to the pipeline with targeted paid campaigns.</li>
+                            <li>Drove 300 qualified enterprise leads by leveraging a CEO-authored book to build thought leadership and capture a high-intent audience.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold">Expo (Formerly Pared)</h4>
+                        <p class="text-md text-gray-400">Head of Demand Generation & Marketing Operations | Oct 2018 - Mar 2020</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>As the first marketing hire, built the entire demand function from scratch, launching growth from a $10M Series A through a $30M Series B.</li>
+                            <li>Achieved a 50% decrease in CAC and 30% contribution to the closed-won pipeline by building an efficient, full-funnel marketing program.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold">Advisen</h4>
+                        <p class="text-md text-gray-400">VP, Head of Marketing, Global | Apr 2017 - Oct 2018</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Promoted to global leader and executed a GTM turnaround that led to the company's acquisition by Zywave.</li>
+                            <li>Added 33% to the pipeline by personalizing outbound campaigns and selling event sponsorships to a C-level audience.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold">Argyle Executive Forum</h4>
+                        <p class="text-md text-gray-400">Campaign Analytics Manager | Apr 2015 - Mar 2017</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Planned and executed a large calendar of events targeting Fortune 1000 executives, sourcing $3.6M in revenue (25% YoY increase).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold">Backstage</h4>
+                        <p class="text-md text-gray-400">Head of Community and Customer Care | Feb 2012 - Apr 2015</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Grew a community-driven B2B2C business by 400% in one year through content and engagement strategies.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-8">
+                 <h3 class="text-2xl font-bold text-white mb-4">Education</h3>
+                 <p><strong>Florida State University, Sarasota, FL</strong> — Master of Fine Arts in Acting</p>
+                 <p><strong>Oxford University, New College, Oxford, UK</strong> — Non-degree program</p>
+                 <p><strong>Hunter College, New York, NY</strong> — Bachelor of Arts in Theatre, Summa Cum Laude</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="calendar" class="bg-white">
+    <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center fade-in-element">
+            <h2 class="text-3xl font-bold text-[#0D0D0D]">Schedule a Meeting</h2>
+            <p class="mt-4 text-xl text-gray-600">Let's discuss how my experience can drive growth.</p>
+        </div>
+        <div class="mt-12 fade-in-element" style="transition-delay: 200ms;">
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+            </div>
+    </div>
+</section>
+
+</body>
+</html>
