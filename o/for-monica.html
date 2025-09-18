@@ -16,7 +16,7 @@
             --brand-accent: #99D5C9;
             --neutral-dark: #2c3e50;
             --neutral-light: #f8f9fa;
-            --color-danger: #e74c3c;
+            --color-warning: #f1c40f; /* Switched from danger red to warning yellow */
         }
         body {
             font-family: 'Poppins', sans-serif;
@@ -33,9 +33,9 @@
             transform: translateY(0);
         }
         .bottleneck-card {
-            border: 2px solid var(--color-danger);
+            border: 2px solid var(--color-warning);
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.5);
         }
         .loop-node {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -174,16 +174,16 @@
             <div class="mt-10 grid grid-cols-1 md:grid-cols-5 gap-6 max-w-6xl mx-auto text-center px-4">
                 <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Market-Product</h3><div class="text-4xl font-bold text-[var(--brand-secondary)] mt-3">85%</div></div>
                 <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Market-Model</h3><div class="text-4xl font-bold text-[var(--brand-secondary)] mt-3">80%</div></div>
-                <div class="p-4 bg-white text-gray-800 rounded-lg shadow-lg bottleneck-card"><h3 class="font-bold text-lg">Market-Brand</h3><div class="text-4xl font-bold text-[var(--color-danger)] mt-3">35%</div></div>
-                <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Market-Channel</h3><div class="text-4xl font-bold text-gray-700 mt-3">75%</div></div>
-                <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Model-Channel</h3><div class="text-4xl font-bold text-gray-700 mt-3">60%</div></div>
+                <div class="p-4 bg-white text-gray-800 rounded-lg shadow-lg bottleneck-card"><h3 class="font-bold text-lg">Market-Brand</h3><div class="text-4xl font-bold text-[var(--color-warning)] mt-3">50%</div></div>
+                <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Market-Channel</h3><div class="text-4xl font-bold text-gray-700 mt-3">80%</div></div>
+                <div class="p-4 bg-slate-50 text-gray-800 rounded-lg shadow-sm"><h3 class="font-bold text-lg">Model-Channel</h3><div class="text-4xl font-bold text-gray-700 mt-3">65%</div></div>
             </div>
         </section>
 
         <section id="evidence" class="bg-white py-16 md:py-24 fade-in-element">
              <div class="text-center max-w-3xl mx-auto px-4 mb-12">
                 <p class="text-2xl font-bold text-gray-800">Diagnostic Deep Dive:</p>
-                <p class="text-gray-600 mt-2">While Product and Model are strong, the data reveals the core issue lies in Brand resonance and Channel strategy.</p>
+                <p class="text-gray-600 mt-2">OnPay has a strong foundation with its Product and Model. The data shows that the primary opportunity for exponential growth lies in <strong>amplifying Brand resonance</strong> within existing, high-potential channels. The challenge is not a lack of presence, but a need for deeper activation.</p>
             </div>
             <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 
@@ -204,11 +204,11 @@
                 </div>
 
                 <div>
-                     <h3 class="text-2xl font-bold text-center mb-6 text-[var(--color-danger)]">Bottleneck: The Brand Disconnect</h3>
+                     <h3 class="text-2xl font-bold text-center mb-6 text-[var(--color-warning)]">Opportunity: The Brand Connection</h3>
                      <div class="space-y-8">
-                        <div class="p-6 bg-red-50 rounded-lg shadow border border-red-200">
-                             <h4 class="font-semibold text-center text-red-800">Market-Brand Fit: Failing to Resonate</h4>
-                             <p class="text-center mt-2 text-sm text-red-700">The data shows a massive gap between OnPay's brand presence and where their target audience (SMBs advised by accountants) spends time and builds trust.</p>
+                        <div class="p-6 bg-yellow-50 rounded-lg shadow border border-yellow-200">
+                             <h4 class="font-semibold text-center text-yellow-800">Market-Brand Fit: Opportunity for Greater Resonance</h4>
+                             <p class="text-center mt-2 text-sm text-yellow-700">The data shows an opportunity to close the gap between OnPay's brand presence and where their target audience (SMBs advised by accountants) spends time and builds trust.</p>
                              <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                                  <div class="bg-white p-3 rounded">
                                      <h5 class="font-semibold text-sm">Websites They Visit</h5>
@@ -223,7 +223,7 @@
                                      <ul class="text-xs mt-2 space-y-1 text-gray-600"><li>The Accounting Podcast</li><li>Journal of Accountancy</li><li>Cloud Accounting</li></ul>
                                  </div>
                              </div>
-                             <p class="text-xs text-center mt-4 text-red-600">Source: SparkToro Audience Research. OnPay has near-zero presence in these channels.</p>
+                             <p class="text-xs text-center mt-4 text-yellow-600">Source: SparkToro Audience Research. OnPay has near-zero presence in these channels.</p>
                         </div>
                         <div class="p-6 bg-amber-50 rounded-lg shadow border border-amber-200">
                             <h4 class="font-semibold text-center text-amber-800">Model-Channel Fit: Risky Over-reliance</h4>
@@ -280,16 +280,16 @@
                     <p class="text-sm text-gray-600 mt-1">High-ranking SEO content (e.g., 'W9 form') captures traffic effectively.</p>
                 </div>
                 <div class="text-4xl text-gray-300 font-light">↓</div>
-                <div class="loop-node text-center w-full p-4 bg-white rounded-lg shadow-lg border-2 border-red-400 transform scale-105">
-                    <div class="w-12 h-12 mx-auto text-[var(--color-danger)]">
+                <div class="loop-node text-center w-full p-4 bg-white rounded-lg shadow-lg border-2 border-yellow-400 transform scale-105">
+                    <div class="w-12 h-12 mx-auto text-yellow-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
                         </svg>
                     </div>
-                    <h4 class="font-semibold mt-2 text-[var(--color-danger)]">3. Trust Gap</h4>
+                    <h4 class="font-semibold mt-2 text-yellow-600">3. Trust Gap</h4>
                     <p class="text-sm text-gray-600 mt-1">Prospects seek validation from trusted sources (accountants) but find OnPay has low affinity in key CPA media channels.</p>
                 </div>
-                <div class="text-4xl text-red-400 font-light animate-pulse">↓</div>
+                <div class="text-4xl text-yellow-400 font-light animate-pulse">↓</div>
                 <div class="loop-node text-center w-full p-4 bg-slate-100 rounded-lg shadow-sm border">
                     <div class="w-12 h-12 mx-auto text-yellow-500">
                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
@@ -300,8 +300,8 @@
                     <p class="text-sm text-gray-600 mt-1">The conversion rate for valuable SEO traffic is capped by this lack of brand trust and authority.</p>
                 </div>
             </div>
-             <div class="mt-8 text-center max-w-3xl mx-auto p-4 bg-red-100 border-l-4 border-red-400">
-                <p class="text-md text-red-900"><strong class="font-semibold">Bottleneck Diagnosis:</strong> The loop breaks at the "Trust Gap." Without validation from trusted sources (accountants), the value of expensive SEO traffic is diminished, capping growth potential.</p>
+             <div class="mt-8 text-center max-w-3xl mx-auto p-4 bg-yellow-100 border-l-4 border-yellow-400">
+                <p class="text-md text-yellow-900"><strong class="font-semibold">Opportunity Diagnosis:</strong> The loop slows at the "Trust Gap." By increasing validation from trusted sources (accountants), OnPay can accelerate the entire growth engine.</p>
             </div>
         </section>
 
@@ -313,7 +313,6 @@
             <div class="max-w-7xl mx-auto px-4 mt-8">
                 <div class="flex flex-wrap gap-4 justify-center items-center bg-gray-800 p-4 rounded-lg shadow-inner">
                     <p class="text-gray-300 font-semibold">Filter by:</p>
-                    
                     <select id="filter-fit" class="bg-gray-700 text-white p-2 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500">
                         <option value="all">All Fits</option>
                         <option value="Market-Brand">Market-Brand</option>
@@ -321,21 +320,18 @@
                         <option value="Market-Brand & Channel">Market-Brand & Channel</option>
                         <option value="Market-Brand & Model">Market-Brand & Model</option>
                     </select>
-
                     <select id="filter-cost" class="bg-gray-700 text-white p-2 rounded-md text-sm focus:ring-green-500 focus:border-green-500">
                         <option value="all">All Costs</option>
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>
                         <option value="High">High</option>
                     </select>
-
                     <select id="filter-roi" class="bg-gray-700 text-white p-2 rounded-md text-sm focus:ring-yellow-500 focus:border-yellow-500">
                         <option value="all">All ROI</option>
                         <option value="Medium">Medium</option>
                         <option value="High">High</option>
                         <option value="Very High">Very High</option>
                     </select>
-
                      <select id="filter-length" class="bg-gray-700 text-white p-2 rounded-md text-sm focus:ring-purple-500 focus:border-purple-500">
                         <option value="all">All Lengths</option>
                         <option value="2 Months">2 Months</option>
@@ -343,7 +339,6 @@
                         <option value="2 Quarters">2 Quarters</option>
                         <option value="Ongoing">Ongoing</option>
                     </select>
-                    
                     <div class="relative">
                         <button id="resource-filter-btn" class="bg-gray-700 text-white p-2 rounded-md text-sm w-full sm:w-auto text-left flex justify-between items-center">
                             <span>Filter by Resource</span>
@@ -352,223 +347,19 @@
                         <div id="resource-filter-dropdown" class="hidden absolute top-full left-0 mt-2 bg-gray-700 border border-gray-600 rounded-md shadow-lg z-10 p-4 space-y-2 max-h-60 overflow-y-auto w-max">
                         </div>
                     </div>
-                    
                     <button id="reset-filters" class="text-sm text-gray-400 hover:text-white transition">Reset</button>
                 </div>
             </div>
-            <div id="experiments-grid" class="mt-10 max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand" data-fit="Market-Brand" data-cost="High" data-roi="High" data-length="2 Quarters" data-resources="Partnerships/BD,Content/Creative,Budget (Sponsorship)">
-                    <h3 class="font-bold text-lg text-white">1. "Accountant-in-Residence"</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">Partnering with a trusted CPA influencer will rapidly build brand credibility in the channels where our audience lives.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Sponsor a top accounting podcast. Co-create authentic content. Measure referral traffic and brand search lift.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-red-400">High</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Quarters</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
-                    </div>
 
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Partnerships/BD</span>
-                            <span class="resource-tag">Content/Creative</span>
-                            <span class="resource-tag">Budget (Sponsorship)</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-red-200">Fit Addressed: <span class="font-medium">Market-Brand</span></p>
+            <div class="mt-12 max-w-7xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-gray-100 border-b-2 border-brand-accent pb-2 mb-8">Track A: Scaling the Accountant Partner Channel</h3>
+                <div id="experiments-grid-accountant" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 </div>
+            </div>
 
-                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand" data-fit="Market-Brand" data-cost="Low" data-roi="High" data-length="2 Months" data-resources="Content/Creative,Web Dev/Design,Budget (PPC)">
-                    <h3 class="font-bold text-lg text-white">2. Vertical-Specific Landing Pages</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">Tailored messaging for specific industries (e.g., restaurants, dentists) will increase conversion rates over generic messaging.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Create 3 industry-specific landing pages with unique copy and imagery. Drive targeted PPC traffic and compare conversion rates.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-green-400">Low</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Months</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Content/Creative</span>
-                            <span class="resource-tag">Web Dev/Design</span>
-                            <span class="resource-tag">Budget (PPC)</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-red-200">Fit Addressed: <span class="font-medium">Market-Brand</span></p>
-                </div>
-
-                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-product" data-fit="Market-Brand & Product" data-cost="Medium" data-roi="High" data-length="2 Quarters" data-resources="Operations/CS,Sales">
-                    <h3 class="font-bold text-lg text-white">3. CPA White-Glove Onboarding</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">A premium, frictionless onboarding for firms will create powerful, vocal advocates.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Offer free migration & a dedicated success manager. Track clients added per firm and solicit G2 reviews.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Quarters</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Operations/CS</span>
-                            <span class="resource-tag">Sales</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-purple-200">Fits Addressed: <span class="font-medium">Market-Brand & Product</span></p>
-                </div>
-
-                 <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-product" data-fit="Market-Brand & Product" data-cost="Medium" data-roi="High" data-length="Ongoing" data-resources="Partnerships/BD,Product Management,Budget (Stipends)">
-                    <h3 class="font-bold text-lg text-white">4. Accountant Advisory Council</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">Formalizing a relationship with a core group of accountants will create powerful brand champions and an invaluable feedback loop.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Invite 10 influential CPAs to a paid advisory council with quarterly meetings. Track product suggestions and social media advocacy.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">Ongoing</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Partnerships/BD</span>
-                            <span class="resource-tag">Product Management</span>
-                            <span class="resource-tag">Budget (Stipends)</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-purple-200">Fits Addressed: <span class="font-medium">Market-Brand & Product</span></p>
-                </div>
-                
-                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-channel" data-fit="Market-Brand & Channel" data-cost="Medium" data-roi="Medium" data-length="4 Months" data-resources="Content/Creative">
-                    <h3 class="font-bold text-lg text-white">5. Content Pivot to Firm Strategy</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">Shifting content from tactical SEO to strategic advice will build a loyal audience and differentiate our brand.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Launch a "Modern Firm" content series on pricing & marketing. Promote in CPA communities & measure engagement.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">4 Months</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Content/Creative</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-orange-200">Fits Addressed: <span class="font-medium">Market-Brand & Channel</span></p>
-                </div>
-
-                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-channel" data-fit="Market-Brand & Channel" data-cost="High" data-roi="Medium" data-length="2 Months" data-resources="Partnerships/BD,Content/Creative,Budget (Placement)">
-                    <h3 class="font-bold text-lg text-white">6. Strategic Content Partnership</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">Co-creating content with a major accounting publication will lend OnPay significant authority and reach.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Partner with 'Journal of Accountancy' on a webinar/whitepaper about payroll trends. Measure leads and brand mentions.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-red-400">High</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Months</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Partnerships/BD</span>
-                            <span class="resource-tag">Content/Creative</span>
-                            <span class="resource-tag">Budget (Placement)</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-orange-200">Fits Addressed: <span class="font-medium">Market-Brand & Channel</span></p>
-                </div>
-
-                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-channel" data-fit="Market-Brand & Channel" data-cost="Medium" data-roi="High" data-length="4 Months" data-resources="Engineering/Product,Web Dev/Design,Content/Creative">
-                    <h3 class="font-bold text-lg text-white">7. Free Payroll Audit Tool</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">A valuable, free tool for accountants will generate high-quality leads and position OnPay as a helpful expert.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Develop a simple online tool for CPAs to audit a new client's payroll for common tax errors. Promote it as a lead magnet.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">4 Months</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Engineering/Product</span>
-                            <span class="resource-tag">Web Dev/Design</span>
-                            <span class="resource-tag">Content/Creative</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-orange-200">Fits Addressed: <span class="font-medium">Market-Brand & Channel</span></p>
-                </div>
-                
-                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-model" data-fit="Market-Brand & Model" data-cost="Low" data-roi="Very High" data-length="2 Quarters" data-resources="Finance/Ops,Sales,Engineering (Billing)">
-                    <h3 class="font-bold text-lg text-white">8. "First Five Free" CPA Referral</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">A compelling financial incentive will motivate accountants to actively trial and refer OnPay to their client base.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Launch a formal program where accountants get their first 5 client payrolls free for a year. Track adoption rate and client LTV.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-green-400">Low</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Quarters</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">Very High</p></div>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Finance/Ops</span>
-                            <span class="resource-tag">Sales</span>
-                            <span class="resource-tag">Engineering (Billing)</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-indigo-200">Fit Addressed: <span class="font-medium">Market-Brand & Model</span></p>
-                </div>
-
-                <div class="experiment-card text-gray-200 p-6 rounded-lg shadow bg-fit-brand-model" data-fit="Market-Brand & Model" data-cost="Medium" data-roi="High" data-length="2 Quarters" data-resources="Content/Creative,Budget (PPC),Web Dev/Design">
-                    <h3 class="font-bold text-lg text-white">9. "Switcher" Campaign vs. Legacy</h3>
-                    <p class="text-sm font-semibold mt-3">Hypothesis:</p>
-                    <p class="text-sm mt-1">Targeting SMBs and accountants using outdated, expensive providers (e.g., ADP, Paychex) will yield high-value customers.</p>
-                    <p class="text-sm font-semibold mt-3">Test:</p>
-                    <p class="text-sm mt-1">Create comparison content and targeted ads highlighting OnPay's ease of use and transparent pricing vs. legacy providers.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
-                        <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm text-yellow-400">Medium</p></div>
-                        <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">2 Quarters</p></div>
-                        <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm text-green-400">High</p></div>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="resource-tag">Content/Creative</span>
-                            <span class="resource-tag">Budget (PPC)</span>
-                             <span class="resource-tag">Web Dev/Design</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-indigo-200">Fit Addressed: <span class="font-medium">Market-Brand & Model</span></p>
+            <div class="mt-16 max-w-7xl mx-auto px-4">
+                <h3 class="text-2xl font-bold text-gray-100 border-b-2 border-brand-accent pb-2 mb-8">Track B: Expanding the SMB Direct Engine</h3>
+                 <div id="experiments-grid-smb" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 </div>
             </div>
         </section>
@@ -720,7 +511,6 @@
                 observer.observe(el);
             });
             
-            // G2 Chart
             const g2Ctx = document.getElementById('g2Chart');
             if(g2Ctx) {
                 new Chart(g2Ctx, {
@@ -733,57 +523,94 @@
                             { label: 'QuickBooks Payroll', data: [8.6, 8.2, 7.5], backgroundColor: 'rgba(44, 62, 80, 0.5)' }
                         ]
                     },
-                    options: {
-                        responsive: true, maintainAspectRatio: false,
-                        scales: { y: { beginAtZero: true, max: 10, title: { display: true, text: 'G2 Rating (out of 10)' }}},
-                        plugins: { legend: { position: 'bottom' } }
-                    }
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 10, title: { display: true, text: 'G2 Rating (out of 10)' }}}, plugins: { legend: { position: 'bottom' } } }
                 });
             }
 
-            // Traffic Source Chart
             const trafficCtx = document.getElementById('trafficSourceChart');
             if(trafficCtx) {
                 new Chart(trafficCtx, {
                     type: 'doughnut',
                     data: {
                         labels: ['Organic (SEO)', 'Paid (PPC)'],
-                        datasets: [{
-                            data: [98, 2],
-                            backgroundColor: ['#00A87B', '#2c3e50'],
-                            borderColor: '#f8f9fa',
-                            borderWidth: 2
-                        }]
+                        datasets: [{ data: [98, 2], backgroundColor: ['#00A87B', '#2c3e50'], borderColor: '#f8f9fa', borderWidth: 2 }]
                     },
-                    options: {
-                        responsive: true, maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'bottom' },
-                            title: { display: true, text: 'Traffic Source Distribution' }
-                        }
-                    }
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, title: { display: true, text: 'Traffic Source Distribution' } } }
                 });
             }
 
-            // --- Experiment Filtering ---
-            const experimentsGrid = document.getElementById('experiments-grid');
-            if (experimentsGrid) {
-                const cards = Array.from(experimentsGrid.querySelectorAll('.experiment-card'));
-                const filterFit = document.getElementById('filter-fit');
-                const filterCost = document.getElementById('filter-cost');
-                const filterRoi = document.getElementById('filter-roi');
-                const filterLength = document.getElementById('filter-length');
-                const resourceFilterBtn = document.getElementById('resource-filter-btn');
-                const resourceFilterDropdown = document.getElementById('resource-filter-dropdown');
-                const resetFilters = document.getElementById('reset-filters');
+            // --- Experiments Data & Rendering ---
+            const experiments = [
+                // Track A: Accountant Partner Channel
+                { id: 1, track: 'accountant', title: 'Deepen Influencer Partnership', hypothesis: 'Moving from passive sponsorship to active co-marketing with The Accounting Podcast will significantly increase qualified referral traffic.', test: 'Pilot a 3-month "Modern Payroll for Accountants" content series with Blake Oliver & David Leary, featuring joint webinars and social takeovers.', fit: 'Market-Brand & Channel', cost: 'High', roi: 'High', length: '2 Quarters', resources: 'Partnerships/BD,Content/Creative,Budget (Sponsorship)' },
+                { id: 2, track: 'accountant', title: '"The Easiest Switch" Campaign', hypothesis: 'Aggressively marketing the free, white-glove migration service as a standalone campaign will increase partner sign-ups by reducing perceived switching friction.', test: 'Launch a dedicated landing page and paid social campaign targeting accountants that focuses only on the free, effortless migration service.', fit: 'Market-Brand & Product', cost: 'Medium', roi: 'High', length: '2 Quarters', resources: 'Content/Creative,Web Dev/Design,Budget (PPC)' },
+                { id: 3, track: 'accountant', title: 'Ambassador Activation Test', hypothesis: 'A performance-based incentive model will drive more tangible marketing outcomes from the Ambassador Program than the current model.', test: 'A/B test a new incentive structure (e.g., bonuses for G2 reviews, webinar co-hosting) with a cohort of 10 ambassadors against a control group.', fit: 'Market-Brand & Product', cost: 'Medium', roi: 'High', length: 'Ongoing', resources: 'Partnerships/BD,Operations/CS' },
+                { id: 4, track: 'accountant', title: 'High-Impact Joint Research Report', hypothesis: 'A deep, collaborative research report with a major publication like Accounting Today will generate higher-quality leads and establish more durable brand authority than one-off webinars.', test: 'Commission a "State of the Modern Accounting Firm" report and support it with a multi-channel promotion plan.', fit: 'Market-Brand & Channel', cost: 'High', roi: 'Medium', length: '4 Months', resources: 'Partnerships/BD,Content/Creative,Budget (Placement)' },
+                { id: 5, track: 'accountant', title: 'Free Payroll Audit Tool', hypothesis: 'A valuable, free tool for accountants will generate high-quality leads and position OnPay as a helpful expert.', test: 'Develop a simple online tool for CPAs to audit a new client\'s payroll for common tax errors. Promote it as a lead magnet.', fit: 'Market-Brand & Channel', cost: 'Medium', roi: 'High', length: '4 Months', resources: 'Engineering/Product,Web Dev/Design,Content/Creative' },
+                { id: 6, track: 'accountant', title: '"First Five Free" CPA Referral', hypothesis: 'A compelling financial incentive will motivate accountants to actively trial and refer OnPay to their client base.', test: 'Launch a formal program where accountants get their first 5 client payrolls free for a year. Track adoption rate and client LTV.', fit: 'Market-Brand & Model', cost: 'Low', roi: 'Very High', length: '2 Quarters', resources: 'Finance/Ops,Sales,Engineering (Billing)' },
+                
+                // Track B: SMB Direct Engine
+                { id: 7, track: 'smb', title: 'SMB Lifecycle Journey Map', hypothesis: 'Mapping and optimizing the first 30-day experience for direct sign-ups will reduce churn and increase activation rates.', test: 'Analyze user behavior for direct vs. partner-referred clients. A/B test a new, tailored email onboarding sequence for the SMB Direct cohort.', fit: 'Market-Brand & Product', cost: 'Medium', roi: 'High', length: '2 Quarters', resources: 'Product Management,Engineering/Product,Content/Creative' },
+                { id: 8, track: 'smb', title: 'Vertical-Specific Paid Campaigns', hypothesis: 'Tailored ad copy and landing pages for specific industries (e.g., restaurants, dentists) will lower CAC and increase conversion rates from paid search.', test: 'Create 3 industry-specific landing pages and ad campaigns. Drive targeted PPC traffic and compare conversion rates against generic campaigns.', fit: 'Market-Brand', cost: 'Low', roi: 'High', length: '2 Months', resources: 'Content/Creative,Web Dev/Design,Budget (PPC)' },
+                { id: 9, track: 'smb', title: '"Switcher" Campaign vs. Legacy', hypothesis: 'Targeting SMBs using outdated, expensive providers (e.g., ADP, Paychex) with a clear value proposition will yield high-value customers.', test: 'Create comparison content and targeted ads highlighting OnPay\'s ease of use and transparent pricing vs. legacy providers.', fit: 'Market-Brand & Model', cost: 'Medium', roi: 'High', length: '2 Quarters', resources: 'Content/Creative,Budget (PPC),Web Dev/Design' },
+            ];
 
-                // Dynamically populate resource filters
+            const accountantGrid = document.getElementById('experiments-grid-accountant');
+            const smbGrid = document.getElementById('experiments-grid-smb');
+
+            function getFitClass(fit) {
+                if (fit.includes('Product')) return 'bg-fit-brand-product';
+                if (fit.includes('Channel')) return 'bg-fit-brand-channel';
+                if (fit.includes('Model')) return 'bg-fit-brand-model';
+                return 'bg-fit-brand';
+            }
+            
+            function renderExperiments() {
+                accountantGrid.innerHTML = '';
+                smbGrid.innerHTML = '';
+                
                 const allResources = new Set();
-                cards.forEach(card => {
-                    const resources = card.dataset.resources.split(',');
-                    resources.forEach(r => allResources.add(r.trim()));
+                
+                experiments.forEach(exp => {
+                    const costColor = exp.cost === 'Low' ? 'text-green-400' : exp.cost === 'Medium' ? 'text-yellow-400' : 'text-red-400';
+                    let roiColor = 'text-yellow-400';
+                    if (exp.roi === 'High') roiColor = 'text-green-400';
+                    if (exp.roi === 'Very High') roiColor = 'text-green-400 font-bold';
+                    
+                    const resourcesArray = exp.resources.split(',').map(r => r.trim());
+                    resourcesArray.forEach(r => allResources.add(r));
+
+                    const cardHTML = `
+                        <div class="experiment-card text-gray-200 p-6 rounded-lg shadow ${getFitClass(exp.fit)}" data-track="${exp.track}" data-fit="${exp.fit}" data-cost="${exp.cost}" data-roi="${exp.roi}" data-length="${exp.length}" data-resources="${exp.resources}">
+                            <h3 class="font-bold text-lg text-white">${exp.title}</h3>
+                            <p class="text-sm font-semibold mt-3">Hypothesis:</p>
+                            <p class="text-sm mt-1">${exp.hypothesis}</p>
+                            <p class="text-sm font-semibold mt-3">Test:</p>
+                            <p class="text-sm mt-1">${exp.test}</p>
+                            <div class="mt-4 pt-4 border-t border-gray-700 grid grid-cols-3 text-center">
+                                <div><p class="text-xs text-gray-400">Est. Cost</p><p class="font-semibold text-sm ${costColor}">${exp.cost}</p></div>
+                                <div><p class="text-xs text-gray-400">Est. Length</p><p class="font-semibold text-sm">${exp.length}</p></div>
+                                <div><p class="text-xs text-gray-400">Est. ROI</p><p class="font-semibold text-sm ${roiColor}">${exp.roi}</p></div>
+                            </div>
+                            <div class="mt-5">
+                                <p class="text-xs text-gray-300 mb-2">Resource Needs:</p>
+                                <div class="flex flex-wrap gap-2">
+                                    ${resourcesArray.map(r => `<span class="resource-tag">${r}</span>`).join('')}
+                                </div>
+                            </div>
+                            <p class="text-xs font-semibold mt-3 mt-auto pt-3 text-gray-400">Fit Addressed: <span class="font-medium text-white">${exp.fit}</span></p>
+                        </div>`;
+
+                    if (exp.track === 'accountant') {
+                        accountantGrid.innerHTML += cardHTML;
+                    } else {
+                        smbGrid.innerHTML += cardHTML;
+                    }
                 });
 
+                // Populate resource dropdown
+                const resourceFilterDropdown = document.getElementById('resource-filter-dropdown');
+                resourceFilterDropdown.innerHTML = '';
                 allResources.forEach(resource => {
                     const label = document.createElement('label');
                     label.className = 'flex items-center space-x-2 text-sm text-gray-200';
@@ -796,79 +623,77 @@
                     resourceFilterDropdown.appendChild(label);
                 });
                 
-                const resourceCheckboxes = resourceFilterDropdown.querySelectorAll('input[type="checkbox"]');
+                // Re-attach listeners after re-render
+                resourceFilterDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', applyFilters));
+            }
 
-                resourceFilterBtn.addEventListener('click', () => {
-                    resourceFilterDropdown.classList.toggle('hidden');
-                });
-                
-                document.addEventListener('click', (e) => {
-                    if (!resourceFilterBtn.contains(e.target) && !resourceFilterDropdown.contains(e.target)) {
-                        resourceFilterDropdown.classList.add('hidden');
+            // --- Experiment Filtering Logic ---
+            const filterFit = document.getElementById('filter-fit');
+            const filterCost = document.getElementById('filter-cost');
+            const filterRoi = document.getElementById('filter-roi');
+            const filterLength = document.getElementById('filter-length');
+            const resourceFilterBtn = document.getElementById('resource-filter-btn');
+            const resourceFilterDropdown = document.getElementById('resource-filter-dropdown');
+            const resetFilters = document.getElementById('reset-filters');
+
+            resourceFilterBtn.addEventListener('click', () => {
+                resourceFilterDropdown.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!resourceFilterBtn.contains(e.target) && !resourceFilterDropdown.contains(e.target)) {
+                    resourceFilterDropdown.classList.add('hidden');
+                }
+            });
+            
+            function applyFilters() {
+                const fitValue = filterFit.value;
+                const costValue = filterCost.value;
+                const roiValue = filterRoi.value;
+                const lengthValue = filterLength.value;
+                const selectedResources = Array.from(resourceFilterDropdown.querySelectorAll('input[type="checkbox"]'))
+                                            .filter(cb => cb.checked)
+                                            .map(cb => cb.value);
+
+                document.querySelectorAll('.experiment-card').forEach(card => {
+                    const cardFit = card.dataset.fit;
+                    const cardCost = card.dataset.cost;
+                    const cardRoi = card.dataset.roi;
+                    const cardLength = card.dataset.length;
+                    const cardResources = card.dataset.resources.split(',').map(r => r.trim());
+
+                    const fitMatch = (fitValue === 'all' || cardFit === fitValue);
+                    const costMatch = (costValue === 'all' || cardCost === costValue);
+                    const roiMatch = (roiValue === 'all' || cardRoi === roiValue);
+                    const lengthMatch = (lengthValue === 'all' || cardLength === lengthValue);
+                    const resourceMatch = (selectedResources.length === 0 || selectedResources.every(r => cardResources.includes(r)));
+
+                    if (fitMatch && costMatch && roiMatch && lengthMatch && resourceMatch) {
+                        card.style.display = 'flex'; 
+                    } else {
+                        card.style.display = 'none';
                     }
                 });
-
-                function applyFilters() {
-                    const fitValue = filterFit.value;
-                    const costValue = filterCost.value;
-                    const roiValue = filterRoi.value;
-                    const lengthValue = filterLength.value;
-                    const selectedResources = Array.from(resourceCheckboxes)
-                                                .filter(cb => cb.checked)
-                                                .map(cb => cb.value);
-
-                    cards.forEach(card => {
-                        const cardFit = card.dataset.fit;
-                        const cardCost = card.dataset.cost;
-                        const cardRoi = card.dataset.roi;
-                        const cardLength = card.dataset.length;
-                        const cardResources = card.dataset.resources.split(',').map(r => r.trim());
-
-                        const fitMatch = (fitValue === 'all' || cardFit === fitValue);
-                        const costMatch = (costValue === 'all' || cardCost === costValue);
-                        const roiMatch = (roiValue === 'all' || cardRoi === roiValue);
-                        const lengthMatch = (lengthValue === 'all' || cardLength === lengthValue);
-                        const resourceMatch = (selectedResources.length === 0 || selectedResources.every(r => cardResources.includes(r)));
-
-
-                        if (fitMatch && costMatch && roiMatch && lengthMatch && resourceMatch) {
-                            card.style.display = 'flex'; 
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                }
-
-                filterFit.addEventListener('change', applyFilters);
-                filterCost.addEventListener('change', applyFilters);
-                filterRoi.addEventListener('change', applyFilters);
-                filterLength.addEventListener('change', applyFilters);
-                resourceCheckboxes.forEach(cb => cb.addEventListener('change', applyFilters));
-                
-                resetFilters.addEventListener('click', function() {
-                    filterFit.value = 'all';
-                    filterCost.value = 'all';
-                    filterRoi.value = 'all';
-                    filterLength.value = 'all';
-                    resourceCheckboxes.forEach(cb => cb.checked = false);
-                    applyFilters();
-                });
             }
+
+            filterFit.addEventListener('change', applyFilters);
+            filterCost.addEventListener('change', applyFilters);
+            filterRoi.addEventListener('change', applyFilters);
+            filterLength.addEventListener('change', applyFilters);
+            
+            resetFilters.addEventListener('click', function() {
+                filterFit.value = 'all';
+                filterCost.value = 'all';
+                filterRoi.value = 'all';
+                filterLength.value = 'all';
+                resourceFilterDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+                applyFilters();
+            });
+
+            // Initial render
+            renderExperiments();
         });
     </script>
-<meta content="website" property="og:type">
-<meta content="Ron Kagan is a marketer." property="og:title">
-<meta content="https://www.skilltrade.marketing/" property="og:url">
-<meta content="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_60/107834/155255_233920.gif" property="og:image">
-<meta content="Ron Kagan is a marketer." property="og:site_name">
-<meta content="Startups to Fortune 50s. Go-to-market engineering. Growth. Demand Generation. Marketing Automation." property="og:description">
-<meta content="Ron Kagan is a marketer." itemprop="name">
-<meta content="Startups to Fortune 50s. Go-to-market engineering. Growth. Demand Generation. Marketing Automation." itemprop="description">
-<meta content="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_60/107834/155255_233920.gif" itemprop="image">
-<meta content="summary_large_image" name="twitter:card">
-<meta content="Ron Kagan is a marketer." name="twitter:title">
-<meta content="Startups to Fortune 50s. Go-to-market engineering. Growth. Demand Generation. Marketing Automation." name="twitter:description">
-<meta content="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_60/107834/155255_233920.gif" name="twitter:image">
-<meta content="Startups to Fortune 50s. Go-to-market engineering. Growth. Demand Generation. Marketing Automation." name="description">
 </body>
 </html>
+
