@@ -1,9 +1,32 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36" version="28.2.4">
   <diagram name="Page-1" id="04gqO4PHvV2fSV_YfQPT">
-    <mxGraphModel>
+    <mxGraphModel dx="785" dy="544" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="7QddOqeb9Y2dUeVt-WA8-1" value="Create YouTube Series&#xa;Solving Competitor Problems" style="whiteSpace=wrap;strokeWidth=2;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="88" y="20" width="260" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="7QddOqeb9Y2dUeVt-WA8-2" value="Search Intent" style="whiteSpace=wrap;strokeWidth=2;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="207" width="156" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="7QddOqeb9Y2dUeVt-WA8-3" value="Viewers to HackerRank&#xa;Community Members" style="whiteSpace=wrap;strokeWidth=2;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="226" y="195" width="225" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="7QddOqeb9Y2dUeVt-WA8-4" value="Captures" style="curved=1;startArrow=none;endArrow=block;exitX=0.23;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="7QddOqeb9Y2dUeVt-WA8-1" target="7QddOqeb9Y2dUeVt-WA8-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="98" y="158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7QddOqeb9Y2dUeVt-WA8-5" value="Converts" style="curved=1;startArrow=none;endArrow=block;exitX=0.77;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="7QddOqeb9Y2dUeVt-WA8-1" target="7QddOqeb9Y2dUeVt-WA8-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="338" y="158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
