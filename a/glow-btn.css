@@ -1,0 +1,288 @@
+
+    :root {
+      --brand-primary: #FF6B4A;
+      /* Extracted from Sendoso's website */
+      --brand-accent: #1B0E33;
+      /* A common dark purple from their branding */
+      --brand-secondary: #F2F2F2;
+      --font-stack: 'Bricolage Grotesque', sans-serif;
+      --color-success: #4CAF50;
+      --color-warning: #FFC107;
+      --color-danger: #FF7E66;
+      --text-primary: #1A1A1A;
+      --text-secondary: #4D4D4D;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      outline: none;
+      opacity: 0.7;
+      transition: opacity .2s;
+    }
+
+    input[type="range"]:hover {
+      opacity: 1;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--brand-primary);
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid var(--card-bg);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: var(--brand-primary);
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid var(--card-bg);
+    }
+
+    .custom-select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234D4D4D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1.2em;
+      padding-right: 2.5rem;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      color: var(--text-primary);
+      background:white;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .hero {
+      background-color: transparent;
+    }
+
+    .highlight {
+      color: var(--brand-primary);
+    }
+
+    .btn-primary {
+      background-color: var(--brand-primary);
+      color: white;
+      transition: background-color 0.3s ease;
+      border-radius: 9999px;
+      padding: 0.5rem 1.5rem;
+    }
+
+    .btn-primary:hover {
+      background-color: #E05A3E;
+    }
+
+    .fade-in-element {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .scorecard-item {
+      border: 1px solid #E5E7EB;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+
+    .scorecard-item.bottleneck {
+      border-color: var(--color-danger);
+      box-shadow: 0 0 15px rgba(255, 126, 102, 0.2);
+    }
+
+    .score-bar {
+      height: 10px;
+      border-radius: 5px;
+      background-color: #E5E7EB;
+    }
+
+    .score-fill {
+      height: 100%;
+      border-radius: 5px;
+    }
+
+    .experiment-card {
+      display: block;
+      border: 1px solid #E5E7EB;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 583px;
+      background-color: #f9fafb;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #E5E7EB;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      unicode-bidi: isolate;
+    }
+
+    .card-content {
+      padding: 10px;
+    }
+
+    .experiment-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .experiment-card h3 {
+      background-color: #f9fafb;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #E5E7EB;
+      display: block;
+      max-width: 583px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      unicode-bidi: isolate;
+    }
+
+    /*
+    .experiment-card.priority-1 h3 {
+      background-color: var(--brand-accent);
+      color: white;
+    }
+    */
+    .center-me {
+      width: 50%;
+      /* Give the element a width */
+      margin: 0 auto;
+      /* Set left and right margins to auto */
+    }
+
+    .chart-bar {
+      transition: height 0.5s ease-out;
+    }
+
+    nav {
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
+    }
+    
+    /* This CSS provides the keyframes and styles for a button 
+  that has a glowing effect, a radiating pulse, and a cycling gradient background.
+*/
+
+/* Define the keyframes for the radiating pulse effect 
+@keyframes radiate {
+  0% {
+     Start with no extra size and full opacity 
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    End scaled up and fully transparent 
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Define the keyframes for the main button's subtle glow, now with cycling colors */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(238, 119, 82, 0.6);
+  }
+  25% {
+    box-shadow: 0 0 20px rgba(231, 60, 126, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 5px rgba(35, 166, 213, 0.6);
+  }
+  75% {
+    box-shadow: 0 0 20px rgba(35, 213, 171, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(238, 119, 82, 0.6);
+  }
+}
+
+/* Define the keyframes for the background gradient animation */
+@keyframes gradient-cycle {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* Add this class to the button you want to animate.
+  For example: <button class="glowing-button">Schedule Time</button>
+*/
+.glowing-button {
+  /* This is crucial for positioning the pseudo-element */
+  position: relative; 
+  
+  /* Apply the combined animations: gradient cycle and color glow */
+  animation: gradient-cycle 30s ease infinite, glow 10s infinite linear;
+
+  /* Basic button styling to match the example */
+  /* background-color is replaced with a gradient */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  color: white;
+  border: none;
+  border-radius: 9999px; /* Pill shape */
+  padding: 12px 24px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* Create the radiating pulse using a pseudo-element */
+.glowing-button::before {
+  content: '';
+  position: absolute;
+  /* Position it perfectly behind the button */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Use the same background, size, and border-radius */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  border-radius: 9999px;
+  
+  /* Apply the radiating and gradient animations */
+  animation: radiate 10s infinite ease-out, gradient-cycle 30s ease infinite;
+  
+  /* Place the pulse behind the button's text */
+  z-index: -1;
+}
+    
+  

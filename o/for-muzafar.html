@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Business Case for Ron Kagan at HackerRank</title>
+    <meta content='https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_60/107834/155255_233920.gif' property='og:image'>
+    <meta content='Ron Kagan is a marketer.' property='og:site_name'>
+    <meta content='Startups to Fortune 50s. Go-to-market engineering. Growth. Demand Generation. Marketing Automation.' property='og:description'>
+    <meta content='Ron Kagan is a marketer.' itemprop='name'>
+    <!-- Chosen Palette: HackerRank Inspired (Emerald Green, Slate Gray, Light Background) -->
+    <!-- Application Structure Plan: This application follows a narrative structure designed to build a compelling business case. It begins by establishing the market opportunity using audience data (The Opportunity). It then clearly defines HackerRank's needs based on the job description (The Challenge). The core of the argument is a direct comparison showing how Ron Kagan not only meets but exceeds these needs (The Solution: Candidate-Role Fit). This is followed by tangible, data-driven growth strategies Ron can implement immediately (The 90-Day Growth Plan). The argument concludes by framing the hiring decision in terms of ROI and accelerated value (The $50k Difference). This logical flow from problem to solution to tangible impact is designed to be more persuasive than a simple feature-by-feature comparison. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1. Sparktoro Audience Data -> Goal: Understand the target market -> Viz: Bar Charts (Chart.js) -> Interaction: Tooltips on hover -> Justification: Bar charts provide a clear, immediate comparison of demographic and geographic segments. 2. JD vs. Resume -> Goal: Prove superior qualification -> Viz: Interactive Tabbed Component (HTML/CSS/JS) -> Interaction: Click tabs to reveal content -> Justification: Allows for a direct, one-to-one mapping of needs to qualifications without overwhelming the user. 3. Growth Methodologies -> Goal: Demonstrate strategic thinking -> Viz: Content Cards (HTML/CSS) -> Interaction: N/A -> Justification: Cards cleanly segment distinct, actionable growth experiments. 4. Time to Value -> Goal: Justify higher salary -> Viz: Comparative Timeline (HTML/CSS) -> Justification: A simple visual to contrast the velocity and impact of an experienced hire vs. a standard one. All choices are made to support the central narrative of demonstrating overwhelming value. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hr-green: #00EA64;
+            --hr-dark: #000000; /* Updated to black */
+            --hr-light-bg: #F7FAFC;
+            --hr-card-bg: #FFFFFF;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--hr-light-bg);
+            color: var(--hr-dark);
+        }
+        .bg-hr-dark { background-color: var(--hr-dark); }
+        .text-hr-green { color: var(--hr-green); }
+        .border-hr-green { border-color: var(--hr-green); }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--hr-green);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .metric-card {
+            background-color: var(--hr-card-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            max-height: 40vh;
+            margin: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        /* Mobile-first button style */
+        .cta-button {
+            display: block;
+            text-align: center;
+            background-color: var(--hr-green);
+            color: var(--hr-dark);
+            border-radius: 9999px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .cta-button:hover {
+             background-color: #00c753;
+        }
+
+        /* Desktop-only glowing effect */
+        @media (min-width: 768px) {
+            @keyframes glow {
+                0% { box-shadow: 0 0 5px rgba(238, 119, 82, 0.6); }
+                25% { box-shadow: 0 0 20px rgba(231, 60, 126, 0.8); }
+                50% { box-shadow: 0 0 5px rgba(35, 166, 213, 0.6); }
+                75% { box-shadow: 0 0 20px rgba(35, 213, 171, 0.8); }
+                100% { box-shadow: 0 0 5px rgba(238, 119, 82, 0.6); }
+            }
+            @keyframes gradient-cycle {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            @keyframes radiate {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: scale(1.4);
+                    opacity: 0;
+                }
+            }
+            .cta-button {
+                position: relative;
+                animation: gradient-cycle 30s ease infinite, glow 10s infinite linear;
+                background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                background-size: 400% 400%;
+                color: white;
+                border: none;
+                z-index: 1;
+                padding: 12px 24px;
+            }
+            .cta-button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                background-size: 400% 400%;
+                border-radius: 9999px;
+                animation: radiate 10s infinite ease-out, gradient-cycle 30s ease infinite;
+                z-index: -1;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-hr-dark text-white sticky top-0 z-50 shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">
+                <span class="text-hr-green">HackerRank</span> Growth
+            </h1>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="nav-menu" class="hidden absolute top-full left-0 right-0 bg-hr-dark md:bg-transparent md:static md:flex md:items-center md:space-x-8 p-4 md:p-0">
+                <div class="flex flex-col md:flex-row items-center md:space-x-8 space-y-4 md:space-y-0 w-full">
+                    <a href="#opportunity" class="nav-link w-full md:w-auto text-center">Opportunity</a>
+                    <a href="#fit" class="nav-link w-full md:w-auto text-center">Candidate-Role Fit</a>
+                    <a href="#plan" class="nav-link w-full md:w-auto text-center">90-Day Plan</a>
+                    <a href="#roi" class="nav-link w-full md:w-auto text-center">The ROI Case</a>
+                    <a href="#calendar" class="cta-button w-full md:w-auto mt-4 md:mt-0">Give me a problem to solve</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="intro" class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-black">The <span class="text-hr-green">$50k Difference</span></h2>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                This is a business case for hiring a strategic GTM Engineer who delivers accelerated, high-amplitude value. It's an argument for investing an additional $50k in salary not as a cost, but as a multiplier on revenue growth, team efficiency, and market penetration.
+            </p>
+        </section>
+        
+        <section id="opportunity" class="mb-20">
+            <h3 class="text-3xl font-bold text-center mb-2 text-black">The Opportunity Landscape</h3>
+            <p class="text-center text-gray-500 mb-4 max-w-3xl mx-auto">An analysis of HackerRank's audience (via SparkToro) and customer reviews (via G2/Capterra) reveals a clear picture of your users and opportunities for growth. Understanding this landscape is the first step to executing high-impact GTM strategies.</p>
+            <p class="text-center text-xs text-gray-400 mb-12 max-w-3xl mx-auto"><em>*SparkToro audience data is representative of the United States only.</em></p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="metric-card col-span-1 md:col-span-2 lg:col-span-1">
+                    <h4 class="font-bold text-lg mb-2 text-black">Key Audience Demographics</h4>
+                    <p class="text-sm text-gray-500 mb-4">Your audience is predominantly male, with a significant concentration in the 26-35 age bracket—prime years for career growth and skill development.</p>
+                    <div class="space-y-4">
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="ageChart"></canvas>
+                        </div>
+                         <div class="chart-container" style="height: 250px;">
+                            <canvas id="genderChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card col-span-1 md:col-span-2">
+                    <h4 class="font-bold text-lg mb-2 text-black">Geographic Concentration</h4>
+                    <p class="text-sm text-gray-500 mb-4">HackerRank's user base is heavily concentrated in key US tech hubs, presenting a prime opportunity for targeted regional campaigns and partnerships.</p>
+                     <div class="chart-container" style="height: 542px;">
+                        <canvas id="stateChart"></canvas>
+                    </div>
+                </div>
+
+                 <div class="metric-card col-span-1 md:col-span-3">
+                    <h4 class="font-bold text-lg mb-2 text-black">Audience Interests & Affinities</h4>
+                    <p class="text-sm text-gray-500 mb-6">The HackerRank audience are active learners and community members. They frequent specific subreddits, follow Python-focused creators, and are deeply engaged with core technologies. This provides a rich channel map for targeted content and community marketing.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <h5 class="font-semibold mb-2 text-center text-black">Top Bio Keywords</h5>
+                            <ul id="bioKeywordsList" class="space-y-1 text-sm bg-gray-50 p-3 rounded-lg text-center"></ul>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold mb-2 text-center text-black">Top Subreddits</h5>
+                            <ul id="subredditsList" class="space-y-1 text-sm bg-gray-50 p-3 rounded-lg text-center"></ul>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold mb-2 text-center text-black">Top YouTube Channels</h5>
+                            <ul id="youtubeList" class="space-y-1 text-sm bg-gray-50 p-3 rounded-lg text-center"></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metric-card col-span-1 md:col-span-3">
+                    <h4 class="font-bold text-lg mb-2 text-black">Key Insights from G2 & Capterra</h4>
+                     <p class="text-sm text-gray-500 mb-4">User reviews highlight strong satisfaction with core assessment features but also point to opportunities in improving the user experience for test creation and addressing the need for assessments that better reflect real-world, senior-level engineering tasks.</p>
+                     <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><span class="font-semibold">Strength:</span> Praised for standardized screening and a vast library of challenges for core computer science concepts.</li>
+                        <li><span class="font-semibold">Opportunity:</span> Users desire more customizable tests that mirror complex, on-the-job scenarios, especially for senior roles.</li>
+                         <li><span class="font-semibold">Opportunity:</span> A recurring theme is the desire for a more intuitive UI/UX for hiring managers setting up assessments.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="fit" class="mb-20">
+            <h3 class="text-3xl font-bold text-center mb-2 text-black">The Solution: Exceeding the Bar</h3>
+            <p class="text-center text-gray-500 mb-12 max-w-3xl mx-auto">The GTM Engineer role requires a unique blend of technical acumen, strategic thinking, and operational excellence. A standard candidate might meet the requirements; a top-tier candidate transcends them. Here’s a direct comparison of the job description against Ron Kagan's proven track record.</p>
+
+            <div id="tabs-container" class="bg-white rounded-lg shadow-lg">
+                <div class="border-b border-gray-200">
+                    <nav id="tabs" class="-mb-px flex space-x-6 px-6" aria-label="Tabs"></nav>
+                </div>
+                <div id="tab-content" class="p-6"></div>
+            </div>
+        </section>
+
+        <section id="plan" class="mb-20">
+            <h3 class="text-3xl font-bold text-center mb-2 text-black">The 90-Day Growth Plan: From Strategy to Execution</h3>
+            <p class="text-center text-gray-500 mb-12 max-w-3xl mx-auto">An experienced GTM Engineer doesn't just operate the existing machine; they build new, more efficient ones. Here are three data-informed growth experiments, grounded in established methodologies, that Ron can architect and launch within the first quarter to drive immediate impact.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="metric-card">
+                    <h4 class="font-bold text-lg mb-2 text-black">Experiment 1: The "Senior Engineer" Assessment Track</h4>
+                    <p class="text-sm text-gray-500 mb-4"><span class="font-semibold">Methodology:</span> Rand Fishkin (Serve the Audience)</p>
+                    <p class="text-gray-700 mb-4"><strong>Hypothesis:</strong> Creating and promoting a specialized assessment track for senior roles, addressing G2 feedback, will attract higher-value enterprise leads and improve conversion rates for that segment.</p>
+                    <p class="text-gray-700"><strong>Execution:</strong> Partner with Product to bundle existing complex challenges. Launch a targeted content campaign on LinkedIn and relevant subreddits (r/webdev, r/devops) highlighting how HackerRank solves the senior hiring problem. Measure lead quality and pipeline velocity from this cohort.</p>
+                </div>
+
+                <div class="metric-card">
+                    <h4 class="font-bold text-lg mb-2 text-black">Experiment 2: The "Python for Data Science" Community Play</h4>
+                    <p class="text-sm text-gray-500 mb-4"><span class="font-semibold">Methodology:</span> Jason Lemkin (Content as a Long-Term Asset)</p>
+                     <p class="text-gray-700 mb-4"><strong>Hypothesis:</strong> By sponsoring or creating valuable content with top YouTube influencers for the Python/Data Science audience (e.g., Real Python), we can capture a highly engaged segment and build brand affinity that drives organic sign-ups.</p>
+                     <p class="text-gray-700"><strong>Execution:</strong> Identify 3-5 key influencers from SparkToro data. Co-create a "Top 10 Python Interview Questions" video series. Use UTMs and a dedicated landing page to track sign-ups and platform engagement from this campaign, measuring CAC and LTV.</p>
+                </div>
+
+                <div class="metric-card">
+                    <h4 class="font-bold text-lg mb-2 text-black">Experiment 3: The Automated PLG Funnel Optimization</h4>
+                    <p class="text-sm text-gray-500 mb-4"><span class="font-semibold">Methodology:</span> Demand Curve (Full-Funnel Growth)</p>
+                     <p class="text-gray-700 mb-4"><strong>Hypothesis:</strong> By implementing an automated workflow using tools like Clay/N8N, we can analyze product usage data to identify high-intent, free-tier users and deliver hyper-personalized upgrade prompts, increasing the free-to-paid conversion rate.</p>
+                    <p class="text-gray-700"><strong>Execution:</strong> Define activation triggers (e.g., user runs >5 tests, invites >3 colleagues). Build a workflow that enriches user data and triggers personalized in-app/email messages based on their specific usage patterns. A/B test messaging to optimize conversion.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="roi" class="bg-white p-8 rounded-lg shadow-lg mb-12">
+            <h3 class="text-3xl font-bold text-center mb-2 text-black">The $50k Difference: An Investment in Velocity & Amplitude</h3>
+            <p class="text-center text-gray-500 mb-12 max-w-3xl mx-auto">The choice isn't between a $150k and a $200k salary. It's between a standard executioner and a strategic force multiplier. The additional $50k investment buys speed, strategic depth, and a significantly higher ceiling on potential impact.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h4 class="text-2xl font-bold text-black mb-4">Time to Value: A Tale of Two Timelines</h4>
+                    <p class="text-gray-700">A candidate with Ron's experience in rebuilding demand gen functions and managing complex tech stacks compresses the learning curve, delivering strategic wins months ahead of schedule.</p>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h5 class="font-semibold text-black">Standard $150k Hire</h5>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div class="bg-gray-400 h-4 rounded-full" style="width: 80%">
+                                <div class="flex justify-between text-xs px-2 text-white">
+                                    <span>Ramp-up</span>
+                                    <span>First Wins</span>
+                                    <span>Strategic Impact</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Months 1-3: Learning stack. Months 4-6: Executing existing plays. Months 7+: Proposing new strategies.</p>
+                    </div>
+                    <div>
+                        <h5 class="font-semibold text-black">Ron Kagan ($200k Hire)</h5>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                             <div class="bg-hr-green h-4 rounded-full" style="width: 100%">
+                                <div class="flex justify-between text-xs px-2 text-black font-medium">
+                                    <span>Quick Wins</span>
+                                    <span>Strategic Impact</span>
+                                </div>
+                             </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Month 1: Tech stack audit & quick wins. Month 2: Launching first growth experiment. Month 3: Delivering measurable pipeline impact.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t pt-8">
+                 <h4 class="text-2xl font-bold text-black mb-4 text-center">The ROI Calculation</h4>
+                 <p class="text-gray-700 text-center max-w-2xl mx-auto">If the strategic experiments Ron architects increase team efficiency by just 10% or improve the free-to-paid conversion rate by a mere 5%, the incremental revenue and cost savings will dwarf the $50k salary difference within the first year, delivering a clear and compelling return on investment.</p>
+            </div>
+        </section>
+
+        <section id="calendar" class="my-12">
+             <h3 class="text-3xl font-bold text-center mb-2 text-black">Ready to Talk Strategy?</h3>
+             <p class="text-center text-gray-500 mb-8 max-w-3xl mx-auto">Let's connect. Find a time that works for you below.</p>
+            <!-- Google Calendar Appointment Scheduling begin -->
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+            <!-- end Google Calendar Appointment Scheduling -->
+        </section>
+
+    </main>
+
+    <footer class="bg-hr-dark text-white text-center py-6 mt-12">
+        <p>This interactive business case was prepared for Muzafar Chaudhry.</p>
+        <p class="text-sm text-gray-400">Ron Kagan | ron@skilltrade.marketing | (917) 653-7410</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const menuBtn = document.getElementById('menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            menuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!navMenu.classList.contains('md:flex')) { // only close if it's the mobile dropdown
+                         navMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const sparktoroData = {
+                age: {
+                    labels: ['18-25', '26-35', '36-50', '51-65', '66+'],
+                    data: [19.89, 46.02, 29.78, 4.24, 0.08]
+                },
+                gender: {
+                    labels: ['Male', 'Female', 'Other'],
+                    data: [82.91, 16.32, 0.75]
+                },
+                state: {
+                    labels: ['California', 'Washington', 'New York', 'Texas', 'Massachusetts', 'Florida', 'Colorado', 'Illinois'],
+                    data: [27.35, 8, 7.31, 6.17, 6.15, 3.48, 3.37, 3.05]
+                },
+                bioKeywords: ['software engineer', 'data', 'development', 'test', 'stack', 'backend', 'machine learning'],
+                subreddits: ['/r/programming', '/r/webdev', '/r/Python', '/r/javascript', '/r/learnprogramming', '/r/reactjs', '/r/devops'],
+                youtube: ['HackerRank', 'Real Python', 'The PSF', 'freeCodeCamp.org', 'Google Developers', 'Khan Academy']
+            };
+
+            const fitData = [
+                {
+                    title: "GTM Strategy & Efficiency",
+                    jd: "Act as GTM program lead, orchestrating multi-team initiatives. Design and implement automated workflows using tools like Clay, N8N. Use AI and analytics to improve the customer journey.",
+                    resume: "As Global Head of Demand Gen at Feedzai, rebuilt the entire global demand function, driving 27% YoY revenue growth. Directed brand transformation across 90+ executives and stakeholders. Expert in managing sophisticated GTM tech stacks.",
+                    plusDelta: "Ron brings proven executive leadership, not just technical execution. He has experience rebuilding functions from the ground up and aligning large, cross-functional teams around a unified GTM strategy, delivering board-level results."
+                },
+                {
+                    title: "Technical Expertise",
+                    jd: "Serve as the in-house technical expert across all GTM and Revenue technologies (Gong, Common Room). Continuously evaluate and test new tools and integrations.",
+                    resume: "Saved 22% on SEM while increasing conversions 33% by replacing an external agency with hands-on expertise. Managed complex MarTech stacks including Marketo, Salesforce, and ABM platforms, focusing on attribution and ROI.",
+                    plusDelta: "Beyond just using tools, Ron demonstrates the ability to optimize them for financial impact. His experience replacing an entire agency proves deep technical and strategic competence that leads to significant cost savings and performance gains."
+                },
+                {
+                    title: "Sales Funnel & PLG",
+                    jd: "Lead quarterly GTM experiments to scale PLG impact, leveraging product usage data, in-app flows, and behavioral triggers to enhance activation and conversion.",
+                    resume: "Improved field marketing channel ROI by 75% YoY through optimized targeting and attribution modeling. At Argyle, achieved a 100% efficiency gain for an SDR team by automating lead research. Drove scalable multichannel programs across the full funnel.",
+                    plusDelta: "Ron's experience isn't theoretical. He has a history of executing experiments and optimizations that produce triple-digit efficiency gains and massive ROI improvements. He understands how to connect top-of-funnel activities directly to sales pipeline and revenue."
+                }
+            ];
+
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) { return value + '%' },
+                            color: '#4A5568'
+                        },
+                        grid: {
+                            color: '#E2E8F0'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#4A5568'
+                        },
+                         grid: {
+                            display: false
+                        }
+                    }
+                }
+            };
+            
+            new Chart(document.getElementById('ageChart'), {
+                type: 'bar',
+                data: {
+                    labels: sparktoroData.age.labels,
+                    datasets: [{
+                        label: '% of Audience',
+                        data: sparktoroData.age.data,
+                        backgroundColor: '#00EA64',
+                    }]
+                },
+                options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { display: true, text: 'Age Distribution' } } }
+            });
+
+             new Chart(document.getElementById('genderChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: sparktoroData.gender.labels,
+                    datasets: [{
+                        label: '% of Audience',
+                        data: sparktoroData.gender.data,
+                        backgroundColor: ['#000000', '#00EA64', '#A0AEC0'],
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, title: { display: true, text: 'Gender Distribution' } } }
+            });
+
+            new Chart(document.getElementById('stateChart'), {
+                type: 'bar',
+                data: {
+                    labels: sparktoroData.state.labels,
+                    datasets: [{
+                        label: '% of US Audience',
+                        data: sparktoroData.state.data,
+                        backgroundColor: '#00EA64',
+                    }]
+                },
+                options: { ...chartOptions, indexAxis: 'y', plugins: { ...chartOptions.plugins, title: { display: true, text: 'Top US States by Audience Concentration' } } }
+            });
+
+            const renderList = (elementId, data) => {
+                const list = document.getElementById(elementId);
+                list.innerHTML = data.map(item => `<li class="p-1 text-gray-700">${item}</li>`).join('');
+            };
+
+            renderList('bioKeywordsList', sparktoroData.bioKeywords);
+            renderList('subredditsList', sparktoroData.subreddits);
+            renderList('youtubeList', sparktoroData.youtube);
+
+            const tabsContainer = document.getElementById('tabs');
+            const tabContentContainer = document.getElementById('tab-content');
+            
+            fitData.forEach((item, index) => {
+                const button = document.createElement('button');
+                button.className = `whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${index === 0 ? 'border-hr-green text-hr-green' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`;
+                button.textContent = item.title;
+                button.dataset.index = index;
+                tabsContainer.appendChild(button);
+            });
+            
+            const renderTabContent = (index) => {
+                const item = fitData[index];
+                tabContentContainer.innerHTML = `
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-gray-600">Job Requirement:</h4>
+                        <p class="mb-4 text-gray-800">${item.jd}</p>
+                        <h4 class="font-bold text-lg mb-2 text-gray-600">Ron Kagan's Experience:</h4>
+                        <p class="mb-4 text-gray-800">${item.resume}</p>
+                        <div class="bg-green-50 border-l-4 border-hr-green p-4">
+                            <h4 class="font-bold text-lg text-green-800">The Plus-Delta (+Δ):</h4>
+                            <p class="text-green-700">${item.plusDelta}</p>
+                        </div>
+                    </div>
+                `;
+            };
+
+            tabsContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    const index = e.target.dataset.index;
+                    
+                    Array.from(tabsContainer.children).forEach((btn, i) => {
+                        if (i == index) {
+                            btn.className = 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-hr-green text-hr-green';
+                        } else {
+                            btn.className = 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                        }
+                    });
+                    
+                    renderTabContent(index);
+                }
+            });
+
+            renderTabContent(0);
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 60) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

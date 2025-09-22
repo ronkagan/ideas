@@ -1,0 +1,2478 @@
+html[data-hubspot-theme="canvas-light"] {
+  --trellis-border-radius-0: 0px;
+  --trellis-border-radius-100: 3px;
+  --trellis-border-radius-200: 4px;
+  --trellis-border-radius-300: 8px;
+  --trellis-border-radius-400: 16px;
+  --trellis-border-radius-breeze-core-component-default: 999999px;
+  --trellis-border-radius-breeze-textarea-default: 16px;
+  --trellis-border-radius-full: 999999px;
+  --trellis-border-radius-temp-do-not-use-300: 100px;
+  --trellis-border-radius-temp-future-300: 8px;
+  --trellis-border-radius-transitional-component: 0px;
+  --trellis-border-radius-transitional-container: 0px;
+  --trellis-border-radius-transitional-container-alt: 3px;
+  --trellis-border-radius-transitional-floating: 3px;
+  --trellis-border-radius-transitional-full-0: 0px;
+  --trellis-border-radius-transitional-full-3: 3px;
+  --trellis-border-radius-transitional-full-8: 8px;
+  --trellis-border-width-0: 0px;
+  --trellis-border-width-100: 1px;
+  --trellis-border-width-200: 2px;
+  --trellis-border-width-300: 4px;
+  --trellis-border-width-transitional-1: 2px;
+  --trellis-border-width-transitional-2: 0px;
+  --trellis-box-shadow-100: 0px 1px 5px 0px rgba(44, 61, 79, 0.12);
+  --trellis-box-shadow-200: 0px 1px 4px 0px rgba(66, 91, 117, 0.06);
+  --trellis-box-shadow-300: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
+  --trellis-box-shadow-400: 0px 1px 24px 0px rgba(0, 0, 0, 0.08);
+  --trellis-color-border-accent-blue-default: #00a4bd;
+  --trellis-color-border-accent-green-default: #00bda5;
+  --trellis-color-border-accent-light-orange-default: #ff7a59;
+  --trellis-color-border-accent-magenta-default: #f2547d;
+  --trellis-color-border-accent-orange-default: #ff7a59;
+  --trellis-color-border-accent-purple-default: #6a78d1;
+  --trellis-color-border-accent-red-default: #f2545b;
+  --trellis-color-border-accent-yellow-default: #f5c26b;
+  --trellis-color-border-alert-default: #f2545b;
+  --trellis-color-border-brand-default: #ff7a59;
+  --trellis-color-border-caution-default: #f5c26b;
+  --trellis-color-border-container-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-core-default: #cbd6e2;
+  --trellis-color-border-core-disabled: #eaf0f6;
+  --trellis-color-border-core-hover: #7c98b6;
+  --trellis-color-border-core-on-fill-default: #fff;
+  --trellis-color-border-core-pressed: #eaf0f6;
+  --trellis-color-border-core-subtle: #dfe3eb;
+  --trellis-color-border-core-subtle-hover: #cbd6e2;
+  --trellis-color-border-core-subtle-pressed: #99acc2;
+  --trellis-color-border-info-default: #00a4bd;
+  --trellis-color-border-interactive-default: #7fd1de;
+  --trellis-color-border-interactive-pressed: #0091ae;
+  --trellis-color-border-inverse-default: #fff;
+  --trellis-color-border-inverse-default-alt: #fff;
+  --trellis-color-border-inverse-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-inverse-disabled-alt: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-positive-default: #00bda5;
+  --trellis-color-border-primary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-primary-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-secondary-default: #ff7a59;
+  --trellis-color-border-secondary-default-alt: #ff7a59;
+  --trellis-color-border-secondary-disabled: transparent;
+  --trellis-color-border-tertiary-default: #cbd6e2;
+  --trellis-color-border-tertiary-disabled: transparent;
+  --trellis-color-border-transitional-core-subtle: #cbd6e2;
+  --trellis-color-border-transitional-core-subtle-alt: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-transitional-interactive-subtle: #7fd1de;
+  --trellis-color-border-transitional-primary-alt: #ff7a59;
+  --trellis-color-border-transitional-tertiary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-border-badge-default: linear-gradient(
+    135deg,
+    #ff3842,
+    #d20688
+  );
+  --trellis-color-breeze-border-field-default: #d20688;
+  --trellis-color-breeze-border-secondary-default: #d20688;
+  --trellis-color-breeze-border-secondary-disabled: #e6e6e6;
+  --trellis-color-breeze-border-secondary-hover: #a5016a;
+  --trellis-color-breeze-border-secondary-pressed: #800051;
+  --trellis-color-breeze-border-tertiary-default: #8a8a8a;
+  --trellis-color-breeze-border-tertiary-disabled: #e6e6e6;
+  --trellis-color-breeze-border-tertiary-hover: #8a8a8a;
+  --trellis-color-breeze-border-tertiary-pressed: #8a8a8a;
+  --trellis-color-breeze-fill-badge-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-component-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-feedback-active: #141414;
+  --trellis-color-breeze-fill-feedback-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-feedback-hover: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-breeze-fill-loading-dot-default: #ff9fcc;
+  --trellis-color-breeze-fill-primary-default: #d20688;
+  --trellis-color-breeze-fill-primary-disabled: #f5f5f5;
+  --trellis-color-breeze-fill-primary-hover: #a5016a;
+  --trellis-color-breeze-fill-primary-pressed: #800051;
+  --trellis-color-breeze-fill-secondary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-secondary-disabled: #eaf0f6;
+  --trellis-color-breeze-fill-secondary-hover: #fcebf2;
+  --trellis-color-breeze-fill-secondary-pressed: #fbdbe9;
+  --trellis-color-breeze-fill-shimmer-default: linear-gradient(
+    135deg,
+    #fbddd2,
+    #fbdbe9
+  );
+  --trellis-color-breeze-fill-special-btn-alt-default: linear-gradient(
+    114deg,
+    #fc0849,
+    #d20688
+  );
+  --trellis-color-breeze-fill-special-btn-alt-disabled: #fc0849;
+  --trellis-color-breeze-fill-special-btn-default: linear-gradient(
+    135deg,
+    #ff3842,
+    #d20688
+  );
+  --trellis-color-breeze-fill-special-btn-hover: linear-gradient(
+    135deg,
+    #d9002b,
+    #a5016a
+  );
+  --trellis-color-breeze-fill-special-btn-pressed: linear-gradient(
+    135deg,
+    #ac0020,
+    #800051
+  );
+  --trellis-color-breeze-fill-tertiary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-tertiary-disabled: #eaf0f6;
+  --trellis-color-breeze-fill-tertiary-hover: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-breeze-fill-tertiary-pressed: hsla(0, 0%, 8%, 0.11);
+  --trellis-color-breeze-fill-transparent-defauilt: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-icon-component-disabled: #8a8a8a;
+  --trellis-color-breeze-icon-feedback-active: #fff;
+  --trellis-color-breeze-icon-feedback-default: #141414;
+  --trellis-color-breeze-icon-field-default: #d20688;
+  --trellis-color-breeze-icon-field-disabled: #8a8a8a;
+  --trellis-color-breeze-icon-full-page-loader-default: linear-gradient(
+    135deg,
+    #fb31a7,
+    #ff4800 23%,
+    #fbddd2
+  );
+  --trellis-color-breeze-icon-icon-button-default: #141414;
+  --trellis-color-breeze-icon-icon-button-hover: #a5016a;
+  --trellis-color-breeze-icon-icon-button-pressed: #800051;
+  --trellis-color-breeze-icon-primary-default: #fff;
+  --trellis-color-breeze-icon-primary-disabled: #8a8a8a;
+  --trellis-color-breeze-icon-secondary-default: #d20688;
+  --trellis-color-breeze-icon-special-btn-default: #fff;
+  --trellis-color-breeze-icon-tertiary-default: #141414;
+  --trellis-color-breeze-icon-transparent-default: #d20688;
+  --trellis-color-breeze-text-badge-default: #d20688;
+  --trellis-color-breeze-text-component-disabled: #8a8a8a;
+  --trellis-color-breeze-text-field-default: #8a8a8a;
+  --trellis-color-breeze-text-field-disabled: #8a8a8a;
+  --trellis-color-breeze-text-field-input: #141414;
+  --trellis-color-breeze-text-primary-default: #fff;
+  --trellis-color-breeze-text-primary-disabled: #8a8a8a;
+  --trellis-color-breeze-text-secondary-default: #d20688;
+  --trellis-color-breeze-text-secondary-disabled: #8a8a8a;
+  --trellis-color-breeze-text-secondary-hover: #a5016a;
+  --trellis-color-breeze-text-secondary-pressed: #800051;
+  --trellis-color-breeze-text-special-btn-default: #fff;
+  --trellis-color-breeze-text-tertiary-default: #141414;
+  --trellis-color-breeze-text-tertiary-disabled: #8a8a8a;
+  --trellis-color-breeze-text-transparent-default: #d20688;
+  --trellis-color-breeze-text-transparent-hover: #a5016a;
+  --trellis-color-breeze-text-transparent-pressed: #800051;
+  --trellis-color-do-not-use-alert-danger: #f04b51;
+  --trellis-color-do-not-use-alert-success: #5967bc;
+  --trellis-color-do-not-use-alert-warning: #fdf3e1;
+  --trellis-color-do-not-use-battleship: #cbd6e2;
+  --trellis-color-do-not-use-button-danger-hover-fill: #ff5962;
+  --trellis-color-do-not-use-button-disabled-text: #b0c1d4;
+  --trellis-color-do-not-use-button-primary-hover-fill: #ff8f73;
+  --trellis-color-do-not-use-button-secondary-active-fill: #ffebe6;
+  --trellis-color-do-not-use-button-secondary-hover-fill: #fff8f6;
+  --trellis-color-do-not-use-button-secondary-text: #ff7a53;
+  --trellis-color-do-not-use-button-tertiary-light-hover-fill: #e5eaf0;
+  --trellis-color-do-not-use-button-tertiary-light-text: #506e91;
+  --trellis-color-do-not-use-calypso: #00a4bd;
+  --trellis-color-do-not-use-calypso-dark: #0091ae;
+  --trellis-color-do-not-use-calypso-light: #e5f5f8;
+  --trellis-color-do-not-use-calypso-medium: #7fd1de;
+  --trellis-color-do-not-use-candy-apple: #f2545b;
+  --trellis-color-do-not-use-candy-apple-dark: #d94c53;
+  --trellis-color-do-not-use-candy-apple-light: #fdedee;
+  --trellis-color-do-not-use-candy-apple-medium: #f8a9ad;
+  --trellis-color-do-not-use-chart-aqua: #51d3d9;
+  --trellis-color-do-not-use-chart-blue: #81c1fd;
+  --trellis-color-do-not-use-chart-dark-purple: #9784c2;
+  --trellis-color-do-not-use-chart-green: #a2d28f;
+  --trellis-color-do-not-use-chart-orange: #fea58e;
+  --trellis-color-do-not-use-chart-purple: #bda9ea;
+  --trellis-color-do-not-use-chart-red: #ea90b1;
+  --trellis-color-do-not-use-chart-yellow: #f5c78e;
+  --trellis-color-do-not-use-cirrus: #f2f5f8;
+  --trellis-color-do-not-use-eerie: #7c98b6;
+  --trellis-color-do-not-use-facebook: #3b5998;
+  --trellis-color-do-not-use-flat-earth: #253342;
+  --trellis-color-do-not-use-flint: #99acc2;
+  --trellis-color-do-not-use-focus-ring-base: #00d0e4;
+  --trellis-color-do-not-use-google: #dd4b39;
+  --trellis-color-do-not-use-great-white: #dfe3eb;
+  --trellis-color-do-not-use-gypsum: #f5f8fa;
+  --trellis-color-do-not-use-heffalump: #425b76;
+  --trellis-color-do-not-use-instagram: #c13584;
+  --trellis-color-do-not-use-koala: #eaf0f6;
+  --trellis-color-do-not-use-link-hover: #007a8c;
+  --trellis-color-do-not-use-linkedin: #0077b5;
+  --trellis-color-do-not-use-lorax: #ff7a59;
+  --trellis-color-do-not-use-lorax-dark: #e66e50;
+  --trellis-color-do-not-use-lorax-light: #fff1ee;
+  --trellis-color-do-not-use-lorax-medium: #ffbcac;
+  --trellis-color-do-not-use-marigold: #f5c26b;
+  --trellis-color-do-not-use-marigold-dark: #dbae60;
+  --trellis-color-do-not-use-marigold-light: #fef8f0;
+  --trellis-color-do-not-use-marigold-medium: #fae0b5;
+  --trellis-color-do-not-use-monolith: #000;
+  --trellis-color-do-not-use-norman: #f2547d;
+  --trellis-color-do-not-use-norman-dark: #d94c71;
+  --trellis-color-do-not-use-norman-light: #fdedf2;
+  --trellis-color-do-not-use-norman-medium: #f9aabe;
+  --trellis-color-do-not-use-obsidian: #33475b;
+  --trellis-color-do-not-use-olaf: #fff;
+  --trellis-color-do-not-use-oz: #00bda5;
+  --trellis-color-do-not-use-oz-dark: #00a38d;
+  --trellis-color-do-not-use-oz-light: #e5f8f6;
+  --trellis-color-do-not-use-oz-medium: #7fded2;
+  --trellis-color-do-not-use-pantera: #2d3e50;
+  --trellis-color-do-not-use-pinterest: #bd081c;
+  --trellis-color-do-not-use-rss: #f26522;
+  --trellis-color-do-not-use-slinky: #516f90;
+  --trellis-color-do-not-use-sorbet: #ff8f59;
+  --trellis-color-do-not-use-sorbet-dark: #e68250;
+  --trellis-color-do-not-use-sorbet-light: #fff3ee;
+  --trellis-color-do-not-use-sorbet-medium: #ffc7ac;
+  --trellis-color-do-not-use-thunderdome: #6a78d1;
+  --trellis-color-do-not-use-thunderdome-dark: #5e6ab8;
+  --trellis-color-do-not-use-thunderdome-light: #f0f1fa;
+  --trellis-color-do-not-use-thunderdome-medium: #b4bbe8;
+  --trellis-color-do-not-use-transparent: transparent;
+  --trellis-color-do-not-use-transparent-dark: transparent;
+  --trellis-color-do-not-use-transparent-light: hsla(0, 0%, 100%, 0);
+  --trellis-color-do-not-use-twitter: #55acee;
+  --trellis-color-do-not-use-x: #000;
+  --trellis-color-do-not-use-xing: #026466;
+  --trellis-color-do-not-use-youtube: red;
+  --trellis-color-fill-accent-blue-default: #00a4bd;
+  --trellis-color-fill-accent-blue-hover: #7fd1de;
+  --trellis-color-fill-accent-blue-pressed: #0091ae;
+  --trellis-color-fill-accent-blue-subtle: #e5f5f8;
+  --trellis-color-fill-accent-blue-subtle-alt: #e5f5f8;
+  --trellis-color-fill-accent-green-default: #00bda5;
+  --trellis-color-fill-accent-green-hover: #7fded2;
+  --trellis-color-fill-accent-green-pressed: #00a38d;
+  --trellis-color-fill-accent-green-subtle: #e5f8f6;
+  --trellis-color-fill-accent-green-subtle-alt: #e5f8f6;
+  --trellis-color-fill-accent-light-orange-default: #ff8f59;
+  --trellis-color-fill-accent-light-orange-hover: #ffc7ac;
+  --trellis-color-fill-accent-light-orange-pressed: #e68250;
+  --trellis-color-fill-accent-light-orange-subtle: #fff3ee;
+  --trellis-color-fill-accent-light-orange-subtle-alt: #fff3ee;
+  --trellis-color-fill-accent-magenta-default: #f2547d;
+  --trellis-color-fill-accent-magenta-hover: #f9aabe;
+  --trellis-color-fill-accent-magenta-pressed: #d94c71;
+  --trellis-color-fill-accent-magenta-subtle: #fdedf2;
+  --trellis-color-fill-accent-magenta-subtle-alt: #fdedf2;
+  --trellis-color-fill-accent-neutral-default: #425b76;
+  --trellis-color-fill-accent-neutral-hover: #516f90;
+  --trellis-color-fill-accent-neutral-pressed: #33475b;
+  --trellis-color-fill-accent-neutral-subtle: #425b76;
+  --trellis-color-fill-accent-neutral-subtle-alt: #eaf0f6;
+  --trellis-color-fill-accent-orange-default: #ff7a59;
+  --trellis-color-fill-accent-orange-hover: #ffbcac;
+  --trellis-color-fill-accent-orange-pressed: #e66e50;
+  --trellis-color-fill-accent-orange-subtle: #fff1ee;
+  --trellis-color-fill-accent-orange-subtle-alt: #fff1ee;
+  --trellis-color-fill-accent-purple-default: #6a78d1;
+  --trellis-color-fill-accent-purple-hover: #b4bbe8;
+  --trellis-color-fill-accent-purple-pressed: #5e6ab8;
+  --trellis-color-fill-accent-purple-subtle: #f0f1fa;
+  --trellis-color-fill-accent-purple-subtle-alt: #f0f1fa;
+  --trellis-color-fill-accent-red-default: #f2545b;
+  --trellis-color-fill-accent-red-hover: #f8a9ad;
+  --trellis-color-fill-accent-red-pressed: #d94c53;
+  --trellis-color-fill-accent-red-subtle: #fdedee;
+  --trellis-color-fill-accent-red-subtle-alt: #fdedee;
+  --trellis-color-fill-accent-teal-default: #00a4bd;
+  --trellis-color-fill-accent-teal-hover: #7fd1de;
+  --trellis-color-fill-accent-teal-pressed: #0091ae;
+  --trellis-color-fill-accent-teal-subtle: #e5f5f8;
+  --trellis-color-fill-accent-teal-subtle-alt: #e5f5f8;
+  --trellis-color-fill-accent-yellow-default: #f5c26b;
+  --trellis-color-fill-accent-yellow-hover: #fae0b5;
+  --trellis-color-fill-accent-yellow-pressed: #dbae60;
+  --trellis-color-fill-accent-yellow-subtle: #fef8f0;
+  --trellis-color-fill-accent-yellow-subtle-alt: #fef8f0;
+  --trellis-color-fill-alert-default: #f2545b;
+  --trellis-color-fill-alert-hover: #ff5962;
+  --trellis-color-fill-alert-pressed: #d94c53;
+  --trellis-color-fill-alert-subtle: #fdedee;
+  --trellis-color-fill-brand-default: #ff7a59;
+  --trellis-color-fill-brand-hover: #ff8f73;
+  --trellis-color-fill-brand-pressed: #e66e50;
+  --trellis-color-fill-brand-subtle: #fff1ee;
+  --trellis-color-fill-caution-default: #f5c26b;
+  --trellis-color-fill-caution-hover: #fae0b5;
+  --trellis-color-fill-caution-pressed: #dbae60;
+  --trellis-color-fill-caution-subtle: #fef8f0;
+  --trellis-color-fill-field-default: #f5f8fa;
+  --trellis-color-fill-field-default-alt: #fff;
+  --trellis-color-fill-field-disabled: #eaf0f6;
+  --trellis-color-fill-field-hover: #e5f5f8;
+  --trellis-color-fill-field-pressed: #eaf0f6;
+  --trellis-color-fill-info-default: #00a4bd;
+  --trellis-color-fill-info-hover: #7fd1de;
+  --trellis-color-fill-info-pressed: #0091ae;
+  --trellis-color-fill-info-subtle: #e5f5f8;
+  --trellis-color-fill-inverse-danger: #f2545b;
+  --trellis-color-fill-inverse-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-inverse-default-alt: #fff;
+  --trellis-color-fill-inverse-default-transparent: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-inverse-disabled: #eaf0f6;
+  --trellis-color-fill-inverse-disabled-alt: #eaf0f6;
+  --trellis-color-fill-inverse-disabled-transparent: #eaf0f6;
+  --trellis-color-fill-inverse-hover: hsla(0, 0%, 100%, 0.08);
+  --trellis-color-fill-inverse-hover-alt: #fff;
+  --trellis-color-fill-inverse-hover-transparent: hsla(0, 0%, 100%, 0.08);
+  --trellis-color-fill-inverse-pressed: hsla(0, 0%, 100%, 0.11);
+  --trellis-color-fill-inverse-pressed-alt: #fff;
+  --trellis-color-fill-inverse-pressed-transparent: hsla(0, 0%, 100%, 0.11);
+  --trellis-color-fill-inverse-primary: #ff7a59;
+  --trellis-color-fill-inverse-subtle: #425b76;
+  --trellis-color-fill-positive-default: #00bda5;
+  --trellis-color-fill-positive-hover: #7fded2;
+  --trellis-color-fill-positive-pressed: #00a38d;
+  --trellis-color-fill-positive-subtle: #e5f8f6;
+  --trellis-color-fill-primary-default: #ff7a59;
+  --trellis-color-fill-primary-disabled: #eaf0f6;
+  --trellis-color-fill-primary-hover: #ff8f73;
+  --trellis-color-fill-primary-pressed: #e66e50;
+  --trellis-color-fill-secondary-default: #fff;
+  --trellis-color-fill-secondary-default-alt: #fff;
+  --trellis-color-fill-secondary-disabled: #eaf0f6;
+  --trellis-color-fill-secondary-disabled-alt: #eaf0f6;
+  --trellis-color-fill-secondary-hover: #fff1ee;
+  --trellis-color-fill-secondary-hover-alt: #fff1ee;
+  --trellis-color-fill-secondary-pressed: #fff1ee;
+  --trellis-color-fill-secondary-pressed-alt: #fff1ee;
+  --trellis-color-fill-surface-default: #fff;
+  --trellis-color-fill-surface-default-hover: #fff;
+  --trellis-color-fill-surface-default-pressed: #fff;
+  --trellis-color-fill-surface-raised: #f5f8fa;
+  --trellis-color-fill-surface-recessed: #f5f8fa;
+  --trellis-color-fill-surface-recessed-hover: #fff;
+  --trellis-color-fill-surface-recessed-pressed: #fff;
+  --trellis-color-fill-tertiary-default: #eaf0f6;
+  --trellis-color-fill-tertiary-disabled: #eaf0f6;
+  --trellis-color-fill-tertiary-hover: #f5f8fa;
+  --trellis-color-fill-tertiary-pressed: #cbd6e2;
+  --trellis-color-fill-transitional-alert: #f2547d;
+  --trellis-color-fill-transitional-banner-gradient-color-1: #ff7a59;
+  --trellis-color-fill-transitional-banner-gradient-color-2: #f2547d;
+  --trellis-color-fill-transitional-beta-button-gradient-color-1: #00a4bd;
+  --trellis-color-fill-transitional-beta-button-gradient-color-2: #00bda5;
+  --trellis-color-fill-transitional-beta-button-hover: #0091ae;
+  --trellis-color-fill-transitional-danger-pattern-color-1: #ff5962;
+  --trellis-color-fill-transitional-danger-pattern-color-2: #f2545b;
+  --trellis-color-fill-transitional-field-hover: #7fd1de;
+  --trellis-color-fill-transitional-modal-gradient-color-1: #00a4bd;
+  --trellis-color-fill-transitional-modal-gradient-color-2: #00bda5;
+  --trellis-color-fill-transitional-popover: #6a78d1;
+  --trellis-color-fill-transitional-progress-success-gradient-color-1: #00bda5;
+  --trellis-color-fill-transitional-progress-success-gradient-color-2: #00a4bd;
+  --trellis-color-fill-transitional-progress-warning-danger-gradient-color-1: #ff8f59;
+  --trellis-color-fill-transitional-progress-warning-danger-gradient-color-2: #f5c26b;
+  --trellis-color-fill-transitional-scroll-default-gradient-color-1: #f5f8fa;
+  --trellis-color-fill-transitional-scroll-default-gradient-color-2: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-fill-transitional-scroll-fadeout-gradient-color-1: #fff;
+  --trellis-color-fill-transitional-scroll-fadeout-gradient-color-2: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-fill-transitional-shadow: rgba(255, 143, 89, 0.4);
+  --trellis-color-fill-transitional-sidenav-on-recessed-active: #e5f5f8;
+  --trellis-color-fill-transitional-table-default: #f5f8fa;
+  --trellis-color-fill-transitional-tabs-default: #f5f8fa;
+  --trellis-color-fill-transitional-tabs-pressed: #f5f8fa;
+  --trellis-color-fill-transitional-tertiary-default: #425b76;
+  --trellis-color-fill-transitional-tertiary-hover: #516f90;
+  --trellis-color-fill-transitional-tertiary-pressed: #33475b;
+  --trellis-color-fill-transitional-upgrade-modal-gradient-color-1: #ff7a59;
+  --trellis-color-fill-transparent-default: transparent;
+  --trellis-color-fill-transparent-disabled: #eaf0f6;
+  --trellis-color-fill-transparent-hover: #f5f8fa;
+  --trellis-color-fill-transparent-pressed: #f5f8fa;
+  --trellis-color-global-shell-border-dark: #425b76;
+  --trellis-color-global-shell-border-default: #516f90;
+  --trellis-color-global-shell-border-search-btn-border-default: #516f90;
+  --trellis-color-global-shell-border-search-btn-border-hover: #425b76;
+  --trellis-color-global-shell-border-search-field-border-default: rgba(
+    0,
+    0,
+    0,
+    0
+  );
+  --trellis-color-global-shell-border-subtle: #7c98b6;
+  --trellis-color-global-shell-fill-editortitle-hover: #516f90;
+  --trellis-color-global-shell-fill-logo-default: #ff7a59;
+  --trellis-color-global-shell-fill-nav-item-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-global-shell-fill-nav-item-hover: #425b76;
+  --trellis-color-global-shell-fill-nav-item-selected: #516f90;
+  --trellis-color-global-shell-fill-search-default: #425b76;
+  --trellis-color-global-shell-fill-search-hover: #425b76;
+  --trellis-color-global-shell-fill-sub-nav-item-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-global-shell-fill-sub-nav-item-hover: #516f90;
+  --trellis-color-global-shell-fill-sub-nav-item-selected: #516f90;
+  --trellis-color-global-shell-fill-surface-default: #2d3e50;
+  --trellis-color-global-shell-fill-surface-panel-default: #425b76;
+  --trellis-color-global-shell-icon-bookmark-default: transparent;
+  --trellis-color-global-shell-icon-bookmark-hover: #dfe3eb;
+  --trellis-color-global-shell-icon-bookmark-selected: #7c98b6;
+  --trellis-color-global-shell-icon-copilot-default: #fbdbe9;
+  --trellis-color-global-shell-icon-nav-item-default: #dfe3eb;
+  --trellis-color-global-shell-icon-nav-item-hover: #f5f8fa;
+  --trellis-color-global-shell-icon-nav-item-selected: #fff;
+  --trellis-color-global-shell-icon-nav-item-subtle: #516f90;
+  --trellis-color-global-shell-text-copilot-default: #fbdbe9;
+  --trellis-color-global-shell-text-copilot-hover: #fff;
+  --trellis-color-global-shell-text-nav-item-default: #dfe3eb;
+  --trellis-color-global-shell-text-nav-item-hover: #f5f8fa;
+  --trellis-color-global-shell-text-nav-item-selected: #fff;
+  --trellis-color-icon-alert-default: #f2545b;
+  --trellis-color-icon-alert-hover: #f8a9ad;
+  --trellis-color-icon-alert-on-fill-default: #fff;
+  --trellis-color-icon-alert-pressed: #d94c53;
+  --trellis-color-icon-core-default: #33475b;
+  --trellis-color-icon-core-disabled: #99acc2;
+  --trellis-color-icon-core-on-fill-default: #fff;
+  --trellis-color-icon-core-subtle: #7c98b6;
+  --trellis-color-icon-interactive-default: #0091ae;
+  --trellis-color-icon-interactive-disabled: #99acc2;
+  --trellis-color-icon-interactive-hover: #007a8c;
+  --trellis-color-icon-interactive-on-fill-default: #fff;
+  --trellis-color-icon-interactive-on-fill-hover: #fff;
+  --trellis-color-icon-interactive-on-fill-pressed: #fff;
+  --trellis-color-icon-interactive-pressed: #7fd1de;
+  --trellis-color-icon-inverse-default: #fff;
+  --trellis-color-icon-inverse-default-alt: #33475b;
+  --trellis-color-icon-inverse-disabled: #99acc2;
+  --trellis-color-icon-inverse-disabled-alt: #99acc2;
+  --trellis-color-icon-inverse-hover: #7fd1de;
+  --trellis-color-icon-inverse-pressed: #fff;
+  --trellis-color-icon-primary-default: #fff;
+  --trellis-color-icon-primary-disabled: #99acc2;
+  --trellis-color-icon-primary-hover: #fff;
+  --trellis-color-icon-primary-pressed: #fff;
+  --trellis-color-icon-secondary-default: #ff7a59;
+  --trellis-color-icon-secondary-disabled: #99acc2;
+  --trellis-color-icon-tertiary-default: #516f90;
+  --trellis-color-icon-tertiary-disabled: #99acc2;
+  --trellis-color-reporting-fill-chart-alert: #f2545b;
+  --trellis-color-reporting-fill-chart-caution: #f5c26b;
+  --trellis-color-reporting-fill-chart-default-dark-aqua: #009ca2;
+  --trellis-color-reporting-fill-chart-default-dark-blue: #468cc4;
+  --trellis-color-reporting-fill-chart-default-dark-green: #6b9a5b;
+  --trellis-color-reporting-fill-chart-default-dark-orange: #c3705c;
+  --trellis-color-reporting-fill-chart-default-dark-pink: #b05c7d;
+  --trellis-color-reporting-fill-chart-default-dark-purple: #8775b2;
+  --trellis-color-reporting-fill-chart-default-dark-yellow: #bb915b;
+  --trellis-color-reporting-fill-chart-default-light-aqua: #51d3d9;
+  --trellis-color-reporting-fill-chart-default-light-blue: #81c1fd;
+  --trellis-color-reporting-fill-chart-default-light-green: #a4d398;
+  --trellis-color-reporting-fill-chart-default-light-orange: #fea58e;
+  --trellis-color-reporting-fill-chart-default-light-pink: #ea90b1;
+  --trellis-color-reporting-fill-chart-default-light-purple: #bda9ea;
+  --trellis-color-reporting-fill-chart-default-light-yellow: #f5c78e;
+  --trellis-color-reporting-fill-chart-positive: #00bda5;
+  --trellis-color-reporting-fill-chart-scale-dark-aqua: #066469;
+  --trellis-color-reporting-fill-chart-scale-dark-blue: #005a8e;
+  --trellis-color-reporting-fill-chart-scale-dark-green: #315f24;
+  --trellis-color-reporting-fill-chart-scale-dark-orange: #904233;
+  --trellis-color-reporting-fill-chart-scale-dark-pink: #8f3e5f;
+  --trellis-color-reporting-fill-chart-scale-dark-purple: #5b4b85;
+  --trellis-color-reporting-fill-chart-scale-dark-yellow: #cb8007;
+  --trellis-color-reporting-fill-chart-scale-light-aqua: #a7ffff;
+  --trellis-color-reporting-fill-chart-scale-light-blue: #c7ffff;
+  --trellis-color-reporting-fill-chart-scale-light-green: #dbffc7;
+  --trellis-color-reporting-fill-chart-scale-light-orange: #fffbe6;
+  --trellis-color-reporting-fill-chart-scale-light-pink: #ffe4ff;
+  --trellis-color-reporting-fill-chart-scale-light-purple: #fdf2ff;
+  --trellis-color-reporting-fill-chart-scale-light-yellow: #fff1da;
+  --trellis-color-reporting-fill-chart-white: #fff;
+  --trellis-color-reporting-fill-highlight-blue-default: #7fd1de;
+  --trellis-color-reporting-fill-highlight-blue-subtle: #e5f5f8;
+  --trellis-color-reporting-fill-highlight-green-default: #7fded2;
+  --trellis-color-reporting-fill-highlight-green-subtle: #e5f8f6;
+  --trellis-color-reporting-fill-highlight-orange-default: #ffbcac;
+  --trellis-color-reporting-fill-highlight-orange-subtle: #fff1ee;
+  --trellis-color-reporting-fill-highlight-red-default: #f8a9ad;
+  --trellis-color-reporting-fill-highlight-red-subtle: #fdedee;
+  --trellis-color-reporting-fill-highlight-yellow-default: #fae0b5;
+  --trellis-color-reporting-fill-highlight-yellow-subtle: #fef8f0;
+  --trellis-color-specialty-link-on-fill-alt-default: #fff;
+  --trellis-color-specialty-link-on-fill-alt-disabled: #99acc2;
+  --trellis-color-specialty-link-on-fill-alt-hover: #7fd1de;
+  --trellis-color-specialty-link-on-fill-alt-pressed: #fff;
+  --trellis-color-specialty-link-on-fill-default: #fff;
+  --trellis-color-specialty-link-on-fill-disabled: #99acc2;
+  --trellis-color-specialty-link-on-fill-hover: #7fd1de;
+  --trellis-color-specialty-link-on-fill-pressed: #fff;
+  --trellis-color-specialty-primary-on-fill-default: #ff7a59;
+  --trellis-color-specialty-primary-on-fill-disabled: #eaf0f6;
+  --trellis-color-specialty-primary-on-fill-hover: #ff8f73;
+  --trellis-color-specialty-primary-on-fill-pressed: #e66e50;
+  --trellis-color-specialty-scrim: rgba(45, 62, 80, 0.8);
+  --trellis-color-specialty-scrim-alt: hsla(0, 0%, 100%, 0.8);
+  --trellis-color-specialty-table-header-default: #f5f8fa;
+  --trellis-color-specialty-table-header-hover: #e5f5f8;
+  --trellis-color-specialty-table-header-pressed: #eaf0f6;
+  --trellis-color-specialty-tertiary-on-fill-default: #fff;
+  --trellis-color-specialty-tertiary-on-fill-disabled: #eaf0f6;
+  --trellis-color-specialty-tertiary-on-fill-hover: #f5f8fa;
+  --trellis-color-specialty-tertiary-on-fill-pressed: #cbd6e2;
+  --trellis-color-specialty-tertiary-transparent-default: #eaf0f6;
+  --trellis-color-specialty-tertiary-transparent-disabled: #eaf0f6;
+  --trellis-color-specialty-tertiary-transparent-hover: #f5f8fa;
+  --trellis-color-specialty-tertiary-transparent-pressed: #cbd6e2;
+  --trellis-color-specialty-text-core-alt-default: #33475b;
+  --trellis-color-specialty-text-interactive-alt-default: #0091ae;
+  --trellis-color-specialty-text-interactive-alt-hover: #007a8c;
+  --trellis-color-specialty-text-interactive-alt-pressed: #7fd1de;
+  --trellis-color-temp-do-not-use-border-primary-default: #cbd6e2;
+  --trellis-color-temp-do-not-use-border-primary-disabled: #eaf0f6;
+  --trellis-color-temp-do-not-use-fill-accent-teal-default: #007c7d;
+  --trellis-color-temp-do-not-use-fill-accent-teal-hover: #006162;
+  --trellis-color-temp-do-not-use-fill-accent-teal-pressed: #00494b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-subtle: #051919;
+  --trellis-color-temp-do-not-use-fill-field-hover: #f5f8fa;
+  --trellis-color-temp-do-not-use-fill-field-pressed: #f5f8fa;
+  --trellis-color-temp-do-not-use-fill-secondary-default: #00a4bd;
+  --trellis-color-temp-do-not-use-fill-secondary-hover: #7fd1de;
+  --trellis-color-temp-do-not-use-fill-secondary-pressed: #0091ae;
+  --trellis-color-temp-do-not-use-fill-surface-default-hover: #242424;
+  --trellis-color-temp-do-not-use-fill-surface-default-pressed: #292929;
+  --trellis-color-temp-do-not-use-fill-surface-recessed: #253342;
+  --trellis-color-temp-do-not-use-icon-primary-default: #7c98b6;
+  --trellis-color-temp-do-not-use-icon-primary-hover: #7c98b6;
+  --trellis-color-temp-do-not-use-icon-primary-pressed: #33475b;
+  --trellis-color-temp-do-not-use-specialty-scrim: #000;
+  --trellis-color-temp-do-not-use-text-primary-default: #33475b;
+  --trellis-color-temp-do-not-use-text-primary-subtle: #516f90;
+  --trellis-color-temp-future-border-primary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-temp-future-border-primary-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-temp-future-fill-accent-teal-default: #00a4bd;
+  --trellis-color-temp-future-fill-accent-teal-hover: #7fd1de;
+  --trellis-color-temp-future-fill-accent-teal-pressed: #0091ae;
+  --trellis-color-temp-future-fill-accent-teal-subtle: #e5f5f8;
+  --trellis-color-temp-future-fill-field-hover: #e5f5f8;
+  --trellis-color-temp-future-fill-field-pressed: #eaf0f6;
+  --trellis-color-temp-future-fill-secondary-default: #fff;
+  --trellis-color-temp-future-fill-secondary-hover: #fff1ee;
+  --trellis-color-temp-future-fill-secondary-pressed: #fff1ee;
+  --trellis-color-temp-future-fill-surface-default-hover: #fff;
+  --trellis-color-temp-future-fill-surface-default-pressed: #fff;
+  --trellis-color-temp-future-fill-surface-recessed: #f5f8fa;
+  --trellis-color-temp-future-icon-primary-default: #fff;
+  --trellis-color-temp-future-icon-primary-hover: #fff;
+  --trellis-color-temp-future-icon-primary-pressed: #fff;
+  --trellis-color-temp-future-specialty-scrim: rgba(45, 62, 80, 0.8);
+  --trellis-color-temp-future-text-primary-default: #fff;
+  --trellis-color-temp-future-text-primary-subtle: #fff;
+  --trellis-color-text-alert-default: #f2545b;
+  --trellis-color-text-alert-hover: #f8a9ad;
+  --trellis-color-text-alert-on-fill-default: #fff;
+  --trellis-color-text-alert-pressed: #d94c53;
+  --trellis-color-text-brand-default: #ff7a59;
+  --trellis-color-text-core-default: #33475b;
+  --trellis-color-text-core-disabled: #99acc2;
+  --trellis-color-text-core-on-fill-default: #fff;
+  --trellis-color-text-core-subtle: #516f90;
+  --trellis-color-text-interactive-default: #0091ae;
+  --trellis-color-text-interactive-default-disabled: #99acc2;
+  --trellis-color-text-interactive-default-hover: #007a8c;
+  --trellis-color-text-interactive-default-pressed: #7fd1de;
+  --trellis-color-text-interactive-on-fill: #fff;
+  --trellis-color-text-interactive-on-fill-default: #fff;
+  --trellis-color-text-interactive-on-fill-hover: #fff;
+  --trellis-color-text-interactive-on-fill-pressed: #fff;
+  --trellis-color-text-inverse-default: #fff;
+  --trellis-color-text-inverse-default-alt: #33475b;
+  --trellis-color-text-inverse-disabled: #99acc2;
+  --trellis-color-text-inverse-disabled-alt: #99acc2;
+  --trellis-color-text-inverse-hover: #7fd1de;
+  --trellis-color-text-inverse-pressed: #fff;
+  --trellis-color-text-primary-default: #fff;
+  --trellis-color-text-primary-disabled: #99acc2;
+  --trellis-color-text-primary-subtle: #fff;
+  --trellis-color-text-secondary-default: #ff7a59;
+  --trellis-color-text-secondary-disabled: #99acc2;
+  --trellis-color-text-tertiary-default: #516f90;
+  --trellis-color-text-tertiary-disabled: #99acc2;
+  --trellis-space-0: 0px;
+  --trellis-space-25: 1px;
+  --trellis-space-50: 2px;
+  --trellis-space-100: 4px;
+  --trellis-space-200: 8px;
+  --trellis-space-250: 10px;
+  --trellis-space-300: 12px;
+  --trellis-space-400: 16px;
+  --trellis-space-500: 20px;
+  --trellis-space-600: 24px;
+  --trellis-space-700: 28px;
+  --trellis-space-800: 32px;
+  --trellis-space-900: 36px;
+  --trellis-space-1000: 40px;
+  --trellis-space-1100: 48px;
+  --trellis-space-1200: 56px;
+  --trellis-space-1300: 60px;
+  --trellis-space-1400: 64px;
+  --trellis-space-1500: 96px;
+  --trellis-space-1600: 144px;
+  --trellis-space-1700: 192px;
+  --trellis-typography-body-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-100-font-size: 14px;
+  --trellis-typography-body-100-font-weight: 300;
+  --trellis-typography-body-100-letter-spacing: 0px;
+  --trellis-typography-body-100-line-height: 24px;
+  --trellis-typography-body-125-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-125-font-size: 14px;
+  --trellis-typography-body-125-font-weight: 600;
+  --trellis-typography-body-125-letter-spacing: 0px;
+  --trellis-typography-body-125-line-height: 24px;
+  --trellis-typography-body-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-200-font-size: 16px;
+  --trellis-typography-body-200-font-weight: 300;
+  --trellis-typography-body-200-letter-spacing: 0px;
+  --trellis-typography-body-200-line-height: 24px;
+  --trellis-typography-body-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-300-font-size: 18px;
+  --trellis-typography-body-300-font-weight: 400;
+  --trellis-typography-body-300-letter-spacing: 0px;
+  --trellis-typography-body-300-line-height: 24px;
+  --trellis-typography-body-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-400-font-size: 20px;
+  --trellis-typography-body-400-font-weight: 400;
+  --trellis-typography-body-400-letter-spacing: 0px;
+  --trellis-typography-body-400-line-height: 28px;
+  --trellis-typography-body-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-500-font-size: 22px;
+  --trellis-typography-body-500-font-weight: 400;
+  --trellis-typography-body-500-letter-spacing: 0px;
+  --trellis-typography-body-500-line-height: 28px;
+  --trellis-typography-body-600-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-600-font-size: 26px;
+  --trellis-typography-body-600-font-weight: 400;
+  --trellis-typography-body-600-letter-spacing: 0px;
+  --trellis-typography-body-600-line-height: 32px;
+  --trellis-typography-body-700-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-700-font-size: 28px;
+  --trellis-typography-body-700-font-weight: 400;
+  --trellis-typography-body-700-letter-spacing: 0px;
+  --trellis-typography-body-700-line-height: 36px;
+  --trellis-typography-code-100-font-family: Source Code Pro, Consolas, Monaco,
+    Courier New, monospace;
+  --trellis-typography-code-100-font-size: 14px;
+  --trellis-typography-code-100-font-weight: 500;
+  --trellis-typography-code-100-letter-spacing: 0px;
+  --trellis-typography-code-100-line-height: 24px;
+  --trellis-typography-detail-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-detail-100-font-size: 12px;
+  --trellis-typography-detail-100-font-weight: 300;
+  --trellis-typography-detail-100-letter-spacing: 0px;
+  --trellis-typography-detail-100-line-height: 14px;
+  --trellis-typography-detail-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-detail-200-font-size: 12px;
+  --trellis-typography-detail-200-font-weight: 300;
+  --trellis-typography-detail-200-letter-spacing: 0px;
+  --trellis-typography-detail-200-line-height: 18px;
+  --trellis-typography-display-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-100-font-size: 56px;
+  --trellis-typography-display-100-font-weight: 500;
+  --trellis-typography-display-100-letter-spacing: -0.32px;
+  --trellis-typography-display-100-line-height: 72px;
+  --trellis-typography-display-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-200-font-size: 66px;
+  --trellis-typography-display-200-font-weight: 500;
+  --trellis-typography-display-200-letter-spacing: -0.32px;
+  --trellis-typography-display-200-line-height: 76px;
+  --trellis-typography-display-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-300-font-size: 76px;
+  --trellis-typography-display-300-font-weight: 500;
+  --trellis-typography-display-300-letter-spacing: -0.32px;
+  --trellis-typography-display-300-line-height: 88px;
+  --trellis-typography-display-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-400-font-size: 84px;
+  --trellis-typography-display-400-font-weight: 500;
+  --trellis-typography-display-400-letter-spacing: -0.32px;
+  --trellis-typography-display-400-line-height: 96px;
+  --trellis-typography-display-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-500-font-size: 94px;
+  --trellis-typography-display-500-font-weight: 500;
+  --trellis-typography-display-500-letter-spacing: -0.32px;
+  --trellis-typography-display-500-line-height: 100px;
+  --trellis-typography-heading-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-100-font-size: 16px;
+  --trellis-typography-heading-100-font-weight: 600;
+  --trellis-typography-heading-100-letter-spacing: 0px;
+  --trellis-typography-heading-100-line-height: 20px;
+  --trellis-typography-heading-1000-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-1000-font-size: 55px;
+  --trellis-typography-heading-1000-font-weight: 700;
+  --trellis-typography-heading-1000-letter-spacing: 0px;
+  --trellis-typography-heading-1000-line-height: 67px;
+  --trellis-typography-heading-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-200-font-size: 18px;
+  --trellis-typography-heading-200-font-weight: 500;
+  --trellis-typography-heading-200-letter-spacing: 0px;
+  --trellis-typography-heading-200-line-height: 24px;
+  --trellis-typography-heading-25-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-25-font-size: 12px;
+  --trellis-typography-heading-25-font-weight: 600;
+  --trellis-typography-heading-25-letter-spacing: 0px;
+  --trellis-typography-heading-25-line-height: 18px;
+  --trellis-typography-heading-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-300-font-size: 20px;
+  --trellis-typography-heading-300-font-weight: 600;
+  --trellis-typography-heading-300-letter-spacing: 0px;
+  --trellis-typography-heading-300-line-height: 24px;
+  --trellis-typography-heading-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-400-font-size: 22px;
+  --trellis-typography-heading-400-font-weight: 500;
+  --trellis-typography-heading-400-letter-spacing: 0px;
+  --trellis-typography-heading-400-line-height: 27px;
+  --trellis-typography-heading-50-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-50-font-size: 14px;
+  --trellis-typography-heading-50-font-weight: 600;
+  --trellis-typography-heading-50-letter-spacing: 0px;
+  --trellis-typography-heading-50-line-height: 18px;
+  --trellis-typography-heading-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-500-font-size: 24px;
+  --trellis-typography-heading-500-font-weight: 300;
+  --trellis-typography-heading-500-letter-spacing: 0px;
+  --trellis-typography-heading-500-line-height: 29px;
+  --trellis-typography-heading-600-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-600-font-size: 32px;
+  --trellis-typography-heading-600-font-weight: 700;
+  --trellis-typography-heading-600-letter-spacing: 0px;
+  --trellis-typography-heading-600-line-height: 39px;
+  --trellis-typography-heading-700-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-700-font-size: 36px;
+  --trellis-typography-heading-700-font-weight: 500;
+  --trellis-typography-heading-700-letter-spacing: -0.16px;
+  --trellis-typography-heading-700-line-height: 44px;
+  --trellis-typography-heading-800-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-800-font-size: 42px;
+  --trellis-typography-heading-800-font-weight: 500;
+  --trellis-typography-heading-800-letter-spacing: -0.16px;
+  --trellis-typography-heading-800-line-height: 52px;
+  --trellis-typography-heading-900-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-900-font-size: 46px;
+  --trellis-typography-heading-900-font-weight: 500;
+  --trellis-typography-heading-900-letter-spacing: -0.16px;
+  --trellis-typography-heading-900-line-height: 56px;
+  --trellis-typography-link-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-100-font-size: 14px;
+  --trellis-typography-link-100-font-weight: 700;
+  --trellis-typography-link-100-letter-spacing: 0px;
+  --trellis-typography-link-100-line-height: 24px;
+  --trellis-typography-link-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-200-font-size: 16px;
+  --trellis-typography-link-200-font-weight: 700;
+  --trellis-typography-link-200-letter-spacing: 0px;
+  --trellis-typography-link-200-line-height: 24px;
+  --trellis-typography-link-25-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-25-font-size: 12px;
+  --trellis-typography-link-25-font-weight: 700;
+  --trellis-typography-link-25-letter-spacing: 0px;
+  --trellis-typography-link-25-line-height: 18px;
+}
+html[data-hubspot-theme="trellis-light"] {
+  --trellis-border-radius-0: 0px;
+  --trellis-border-radius-100: 4px;
+  --trellis-border-radius-200: 4px;
+  --trellis-border-radius-300: 8px;
+  --trellis-border-radius-400: 16px;
+  --trellis-border-radius-breeze-core-component-default: 999999px;
+  --trellis-border-radius-breeze-textarea-default: 16px;
+  --trellis-border-radius-full: 999999px;
+  --trellis-border-radius-temp-do-not-use-300: 8px;
+  --trellis-border-radius-temp-future-300: 8px;
+  --trellis-border-radius-transitional-component: 4px;
+  --trellis-border-radius-transitional-container: 8px;
+  --trellis-border-radius-transitional-container-alt: 8px;
+  --trellis-border-radius-transitional-floating: 16px;
+  --trellis-border-radius-transitional-full-0: 999999px;
+  --trellis-border-radius-transitional-full-3: 999999px;
+  --trellis-border-radius-transitional-full-8: 999999px;
+  --trellis-border-width-0: 0px;
+  --trellis-border-width-100: 1px;
+  --trellis-border-width-200: 2px;
+  --trellis-border-width-300: 4px;
+  --trellis-border-width-transitional-1: 1px;
+  --trellis-border-width-transitional-2: 1px;
+  --trellis-box-shadow-100: 0px 1px 8px 0px hsla(0, 0%, 8%, 0.08);
+  --trellis-box-shadow-200: 0px 8px 16px 0px hsla(0, 0%, 8%, 0.04);
+  --trellis-box-shadow-300: 0px 16px 32px 0px hsla(0, 0%, 8%, 0.08);
+  --trellis-box-shadow-400: 0px 24px 48px 0px hsla(0, 0%, 8%, 0.08);
+  --trellis-color-border-accent-blue-default: #016de1;
+  --trellis-color-border-accent-green-default: #00823a;
+  --trellis-color-border-accent-light-orange-default: #c93700;
+  --trellis-color-border-accent-magenta-default: #d20688;
+  --trellis-color-border-accent-orange-default: #c93700;
+  --trellis-color-border-accent-purple-default: #7d53e9;
+  --trellis-color-border-accent-red-default: #d9002b;
+  --trellis-color-border-accent-yellow-default: #956309;
+  --trellis-color-border-alert-default: #d9002b;
+  --trellis-color-border-brand-default: #ff4800;
+  --trellis-color-border-caution-default: #eeb117;
+  --trellis-color-border-container-default: #ccc;
+  --trellis-color-border-core-default: #8a8a8a;
+  --trellis-color-border-core-disabled: #e6e6e6;
+  --trellis-color-border-core-hover: #666;
+  --trellis-color-border-core-on-fill-default: #fff;
+  --trellis-color-border-core-pressed: #141414;
+  --trellis-color-border-core-subtle: #ccc;
+  --trellis-color-border-core-subtle-hover: #b3b3b3;
+  --trellis-color-border-core-subtle-pressed: #8a8a8a;
+  --trellis-color-border-info-default: #016de1;
+  --trellis-color-border-interactive-default: #8a8a8a;
+  --trellis-color-border-interactive-pressed: #141414;
+  --trellis-color-border-inverse-default: #141414;
+  --trellis-color-border-inverse-default-alt: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-inverse-disabled: #e6e6e6;
+  --trellis-color-border-inverse-disabled-alt: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-positive-default: #00823a;
+  --trellis-color-border-primary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-primary-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-secondary-default: #8a8a8a;
+  --trellis-color-border-secondary-default-alt: #ab73b4;
+  --trellis-color-border-secondary-disabled: #e6e6e6;
+  --trellis-color-border-tertiary-default: #8a8a8a;
+  --trellis-color-border-tertiary-disabled: #e6e6e6;
+  --trellis-color-border-transitional-core-subtle: #ccc;
+  --trellis-color-border-transitional-core-subtle-alt: #ccc;
+  --trellis-color-border-transitional-interactive-subtle: #ccc;
+  --trellis-color-border-transitional-primary-alt: #141414;
+  --trellis-color-border-transitional-tertiary-default: #8a8a8a;
+  --trellis-color-breeze-border-badge-default: linear-gradient(
+    135deg,
+    #ff3842,
+    #d20688
+  );
+  --trellis-color-breeze-border-field-default: #d20688;
+  --trellis-color-breeze-border-secondary-default: #d20688;
+  --trellis-color-breeze-border-secondary-disabled: #e6e6e6;
+  --trellis-color-breeze-border-secondary-hover: #a5016a;
+  --trellis-color-breeze-border-secondary-pressed: #800051;
+  --trellis-color-breeze-border-tertiary-default: #8a8a8a;
+  --trellis-color-breeze-border-tertiary-disabled: #e6e6e6;
+  --trellis-color-breeze-border-tertiary-hover: #8a8a8a;
+  --trellis-color-breeze-border-tertiary-pressed: #8a8a8a;
+  --trellis-color-breeze-fill-badge-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-component-disabled: #fff;
+  --trellis-color-breeze-fill-feedback-active: #141414;
+  --trellis-color-breeze-fill-feedback-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-feedback-hover: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-breeze-fill-loading-dot-default: #ff9fcc;
+  --trellis-color-breeze-fill-primary-default: #d20688;
+  --trellis-color-breeze-fill-primary-disabled: #f5f5f5;
+  --trellis-color-breeze-fill-primary-hover: #a5016a;
+  --trellis-color-breeze-fill-primary-pressed: #800051;
+  --trellis-color-breeze-fill-secondary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-secondary-disabled: #f5f5f5;
+  --trellis-color-breeze-fill-secondary-hover: #fcebf2;
+  --trellis-color-breeze-fill-secondary-pressed: #fbdbe9;
+  --trellis-color-breeze-fill-shimmer-default: linear-gradient(
+    135deg,
+    #fbddd2,
+    #fbdbe9
+  );
+  --trellis-color-breeze-fill-special-btn-alt-default: linear-gradient(
+    114deg,
+    #ff3842,
+    #d20688
+  );
+  --trellis-color-breeze-fill-special-btn-alt-disabled: #ff3842;
+  --trellis-color-breeze-fill-special-btn-default: linear-gradient(
+    135deg,
+    #ff3842,
+    #d20688
+  );
+  --trellis-color-breeze-fill-special-btn-hover: linear-gradient(
+    135deg,
+    #d9002b,
+    #a5016a
+  );
+  --trellis-color-breeze-fill-special-btn-pressed: linear-gradient(
+    135deg,
+    #ac0020,
+    #800051
+  );
+  --trellis-color-breeze-fill-tertiary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-tertiary-disabled: #fff;
+  --trellis-color-breeze-fill-tertiary-hover: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-breeze-fill-tertiary-pressed: hsla(0, 0%, 8%, 0.11);
+  --trellis-color-breeze-fill-transparent-defauilt: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-icon-component-disabled: #8a8a8a;
+  --trellis-color-breeze-icon-feedback-active: #fff;
+  --trellis-color-breeze-icon-feedback-default: #141414;
+  --trellis-color-breeze-icon-field-default: #d20688;
+  --trellis-color-breeze-icon-field-disabled: #8a8a8a;
+  --trellis-color-breeze-icon-full-page-loader-default: linear-gradient(
+    135deg,
+    #fb31a7,
+    #ff4800 23%,
+    #fbddd2
+  );
+  --trellis-color-breeze-icon-icon-button-default: #141414;
+  --trellis-color-breeze-icon-icon-button-hover: #a5016a;
+  --trellis-color-breeze-icon-icon-button-pressed: #800051;
+  --trellis-color-breeze-icon-primary-default: #fff;
+  --trellis-color-breeze-icon-primary-disabled: #8a8a8a;
+  --trellis-color-breeze-icon-secondary-default: #d20688;
+  --trellis-color-breeze-icon-special-btn-default: #fff;
+  --trellis-color-breeze-icon-tertiary-default: #141414;
+  --trellis-color-breeze-icon-transparent-default: #d20688;
+  --trellis-color-breeze-text-badge-default: #d20688;
+  --trellis-color-breeze-text-component-disabled: #8a8a8a;
+  --trellis-color-breeze-text-field-default: #666;
+  --trellis-color-breeze-text-field-disabled: #8a8a8a;
+  --trellis-color-breeze-text-field-input: #141414;
+  --trellis-color-breeze-text-primary-default: #fff;
+  --trellis-color-breeze-text-primary-disabled: #8a8a8a;
+  --trellis-color-breeze-text-secondary-default: #d20688;
+  --trellis-color-breeze-text-secondary-disabled: #8a8a8a;
+  --trellis-color-breeze-text-secondary-hover: #a5016a;
+  --trellis-color-breeze-text-secondary-pressed: #800051;
+  --trellis-color-breeze-text-special-btn-default: #fff;
+  --trellis-color-breeze-text-tertiary-default: #141414;
+  --trellis-color-breeze-text-tertiary-disabled: #8a8a8a;
+  --trellis-color-breeze-text-transparent-default: #d20688;
+  --trellis-color-breeze-text-transparent-hover: #a5016a;
+  --trellis-color-breeze-text-transparent-pressed: #800051;
+  --trellis-color-do-not-use-alert-danger: #d9002b;
+  --trellis-color-do-not-use-alert-success: #00641a;
+  --trellis-color-do-not-use-alert-warning: #eeb117;
+  --trellis-color-do-not-use-battleship: #b6b1af;
+  --trellis-color-do-not-use-button-danger-hover-fill: #ac0020;
+  --trellis-color-do-not-use-button-disabled-text: #b0c1d4;
+  --trellis-color-do-not-use-button-primary-hover-fill: #6431da;
+  --trellis-color-do-not-use-button-secondary-active-fill: #4d4c4c;
+  --trellis-color-do-not-use-button-secondary-hover-fill: #333;
+  --trellis-color-do-not-use-button-secondary-text: #fff;
+  --trellis-color-do-not-use-button-tertiary-light-hover-fill: #cfcccb;
+  --trellis-color-do-not-use-button-tertiary-light-text: #1f1f1f;
+  --trellis-color-do-not-use-calypso: #016de1;
+  --trellis-color-do-not-use-calypso-dark: #0035b2;
+  --trellis-color-do-not-use-calypso-light: #d0e8f5;
+  --trellis-color-do-not-use-calypso-medium: #0050c7;
+  --trellis-color-do-not-use-candy-apple: #d9002b;
+  --trellis-color-do-not-use-candy-apple-dark: #850016;
+  --trellis-color-do-not-use-candy-apple-light: #fbddd8;
+  --trellis-color-do-not-use-candy-apple-medium: #ac0020;
+  --trellis-color-do-not-use-chart-aqua: #51d3d9;
+  --trellis-color-do-not-use-chart-blue: #81c1fd;
+  --trellis-color-do-not-use-chart-dark-purple: #9784c2;
+  --trellis-color-do-not-use-chart-green: #a2d28f;
+  --trellis-color-do-not-use-chart-orange: #fea58e;
+  --trellis-color-do-not-use-chart-purple: #bda9ea;
+  --trellis-color-do-not-use-chart-red: #ea90b1;
+  --trellis-color-do-not-use-chart-yellow: #f5c78e;
+  --trellis-color-do-not-use-cirrus: #f2f5f8;
+  --trellis-color-do-not-use-eerie: #676565;
+  --trellis-color-do-not-use-facebook: #3b5998;
+  --trellis-color-do-not-use-flat-earth: #253342;
+  --trellis-color-do-not-use-flint: #000;
+  --trellis-color-do-not-use-focus-ring-base: #00d0e4;
+  --trellis-color-do-not-use-google: #dd4b39;
+  --trellis-color-do-not-use-great-white: #000;
+  --trellis-color-do-not-use-gypsum: #fff;
+  --trellis-color-do-not-use-heffalump: #425b76;
+  --trellis-color-do-not-use-instagram: #c13584;
+  --trellis-color-do-not-use-koala: #e5e1fa;
+  --trellis-color-do-not-use-link-hover: #5113ba;
+  --trellis-color-do-not-use-linkedin: #0077b5;
+  --trellis-color-do-not-use-lorax: #5113ba;
+  --trellis-color-do-not-use-lorax-dark: #7d53e9;
+  --trellis-color-do-not-use-lorax-light: #333;
+  --trellis-color-do-not-use-lorax-medium: #ff7d4c;
+  --trellis-color-do-not-use-marigold: #eeb117;
+  --trellis-color-do-not-use-marigold-dark: #b67e0e;
+  --trellis-color-do-not-use-marigold-light: #fbe0a5;
+  --trellis-color-do-not-use-marigold-medium: #d39913;
+  --trellis-color-do-not-use-monolith: #000;
+  --trellis-color-do-not-use-norman: #d20688;
+  --trellis-color-do-not-use-norman-dark: #800051;
+  --trellis-color-do-not-use-norman-light: #fbdbe9;
+  --trellis-color-do-not-use-norman-medium: #a5016a;
+  --trellis-color-do-not-use-obsidian: #33475b;
+  --trellis-color-do-not-use-olaf: #fff;
+  --trellis-color-do-not-use-oz: #00641a;
+  --trellis-color-do-not-use-oz-dark: #03380c;
+  --trellis-color-do-not-use-oz-light: #b1f4ab;
+  --trellis-color-do-not-use-oz-medium: #004c12;
+  --trellis-color-do-not-use-pantera: #2d3e50;
+  --trellis-color-do-not-use-pinterest: #bd081c;
+  --trellis-color-do-not-use-rss: #f26522;
+  --trellis-color-do-not-use-slinky: #516f90;
+  --trellis-color-do-not-use-sorbet: #ff8f59;
+  --trellis-color-do-not-use-sorbet-dark: #e68250;
+  --trellis-color-do-not-use-sorbet-light: #fff3ee;
+  --trellis-color-do-not-use-sorbet-medium: #ffc7ac;
+  --trellis-color-do-not-use-thunderdome: #5113ba;
+  --trellis-color-do-not-use-thunderdome-dark: #7d53e9;
+  --trellis-color-do-not-use-thunderdome-light: #e5e1fa;
+  --trellis-color-do-not-use-thunderdome-medium: #6431da;
+  --trellis-color-do-not-use-transparent: transparent;
+  --trellis-color-do-not-use-transparent-dark: transparent;
+  --trellis-color-do-not-use-transparent-light: transparent;
+  --trellis-color-do-not-use-twitter: #55acee;
+  --trellis-color-do-not-use-x: #000;
+  --trellis-color-do-not-use-xing: #026466;
+  --trellis-color-do-not-use-youtube: red;
+  --trellis-color-fill-accent-blue-default: #016de1;
+  --trellis-color-fill-accent-blue-hover: #0050c7;
+  --trellis-color-fill-accent-blue-pressed: #0035b2;
+  --trellis-color-fill-accent-blue-subtle: #acdaf4;
+  --trellis-color-fill-accent-blue-subtle-alt: #e1f2fb;
+  --trellis-color-fill-accent-green-default: #00823a;
+  --trellis-color-fill-accent-green-hover: #006831;
+  --trellis-color-fill-accent-green-pressed: #003c1e;
+  --trellis-color-fill-accent-green-subtle: #bde7cb;
+  --trellis-color-fill-accent-green-subtle-alt: #edf4ef;
+  --trellis-color-fill-accent-light-orange-default: #ff4800;
+  --trellis-color-fill-accent-light-orange-hover: #c93700;
+  --trellis-color-fill-accent-light-orange-pressed: #9f2800;
+  --trellis-color-fill-accent-light-orange-subtle: #fcc6b1;
+  --trellis-color-fill-accent-light-orange-subtle-alt: #fcece6;
+  --trellis-color-fill-accent-magenta-default: #d20688;
+  --trellis-color-fill-accent-magenta-hover: #a5016a;
+  --trellis-color-fill-accent-magenta-pressed: #800051;
+  --trellis-color-fill-accent-magenta-subtle: #fcc3dc;
+  --trellis-color-fill-accent-magenta-subtle-alt: #fcebf2;
+  --trellis-color-fill-accent-neutral-default: #141414;
+  --trellis-color-fill-accent-neutral-hover: #4d4d4d;
+  --trellis-color-fill-accent-neutral-pressed: #666;
+  --trellis-color-fill-accent-neutral-subtle: #e6e6e6;
+  --trellis-color-fill-accent-neutral-subtle-alt: #f0f0f0;
+  --trellis-color-fill-accent-orange-default: #c93700;
+  --trellis-color-fill-accent-orange-hover: #9f2800;
+  --trellis-color-fill-accent-orange-pressed: #7b1d00;
+  --trellis-color-fill-accent-orange-subtle: #fcc6b1;
+  --trellis-color-fill-accent-orange-subtle-alt: #fcece6;
+  --trellis-color-fill-accent-purple-default: #6431da;
+  --trellis-color-fill-accent-purple-hover: #5113ba;
+  --trellis-color-fill-accent-purple-pressed: #321986;
+  --trellis-color-fill-accent-purple-subtle: #d7cdfc;
+  --trellis-color-fill-accent-purple-subtle-alt: #efeefd;
+  --trellis-color-fill-accent-red-default: #d9002b;
+  --trellis-color-fill-accent-red-hover: #ac0020;
+  --trellis-color-fill-accent-red-pressed: #850016;
+  --trellis-color-fill-accent-red-subtle: #fcc5be;
+  --trellis-color-fill-accent-red-subtle-alt: #fcece9;
+  --trellis-color-fill-accent-teal-default: #007c7d;
+  --trellis-color-fill-accent-teal-hover: #006162;
+  --trellis-color-fill-accent-teal-pressed: #00494b;
+  --trellis-color-fill-accent-teal-subtle: #b3f0ed;
+  --trellis-color-fill-accent-teal-subtle-alt: #e0fcfa;
+  --trellis-color-fill-accent-yellow-default: #956309;
+  --trellis-color-fill-accent-yellow-hover: #784b05;
+  --trellis-color-fill-accent-yellow-pressed: #5e3804;
+  --trellis-color-fill-accent-yellow-subtle: #fbe0a5;
+  --trellis-color-fill-accent-yellow-subtle-alt: #fcf6e6;
+  --trellis-color-fill-alert-default: #d9002b;
+  --trellis-color-fill-alert-hover: #ac0020;
+  --trellis-color-fill-alert-pressed: #850016;
+  --trellis-color-fill-alert-subtle: #fcece9;
+  --trellis-color-fill-brand-default: #ff4800;
+  --trellis-color-fill-brand-hover: #c93700;
+  --trellis-color-fill-brand-pressed: #9f2800;
+  --trellis-color-fill-brand-subtle: #fcc6b1;
+  --trellis-color-fill-caution-default: #fccb57;
+  --trellis-color-fill-caution-hover: #eeb117;
+  --trellis-color-fill-caution-pressed: #d39913;
+  --trellis-color-fill-caution-subtle: #fcf6e6;
+  --trellis-color-fill-field-default: #fff;
+  --trellis-color-fill-field-default-alt: #fff;
+  --trellis-color-fill-field-disabled: #f5f5f5;
+  --trellis-color-fill-field-hover: #ebebeb;
+  --trellis-color-fill-field-pressed: #e6e6e6;
+  --trellis-color-fill-info-default: #016de1;
+  --trellis-color-fill-info-hover: #0050c7;
+  --trellis-color-fill-info-pressed: #0035b2;
+  --trellis-color-fill-info-subtle: #e1f2fb;
+  --trellis-color-fill-inverse-danger: #fff;
+  --trellis-color-fill-inverse-default: #fff;
+  --trellis-color-fill-inverse-default-alt: #141414;
+  --trellis-color-fill-inverse-default-transparent: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-inverse-disabled: #fff;
+  --trellis-color-fill-inverse-disabled-alt: #f0f0f0;
+  --trellis-color-fill-inverse-disabled-transparent: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-inverse-hover: #f0f0f0;
+  --trellis-color-fill-inverse-hover-alt: #333;
+  --trellis-color-fill-inverse-hover-transparent: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-fill-inverse-pressed: #e6e6e6;
+  --trellis-color-fill-inverse-pressed-alt: #4d4d4d;
+  --trellis-color-fill-inverse-pressed-transparent: hsla(0, 0%, 8%, 0.11);
+  --trellis-color-fill-inverse-primary: #fff;
+  --trellis-color-fill-inverse-subtle: #fff;
+  --trellis-color-fill-positive-default: #00823a;
+  --trellis-color-fill-positive-hover: #006831;
+  --trellis-color-fill-positive-pressed: #005027;
+  --trellis-color-fill-positive-subtle: #edf4ef;
+  --trellis-color-fill-primary-default: #141414;
+  --trellis-color-fill-primary-disabled: #f5f5f5;
+  --trellis-color-fill-primary-hover: #333;
+  --trellis-color-fill-primary-pressed: #4d4d4d;
+  --trellis-color-fill-secondary-default: #fff;
+  --trellis-color-fill-secondary-default-alt: #d6c2d9;
+  --trellis-color-fill-secondary-disabled: #fff;
+  --trellis-color-fill-secondary-disabled-alt: #f5f5f5;
+  --trellis-color-fill-secondary-hover: #f0f0f0;
+  --trellis-color-fill-secondary-hover-alt: #caaacf;
+  --trellis-color-fill-secondary-pressed: #e6e6e6;
+  --trellis-color-fill-secondary-pressed-alt: #bc8dc3;
+  --trellis-color-fill-surface-default: #fff;
+  --trellis-color-fill-surface-default-hover: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-fill-surface-default-pressed: hsla(0, 0%, 8%, 0.11);
+  --trellis-color-fill-surface-raised: #fff;
+  --trellis-color-fill-surface-recessed: #f0f0f0;
+  --trellis-color-fill-surface-recessed-hover: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-fill-surface-recessed-pressed: hsla(0, 0%, 8%, 0.11);
+  --trellis-color-fill-tertiary-default: #fff;
+  --trellis-color-fill-tertiary-disabled: #f5f5f5;
+  --trellis-color-fill-tertiary-hover: #ebebeb;
+  --trellis-color-fill-tertiary-pressed: #e6e6e6;
+  --trellis-color-fill-transitional-alert: #d9002b;
+  --trellis-color-fill-transitional-banner-gradient-color-1: #d7cdfc;
+  --trellis-color-fill-transitional-banner-gradient-color-2: #d7cdfc;
+  --trellis-color-fill-transitional-beta-button-gradient-color-1: #d7cdfc;
+  --trellis-color-fill-transitional-beta-button-gradient-color-2: #d7cdfc;
+  --trellis-color-fill-transitional-beta-button-hover: #c4b4f7;
+  --trellis-color-fill-transitional-danger-pattern-color-1: #fff;
+  --trellis-color-fill-transitional-danger-pattern-color-2: #fff;
+  --trellis-color-fill-transitional-field-hover: hsla(0, 0%, 8%, 0.11);
+  --trellis-color-fill-transitional-modal-gradient-color-1: #fff;
+  --trellis-color-fill-transitional-modal-gradient-color-2: #fff;
+  --trellis-color-fill-transitional-popover: #fff;
+  --trellis-color-fill-transitional-progress-success-gradient-color-1: #00823a;
+  --trellis-color-fill-transitional-progress-success-gradient-color-2: #00823a;
+  --trellis-color-fill-transitional-progress-warning-danger-gradient-color-1: #fccb57;
+  --trellis-color-fill-transitional-progress-warning-danger-gradient-color-2: #fccb57;
+  --trellis-color-fill-transitional-scroll-default-gradient-color-1: #f5f5f5;
+  --trellis-color-fill-transitional-scroll-default-gradient-color-2: rgba(
+    239,
+    237,
+    235,
+    0
+  );
+  --trellis-color-fill-transitional-scroll-fadeout-gradient-color-1: #fff;
+  --trellis-color-fill-transitional-scroll-fadeout-gradient-color-2: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-fill-transitional-shadow: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-transitional-sidenav-on-recessed-active: rgba(
+    204,
+    204,
+    204,
+    0.4
+  );
+  --trellis-color-fill-transitional-table-default: #f0f0f0;
+  --trellis-color-fill-transitional-tabs-default: #fff;
+  --trellis-color-fill-transitional-tabs-pressed: #f5f5f5;
+  --trellis-color-fill-transitional-tertiary-default: #fff;
+  --trellis-color-fill-transitional-tertiary-hover: #f0f0f0;
+  --trellis-color-fill-transitional-tertiary-pressed: #e6e6e6;
+  --trellis-color-fill-transitional-upgrade-modal-gradient-color-1: #fff;
+  --trellis-color-fill-transparent-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-transparent-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-transparent-hover: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-transparent-pressed: hsla(0, 0%, 8%, 0);
+  --trellis-color-global-shell-border-dark: #8a8a8a;
+  --trellis-color-global-shell-border-default: #8a8a8a;
+  --trellis-color-global-shell-border-search-btn-border-default: #8a8a8a;
+  --trellis-color-global-shell-border-search-btn-border-hover: #8a8a8a;
+  --trellis-color-global-shell-border-search-field-border-default: #8a8a8a;
+  --trellis-color-global-shell-border-subtle: #8a8a8a;
+  --trellis-color-global-shell-fill-editortitle-hover: hsla(0, 0%, 8%, 0.11);
+  --trellis-color-global-shell-fill-logo-default: #ff4800;
+  --trellis-color-global-shell-fill-nav-item-default: #46062b;
+  --trellis-color-global-shell-fill-nav-item-hover: #5e043b;
+  --trellis-color-global-shell-fill-nav-item-selected: #800051;
+  --trellis-color-global-shell-fill-search-default: #5e043b;
+  --trellis-color-global-shell-fill-search-hover: #800051;
+  --trellis-color-global-shell-fill-sub-nav-item-default: #46062b;
+  --trellis-color-global-shell-fill-sub-nav-item-hover: #5e043b;
+  --trellis-color-global-shell-fill-sub-nav-item-selected: #800051;
+  --trellis-color-global-shell-fill-surface-default: #46062b;
+  --trellis-color-global-shell-fill-surface-panel-default: #46062b;
+  --trellis-color-global-shell-icon-bookmark-default: hsla(0, 0%, 100%, 0);
+  --trellis-color-global-shell-icon-bookmark-hover: #f0f0f0;
+  --trellis-color-global-shell-icon-bookmark-selected: #fff;
+  --trellis-color-global-shell-icon-copilot-default: #fb31a7;
+  --trellis-color-global-shell-icon-nav-item-default: #fff;
+  --trellis-color-global-shell-icon-nav-item-hover: #fff;
+  --trellis-color-global-shell-icon-nav-item-selected: #fff;
+  --trellis-color-global-shell-icon-nav-item-subtle: #8a8a8a;
+  --trellis-color-global-shell-text-copilot-default: #fff;
+  --trellis-color-global-shell-text-copilot-hover: #fff;
+  --trellis-color-global-shell-text-nav-item-default: #fff;
+  --trellis-color-global-shell-text-nav-item-hover: #fff;
+  --trellis-color-global-shell-text-nav-item-selected: #fff;
+  --trellis-color-icon-alert-default: #d9002b;
+  --trellis-color-icon-alert-hover: #ac0020;
+  --trellis-color-icon-alert-on-fill-default: #fff;
+  --trellis-color-icon-alert-pressed: #850016;
+  --trellis-color-icon-core-default: #141414;
+  --trellis-color-icon-core-disabled: #8a8a8a;
+  --trellis-color-icon-core-on-fill-default: #fff;
+  --trellis-color-icon-core-subtle: #666;
+  --trellis-color-icon-interactive-default: #141414;
+  --trellis-color-icon-interactive-disabled: #8a8a8a;
+  --trellis-color-icon-interactive-hover: #4d4d4d;
+  --trellis-color-icon-interactive-on-fill-default: #fff;
+  --trellis-color-icon-interactive-on-fill-hover: #e6e6e6;
+  --trellis-color-icon-interactive-on-fill-pressed: #b3b3b3;
+  --trellis-color-icon-interactive-pressed: #666;
+  --trellis-color-icon-inverse-default: #141414;
+  --trellis-color-icon-inverse-default-alt: #fff;
+  --trellis-color-icon-inverse-disabled: #8a8a8a;
+  --trellis-color-icon-inverse-disabled-alt: #8a8a8a;
+  --trellis-color-icon-inverse-hover: #4d4d4d;
+  --trellis-color-icon-inverse-pressed: #666;
+  --trellis-color-icon-primary-default: #fff;
+  --trellis-color-icon-primary-disabled: #8a8a8a;
+  --trellis-color-icon-primary-hover: #fff;
+  --trellis-color-icon-primary-pressed: #fff;
+  --trellis-color-icon-secondary-default: #141414;
+  --trellis-color-icon-secondary-disabled: #8a8a8a;
+  --trellis-color-icon-tertiary-default: #141414;
+  --trellis-color-icon-tertiary-disabled: #8a8a8a;
+  --trellis-color-reporting-fill-chart-alert: #ff3842;
+  --trellis-color-reporting-fill-chart-caution: #fccb57;
+  --trellis-color-reporting-fill-chart-default-dark-aqua: #009b9c;
+  --trellis-color-reporting-fill-chart-default-dark-blue: #078cfd;
+  --trellis-color-reporting-fill-chart-default-dark-green: #119d49;
+  --trellis-color-reporting-fill-chart-default-dark-orange: #ff7d4c;
+  --trellis-color-reporting-fill-chart-default-dark-pink: #a5016a;
+  --trellis-color-reporting-fill-chart-default-dark-purple: #9778ec;
+  --trellis-color-reporting-fill-chart-default-dark-yellow: #b67e0e;
+  --trellis-color-reporting-fill-chart-default-light-aqua: #48d1cf;
+  --trellis-color-reporting-fill-chart-default-light-blue: #8cc4f4;
+  --trellis-color-reporting-fill-chart-default-light-green: #97dbae;
+  --trellis-color-reporting-fill-chart-default-light-orange: #ffa581;
+  --trellis-color-reporting-fill-chart-default-light-pink: #ff9fcc;
+  --trellis-color-reporting-fill-chart-default-light-purple: #c4b4f7;
+  --trellis-color-reporting-fill-chart-default-light-yellow: #fbe0a5;
+  --trellis-color-reporting-fill-chart-positive: #6acb8c;
+  --trellis-color-reporting-fill-chart-scale-dark-aqua: #006162;
+  --trellis-color-reporting-fill-chart-scale-dark-blue: #0035b2;
+  --trellis-color-reporting-fill-chart-scale-dark-green: #005027;
+  --trellis-color-reporting-fill-chart-scale-dark-orange: #7b1d00;
+  --trellis-color-reporting-fill-chart-scale-dark-pink: #800051;
+  --trellis-color-reporting-fill-chart-scale-dark-purple: #321986;
+  --trellis-color-reporting-fill-chart-scale-dark-yellow: #b67e0e;
+  --trellis-color-reporting-fill-chart-scale-light-aqua: #b3f0ed;
+  --trellis-color-reporting-fill-chart-scale-light-blue: #acdaf4;
+  --trellis-color-reporting-fill-chart-scale-light-green: #daefe1;
+  --trellis-color-reporting-fill-chart-scale-light-orange: #fcf5f2;
+  --trellis-color-reporting-fill-chart-scale-light-pink: #fcebf2;
+  --trellis-color-reporting-fill-chart-scale-light-purple: #f9f5ff;
+  --trellis-color-reporting-fill-chart-scale-light-yellow: #fcf6e6;
+  --trellis-color-reporting-fill-chart-white: #fff;
+  --trellis-color-reporting-fill-highlight-blue-default: #acdaf4;
+  --trellis-color-reporting-fill-highlight-blue-subtle: #e1f2fb;
+  --trellis-color-reporting-fill-highlight-green-default: #bde7cb;
+  --trellis-color-reporting-fill-highlight-green-subtle: #edf4ef;
+  --trellis-color-reporting-fill-highlight-orange-default: #fcc6b1;
+  --trellis-color-reporting-fill-highlight-orange-subtle: #fcece6;
+  --trellis-color-reporting-fill-highlight-red-default: #fcc5be;
+  --trellis-color-reporting-fill-highlight-red-subtle: #fcece9;
+  --trellis-color-reporting-fill-highlight-yellow-default: #fbe0a5;
+  --trellis-color-reporting-fill-highlight-yellow-subtle: #fcf6e6;
+  --trellis-color-specialty-link-on-fill-alt-default: #46062b;
+  --trellis-color-specialty-link-on-fill-alt-disabled: #8a8a8a;
+  --trellis-color-specialty-link-on-fill-alt-hover: #800051;
+  --trellis-color-specialty-link-on-fill-alt-pressed: #a5016a;
+  --trellis-color-specialty-link-on-fill-default: #fff;
+  --trellis-color-specialty-link-on-fill-disabled: #b3b3b3;
+  --trellis-color-specialty-link-on-fill-hover: #f0f0f0;
+  --trellis-color-specialty-link-on-fill-pressed: #fff;
+  --trellis-color-specialty-primary-on-fill-default: #fff;
+  --trellis-color-specialty-primary-on-fill-disabled: #f5f5f5;
+  --trellis-color-specialty-primary-on-fill-hover: #e6e6e6;
+  --trellis-color-specialty-primary-on-fill-pressed: #ccc;
+  --trellis-color-specialty-scrim: hsla(0, 0%, 8%, 0.46);
+  --trellis-color-specialty-scrim-alt: hsla(0, 0%, 100%, 0.81);
+  --trellis-color-specialty-table-header-default: #f7f2f7;
+  --trellis-color-specialty-table-header-hover: #efe7f0;
+  --trellis-color-specialty-table-header-pressed: #e4d7e6;
+  --trellis-color-specialty-tertiary-on-fill-default: #46062b;
+  --trellis-color-specialty-tertiary-on-fill-disabled: #46062b;
+  --trellis-color-specialty-tertiary-on-fill-hover: #5e043b;
+  --trellis-color-specialty-tertiary-on-fill-pressed: #800051;
+  --trellis-color-specialty-tertiary-transparent-default: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-specialty-tertiary-transparent-disabled: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-specialty-tertiary-transparent-hover: #ebebeb;
+  --trellis-color-specialty-tertiary-transparent-pressed: #e6e6e6;
+  --trellis-color-specialty-text-core-alt-default: #46062b;
+  --trellis-color-specialty-text-interactive-alt-default: #141414;
+  --trellis-color-specialty-text-interactive-alt-hover: #4d4d4d;
+  --trellis-color-specialty-text-interactive-alt-pressed: #666;
+  --trellis-color-temp-do-not-use-border-primary-default: #bcff2b;
+  --trellis-color-temp-do-not-use-border-primary-disabled: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-default: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-subtle: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-field-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-field-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-secondary-default: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-secondary-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-secondary-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-surface-default-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-surface-default-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-surface-recessed: #bcff2b;
+  --trellis-color-temp-do-not-use-icon-primary-default: #bcff2b;
+  --trellis-color-temp-do-not-use-icon-primary-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-icon-primary-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-specialty-scrim: #bcff2b;
+  --trellis-color-temp-do-not-use-text-primary-default: #bcff2b;
+  --trellis-color-temp-do-not-use-text-primary-subtle: #bcff2b;
+  --trellis-color-temp-future-border-primary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-temp-future-border-primary-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-temp-future-fill-accent-teal-default: #007c7d;
+  --trellis-color-temp-future-fill-accent-teal-hover: #006162;
+  --trellis-color-temp-future-fill-accent-teal-pressed: #00494b;
+  --trellis-color-temp-future-fill-accent-teal-subtle: #b3f0ed;
+  --trellis-color-temp-future-fill-field-hover: #efedeb;
+  --trellis-color-temp-future-fill-field-pressed: #e7e5e4;
+  --trellis-color-temp-future-fill-secondary-default: #fff;
+  --trellis-color-temp-future-fill-secondary-hover: #f5f3f2;
+  --trellis-color-temp-future-fill-secondary-pressed: #e7e5e4;
+  --trellis-color-temp-future-fill-surface-default-hover: rgba(
+    20,
+    20,
+    20,
+    0.08
+  );
+  --trellis-color-temp-future-fill-surface-default-pressed: rgba(
+    20,
+    20,
+    20,
+    0.11
+  );
+  --trellis-color-temp-future-fill-surface-recessed: #f8f7f6;
+  --trellis-color-temp-future-icon-primary-default: #fff;
+  --trellis-color-temp-future-icon-primary-hover: #fff;
+  --trellis-color-temp-future-icon-primary-pressed: #fff;
+  --trellis-color-temp-future-specialty-scrim: hsla(0, 0%, 8%, 0.46);
+  --trellis-color-temp-future-text-primary-default: #fff;
+  --trellis-color-temp-future-text-primary-subtle: #fff;
+  --trellis-color-text-alert-default: #d9002b;
+  --trellis-color-text-alert-hover: #ac0020;
+  --trellis-color-text-alert-on-fill-default: #fff;
+  --trellis-color-text-alert-pressed: #850016;
+  --trellis-color-text-brand-default: #9f2800;
+  --trellis-color-text-core-default: #141414;
+  --trellis-color-text-core-disabled: #8a8a8a;
+  --trellis-color-text-core-on-fill-default: #fff;
+  --trellis-color-text-core-subtle: #666;
+  --trellis-color-text-interactive-default: #46062b;
+  --trellis-color-text-interactive-default-disabled: #8a8a8a;
+  --trellis-color-text-interactive-default-hover: #800051;
+  --trellis-color-text-interactive-default-pressed: #a5016a;
+  --trellis-color-text-interactive-on-fill: #fff;
+  --trellis-color-text-interactive-on-fill-default: #fff;
+  --trellis-color-text-interactive-on-fill-hover: #e6e6e6;
+  --trellis-color-text-interactive-on-fill-pressed: #b3b3b3;
+  --trellis-color-text-inverse-default: #141414;
+  --trellis-color-text-inverse-default-alt: #fff;
+  --trellis-color-text-inverse-disabled: #8a8a8a;
+  --trellis-color-text-inverse-disabled-alt: #8a8a8a;
+  --trellis-color-text-inverse-hover: #4d4d4d;
+  --trellis-color-text-inverse-pressed: #666;
+  --trellis-color-text-primary-default: #fff;
+  --trellis-color-text-primary-disabled: #8a8a8a;
+  --trellis-color-text-primary-subtle: #fff;
+  --trellis-color-text-secondary-default: #141414;
+  --trellis-color-text-secondary-disabled: #8a8a8a;
+  --trellis-color-text-tertiary-default: #141414;
+  --trellis-color-text-tertiary-disabled: #8a8a8a;
+  --trellis-space-0: 0px;
+  --trellis-space-25: 1px;
+  --trellis-space-50: 2px;
+  --trellis-space-100: 4px;
+  --trellis-space-200: 8px;
+  --trellis-space-250: 10px;
+  --trellis-space-300: 12px;
+  --trellis-space-400: 16px;
+  --trellis-space-500: 20px;
+  --trellis-space-600: 24px;
+  --trellis-space-700: 28px;
+  --trellis-space-800: 32px;
+  --trellis-space-900: 36px;
+  --trellis-space-1000: 40px;
+  --trellis-space-1100: 48px;
+  --trellis-space-1200: 56px;
+  --trellis-space-1300: 60px;
+  --trellis-space-1400: 64px;
+  --trellis-space-1500: 96px;
+  --trellis-space-1600: 144px;
+  --trellis-space-1700: 192px;
+  --trellis-typography-body-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-100-font-size: 14px;
+  --trellis-typography-body-100-font-weight: 300;
+  --trellis-typography-body-100-letter-spacing: 0px;
+  --trellis-typography-body-100-line-height: 24px;
+  --trellis-typography-body-125-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-125-font-size: 14px;
+  --trellis-typography-body-125-font-weight: 600;
+  --trellis-typography-body-125-letter-spacing: 0px;
+  --trellis-typography-body-125-line-height: 24px;
+  --trellis-typography-body-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-200-font-size: 16px;
+  --trellis-typography-body-200-font-weight: 300;
+  --trellis-typography-body-200-letter-spacing: 0px;
+  --trellis-typography-body-200-line-height: 24px;
+  --trellis-typography-body-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-300-font-size: 18px;
+  --trellis-typography-body-300-font-weight: 400;
+  --trellis-typography-body-300-letter-spacing: 0px;
+  --trellis-typography-body-300-line-height: 24px;
+  --trellis-typography-body-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-400-font-size: 20px;
+  --trellis-typography-body-400-font-weight: 400;
+  --trellis-typography-body-400-letter-spacing: 0px;
+  --trellis-typography-body-400-line-height: 28px;
+  --trellis-typography-body-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-500-font-size: 22px;
+  --trellis-typography-body-500-font-weight: 400;
+  --trellis-typography-body-500-letter-spacing: 0px;
+  --trellis-typography-body-500-line-height: 28px;
+  --trellis-typography-body-600-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-600-font-size: 26px;
+  --trellis-typography-body-600-font-weight: 400;
+  --trellis-typography-body-600-letter-spacing: 0px;
+  --trellis-typography-body-600-line-height: 32px;
+  --trellis-typography-body-700-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-700-font-size: 28px;
+  --trellis-typography-body-700-font-weight: 400;
+  --trellis-typography-body-700-letter-spacing: 0px;
+  --trellis-typography-body-700-line-height: 36px;
+  --trellis-typography-code-100-font-family: Source Code Pro, Consolas, Monaco,
+    Courier New, monospace;
+  --trellis-typography-code-100-font-size: 14px;
+  --trellis-typography-code-100-font-weight: 500;
+  --trellis-typography-code-100-letter-spacing: 0px;
+  --trellis-typography-code-100-line-height: 24px;
+  --trellis-typography-detail-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-detail-100-font-size: 12px;
+  --trellis-typography-detail-100-font-weight: 300;
+  --trellis-typography-detail-100-letter-spacing: 0px;
+  --trellis-typography-detail-100-line-height: 14px;
+  --trellis-typography-detail-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-detail-200-font-size: 12px;
+  --trellis-typography-detail-200-font-weight: 300;
+  --trellis-typography-detail-200-letter-spacing: 0px;
+  --trellis-typography-detail-200-line-height: 18px;
+  --trellis-typography-display-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-100-font-size: 56px;
+  --trellis-typography-display-100-font-weight: 500;
+  --trellis-typography-display-100-letter-spacing: -0.32px;
+  --trellis-typography-display-100-line-height: 72px;
+  --trellis-typography-display-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-200-font-size: 66px;
+  --trellis-typography-display-200-font-weight: 500;
+  --trellis-typography-display-200-letter-spacing: -0.32px;
+  --trellis-typography-display-200-line-height: 76px;
+  --trellis-typography-display-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-300-font-size: 76px;
+  --trellis-typography-display-300-font-weight: 500;
+  --trellis-typography-display-300-letter-spacing: -0.32px;
+  --trellis-typography-display-300-line-height: 88px;
+  --trellis-typography-display-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-400-font-size: 84px;
+  --trellis-typography-display-400-font-weight: 500;
+  --trellis-typography-display-400-letter-spacing: -0.32px;
+  --trellis-typography-display-400-line-height: 96px;
+  --trellis-typography-display-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-500-font-size: 94px;
+  --trellis-typography-display-500-font-weight: 500;
+  --trellis-typography-display-500-letter-spacing: -0.32px;
+  --trellis-typography-display-500-line-height: 100px;
+  --trellis-typography-heading-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-100-font-size: 16px;
+  --trellis-typography-heading-100-font-weight: 600;
+  --trellis-typography-heading-100-letter-spacing: 0px;
+  --trellis-typography-heading-100-line-height: 20px;
+  --trellis-typography-heading-1000-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-1000-font-size: 55px;
+  --trellis-typography-heading-1000-font-weight: 700;
+  --trellis-typography-heading-1000-letter-spacing: 0px;
+  --trellis-typography-heading-1000-line-height: 67px;
+  --trellis-typography-heading-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-200-font-size: 18px;
+  --trellis-typography-heading-200-font-weight: 500;
+  --trellis-typography-heading-200-letter-spacing: 0px;
+  --trellis-typography-heading-200-line-height: 24px;
+  --trellis-typography-heading-25-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-25-font-size: 12px;
+  --trellis-typography-heading-25-font-weight: 600;
+  --trellis-typography-heading-25-letter-spacing: 0px;
+  --trellis-typography-heading-25-line-height: 18px;
+  --trellis-typography-heading-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-300-font-size: 20px;
+  --trellis-typography-heading-300-font-weight: 600;
+  --trellis-typography-heading-300-letter-spacing: 0px;
+  --trellis-typography-heading-300-line-height: 24px;
+  --trellis-typography-heading-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-400-font-size: 22px;
+  --trellis-typography-heading-400-font-weight: 500;
+  --trellis-typography-heading-400-letter-spacing: 0px;
+  --trellis-typography-heading-400-line-height: 27px;
+  --trellis-typography-heading-50-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-50-font-size: 14px;
+  --trellis-typography-heading-50-font-weight: 600;
+  --trellis-typography-heading-50-letter-spacing: 0px;
+  --trellis-typography-heading-50-line-height: 18px;
+  --trellis-typography-heading-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-500-font-size: 24px;
+  --trellis-typography-heading-500-font-weight: 300;
+  --trellis-typography-heading-500-letter-spacing: 0px;
+  --trellis-typography-heading-500-line-height: 29px;
+  --trellis-typography-heading-600-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-600-font-size: 32px;
+  --trellis-typography-heading-600-font-weight: 700;
+  --trellis-typography-heading-600-letter-spacing: 0px;
+  --trellis-typography-heading-600-line-height: 39px;
+  --trellis-typography-heading-700-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-700-font-size: 36px;
+  --trellis-typography-heading-700-font-weight: 500;
+  --trellis-typography-heading-700-letter-spacing: -0.16px;
+  --trellis-typography-heading-700-line-height: 44px;
+  --trellis-typography-heading-800-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-800-font-size: 42px;
+  --trellis-typography-heading-800-font-weight: 500;
+  --trellis-typography-heading-800-letter-spacing: -0.16px;
+  --trellis-typography-heading-800-line-height: 52px;
+  --trellis-typography-heading-900-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-900-font-size: 46px;
+  --trellis-typography-heading-900-font-weight: 500;
+  --trellis-typography-heading-900-letter-spacing: -0.16px;
+  --trellis-typography-heading-900-line-height: 56px;
+  --trellis-typography-link-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-100-font-size: 14px;
+  --trellis-typography-link-100-font-weight: 700;
+  --trellis-typography-link-100-letter-spacing: 0px;
+  --trellis-typography-link-100-line-height: 24px;
+  --trellis-typography-link-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-200-font-size: 16px;
+  --trellis-typography-link-200-font-weight: 700;
+  --trellis-typography-link-200-letter-spacing: 0px;
+  --trellis-typography-link-200-line-height: 24px;
+  --trellis-typography-link-25-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-25-font-size: 12px;
+  --trellis-typography-link-25-font-weight: 700;
+  --trellis-typography-link-25-letter-spacing: 0px;
+  --trellis-typography-link-25-line-height: 18px;
+}
+html[data-hubspot-theme="trellis-dark"] {
+  --trellis-border-radius-0: 0px;
+  --trellis-border-radius-100: 3px;
+  --trellis-border-radius-200: 4px;
+  --trellis-border-radius-300: 8px;
+  --trellis-border-radius-400: 16px;
+  --trellis-border-radius-breeze-core-component-default: 999999px;
+  --trellis-border-radius-breeze-textarea-default: 999999px;
+  --trellis-border-radius-full: 999999px;
+  --trellis-border-radius-temp-do-not-use-300: 8px;
+  --trellis-border-radius-temp-future-300: 8px;
+  --trellis-border-radius-transitional-component: 4px;
+  --trellis-border-radius-transitional-container: 8px;
+  --trellis-border-radius-transitional-container-alt: 8px;
+  --trellis-border-radius-transitional-floating: 16px;
+  --trellis-border-radius-transitional-full-0: 999999px;
+  --trellis-border-radius-transitional-full-3: 999999px;
+  --trellis-border-radius-transitional-full-8: 999999px;
+  --trellis-border-width-0: 0px;
+  --trellis-border-width-100: 1px;
+  --trellis-border-width-200: 2px;
+  --trellis-border-width-300: 4px;
+  --trellis-border-width-transitional-1: 1px;
+  --trellis-border-width-transitional-2: 1px;
+  --trellis-box-shadow-100: 0px 1px 0px 0px hsla(0, 0%, 8%, 0.24);
+  --trellis-box-shadow-200: 0px 8px 16px 0px hsla(0, 0%, 8%, 0.16);
+  --trellis-box-shadow-300: 0px 16px 32px 0px hsla(0, 0%, 8%, 0.24);
+  --trellis-box-shadow-400: 0px 24px 48px 0px hsla(0, 0%, 8%, 0.24);
+  --trellis-color-border-accent-blue-default: #078cfd;
+  --trellis-color-border-accent-green-default: #119d49;
+  --trellis-color-border-accent-light-orange-default: #ff7d4c;
+  --trellis-color-border-accent-magenta-default: #2d061b;
+  --trellis-color-border-accent-orange-default: #ff7d4c;
+  --trellis-color-border-accent-purple-default: #9778ec;
+  --trellis-color-border-accent-red-default: #ff3842;
+  --trellis-color-border-accent-yellow-default: #b67e0e;
+  --trellis-color-border-alert-default: #ff3842;
+  --trellis-color-border-brand-default: #ff7d4c;
+  --trellis-color-border-caution-default: #b67e0e;
+  --trellis-color-border-container-default: #333;
+  --trellis-color-border-core-default: #4d4d4d;
+  --trellis-color-border-core-disabled: #333;
+  --trellis-color-border-core-hover: #ccc;
+  --trellis-color-border-core-on-fill-default: #fff;
+  --trellis-color-border-core-pressed: #ccc;
+  --trellis-color-border-core-subtle: #333;
+  --trellis-color-border-core-subtle-hover: #4d4d4d;
+  --trellis-color-border-core-subtle-pressed: #666;
+  --trellis-color-border-info-default: #078cfd;
+  --trellis-color-border-interactive-default: #4d4d4d;
+  --trellis-color-border-interactive-pressed: #ccc;
+  --trellis-color-border-inverse-default: #2d061b;
+  --trellis-color-border-inverse-default-alt: #2d061b;
+  --trellis-color-border-inverse-disabled: #2d061b;
+  --trellis-color-border-inverse-disabled-alt: #2d061b;
+  --trellis-color-border-positive-default: #119d49;
+  --trellis-color-border-primary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-primary-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-secondary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-secondary-default-alt: #ab73b4;
+  --trellis-color-border-secondary-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-border-tertiary-default: #4d4d4d;
+  --trellis-color-border-tertiary-disabled: #333;
+  --trellis-color-border-transitional-core-subtle: #f5f5f5;
+  --trellis-color-border-transitional-core-subtle-alt: #f5f5f5;
+  --trellis-color-border-transitional-interactive-subtle: #f5f5f5;
+  --trellis-color-border-transitional-primary-alt: #141414;
+  --trellis-color-border-transitional-tertiary-default: #f5f5f5;
+  --trellis-color-breeze-border-badge-default: linear-gradient(
+    135deg,
+    #ff3842,
+    #d20688
+  );
+  --trellis-color-breeze-border-field-default: #d20688;
+  --trellis-color-breeze-border-secondary-default: #d20688;
+  --trellis-color-breeze-border-secondary-disabled: #f5f5f5;
+  --trellis-color-breeze-border-secondary-hover: #a5016a;
+  --trellis-color-breeze-border-secondary-pressed: #800051;
+  --trellis-color-breeze-border-tertiary-default: #8a8a8a;
+  --trellis-color-breeze-border-tertiary-disabled: #f5f5f5;
+  --trellis-color-breeze-border-tertiary-hover: #8a8a8a;
+  --trellis-color-breeze-border-tertiary-pressed: #8a8a8a;
+  --trellis-color-breeze-fill-badge-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-component-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-feedback-active: #141414;
+  --trellis-color-breeze-fill-feedback-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-feedback-hover: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-breeze-fill-loading-dot-default: #d20688;
+  --trellis-color-breeze-fill-primary-default: #d20688;
+  --trellis-color-breeze-fill-primary-disabled: #666;
+  --trellis-color-breeze-fill-primary-hover: #a5016a;
+  --trellis-color-breeze-fill-primary-pressed: #800051;
+  --trellis-color-breeze-fill-secondary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-secondary-disabled: #171717;
+  --trellis-color-breeze-fill-secondary-hover: #fcebf2;
+  --trellis-color-breeze-fill-secondary-pressed: #fbdbe9;
+  --trellis-color-breeze-fill-shimmer-default: linear-gradient(
+    135deg,
+    #fbddd2,
+    #fbdbe9
+  );
+  --trellis-color-breeze-fill-special-btn-alt-default: linear-gradient(
+    114deg,
+    #ff3842,
+    #d20688
+  );
+  --trellis-color-breeze-fill-special-btn-alt-disabled: #ff3842;
+  --trellis-color-breeze-fill-special-btn-default: linear-gradient(
+    135deg,
+    #ff3842,
+    #d20688
+  );
+  --trellis-color-breeze-fill-special-btn-hover: linear-gradient(
+    135deg,
+    #d9002b,
+    #a5016a
+  );
+  --trellis-color-breeze-fill-special-btn-pressed: linear-gradient(
+    135deg,
+    #ac0020,
+    #800051
+  );
+  --trellis-color-breeze-fill-tertiary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-breeze-fill-tertiary-disabled: #171717;
+  --trellis-color-breeze-fill-tertiary-hover: hsla(0, 0%, 8%, 0.08);
+  --trellis-color-breeze-fill-tertiary-pressed: hsla(0, 0%, 8%, 0.11);
+  --trellis-color-breeze-fill-transparent-defauilt: hsla(0, 0%, 100%, 0);
+  --trellis-color-breeze-icon-component-disabled: #8a8a8a;
+  --trellis-color-breeze-icon-feedback-active: #fff;
+  --trellis-color-breeze-icon-feedback-default: #141414;
+  --trellis-color-breeze-icon-field-default: #d20688;
+  --trellis-color-breeze-icon-field-disabled: #8a8a8a;
+  --trellis-color-breeze-icon-full-page-loader-default: linear-gradient(
+    135deg,
+    #fb31a7,
+    #ff4800 23%,
+    #fbddd2
+  );
+  --trellis-color-breeze-icon-icon-button-default: #141414;
+  --trellis-color-breeze-icon-icon-button-hover: #a5016a;
+  --trellis-color-breeze-icon-icon-button-pressed: #800051;
+  --trellis-color-breeze-icon-primary-default: #fff;
+  --trellis-color-breeze-icon-primary-disabled: #fff;
+  --trellis-color-breeze-icon-secondary-default: #d20688;
+  --trellis-color-breeze-icon-special-btn-default: #fff;
+  --trellis-color-breeze-icon-tertiary-default: #141414;
+  --trellis-color-breeze-icon-transparent-default: #d20688;
+  --trellis-color-breeze-text-badge-default: #d20688;
+  --trellis-color-breeze-text-component-disabled: #8a8a8a;
+  --trellis-color-breeze-text-field-default: #666;
+  --trellis-color-breeze-text-field-disabled: #8a8a8a;
+  --trellis-color-breeze-text-field-input: #141414;
+  --trellis-color-breeze-text-primary-default: #fff;
+  --trellis-color-breeze-text-primary-disabled: #ebebeb;
+  --trellis-color-breeze-text-secondary-default: #d20688;
+  --trellis-color-breeze-text-secondary-disabled: #8a8a8a;
+  --trellis-color-breeze-text-secondary-hover: #a5016a;
+  --trellis-color-breeze-text-secondary-pressed: #800051;
+  --trellis-color-breeze-text-special-btn-default: #fff;
+  --trellis-color-breeze-text-tertiary-default: #141414;
+  --trellis-color-breeze-text-tertiary-disabled: #8a8a8a;
+  --trellis-color-breeze-text-transparent-default: #d20688;
+  --trellis-color-breeze-text-transparent-hover: #a5016a;
+  --trellis-color-breeze-text-transparent-pressed: #800051;
+  --trellis-color-do-not-use-alert-danger: #d9002b;
+  --trellis-color-do-not-use-alert-success: #008022;
+  --trellis-color-do-not-use-alert-warning: #eeb117;
+  --trellis-color-do-not-use-battleship: #333;
+  --trellis-color-do-not-use-button-danger-hover-fill: #ac0020;
+  --trellis-color-do-not-use-button-disabled-text: #b0c1d4;
+  --trellis-color-do-not-use-button-primary-hover-fill: #6431da;
+  --trellis-color-do-not-use-button-secondary-active-fill: #b6b1af;
+  --trellis-color-do-not-use-button-secondary-hover-fill: #cfcccb;
+  --trellis-color-do-not-use-button-secondary-text: #1f1f1f;
+  --trellis-color-do-not-use-button-tertiary-light-hover-fill: #292929;
+  --trellis-color-do-not-use-button-tertiary-light-text: #e7e5e4;
+  --trellis-color-do-not-use-calypso: #016de1;
+  --trellis-color-do-not-use-calypso-dark: #0035b2;
+  --trellis-color-do-not-use-calypso-light: #00133f;
+  --trellis-color-do-not-use-calypso-medium: #0050c7;
+  --trellis-color-do-not-use-candy-apple: #d9002b;
+  --trellis-color-do-not-use-candy-apple-dark: #850016;
+  --trellis-color-do-not-use-candy-apple-light: #290c05;
+  --trellis-color-do-not-use-candy-apple-medium: #ac0020;
+  --trellis-color-do-not-use-chart-aqua: #51d3d9;
+  --trellis-color-do-not-use-chart-blue: #81c1fd;
+  --trellis-color-do-not-use-chart-dark-purple: #9784c2;
+  --trellis-color-do-not-use-chart-green: #a2d28f;
+  --trellis-color-do-not-use-chart-orange: #fea58e;
+  --trellis-color-do-not-use-chart-purple: #bda9ea;
+  --trellis-color-do-not-use-chart-red: #ea90b1;
+  --trellis-color-do-not-use-chart-yellow: #f5c78e;
+  --trellis-color-do-not-use-cirrus: #f2f5f8;
+  --trellis-color-do-not-use-eerie: #b6b1af;
+  --trellis-color-do-not-use-facebook: #3b5998;
+  --trellis-color-do-not-use-flat-earth: #253342;
+  --trellis-color-do-not-use-flint: #000;
+  --trellis-color-do-not-use-focus-ring-base: #00d0e4;
+  --trellis-color-do-not-use-google: #dd4b39;
+  --trellis-color-do-not-use-great-white: #fff;
+  --trellis-color-do-not-use-gypsum: #292929;
+  --trellis-color-do-not-use-heffalump: #425b76;
+  --trellis-color-do-not-use-instagram: #c13584;
+  --trellis-color-do-not-use-koala: #1b0c3b;
+  --trellis-color-do-not-use-link-hover: #5113ba;
+  --trellis-color-do-not-use-linkedin: #0077b5;
+  --trellis-color-do-not-use-lorax: #7d53e9;
+  --trellis-color-do-not-use-lorax-dark: #5113ba;
+  --trellis-color-do-not-use-lorax-light: #cfcccb;
+  --trellis-color-do-not-use-lorax-medium: #ff7d4c;
+  --trellis-color-do-not-use-marigold: #eeb117;
+  --trellis-color-do-not-use-marigold-dark: #b67e0e;
+  --trellis-color-do-not-use-marigold-light: #1f1306;
+  --trellis-color-do-not-use-marigold-medium: #d39913;
+  --trellis-color-do-not-use-monolith: #000;
+  --trellis-color-do-not-use-norman: #d20688;
+  --trellis-color-do-not-use-norman-dark: #800051;
+  --trellis-color-do-not-use-norman-light: #2d061b;
+  --trellis-color-do-not-use-norman-medium: #a5016a;
+  --trellis-color-do-not-use-obsidian: #33475b;
+  --trellis-color-do-not-use-olaf: #141414;
+  --trellis-color-do-not-use-oz: #008022;
+  --trellis-color-do-not-use-oz-dark: #004c12;
+  --trellis-color-do-not-use-oz-light: #071905;
+  --trellis-color-do-not-use-oz-medium: #00641a;
+  --trellis-color-do-not-use-pantera: #2d3e50;
+  --trellis-color-do-not-use-pinterest: #bd081c;
+  --trellis-color-do-not-use-rss: #f26522;
+  --trellis-color-do-not-use-slinky: #516f90;
+  --trellis-color-do-not-use-sorbet: #ff8f59;
+  --trellis-color-do-not-use-sorbet-dark: #e68250;
+  --trellis-color-do-not-use-sorbet-light: #fff3ee;
+  --trellis-color-do-not-use-sorbet-medium: #ffc7ac;
+  --trellis-color-do-not-use-thunderdome: #7d53e9;
+  --trellis-color-do-not-use-thunderdome-dark: #5113ba;
+  --trellis-color-do-not-use-thunderdome-light: #1b0c3b;
+  --trellis-color-do-not-use-thunderdome-medium: #6431da;
+  --trellis-color-do-not-use-transparent: transparent;
+  --trellis-color-do-not-use-transparent-dark: transparent;
+  --trellis-color-do-not-use-transparent-light: transparent;
+  --trellis-color-do-not-use-twitter: #55acee;
+  --trellis-color-do-not-use-x: #000;
+  --trellis-color-do-not-use-xing: #026466;
+  --trellis-color-do-not-use-youtube: red;
+  --trellis-color-fill-accent-blue-default: #016de1;
+  --trellis-color-fill-accent-blue-hover: #0050c7;
+  --trellis-color-fill-accent-blue-pressed: #0035b2;
+  --trellis-color-fill-accent-blue-subtle: #00133f;
+  --trellis-color-fill-accent-blue-subtle-alt: #fff;
+  --trellis-color-fill-accent-green-default: #00823a;
+  --trellis-color-fill-accent-green-hover: #006831;
+  --trellis-color-fill-accent-green-pressed: #005027;
+  --trellis-color-fill-accent-green-subtle: #00190d;
+  --trellis-color-fill-accent-green-subtle-alt: #00190d;
+  --trellis-color-fill-accent-light-orange-default: #ff4800;
+  --trellis-color-fill-accent-light-orange-hover: #ff7d4c;
+  --trellis-color-fill-accent-light-orange-pressed: #ffa581;
+  --trellis-color-fill-accent-light-orange-subtle: #241005;
+  --trellis-color-fill-accent-light-orange-subtle-alt: #241005;
+  --trellis-color-fill-accent-magenta-default: #d20688;
+  --trellis-color-fill-accent-magenta-hover: #a5016a;
+  --trellis-color-fill-accent-magenta-pressed: #800051;
+  --trellis-color-fill-accent-magenta-subtle: #2d061b;
+  --trellis-color-fill-accent-magenta-subtle-alt: #2d061b;
+  --trellis-color-fill-accent-neutral-default: #ebebeb;
+  --trellis-color-fill-accent-neutral-hover: #ccc;
+  --trellis-color-fill-accent-neutral-pressed: #b3b3b3;
+  --trellis-color-fill-accent-neutral-subtle: #171717;
+  --trellis-color-fill-accent-neutral-subtle-alt: #171717;
+  --trellis-color-fill-accent-orange-default: #ff4800;
+  --trellis-color-fill-accent-orange-hover: #ff7d4c;
+  --trellis-color-fill-accent-orange-pressed: #ffa581;
+  --trellis-color-fill-accent-orange-subtle: #241005;
+  --trellis-color-fill-accent-orange-subtle-alt: #241005;
+  --trellis-color-fill-accent-purple-default: #7d53e9;
+  --trellis-color-fill-accent-purple-hover: #6431da;
+  --trellis-color-fill-accent-purple-pressed: #5113ba;
+  --trellis-color-fill-accent-purple-subtle: #1b0c3b;
+  --trellis-color-fill-accent-purple-subtle-alt: #1b0c3b;
+  --trellis-color-fill-accent-red-default: #d9002b;
+  --trellis-color-fill-accent-red-hover: #ac0020;
+  --trellis-color-fill-accent-red-pressed: #850016;
+  --trellis-color-fill-accent-red-subtle: #290c05;
+  --trellis-color-fill-accent-red-subtle-alt: #290c05;
+  --trellis-color-fill-accent-teal-default: #007c7d;
+  --trellis-color-fill-accent-teal-hover: #006162;
+  --trellis-color-fill-accent-teal-pressed: #00494b;
+  --trellis-color-fill-accent-teal-subtle: #051919;
+  --trellis-color-fill-accent-teal-subtle-alt: #051919;
+  --trellis-color-fill-accent-yellow-default: #eeb117;
+  --trellis-color-fill-accent-yellow-hover: #d39913;
+  --trellis-color-fill-accent-yellow-pressed: #b67e0e;
+  --trellis-color-fill-accent-yellow-subtle: #1f1306;
+  --trellis-color-fill-accent-yellow-subtle-alt: #1f1306;
+  --trellis-color-fill-alert-default: #d9002b;
+  --trellis-color-fill-alert-hover: #ac0020;
+  --trellis-color-fill-alert-pressed: #850016;
+  --trellis-color-fill-alert-subtle: #290c05;
+  --trellis-color-fill-brand-default: #ff4800;
+  --trellis-color-fill-brand-hover: #ffa581;
+  --trellis-color-fill-brand-pressed: #ff7d4c;
+  --trellis-color-fill-brand-subtle: #241005;
+  --trellis-color-fill-caution-default: #eeb117;
+  --trellis-color-fill-caution-hover: #d39913;
+  --trellis-color-fill-caution-pressed: #b67e0e;
+  --trellis-color-fill-caution-subtle: #1f1306;
+  --trellis-color-fill-field-default: #fff;
+  --trellis-color-fill-field-default-alt: #fff;
+  --trellis-color-fill-field-disabled: #333;
+  --trellis-color-fill-field-hover: #ebebeb;
+  --trellis-color-fill-field-pressed: #e6e6e6;
+  --trellis-color-fill-info-default: #016de1;
+  --trellis-color-fill-info-hover: #0050c7;
+  --trellis-color-fill-info-pressed: #0035b2;
+  --trellis-color-fill-info-subtle: #00133f;
+  --trellis-color-fill-inverse-danger: #fff;
+  --trellis-color-fill-inverse-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-inverse-default-alt: #292929;
+  --trellis-color-fill-inverse-default-transparent: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-inverse-disabled: #333;
+  --trellis-color-fill-inverse-disabled-alt: #292929;
+  --trellis-color-fill-inverse-disabled-transparent: #333;
+  --trellis-color-fill-inverse-hover: #fff;
+  --trellis-color-fill-inverse-hover-alt: #292929;
+  --trellis-color-fill-inverse-hover-transparent: #fff;
+  --trellis-color-fill-inverse-pressed: #292929;
+  --trellis-color-fill-inverse-pressed-alt: #292929;
+  --trellis-color-fill-inverse-pressed-transparent: #292929;
+  --trellis-color-fill-inverse-primary: #fff;
+  --trellis-color-fill-inverse-subtle: #141414;
+  --trellis-color-fill-positive-default: #00823a;
+  --trellis-color-fill-positive-hover: #006831;
+  --trellis-color-fill-positive-pressed: #005027;
+  --trellis-color-fill-positive-subtle: #00190d;
+  --trellis-color-fill-primary-default: #fff;
+  --trellis-color-fill-primary-disabled: #666;
+  --trellis-color-fill-primary-hover: #ebebeb;
+  --trellis-color-fill-primary-pressed: #e6e6e6;
+  --trellis-color-fill-secondary-default: #ebebeb;
+  --trellis-color-fill-secondary-default-alt: #d6c2d9;
+  --trellis-color-fill-secondary-disabled: #171717;
+  --trellis-color-fill-secondary-disabled-alt: #171717;
+  --trellis-color-fill-secondary-hover: #ccc;
+  --trellis-color-fill-secondary-hover-alt: #caaacf;
+  --trellis-color-fill-secondary-pressed: #b3b3b3;
+  --trellis-color-fill-secondary-pressed-alt: #bc8dc3;
+  --trellis-color-fill-surface-default: #1f1f1f;
+  --trellis-color-fill-surface-default-hover: #242424;
+  --trellis-color-fill-surface-default-pressed: #292929;
+  --trellis-color-fill-surface-raised: #292929;
+  --trellis-color-fill-surface-recessed: #141414;
+  --trellis-color-fill-surface-recessed-hover: #fff;
+  --trellis-color-fill-surface-recessed-pressed: #fff;
+  --trellis-color-fill-tertiary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-fill-tertiary-disabled: #171717;
+  --trellis-color-fill-tertiary-hover: #292929;
+  --trellis-color-fill-tertiary-pressed: #292929;
+  --trellis-color-fill-transitional-alert: #f5f5f5;
+  --trellis-color-fill-transitional-banner-gradient-color-1: #d7cdfc;
+  --trellis-color-fill-transitional-banner-gradient-color-2: #d7cdfc;
+  --trellis-color-fill-transitional-beta-button-gradient-color-1: #d7cdfc;
+  --trellis-color-fill-transitional-beta-button-gradient-color-2: #d7cdfc;
+  --trellis-color-fill-transitional-beta-button-hover: #c4b4f7;
+  --trellis-color-fill-transitional-danger-pattern-color-1: #fff;
+  --trellis-color-fill-transitional-danger-pattern-color-2: #fff;
+  --trellis-color-fill-transitional-field-hover: #f5f5f5;
+  --trellis-color-fill-transitional-modal-gradient-color-1: #fff;
+  --trellis-color-fill-transitional-modal-gradient-color-2: #fff;
+  --trellis-color-fill-transitional-popover: #f5f5f5;
+  --trellis-color-fill-transitional-progress-success-gradient-color-1: #00823a;
+  --trellis-color-fill-transitional-progress-success-gradient-color-2: #00823a;
+  --trellis-color-fill-transitional-progress-warning-danger-gradient-color-1: #fccb57;
+  --trellis-color-fill-transitional-progress-warning-danger-gradient-color-2: #fccb57;
+  --trellis-color-fill-transitional-scroll-default-gradient-color-1: #f5f5f5;
+  --trellis-color-fill-transitional-scroll-default-gradient-color-2: rgba(
+    239,
+    237,
+    235,
+    0
+  );
+  --trellis-color-fill-transitional-scroll-fadeout-gradient-color-1: #fff;
+  --trellis-color-fill-transitional-scroll-fadeout-gradient-color-2: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-fill-transitional-shadow: #f5f5f5;
+  --trellis-color-fill-transitional-sidenav-on-recessed-active: #ebebeb;
+  --trellis-color-fill-transitional-table-default: #f5f5f5;
+  --trellis-color-fill-transitional-tabs-default: #f5f5f5;
+  --trellis-color-fill-transitional-tabs-pressed: #f5f5f5;
+  --trellis-color-fill-transitional-tertiary-default: #f5f5f5;
+  --trellis-color-fill-transitional-tertiary-hover: #f5f5f5;
+  --trellis-color-fill-transitional-tertiary-pressed: #f5f5f5;
+  --trellis-color-fill-transitional-upgrade-modal-gradient-color-1: #fff;
+  --trellis-color-fill-transparent-default: #fff;
+  --trellis-color-fill-transparent-disabled: #333;
+  --trellis-color-fill-transparent-hover: #292929;
+  --trellis-color-fill-transparent-pressed: #292929;
+  --trellis-color-global-shell-border-dark: #333;
+  --trellis-color-global-shell-border-default: #333;
+  --trellis-color-global-shell-border-search-btn-border-default: #333;
+  --trellis-color-global-shell-border-search-btn-border-hover: #4d4d4d;
+  --trellis-color-global-shell-border-search-field-border-default: #666;
+  --trellis-color-global-shell-border-subtle: #242424;
+  --trellis-color-global-shell-fill-editortitle-hover: hsla(0, 0%, 100%, 0);
+  --trellis-color-global-shell-fill-logo-default: #ff4800;
+  --trellis-color-global-shell-fill-nav-item-default: hsla(0, 0%, 100%, 0);
+  --trellis-color-global-shell-fill-nav-item-hover: hsla(0, 0%, 100%, 0);
+  --trellis-color-global-shell-fill-nav-item-selected: hsla(0, 0%, 100%, 0);
+  --trellis-color-global-shell-fill-search-default: #1f1f1f;
+  --trellis-color-global-shell-fill-search-hover: #1f1f1f;
+  --trellis-color-global-shell-fill-sub-nav-item-default: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-global-shell-fill-sub-nav-item-hover: hsla(0, 0%, 100%, 0);
+  --trellis-color-global-shell-fill-sub-nav-item-selected: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-global-shell-fill-surface-default: #1f1f1f;
+  --trellis-color-global-shell-fill-surface-panel-default: #1f1f1f;
+  --trellis-color-global-shell-icon-bookmark-default: hsla(0, 0%, 100%, 0);
+  --trellis-color-global-shell-icon-bookmark-hover: hsla(0, 0%, 100%, 0);
+  --trellis-color-global-shell-icon-bookmark-selected: #f5f5f5;
+  --trellis-color-global-shell-icon-copilot-default: #fbdbe9;
+  --trellis-color-global-shell-icon-nav-item-default: #fff;
+  --trellis-color-global-shell-icon-nav-item-hover: #fff;
+  --trellis-color-global-shell-icon-nav-item-selected: #fff;
+  --trellis-color-global-shell-icon-nav-item-subtle: #fff;
+  --trellis-color-global-shell-text-copilot-default: #fbdbe9;
+  --trellis-color-global-shell-text-copilot-hover: #fbdbe9;
+  --trellis-color-global-shell-text-nav-item-default: #fff;
+  --trellis-color-global-shell-text-nav-item-hover: #fff;
+  --trellis-color-global-shell-text-nav-item-selected: #fff;
+  --trellis-color-icon-alert-default: #ff3842;
+  --trellis-color-icon-alert-hover: #ff3842;
+  --trellis-color-icon-alert-on-fill-default: #fff;
+  --trellis-color-icon-alert-pressed: #ff3842;
+  --trellis-color-icon-core-default: #e6e6e6;
+  --trellis-color-icon-core-disabled: #b3b3b3;
+  --trellis-color-icon-core-on-fill-default: #1f1f1f;
+  --trellis-color-icon-core-subtle: #b3b3b3;
+  --trellis-color-icon-interactive-default: #e6e6e6;
+  --trellis-color-icon-interactive-disabled: #b3b3b3;
+  --trellis-color-icon-interactive-hover: #ccc;
+  --trellis-color-icon-interactive-on-fill-default: #1f1f1f;
+  --trellis-color-icon-interactive-on-fill-hover: #1f1f1f;
+  --trellis-color-icon-interactive-on-fill-pressed: #1f1f1f;
+  --trellis-color-icon-interactive-pressed: #b3b3b3;
+  --trellis-color-icon-inverse-default: #f5f5f5;
+  --trellis-color-icon-inverse-default-alt: #f5f5f5;
+  --trellis-color-icon-inverse-disabled: #f5f5f5;
+  --trellis-color-icon-inverse-disabled-alt: #f5f5f5;
+  --trellis-color-icon-inverse-hover: #f5f5f5;
+  --trellis-color-icon-inverse-pressed: #f5f5f5;
+  --trellis-color-icon-primary-default: #fff;
+  --trellis-color-icon-primary-disabled: #666;
+  --trellis-color-icon-primary-hover: #fff;
+  --trellis-color-icon-primary-pressed: #fff;
+  --trellis-color-icon-secondary-default: #fff;
+  --trellis-color-icon-secondary-disabled: #b3b3b3;
+  --trellis-color-icon-tertiary-default: #ccc;
+  --trellis-color-icon-tertiary-disabled: #b3b3b3;
+  --trellis-color-reporting-fill-chart-alert: #ff3842;
+  --trellis-color-reporting-fill-chart-caution: #fccb57;
+  --trellis-color-reporting-fill-chart-default-dark-aqua: #009b9c;
+  --trellis-color-reporting-fill-chart-default-dark-blue: #078cfd;
+  --trellis-color-reporting-fill-chart-default-dark-green: #119d49;
+  --trellis-color-reporting-fill-chart-default-dark-orange: #ff7d4c;
+  --trellis-color-reporting-fill-chart-default-dark-pink: #a5016a;
+  --trellis-color-reporting-fill-chart-default-dark-purple: #9778ec;
+  --trellis-color-reporting-fill-chart-default-dark-yellow: #b67e0e;
+  --trellis-color-reporting-fill-chart-default-light-aqua: #48d1cf;
+  --trellis-color-reporting-fill-chart-default-light-blue: #8cc4f4;
+  --trellis-color-reporting-fill-chart-default-light-green: #97dbae;
+  --trellis-color-reporting-fill-chart-default-light-orange: #ffa581;
+  --trellis-color-reporting-fill-chart-default-light-pink: #ff9fcc;
+  --trellis-color-reporting-fill-chart-default-light-purple: #c4b4f7;
+  --trellis-color-reporting-fill-chart-default-light-yellow: #fbe0a5;
+  --trellis-color-reporting-fill-chart-positive: #6acb8c;
+  --trellis-color-reporting-fill-chart-scale-dark-aqua: #006162;
+  --trellis-color-reporting-fill-chart-scale-dark-blue: #0035b2;
+  --trellis-color-reporting-fill-chart-scale-dark-green: #005027;
+  --trellis-color-reporting-fill-chart-scale-dark-orange: #7b1d00;
+  --trellis-color-reporting-fill-chart-scale-dark-pink: #800051;
+  --trellis-color-reporting-fill-chart-scale-dark-purple: #321986;
+  --trellis-color-reporting-fill-chart-scale-dark-yellow: #b67e0e;
+  --trellis-color-reporting-fill-chart-scale-light-aqua: #b3f0ed;
+  --trellis-color-reporting-fill-chart-scale-light-blue: #acdaf4;
+  --trellis-color-reporting-fill-chart-scale-light-green: #daefe1;
+  --trellis-color-reporting-fill-chart-scale-light-orange: #fcf5f2;
+  --trellis-color-reporting-fill-chart-scale-light-pink: #fcebf2;
+  --trellis-color-reporting-fill-chart-scale-light-purple: #f9f5ff;
+  --trellis-color-reporting-fill-chart-scale-light-yellow: #fcf6e6;
+  --trellis-color-reporting-fill-chart-white: #fff;
+  --trellis-color-reporting-fill-highlight-blue-default: #acdaf4;
+  --trellis-color-reporting-fill-highlight-blue-subtle: #e1f2fb;
+  --trellis-color-reporting-fill-highlight-green-default: #bde7cb;
+  --trellis-color-reporting-fill-highlight-green-subtle: #edf4ef;
+  --trellis-color-reporting-fill-highlight-orange-default: #fcc6b1;
+  --trellis-color-reporting-fill-highlight-orange-subtle: #fcece6;
+  --trellis-color-reporting-fill-highlight-red-default: #fcc5be;
+  --trellis-color-reporting-fill-highlight-red-subtle: #fcece9;
+  --trellis-color-reporting-fill-highlight-yellow-default: #fbe0a5;
+  --trellis-color-reporting-fill-highlight-yellow-subtle: #fcf6e6;
+  --trellis-color-specialty-link-on-fill-alt-default: #46062b;
+  --trellis-color-specialty-link-on-fill-alt-disabled: #8a8a8a;
+  --trellis-color-specialty-link-on-fill-alt-hover: #800051;
+  --trellis-color-specialty-link-on-fill-alt-pressed: #a5016a;
+  --trellis-color-specialty-link-on-fill-default: #fff;
+  --trellis-color-specialty-link-on-fill-disabled: #fff;
+  --trellis-color-specialty-link-on-fill-hover: #f0f0f0;
+  --trellis-color-specialty-link-on-fill-pressed: #fff;
+  --trellis-color-specialty-primary-on-fill-default: #fff;
+  --trellis-color-specialty-primary-on-fill-disabled: #fff;
+  --trellis-color-specialty-primary-on-fill-hover: #f0f0f0;
+  --trellis-color-specialty-primary-on-fill-pressed: #e6e6e6;
+  --trellis-color-specialty-scrim: #141414;
+  --trellis-color-specialty-scrim-alt: #fff;
+  --trellis-color-specialty-table-header-default: #f7f2f7;
+  --trellis-color-specialty-table-header-hover: #efe7f0;
+  --trellis-color-specialty-table-header-pressed: #e4d7e6;
+  --trellis-color-specialty-tertiary-on-fill-default: #46062b;
+  --trellis-color-specialty-tertiary-on-fill-disabled: #46062b;
+  --trellis-color-specialty-tertiary-on-fill-hover: #5e043b;
+  --trellis-color-specialty-tertiary-on-fill-pressed: #800051;
+  --trellis-color-specialty-tertiary-transparent-default: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-specialty-tertiary-transparent-disabled: rgba(
+    255,
+    255,
+    255,
+    0
+  );
+  --trellis-color-specialty-tertiary-transparent-hover: #f0f0f0;
+  --trellis-color-specialty-tertiary-transparent-pressed: #e6e6e6;
+  --trellis-color-specialty-text-core-alt-default: #46062b;
+  --trellis-color-specialty-text-interactive-alt-default: #141414;
+  --trellis-color-specialty-text-interactive-alt-hover: #4d4d4d;
+  --trellis-color-specialty-text-interactive-alt-pressed: #666;
+  --trellis-color-temp-do-not-use-border-primary-default: #bcff2b;
+  --trellis-color-temp-do-not-use-border-primary-disabled: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-default: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-accent-teal-subtle: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-field-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-field-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-secondary-default: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-secondary-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-secondary-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-surface-default-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-surface-default-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-fill-surface-recessed: #bcff2b;
+  --trellis-color-temp-do-not-use-icon-primary-default: #bcff2b;
+  --trellis-color-temp-do-not-use-icon-primary-hover: #bcff2b;
+  --trellis-color-temp-do-not-use-icon-primary-pressed: #bcff2b;
+  --trellis-color-temp-do-not-use-specialty-scrim: #bcff2b;
+  --trellis-color-temp-do-not-use-text-primary-default: #bcff2b;
+  --trellis-color-temp-do-not-use-text-primary-subtle: #bcff2b;
+  --trellis-color-temp-future-border-primary-default: hsla(0, 0%, 8%, 0);
+  --trellis-color-temp-future-border-primary-disabled: hsla(0, 0%, 8%, 0);
+  --trellis-color-temp-future-fill-accent-teal-default: #007c7d;
+  --trellis-color-temp-future-fill-accent-teal-hover: #006162;
+  --trellis-color-temp-future-fill-accent-teal-pressed: #00494b;
+  --trellis-color-temp-future-fill-accent-teal-subtle: #051919;
+  --trellis-color-temp-future-fill-field-hover: #efedeb;
+  --trellis-color-temp-future-fill-field-pressed: #e7e5e4;
+  --trellis-color-temp-future-fill-secondary-default: #efedeb;
+  --trellis-color-temp-future-fill-secondary-hover: #cfcccb;
+  --trellis-color-temp-future-fill-secondary-pressed: #b6b1af;
+  --trellis-color-temp-future-fill-surface-default-hover: #242424;
+  --trellis-color-temp-future-fill-surface-default-pressed: #292929;
+  --trellis-color-temp-future-fill-surface-recessed: #141414;
+  --trellis-color-temp-future-icon-primary-default: #fff;
+  --trellis-color-temp-future-icon-primary-hover: #fff;
+  --trellis-color-temp-future-icon-primary-pressed: #fff;
+  --trellis-color-temp-future-specialty-scrim: #141414;
+  --trellis-color-temp-future-text-primary-default: #fff;
+  --trellis-color-temp-future-text-primary-subtle: #fff;
+  --trellis-color-text-alert-default: #ff7b70;
+  --trellis-color-text-alert-hover: #ff3842;
+  --trellis-color-text-alert-on-fill-default: #fff;
+  --trellis-color-text-alert-pressed: #d9002b;
+  --trellis-color-text-brand-default: #ff7d4c;
+  --trellis-color-text-core-default: #e6e6e6;
+  --trellis-color-text-core-disabled: #666;
+  --trellis-color-text-core-on-fill-default: #1f1f1f;
+  --trellis-color-text-core-subtle: #b3b3b3;
+  --trellis-color-text-interactive-default: #e6e6e6;
+  --trellis-color-text-interactive-default-disabled: #666;
+  --trellis-color-text-interactive-default-hover: #ccc;
+  --trellis-color-text-interactive-default-pressed: #b3b3b3;
+  --trellis-color-text-interactive-on-fill: #1f1f1f;
+  --trellis-color-text-interactive-on-fill-default: #1f1f1f;
+  --trellis-color-text-interactive-on-fill-hover: #1f1f1f;
+  --trellis-color-text-interactive-on-fill-pressed: #1f1f1f;
+  --trellis-color-text-inverse-default: #f5f5f5;
+  --trellis-color-text-inverse-default-alt: #f5f5f5;
+  --trellis-color-text-inverse-disabled: #f5f5f5;
+  --trellis-color-text-inverse-disabled-alt: #f5f5f5;
+  --trellis-color-text-inverse-hover: #f5f5f5;
+  --trellis-color-text-inverse-pressed: #f5f5f5;
+  --trellis-color-text-primary-default: #fff;
+  --trellis-color-text-primary-disabled: #666;
+  --trellis-color-text-primary-subtle: #fff;
+  --trellis-color-text-secondary-default: #1f1f1f;
+  --trellis-color-text-secondary-disabled: #666;
+  --trellis-color-text-tertiary-default: #e6e6e6;
+  --trellis-color-text-tertiary-disabled: #666;
+  --trellis-space-0: 0px;
+  --trellis-space-25: 1px;
+  --trellis-space-50: 2px;
+  --trellis-space-100: 4px;
+  --trellis-space-200: 8px;
+  --trellis-space-250: 10px;
+  --trellis-space-300: 12px;
+  --trellis-space-400: 16px;
+  --trellis-space-500: 20px;
+  --trellis-space-600: 24px;
+  --trellis-space-700: 28px;
+  --trellis-space-800: 32px;
+  --trellis-space-900: 36px;
+  --trellis-space-1000: 40px;
+  --trellis-space-1100: 48px;
+  --trellis-space-1200: 56px;
+  --trellis-space-1300: 60px;
+  --trellis-space-1400: 64px;
+  --trellis-space-1500: 96px;
+  --trellis-space-1600: 144px;
+  --trellis-space-1700: 192px;
+  --trellis-typography-body-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-100-font-size: 14px;
+  --trellis-typography-body-100-font-weight: 300;
+  --trellis-typography-body-100-letter-spacing: 0px;
+  --trellis-typography-body-100-line-height: 24px;
+  --trellis-typography-body-125-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-125-font-size: 14px;
+  --trellis-typography-body-125-font-weight: 600;
+  --trellis-typography-body-125-letter-spacing: 0px;
+  --trellis-typography-body-125-line-height: 24px;
+  --trellis-typography-body-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-200-font-size: 16px;
+  --trellis-typography-body-200-font-weight: 300;
+  --trellis-typography-body-200-letter-spacing: 0px;
+  --trellis-typography-body-200-line-height: 24px;
+  --trellis-typography-body-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-300-font-size: 18px;
+  --trellis-typography-body-300-font-weight: 400;
+  --trellis-typography-body-300-letter-spacing: 0px;
+  --trellis-typography-body-300-line-height: 24px;
+  --trellis-typography-body-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-400-font-size: 20px;
+  --trellis-typography-body-400-font-weight: 400;
+  --trellis-typography-body-400-letter-spacing: 0px;
+  --trellis-typography-body-400-line-height: 28px;
+  --trellis-typography-body-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-500-font-size: 22px;
+  --trellis-typography-body-500-font-weight: 400;
+  --trellis-typography-body-500-letter-spacing: 0px;
+  --trellis-typography-body-500-line-height: 28px;
+  --trellis-typography-body-600-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-600-font-size: 26px;
+  --trellis-typography-body-600-font-weight: 400;
+  --trellis-typography-body-600-letter-spacing: 0px;
+  --trellis-typography-body-600-line-height: 32px;
+  --trellis-typography-body-700-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-body-700-font-size: 28px;
+  --trellis-typography-body-700-font-weight: 400;
+  --trellis-typography-body-700-letter-spacing: 0px;
+  --trellis-typography-body-700-line-height: 36px;
+  --trellis-typography-code-100-font-family: Source Code Pro, Consolas, Monaco,
+    Courier New, monospace;
+  --trellis-typography-code-100-font-size: 14px;
+  --trellis-typography-code-100-font-weight: 500;
+  --trellis-typography-code-100-letter-spacing: 0px;
+  --trellis-typography-code-100-line-height: 24px;
+  --trellis-typography-detail-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-detail-100-font-size: 12px;
+  --trellis-typography-detail-100-font-weight: 300;
+  --trellis-typography-detail-100-letter-spacing: 0px;
+  --trellis-typography-detail-100-line-height: 14px;
+  --trellis-typography-detail-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-detail-200-font-size: 12px;
+  --trellis-typography-detail-200-font-weight: 300;
+  --trellis-typography-detail-200-letter-spacing: 0px;
+  --trellis-typography-detail-200-line-height: 18px;
+  --trellis-typography-display-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-100-font-size: 56px;
+  --trellis-typography-display-100-font-weight: 500;
+  --trellis-typography-display-100-letter-spacing: -0.32px;
+  --trellis-typography-display-100-line-height: 72px;
+  --trellis-typography-display-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-200-font-size: 66px;
+  --trellis-typography-display-200-font-weight: 500;
+  --trellis-typography-display-200-letter-spacing: -0.32px;
+  --trellis-typography-display-200-line-height: 76px;
+  --trellis-typography-display-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-300-font-size: 76px;
+  --trellis-typography-display-300-font-weight: 500;
+  --trellis-typography-display-300-letter-spacing: -0.32px;
+  --trellis-typography-display-300-line-height: 88px;
+  --trellis-typography-display-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-400-font-size: 84px;
+  --trellis-typography-display-400-font-weight: 500;
+  --trellis-typography-display-400-letter-spacing: -0.32px;
+  --trellis-typography-display-400-line-height: 96px;
+  --trellis-typography-display-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-display-500-font-size: 94px;
+  --trellis-typography-display-500-font-weight: 500;
+  --trellis-typography-display-500-letter-spacing: -0.32px;
+  --trellis-typography-display-500-line-height: 100px;
+  --trellis-typography-heading-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-100-font-size: 16px;
+  --trellis-typography-heading-100-font-weight: 600;
+  --trellis-typography-heading-100-letter-spacing: 0px;
+  --trellis-typography-heading-100-line-height: 20px;
+  --trellis-typography-heading-1000-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-1000-font-size: 55px;
+  --trellis-typography-heading-1000-font-weight: 700;
+  --trellis-typography-heading-1000-letter-spacing: 0px;
+  --trellis-typography-heading-1000-line-height: 67px;
+  --trellis-typography-heading-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-200-font-size: 18px;
+  --trellis-typography-heading-200-font-weight: 500;
+  --trellis-typography-heading-200-letter-spacing: 0px;
+  --trellis-typography-heading-200-line-height: 24px;
+  --trellis-typography-heading-25-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-25-font-size: 12px;
+  --trellis-typography-heading-25-font-weight: 600;
+  --trellis-typography-heading-25-letter-spacing: 0px;
+  --trellis-typography-heading-25-line-height: 18px;
+  --trellis-typography-heading-300-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-300-font-size: 20px;
+  --trellis-typography-heading-300-font-weight: 600;
+  --trellis-typography-heading-300-letter-spacing: 0px;
+  --trellis-typography-heading-300-line-height: 24px;
+  --trellis-typography-heading-400-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-400-font-size: 22px;
+  --trellis-typography-heading-400-font-weight: 500;
+  --trellis-typography-heading-400-letter-spacing: 0px;
+  --trellis-typography-heading-400-line-height: 27px;
+  --trellis-typography-heading-50-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-50-font-size: 14px;
+  --trellis-typography-heading-50-font-weight: 600;
+  --trellis-typography-heading-50-letter-spacing: 0px;
+  --trellis-typography-heading-50-line-height: 18px;
+  --trellis-typography-heading-500-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-500-font-size: 24px;
+  --trellis-typography-heading-500-font-weight: 300;
+  --trellis-typography-heading-500-letter-spacing: 0px;
+  --trellis-typography-heading-500-line-height: 29px;
+  --trellis-typography-heading-600-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-600-font-size: 32px;
+  --trellis-typography-heading-600-font-weight: 700;
+  --trellis-typography-heading-600-letter-spacing: 0px;
+  --trellis-typography-heading-600-line-height: 39px;
+  --trellis-typography-heading-700-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-700-font-size: 36px;
+  --trellis-typography-heading-700-font-weight: 500;
+  --trellis-typography-heading-700-letter-spacing: -0.16px;
+  --trellis-typography-heading-700-line-height: 44px;
+  --trellis-typography-heading-800-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-800-font-size: 42px;
+  --trellis-typography-heading-800-font-weight: 500;
+  --trellis-typography-heading-800-letter-spacing: -0.16px;
+  --trellis-typography-heading-800-line-height: 52px;
+  --trellis-typography-heading-900-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-heading-900-font-size: 46px;
+  --trellis-typography-heading-900-font-weight: 500;
+  --trellis-typography-heading-900-letter-spacing: -0.16px;
+  --trellis-typography-heading-900-line-height: 56px;
+  --trellis-typography-link-100-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-100-font-size: 14px;
+  --trellis-typography-link-100-font-weight: 700;
+  --trellis-typography-link-100-letter-spacing: 0px;
+  --trellis-typography-link-100-line-height: 24px;
+  --trellis-typography-link-200-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-200-font-size: 16px;
+  --trellis-typography-link-200-font-weight: 700;
+  --trellis-typography-link-200-letter-spacing: 0px;
+  --trellis-typography-link-200-line-height: 24px;
+  --trellis-typography-link-25-font-family: Lexend Deca, Helvetica, Arial,
+    sans-serif;
+  --trellis-typography-link-25-font-size: 12px;
+  --trellis-typography-link-25-font-weight: 700;
+  --trellis-typography-link-25-letter-spacing: 0px;
+  --trellis-typography-link-25-line-height: 18px;
+}
+/*# sourceMappingURL=//static.hsappstatic.net/foundations-theming-base/static-1.2353/stylesheets/hubspot-theme.stable.css.map*/
