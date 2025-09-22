@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackerRank Marketing Experiments</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .section-heading {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #1a0dab;
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #ddd;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .filter-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .filter-group select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            font-size: 1em;
+            min-width: 150px;
+        }
+        .experiment-group h2 {
+            font-size: 1.8em;
+            color: #2EC866; /* HackerRank Green */
+            border-bottom: 2px solid #2EC866;
+            padding-bottom: 10px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+        }
+        .experiment-card {
+            border: 1px solid #ddd;
+            border-left-width: 5px;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        /* Color Coding by Fit */
+        .fit-brand-community { background-color: #E6F7FF; border-left-color: #91D5FF; }
+        .fit-demand-gen { background-color: #F6FFED; border-left-color: #B7EB8F; }
+        .fit-content-seo { background-color: #FFFBE6; border-left-color: #FFE58F; }
+        .fit-sales-pipeline { background-color: #FFF0F6; border-left-color: #FFADD2; }
+        
+        .experiment-card h3 {
+            margin-top: 0;
+            color: #0052cc;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .tag {
+            background-color: #e7f1ff; color: #0052cc; padding: 5px 12px;
+            border-radius: 15px; font-size: 0.85em; font-weight: 500;
+        }
+        .tag.tag-cost { background-color: #e3fcef; color: #006644; }
+        .tag.tag-roi { background-color: #fffae6; color: #974F0C; }
+        .tag.tag-length { background-color: #fde8e3; color: #bf2600; }
+        .tag.tag-resource { background-color: #ebecf0; color: #42526e; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="section-heading">Recommended Marketing Experiments</h1>
+
+    <div class="filters">
+        <div class="filter-group">
+            <label for="fit-filter">Fit (Bottleneck)</label>
+            <select id="fit-filter">
+                <option value="all">All Bottlenecks</option>
+                <option value="brand-trust">Brand Trust</option>
+                <option value="top-of-funnel-scaling">Top-of-Funnel Scaling</option>
+                <option value="competitor-conversion">Competitor Conversion</option>
+                <option value="community-engagement">Community Engagement</option>
+                <option value="brand-storytelling">Brand Storytelling</option>
+                <option value="thought-leadership">Thought Leadership</option>
+                <option value="product-led-growth">Product-Led Growth</option>
+                <option value="enterprise-sales">Enterprise Sales (ABM)</option>
+                <option value="long-term-pipeline">Long-Term Pipeline</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="cost-filter">Cost</label>
+            <select id="cost-filter"><option value="all">All Costs</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select>
+        </div>
+        <div class="filter-group">
+            <label for="roi-filter">ROI</label>
+            <select id="roi-filter"><option value="all">All ROIs</option><option value="medium">Medium</option><option value="high">High</option><option value="very-high">Very High</option></select>
+        </div>
+        <div class="filter-group">
+            <label for="length-filter">Length</label>
+            <select id="length-filter"><option value="all">All Lengths</option><option value="short">Short (0-3 Mos)</option><option value="medium">Medium (3-6 Mos)</option><option value="long">Long (6+ Mos)</option></select>
+        </div>
+        <div class="filter-group">
+            <label for="resource-filter">Resource</label>
+            <select id="resource-filter"><option value="all">All Resources</option><option value="gtm-engineer">GTM Engineer</option><option value="dev-advocate">Developer Advocate</option><option value="content-marketer">Content Marketer</option><option value="engineer">Engineer</option><option value="video-producer">Video Producer</option><option value="data-scientist">Data Scientist</option><option value="product-manager">Product Manager</option><option value="biz-dev-manager">Biz Dev Manager</option></select>
+        </div>
+    </div>
+
+    <div id="experiments-list">
+
+        <div class="experiment-group" id="group-brand-community">
+            <h2>Brand & Community Engagement</h2>
+            
+            <div class="experiment-card fit-brand-community" data-fit="brand-trust" data-cost="medium" data-roi="high" data-length="medium" data-resource="gtm-engineer content-marketer">
+                <h3>1. The "Syntax.fm" Podcast Sponsorship Flywheel</h3>
+                <p><strong>Hypothesis:</strong> By sponsoring a trusted, high-affinity podcast, we can build brand equity with our core developer and engineering manager audience, leading to a measurable lift in branded search and higher-quality inbound leads.</p>
+                <div class="tags"><span class="tag">Fit: Brand Trust</span><span class="tag tag-cost">Cost: Medium</span><span class="tag tag-roi">ROI: High</span><span class="tag tag-length">Length: Medium</span><span class="tag tag-resource">Resource: GTM Engineer</span><span class="tag tag-resource">Resource: Content Marketer</span></div>
+            </div>
+            
+            <div class="experiment-card fit-brand-community" data-fit="brand-trust community-engagement" data-cost="low" data-roi="high" data-length="long" data-resource="dev-advocate">
+                <h3>2. The Zero-Click Subreddit Expert</h3>
+                <p><strong>Hypothesis:</strong> By consistently providing expert, non-promotional answers in high-affinity subreddits, we can establish HackerRank as the most trusted authority on skill assessment, driving high-intent organic traffic and sign-ups.</p>
+                <div class="tags"><span class="tag">Fit: Community Engagement</span><span class="tag tag-cost">Cost: Low</span><span class="tag tag-roi">ROI: High</span><span class="tag tag-length">Length: Long</span><span class="tag tag-resource">Resource: Developer Advocate</span></div>
+            </div>
+
+            <div class="experiment-card fit-brand-community" data-fit="community-engagement" data-cost="low" data-roi="high" data-length="medium" data-resource="dev-advocate">
+                <h3>6. The "Interactive Interview Prep" Live Stream</h3>
+                <p><strong>Hypothesis:</strong> Hosting a weekly, interactive live stream on YouTube where an expert solves coding challenges will significantly increase community engagement and grow our subscriber base.</p>
+                <div class="tags"><span class="tag">Fit: Community Engagement</span><span class="tag tag-cost">Cost: Low</span><span class="tag tag-roi">ROI: High</span><span class="tag tag-length">Length: Medium</span><span class="tag tag-resource">Resource: Developer Advocate</span></div>
+            </div>
+        </div>
+
+        <div class="experiment-group" id="group-demand-gen">
+            <h2>Demand Generation & Product-Led Growth</h2>
+            
+             <div class="experiment-card fit-demand-gen" data-fit="top-of-funnel-scaling" data-cost="high" data-roi="high" data-length="short" data-resource="gtm-engineer">
+                <h3>4. The Geo-Targeted "Skills Over Pedigree" Campaign</h3>
+                <p><strong>Hypothesis:</strong> By running highly-targeted LinkedIn Ad campaigns focused on our core "Skills Over Pedigree" message in top tech hubs, we can increase qualified demo requests by 20%.</p>
+                <div class="tags"><span class="tag">Fit: Top-of-Funnel Scaling</span><span class="tag tag-cost">Cost: High</span><span class="tag tag-roi">ROI: High</span><span class="tag tag-length">Length: Short</span><span class="tag tag-resource">Resource: GTM Engineer</span></div>
+            </div>
+            
+            <div class="experiment-card fit-demand-gen" data-fit="product-led-growth" data-cost="medium" data-roi="very-high" data-length="medium" data-resource="product-manager engineer">
+                <h3>8. The "AI-Powered Interview Coach" Beta Program</h3>
+                <p><strong>Hypothesis:</strong> Launching a free, AI-powered tool that provides real-time feedback on interview skills will create a viral growth loop, attracting tens of thousands of new developers to the platform.</p>
+                <div class="tags"><span class="tag">Fit: Product-Led Growth</span><span class="tag tag-cost">Cost: Medium</span><span class="tag tag-roi">ROI: Very High</span><span class="tag tag-length">Length: Medium</span><span class="tag tag-resource">Resource: Product Manager</span><span class="tag tag-resource">Resource: Engineer</span></div>
+            </div>
+        </div>
+        
+        <div class="experiment-group" id="group-content-seo">
+            <h2>Content, SEO & Thought Leadership</h2>
+
+            <div class="experiment-card fit-content-seo" data-fit="competitor-conversion" data-cost="medium" data-roi="high" data-length="medium" data-resource="engineer video-producer">
+                <h3>3. The "Beat the Algorithm" YouTube Content Series</h3>
+                <p><strong>Hypothesis:</strong> By creating a YouTube series on solving popular algorithm problems, we can capture search intent and convert viewers from competitor-aware to HackerRank community members.</p>
+                <div class="tags"><span class="tag">Fit: Competitor Conversion</span><span class="tag tag-cost">Cost: Medium</span><span class="tag tag-roi">ROI: High</span><span class="tag tag-length">Length: Medium</span><span class="tag tag-resource">Resource: Engineer</span><span class="tag tag-resource">Resource: Video Producer</span></div>
+            </div>
+            
+             <div class="experiment-card fit-content-seo" data-fit="brand-storytelling" data-cost="medium" data-roi="medium" data-length="medium" data-resource="content-marketer video-producer">
+                <h3>5. The "Hidden Gems" Developer Story Showcase</h3>
+                <p><strong>Hypothesis:</strong> Amplifying success stories of developers from non-traditional backgrounds will solidify our "Skills Over Pedigree" mission and generate high-quality, mission-aligned leads.</p>
+                <div class="tags"><span class="tag">Fit: Brand Storytelling</span><span class="tag tag-cost">Cost: Medium</span><span class="tag tag-roi">ROI: Medium</span><span class="tag tag-length">Length: Medium</span><span class="tag tag-resource">Resource: Content Marketer</span><span class="tag tag-resource">Resource: Video Producer</span></div>
+            </div>
+            
+             <div class="experiment-card fit-content-seo" data-fit="thought-leadership" data-cost="high" data-roi="very-high" data-length="long" data-resource="data-scientist content-marketer">
+                <h3>7. The "State of Skills" Annual Data Report</h3>
+                <p><strong>Hypothesis:</strong> By leveraging our proprietary data, we can create a definitive annual report that generates massive PR coverage, high-authority backlinks, and a surge in enterprise leads.</p>
+                <div class="tags"><span class="tag">Fit: Thought Leadership</span><span class="tag tag-cost">Cost: High</span><span class="tag tag-roi">ROI: Very High</span><span class="tag tag-length">Length: Long</span><span class="tag tag-resource">Resource: Data Scientist</span><span class="tag tag-resource">Resource: Content Marketer</span></div>
+            </div>
+        </div>
+
+        <div class="experiment-group" id="group-sales-pipeline">
+            <h2>Sales & Pipeline Acceleration</h2>
+             <div class="experiment-card fit-sales-pipeline" data-fit="enterprise-sales" data-cost="high" data-roi="high" data-length="short" data-resource="gtm-engineer">
+                <h3>9. The "CTO Roundtable" Exclusive Dinner Series</h3>
+                <p><strong>Hypothesis:</strong> Hosting exclusive, invitation-only roundtable dinners for VPs of Engineering and CTOs will build deep relationships with key accounts and source a significant portion of our enterprise sales pipeline.</p>
+                <div class="tags"><span class="tag">Fit: Enterprise Sales</span><span class="tag tag-cost">Cost: High</span><span class="tag tag-roi">ROI: High</span><span class="tag tag-length">Length: Short</span><span class="tag tag-resource">Resource: GTM Engineer</span></div>
+            </div>
+
+            <div class="experiment-card fit-sales-pipeline" data-fit="long-term-pipeline" data-cost="low" data-roi="very-high" data-length="long" data-resource="biz-dev-manager">
+                <h3>10. The "HackerRank for Startups" Program</h3>
+                <p><strong>Hypothesis:</strong> Creating a tailored plan for early-stage startups will embed our platform in the next generation of high-growth companies, building a powerful, long-term pipeline of future enterprise customers.</p>
+                <div class="tags"><span class="tag">Fit: Long-Term Pipeline</span><span class="tag tag-cost">Cost: Low</span><span class="tag tag-roi">ROI: Very High</span><span class="tag tag-length">Length: Long</span><span class="tag tag-resource">Resource: Biz Dev Manager</span></div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const filters = {
+            fit: document.getElementById('fit-filter'),
+            cost: document.getElementById('cost-filter'),
+            roi: document.getElementById('roi-filter'),
+            length: document.getElementById('length-filter'),
+            resource: document.getElementById('resource-filter')
+        };
+        const experimentCards = document.querySelectorAll('.experiment-card');
+        const experimentGroups = document.querySelectorAll('.experiment-group');
+
+        function applyFilters() {
+            const activeFilters = {
+                fit: filters.fit.value, cost: filters.cost.value,
+                roi: filters.roi.value, length: filters.length.value,
+                resource: filters.resource.value
+            };
+            experimentCards.forEach(card => {
+                let isVisible = true;
+                for (const key in activeFilters) {
+                    if (activeFilters[key] !== 'all') {
+                        if (!card.dataset[key].includes(activeFilters[key])) {
+                            isVisible = false; break;
+                        }
+                    }
+                }
+                card.classList.toggle('hidden', !isVisible);
+            });
+            experimentGroups.forEach(group => {
+                const visibleCards = group.querySelectorAll('.experiment-card:not(.hidden)');
+                group.classList.toggle('hidden', visibleCards.length === 0);
+            });
+        }
+        for (const key in filters) {
+            filters[key].addEventListener('change', applyFilters);
+        }
+        applyFilters();
+    });
+</script>
+
+</body>
+</html>

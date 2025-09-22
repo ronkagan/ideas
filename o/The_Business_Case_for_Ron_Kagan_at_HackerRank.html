@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Business Case for Ron Kagan at HackerRank</title>
+    <meta content='https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_60/107834/155255_233920.gif' property='og:image'>
+    <meta content='Ron Kagan is a marketer.' property='og:site_name'>
+    <meta content='Startups to Fortune 50s. Go-to-market engineering. Growth. Demand Generation. Marketing Automation.' property='og:description'>
+    <meta content='Ron Kagan is a marketer.' itemprop='name'>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .nav-link.active {
+            color: #2EC866;
+            border-bottom-color: #2EC866;
+        }
+        .interactive-hover {
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            border-radius: 8px;
+            padding: 8px;
+            margin: -8px; /* Offset padding to maintain layout */
+        }
+        .interactive-hover:hover {
+            background-color: #E6F7FF; /* Complementary light blue */
+            transform: scale(1.02);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hr-green': '#2EC866',
+                        'hr-gray': {
+                            'light': '#F7F7F7',
+                            'medium': '#545454',
+                            'dark': '#212121',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-hr-gray-light text-hr-gray-dark">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 font-bold text-xl text-hr-gray-dark">
+                        Ron Kagan
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#opportunity" class="nav-link text-gray-500 hover:text-hr-green px-3 py-2 text-sm font-medium border-b-2 border-transparent">The Opportunity</a>
+                        <a href="#experiments" class="nav-link text-gray-500 hover:text-hr-green px-3 py-2 text-sm font-medium border-b-2 border-transparent">Experiments</a>
+                        <a href="#challenge" class="nav-link text-gray-500 hover:text-hr-green px-3 py-2 text-sm font-medium border-b-2 border-transparent">The Challenge</a>
+                        <a href="#solution" class="nav-link text-gray-500 hover:text-hr-green px-3 py-2 text-sm font-medium border-b-2 border-transparent">The Solution</a>
+                        <a href="#plan" class="nav-link text-gray-500 hover:text-hr-green px-3 py-2 text-sm font-medium border-b-2 border-transparent">90-Day Plan</a>
+                        <a href="#roi" class="nav-link text-gray-500 hover:text-hr-green px-3 py-2 text-sm font-medium border-b-2 border-transparent">The ROI</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-28 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-hr-gray-dark tracking-tight">
+                    A Business Case for the GTM Engineer Role
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-hr-gray-medium max-w-3xl mx-auto interactive-hover">
+                    An analysis of the market opportunity, a breakdown of the role's challenges, and a data-driven plan to generate pipeline and accelerate revenue for HackerRank.
+                </p>
+                <div class="mt-8 flex justify-center">
+                     <a href="#plan" class="bg-hr-green text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-opacity-90 transition-transform transform hover:scale-105">View the 90-Day Plan</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="opportunity" class="py-20 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-hr-gray-dark">The Opportunity: Where Your Audience Lives</h2>
+                    <p class="mt-4 text-lg text-hr-gray-medium max-w-3xl mx-auto interactive-hover">SparkToro data reveals a highly concentrated, professional audience of developers and tech leaders. This isn't a spray-and-pray market; it's a target-rich environment where strategic, multi-channel campaigns can deliver outsized ROI.</p>
+                </div>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg fade-in">
+                        <h3 class="text-xl font-bold text-center text-hr-gray-dark">Audience by Social Network</h3>
+                        <p class="text-sm text-center text-gray-500 mb-4">High affinity for professional & learning platforms.</p>
+                        <canvas id="socialChart"></canvas>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg fade-in" style="animation-delay: 0.1s;">
+                        <h3 class="text-xl font-bold text-center text-hr-gray-dark">Top Subreddits</h3>
+                         <p class="text-sm text-center text-gray-500 mb-4">Deeply engaged in technical communities.</p>
+                        <canvas id="subredditChart"></canvas>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg fade-in" style="animation-delay: 0.2s;">
+                        <h3 class="text-xl font-bold text-center text-hr-gray-dark">Most Visited Websites</h3>
+                         <p class="text-sm text-center text-gray-500 mb-4">Constant focus on learning and problem-solving.</p>
+                        <canvas id="websitesChart"></canvas>
+                    </div>
+                </div>
+                 <div class="mt-8 text-center text-md text-hr-gray-medium">
+                    <p class="interactive-hover"><strong>Key Insight:</strong> The HackerRank audience—both the developer community and the hiring managers who lead them—spends their time on platforms dedicated to learning, problem-solving, and professional networking. A successful GTM strategy must provide value in these exact places, aligning with Rand Fishkin's "market where your audience already is" philosophy.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experiments" class="py-20 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-hr-gray-dark">Actionable Marketing Experiments</h2>
+                     <p class="mt-4 text-lg text-hr-gray-medium max-w-3xl mx-auto interactive-hover">This is a library of actionable, data-driven experiments HackerRank can run to accelerate growth. Use the filters to find ideas that best fit current strategic priorities, budgets, and resources.</p>
+                </div>
+                
+                 <div class="filters flex flex-wrap gap-4 my-10 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="filter-group flex flex-col flex-grow min-w-[150px]">
+                        <label for="fit-filter" class="font-bold mb-1 text-sm text-gray-600">Fit (Bottleneck)</label>
+                        <select id="fit-filter" class="p-2 rounded-md border border-gray-300 bg-white text-base">
+                            <option value="all">All Bottlenecks</option><option value="brand-trust">Brand Trust</option><option value="top-of-funnel-scaling">Top-of-Funnel Scaling</option><option value="competitor-conversion">Competitor Conversion</option><option value="community-engagement">Community Engagement</option><option value="brand-storytelling">Brand Storytelling</option><option value="thought-leadership">Thought Leadership</option><option value="product-led-growth">Product-Led Growth</option><option value="enterprise-sales">Enterprise Sales (ABM)</option><option value="long-term-pipeline">Long-Term Pipeline</option>
+                        </select>
+                    </div>
+                    <div class="filter-group flex flex-col flex-grow min-w-[150px]">
+                        <label for="cost-filter" class="font-bold mb-1 text-sm text-gray-600">Cost</label>
+                        <select id="cost-filter" class="p-2 rounded-md border border-gray-300 bg-white text-base"><option value="all">All Costs</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select>
+                    </div>
+                    <div class="filter-group flex flex-col flex-grow min-w-[150px]">
+                        <label for="roi-filter" class="font-bold mb-1 text-sm text-gray-600">ROI</label>
+                        <select id="roi-filter" class="p-2 rounded-md border border-gray-300 bg-white text-base"><option value="all">All ROIs</option><option value="medium">Medium</option><option value="high">High</option><option value="very-high">Very High</option></select>
+                    </div>
+                    <div class="filter-group flex flex-col flex-grow min-w-[150px]">
+                        <label for="length-filter" class="font-bold mb-1 text-sm text-gray-600">Length</label>
+                        <select id="length-filter" class="p-2 rounded-md border border-gray-300 bg-white text-base"><option value="all">All Lengths</option><option value="short">Short (0-3 Mos)</option><option value="medium">Medium (3-6 Mos)</option><option value="long">Long (6+ Mos)</option></select>
+                    </div>
+                    <div class="filter-group flex flex-col flex-grow min-w-[150px]">
+                        <label for="resource-filter" class="font-bold mb-1 text-sm text-gray-600">Resource</label>
+                        <select id="resource-filter" class="p-2 rounded-md border border-gray-300 bg-white text-base"><option value="all">All Resources</option><option value="gtm-engineer">GTM Engineer</option><option value="dev-advocate">Developer Advocate</option><option value="content-marketer">Content Marketer</option><option value="engineer">Engineer</option><option value="video-producer">Video Producer</option><option value="data-scientist">Data Scientist</option><option value="product-manager">Product Manager</option><option value="biz-dev-manager">Biz Dev Manager</option></select>
+                    </div>
+                </div>
+
+                <div id="experiments-list">
+                    <div class="experiment-group" id="group-brand-community">
+                        <h2 class="text-2xl font-bold text-hr-green border-b-2 border-hr-green pb-2 mb-6 mt-8">Brand & Community Engagement</h2>
+                        <div class="experiment-card bg-sky-50 border-l-4 border-sky-300 rounded-lg p-6 mb-6 shadow-md" data-fit="brand-trust" data-cost="medium" data-roi="high" data-length="medium" data-resource="gtm-engineer content-marketer">
+                            <h3 class="text-xl font-bold text-sky-800">1. The "Syntax.fm" Podcast Sponsorship Flywheel</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> By sponsoring a trusted, high-affinity podcast, we can build brand equity with our core developer and engineering manager audience, leading to a measurable lift in branded search and higher-quality inbound leads.</p>
+                            <div class="tags mt-4 pt-4 border-t border-sky-200 flex flex-wrap gap-2"><span class="tag bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Brand Trust</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: Medium</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Medium</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: GTM Engineer</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Content Marketer</span></div>
+                        </div>
+                        <div class="experiment-card bg-sky-50 border-l-4 border-sky-300 rounded-lg p-6 mb-6 shadow-md" data-fit="brand-trust community-engagement" data-cost="low" data-roi="high" data-length="long" data-resource="dev-advocate">
+                            <h3 class="text-xl font-bold text-sky-800">2. The Zero-Click Subreddit Expert</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> By consistently providing expert, non-promotional answers in high-affinity subreddits, we can establish HackerRank as the most trusted authority on skill assessment, driving high-intent organic traffic and sign-ups.</p>
+                            <div class="tags mt-4 pt-4 border-t border-sky-200 flex flex-wrap gap-2"><span class="tag bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Community Engagement</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: Low</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Long</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Developer Advocate</span></div>
+                        </div>
+                         <div class="experiment-card bg-sky-50 border-l-4 border-sky-300 rounded-lg p-6 mb-6 shadow-md" data-fit="community-engagement" data-cost="low" data-roi="high" data-length="medium" data-resource="dev-advocate">
+                            <h3 class="text-xl font-bold text-sky-800">6. The "Interactive Interview Prep" Live Stream</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> Hosting a weekly, interactive live stream on YouTube where an expert solves coding challenges will significantly increase community engagement and grow our subscriber base.</p>
+                            <div class="tags mt-4 pt-4 border-t border-sky-200 flex flex-wrap gap-2"><span class="tag bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Community Engagement</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: Low</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Medium</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Developer Advocate</span></div>
+                        </div>
+                    </div>
+                    <div class="experiment-group" id="group-demand-gen">
+                        <h2 class="text-2xl font-bold text-hr-green border-b-2 border-hr-green pb-2 mb-6 mt-8">Demand Generation & Product-Led Growth</h2>
+                        <div class="experiment-card bg-emerald-50 border-l-4 border-emerald-300 rounded-lg p-6 mb-6 shadow-md" data-fit="top-of-funnel-scaling" data-cost="high" data-roi="high" data-length="short" data-resource="gtm-engineer">
+                            <h3 class="text-xl font-bold text-emerald-800">4. The Geo-Targeted "Skills Over Pedigree" Campaign</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> By running highly-targeted LinkedIn Ad campaigns focused on our core "Skills Over Pedigree" message in top tech hubs, we can increase qualified demo requests by 20%.</p>
+                            <div class="tags mt-4 pt-4 border-t border-emerald-200 flex flex-wrap gap-2"><span class="tag bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Top-of-Funnel Scaling</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: High</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Short</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: GTM Engineer</span></div>
+                        </div>
+                        <div class="experiment-card bg-emerald-50 border-l-4 border-emerald-300 rounded-lg p-6 mb-6 shadow-md" data-fit="product-led-growth" data-cost="medium" data-roi="very-high" data-length="medium" data-resource="product-manager engineer">
+                            <h3 class="text-xl font-bold text-emerald-800">8. The "AI-Powered Interview Coach" Beta Program</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> Launching a free, AI-powered tool that provides real-time feedback on interview skills will create a viral growth loop, attracting tens of thousands of new developers to the platform.</p>
+                            <div class="tags mt-4 pt-4 border-t border-emerald-200 flex flex-wrap gap-2"><span class="tag bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Product-Led Growth</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: Medium</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: Very High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Medium</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Product Manager</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Engineer</span></div>
+                        </div>
+                    </div>
+                    <div class="experiment-group" id="group-content-seo">
+                        <h2 class="text-2xl font-bold text-hr-green border-b-2 border-hr-green pb-2 mb-6 mt-8">Content, SEO & Thought Leadership</h2>
+                         <div class="experiment-card bg-amber-50 border-l-4 border-amber-300 rounded-lg p-6 mb-6 shadow-md" data-fit="competitor-conversion" data-cost="medium" data-roi="high" data-length="medium" data-resource="engineer video-producer">
+                            <h3 class="text-xl font-bold text-amber-800">3. The "Beat the Algorithm" YouTube Content Series</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> By creating a YouTube series on solving popular algorithm problems, we can capture search intent and convert viewers from competitor-aware to HackerRank community members.</p>
+                            <div class="tags mt-4 pt-4 border-t border-amber-200 flex flex-wrap gap-2"><span class="tag bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Competitor Conversion</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: Medium</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Medium</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Engineer</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Video Producer</span></div>
+                        </div>
+                        <div class="experiment-card bg-amber-50 border-l-4 border-amber-300 rounded-lg p-6 mb-6 shadow-md" data-fit="brand-storytelling" data-cost="medium" data-roi="medium" data-length="medium" data-resource="content-marketer video-producer">
+                            <h3 class="text-xl font-bold text-amber-800">5. The "Hidden Gems" Developer Story Showcase</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> Amplifying success stories of developers from non-traditional backgrounds will solidify our "Skills Over Pedigree" mission and generate high-quality, mission-aligned leads.</p>
+                            <div class="tags mt-4 pt-4 border-t border-amber-200 flex flex-wrap gap-2"><span class="tag bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Brand Storytelling</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: Medium</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: Medium</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Medium</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Content Marketer</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Video Producer</span></div>
+                        </div>
+                         <div class="experiment-card bg-amber-50 border-l-4 border-amber-300 rounded-lg p-6 mb-6 shadow-md" data-fit="thought-leadership" data-cost="high" data-roi="very-high" data-length="long" data-resource="data-scientist content-marketer">
+                            <h3 class="text-xl font-bold text-amber-800">7. The "State of Skills" Annual Data Report</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> By leveraging our proprietary data, we can create a definitive annual report that generates massive PR coverage, high-authority backlinks, and a surge in enterprise leads.</p>
+                            <div class="tags mt-4 pt-4 border-t border-amber-200 flex flex-wrap gap-2"><span class="tag bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Thought Leadership</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: High</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: Very High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Long</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Data Scientist</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Content Marketer</span></div>
+                        </div>
+                    </div>
+                    <div class="experiment-group" id="group-sales-pipeline">
+                        <h2 class="text-2xl font-bold text-hr-green border-b-2 border-hr-green pb-2 mb-6 mt-8">Sales & Pipeline Acceleration</h2>
+                         <div class="experiment-card bg-fuchsia-50 border-l-4 border-fuchsia-300 rounded-lg p-6 mb-6 shadow-md" data-fit="enterprise-sales" data-cost="high" data-roi="high" data-length="short" data-resource="gtm-engineer">
+                            <h3 class="text-xl font-bold text-fuchsia-800">9. The "CTO Roundtable" Exclusive Dinner Series</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> Hosting exclusive, invitation-only roundtable dinners for VPs of Engineering and CTOs will build deep relationships with key accounts and source a significant portion of our enterprise sales pipeline.</p>
+                            <div class="tags mt-4 pt-4 border-t border-fuchsia-200 flex flex-wrap gap-2"><span class="tag bg-fuchsia-100 text-fuchsia-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Enterprise Sales</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: High</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Short</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: GTM Engineer</span></div>
+                        </div>
+                        <div class="experiment-card bg-fuchsia-50 border-l-4 border-fuchsia-300 rounded-lg p-6 mb-6 shadow-md" data-fit="long-term-pipeline" data-cost="low" data-roi="very-high" data-length="long" data-resource="biz-dev-manager">
+                            <h3 class="text-xl font-bold text-fuchsia-800">10. The "HackerRank for Startups" Program</h3>
+                            <p class="mt-2 text-gray-700 interactive-hover"><strong>Hypothesis:</strong> Creating a tailored plan for early-stage startups will embed our platform in the next generation of high-growth companies, building a powerful, long-term pipeline of future enterprise customers.</p>
+                            <div class="tags mt-4 pt-4 border-t border-fuchsia-200 flex flex-wrap gap-2"><span class="tag bg-fuchsia-100 text-fuchsia-800 px-3 py-1 rounded-full text-sm font-medium">Fit: Long-Term Pipeline</span><span class="tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cost: Low</span><span class="tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">ROI: Very High</span><span class="tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Length: Long</span><span class="tag bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Resource: Biz Dev Manager</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="challenge" class="py-20 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-hr-gray-dark">The Challenge: Hiring a True GTM Engineer</h2>
+                    <p class="mt-4 text-lg text-hr-gray-medium max-w-3xl mx-auto interactive-hover">The job description calls for a rare hybrid: someone with the technical acumen to manage complex campaigns and the strategic mindset to drive pipeline. HackerRank needs a full-stack marketer who can execute, analyze, and optimize across the entire funnel.</p>
+                </div>
+                <div class="mt-12 space-y-8 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                    <div class="fade-in">
+                        <h3 class="text-xl font-bold text-hr-gray-dark">Multi-Channel Campaign Execution</h3>
+                        <p class="mt-2 text-base text-hr-gray-medium interactive-hover">Requires hands-on expertise in LinkedIn Ads, email nurture, and direct mail, with full ownership of targeting, creative, and budget pacing at scale (>$10k/mo).</p>
+                    </div>
+                    <div class="fade-in" style="animation-delay: 0.1s;">
+                        <h3 class="text-xl font-bold text-hr-gray-dark">Sophisticated ABM Strategy</h3>
+                        <p class="mt-2 text-base text-hr-gray-medium interactive-hover">Must understand the nuanced differences between 1:1, 1:Few, and 1:Many ABM strategies and know precisely when and how to deploy each to maximize impact on target accounts.</p>
+                    </div>
+                    <div class="fade-in" style="animation-delay: 0.2s;">
+                        <h3 class="text-xl font-bold text-hr-gray-dark">Technical Marketing & Analytics</h3>
+                        <p class="mt-2 text-base text-hr-gray-medium interactive-hover">Needs deep comfort with setting up and managing conversion tracking, building retargeting audiences from CRM lists, and reporting on performance with an eye toward attribution.</p>
+                    </div>
+                    <div class="fade-in" style="animation-delay: 0.3s;">
+                        <h3 class="text-xl font-bold text-hr-gray-dark">Automation & Nurturing</h3>
+                        <p class="mt-2 text-base text-hr-gray-medium interactive-hover">Demands proficiency in building and managing multi-channel nurture campaigns using platforms like HubSpot or Marketo to accelerate leads through the funnel.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="solution" class="py-20 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-hr-gray-dark">The Solution: Candidate-Role Fit</h2>
+                    <p class="mt-4 max-w-2xl text-lg text-hr-gray-medium lg:mx-auto interactive-hover">A direct comparison demonstrates not just meeting the requirements, but exceeding them with a track record of driving measurable results in identical functions.</p>
+                </div>
+
+                <div class="mt-12">
+                    <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                        <div class="relative fade-in">
+                            <dt>
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-hr-green text-white">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                </div>
+                                <p class="ml-16 text-lg leading-6 font-bold text-hr-gray-dark">Challenge: LinkedIn Ads @ Scale</p>
+                            </dt>
+                            <dd class="mt-2 ml-16 text-base text-hr-gray-medium interactive-hover">
+                                <strong>Experience:</strong> Managed LinkedIn ad budgets exceeding $50k/month at multiple organizations. Full ownership of campaign strategy, audience segmentation (including 1st and 3rd party data), creative A/B testing, and budget optimization for B2B SaaS lead generation and pipeline goals.
+                            </dd>
+                        </div>
+                        <div class="relative fade-in" style="animation-delay: 0.1s;">
+                            <dt>
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-hr-green text-white">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0v-4a2 2 0 012-2h6a2 2 0 012 2v4m-6 0v-4" /></svg>
+                                </div>
+                                <p class="ml-16 text-lg leading-6 font-bold text-hr-gray-dark">Challenge: Advanced ABM</p>
+                            </dt>
+                            <dd class="mt-2 ml-16 text-base text-hr-gray-medium interactive-hover">
+                                <strong>Experience:</strong> Designed and executed integrated ABM programs using 1:1 (high-touch exec outreach), 1:Few (cluster-based content), and 1:Many (programmatic ads) approaches. Leveraged platforms like 6sense and Demandbase to identify and engage target accounts, resulting in a 40% increase in pipeline from named accounts.
+                            </dd>
+                        </div>
+                        <div class="relative fade-in" style="animation-delay: 0.2s;">
+                            <dt>
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-hr-green text-white">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                                </div>
+                                <p class="ml-16 text-lg leading-6 font-bold text-hr-gray-dark">Challenge: Technical Setup</p>
+                            </dt>
+                            <dd class="mt-2 ml-16 text-base text-hr-gray-medium interactive-hover">
+                                <strong>Experience:</strong> Expert-level proficiency with GTM, server-side tracking, and API integrations. Built custom attribution models in HubSpot and Salesforce, connecting ad spend directly to revenue. Set up and managed retargeting audiences via CRM syncs for hyper-personalized ad sequencing.
+                            </dd>
+                        </div>
+                        <div class="relative fade-in" style="animation-delay: 0.3s;">
+                            <dt>
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-hr-green text-white">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                                </div>
+                                <p class="ml-16 text-lg leading-6 font-bold text-hr-gray-dark">Challenge: Nurture & Automation</p>
+                            </dt>
+                            <dd class="mt-2 ml-16 text-base text-hr-gray-medium interactive-hover">
+                                <strong>Experience:</strong> Architected and managed complex, multi-channel nurture streams in HubSpot, Marketo, and Customer.io. Used behavioral triggers, lead scoring, and dynamic content to personalize journeys, improving MQL-to-SQL conversion rates by over 30%.
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section id="plan" class="py-20 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-hr-gray-dark">The 90-Day Growth Plan: From Onboarding to Impact</h2>
+                    <p class="mt-4 text-lg text-hr-gray-medium max-w-3xl mx-auto interactive-hover">A structured, three-phase plan to quickly learn, build, and scale demand generation efforts, ensuring immediate value and a clear path to generating pipeline.</p>
+                </div>
+                
+                <div class="mt-12">
+                    <div class="sm:hidden">
+                        <label for="tabs" class="sr-only">Select a tab</label>
+                        <select id="tabs" name="tabs" class="block w-full focus:ring-hr-green focus:border-hr-green border-gray-300 rounded-md"></select>
+                    </div>
+                    <div class="hidden sm:block">
+                        <div class="border-b border-gray-200">
+                            <nav id="tabs-container" class="-mb-px flex space-x-8" aria-label="Tabs"></nav>
+                        </div>
+                    </div>
+                    <div id="tab-content" class="mt-8 fade-in"></div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section id="roi" class="py-20 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-hr-gray-dark">The $500,000 Question: ROI of the Right Hire</h2>
+                    <p class="mt-4 text-lg text-hr-gray-medium max-w-3xl mx-auto interactive-hover">This isn't a cost center; it's a revenue accelerant. A GTM Engineer isn't just executing tasks—they are building the engine that drives the entire go-to-market motion. The right hire pays for themselves in the first 6-9 months through direct pipeline generation.</p>
+                </div>
+                <div class="mt-12 bg-white rounded-xl shadow-lg p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="fade-in interactive-hover">
+                        <h3 class="text-5xl font-extrabold text-hr-green">30%</h3>
+                        <p class="mt-2 text-lg font-semibold text-hr-gray-dark">Faster Lead Velocity</p>
+                        <p class="text-hr-gray-medium">By optimizing nurture paths and lead scoring, MQLs move to SQLs faster, shortening the sales cycle.</p>
+                    </div>
+                    <div class="fade-in interactive-hover" style="animation-delay: 0.1s;">
+                        <h3 class="text-5xl font-extrabold text-hr-green">$500k+</h3>
+                        <p class="mt-2 text-lg font-semibold text-hr-gray-dark">New Pipeline in 6 Months</p>
+                        <p class="text-hr-gray-medium">Through optimized paid channels and targeted ABM plays, a direct and measurable impact on revenue opportunities.</p>
+                    </div>
+                    <div class="fade-in interactive-hover" style="animation-delay: 0.2s;">
+                        <h3 class="text-5xl font-extrabold text-hr-green">2x</h3>
+                        <p class="mt-2 text-lg font-semibold text-hr-gray-dark">Marketing Efficiency</p>
+                        <p class="text-hr-gray-medium">By building scalable systems and improving attribution, every marketing dollar is spent more effectively.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-hr-gray-dark">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-white text-lg font-semibold">Ready to Build the Engine?</p>
+            <p class="mt-2 text-gray-300">Let's connect and discuss how I can start delivering value from day one.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Chart.js Data and Initialization
+            const chartConfig = {
+                type: 'bar',
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { display: false } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            };
+            
+            new Chart(document.getElementById('socialChart'), {
+                ...chartConfig,
+                data: {
+                    labels: ['YouTube', 'GitHub', 'LinkedIn', 'Reddit', 'Medium'],
+                    datasets: [{
+                        label: 'Audience Affinity %',
+                        data: [97.6, 85.3, 81.5, 78.8, 67.8],
+                        backgroundColor: ['#FF0000', '#333333', '#0A66C2', '#FF4500', '#000000'],
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById('subredditChart'), {
+                ...chartConfig,
+                type: 'bar', // Explicitly setting type to bar
+                data: {
+                    labels: ['r/programming', 'r/webdev', 'r/learnprogramming', 'r/cscareerquestions', 'r/javascript'],
+                    datasets: [{
+                        label: '# of Members',
+                        data: [6784978, 3104935, 4253517, 1200000, 2408651], // Using more accurate member counts
+                        backgroundColor: ['#2EC866', '#4A90E2', '#F5A623', '#BD10E0', '#D0021B'],
+                    }]
+                },
+                options: {
+                    ...chartConfig.options,
+                    indexAxis: 'y' // This was the fix
+                }
+            });
+            
+            new Chart(document.getElementById('websitesChart'), {
+                 ...chartConfig,
+                type: 'doughnut',
+                data: {
+                    labels: ['LeetCode', 'Naukri.com', 'Kaggle', 'Docker.com', 'DataCamp'],
+                    datasets: [{
+                        label: 'Audience Affinity %',
+                        data: [85.0, 54.6, 49.6, 47.0, 46.3],
+                        backgroundColor: ['#FFA116', '#2970FF', '#20BEFF', '#0db7ed', '#6535F3'],
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' } } }
+            });
+
+            // 90-Day Plan Tabs Logic
+            const tabsData = [
+                {
+                    name: 'Days 1-30: Learn & Document',
+                    title: 'Phase 1: Deep Dive and Quick Wins',
+                    content: [
+                        { item: 'Full Funnel Audit:', description: 'Map the entire customer journey from first touch to closed-won. Document every system, process, and data point involved.' },
+                        { item: 'Stakeholder Interviews:', description: 'Meet with sales, marketing, and product leaders to understand their challenges, goals, and definitions of success.' },
+                        { item: 'Technical Infrastructure Review:', description: 'Audit the existing martech stack (HubSpot, SFDC, etc.), conversion tracking, and data syncs to identify gaps.' },
+                        { item: 'Quick Win Campaign:', description: 'Launch a simple, high-intent retargeting campaign on LinkedIn to capture low-hanging fruit and test creative/messaging.' }
+                    ]
+                },
+                {
+                    name: 'Days 31-60: Build & Optimize',
+                    title: 'Phase 2: Foundation Building',
+                    content: [
+                        { item: 'Refine Lead Scoring & Routing:', description: 'Work with sales ops to optimize the lead scoring model based on firmographic and behavioral data, ensuring the best leads are fast-tracked.' },
+                        { item: 'Launch First ABM "1:Few" Play:', description: 'Select a cluster of 10-20 high-fit accounts. Launch a multi-channel campaign with personalized ads, content, and sales outreach.' },
+                        { item: 'Build Foundational Nurture Stream:', description: 'Create a robust, multi-touch email nurture sequence for inbound leads who are not yet sales-ready.' },
+                        { item: 'Develop GTM Dashboard:', description: 'Build a comprehensive dashboard in SFDC/HubSpot to track key demand gen metrics: MQLs, SQLs, pipeline generated, and cost-per-opportunity.' }
+                    ]
+                },
+                {
+                    name: 'Days 61-90: Scale & Report',
+                    title: 'Phase 3: Accelerate and Scale',
+                    content: [
+                        { item: 'Scale Winning Campaigns:', description: 'Double down on channels and creative that have proven to be effective, reallocating budget from underperforming initiatives.' },
+                        { item: 'Present First Quarterly Business Review (QBR):', description: 'Deliver a data-driven presentation on the performance of demand gen efforts, highlighting successes, learnings, and the plan for the next 90 days.' },
+                        { item: 'Launch First "Zero-Click" Content Play:', description: 'Based on audience research, identify a key watering hole (e.g., a specific subreddit) and begin providing high-value, non-promotional content to build brand trust.' },
+                        { item: 'Automate & Systematize:', description: 'Document all successful campaign "plays" into a repeatable playbook for the marketing team to ensure long-term, scalable success.' }
+                    ]
+                }
+            ];
+            
+            const tabsContainer = document.getElementById('tabs-container');
+            const tabContentContainer = document.getElementById('tab-content');
+            const mobileTabs = document.getElementById('tabs');
+            
+            tabsData.forEach((tab, index) => {
+                const button = document.createElement('button');
+                button.textContent = tab.name;
+                button.className = index === 0 
+                    ? 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-hr-green text-hr-green'
+                    : 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                tabsContainer.appendChild(button);
+                
+                const option = document.createElement('option');
+                option.textContent = tab.name;
+                mobileTabs.appendChild(option);
+            });
+            
+            function renderTabContent(index) {
+                const tab = tabsData[index];
+                tabContentContainer.innerHTML = `
+                    <h3 class="text-2xl font-bold text-hr-gray-dark">${tab.title}</h3>
+                    <ul class="mt-6 space-y-4">
+                        ${tab.content.map(c => `
+                            <li class="flex items-start interactive-hover">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-6 w-6 text-hr-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-lg font-semibold text-hr-gray-dark">${c.item}</p>
+                                    <p class="text-hr-gray-medium">${c.description}</p>
+                                </div>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+            }
+
+            tabsContainer.addEventListener('click', e => {
+                if (e.target.tagName === 'BUTTON') {
+                    const index = Array.from(tabsContainer.children).indexOf(e.target);
+                    Array.from(tabsContainer.children).forEach((btn, i) => {
+                        btn.className = i === index
+                            ? 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-hr-green text-hr-green'
+                            : 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                    });
+                    mobileTabs.selectedIndex = index;
+                    renderTabContent(index);
+                }
+            });
+            
+            mobileTabs.addEventListener('change', e => {
+                const index = e.target.selectedIndex;
+                Array.from(tabsContainer.children).forEach((btn, i) => {
+                    btn.className = i === index
+                        ? 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-hr-green text-hr-green'
+                        : 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                });
+                renderTabContent(index);
+            });
+
+            renderTabContent(0);
+            
+            // Experiments Filtering Logic
+            const filters = {
+                fit: document.getElementById('fit-filter'),
+                cost: document.getElementById('cost-filter'),
+                roi: document.getElementById('roi-filter'),
+                length: document.getElementById('length-filter'),
+                resource: document.getElementById('resource-filter')
+            };
+            const experimentCards = document.querySelectorAll('.experiment-card');
+            const experimentGroups = document.querySelectorAll('.experiment-group');
+
+            function applyFilters() {
+                const activeFilters = {
+                    fit: filters.fit.value, cost: filters.cost.value,
+                    roi: filters.roi.value, length: filters.length.value,
+                    resource: filters.resource.value
+                };
+                experimentCards.forEach(card => {
+                    let isVisible = true;
+                    for (const key in activeFilters) {
+                        if (activeFilters[key] !== 'all') {
+                            if (!card.dataset[key].includes(activeFilters[key])) {
+                                isVisible = false; break;
+                            }
+                        }
+                    }
+                    card.classList.toggle('hidden', !isVisible);
+                });
+                experimentGroups.forEach(group => {
+                    const visibleCards = group.querySelectorAll('.experiment-card:not(.hidden)');
+                    group.classList.toggle('hidden', visibleCards.length === 0);
+                });
+            }
+            for (const key in filters) {
+                filters[key].addEventListener('change', applyFilters);
+            }
+            applyFilters();
+
+            // Scroll-spy for navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) { // adjusted offset for sticky header
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
