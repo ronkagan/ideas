@@ -8,163 +8,214 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: "Healing Neutrals" - A calming and professional palette using warm grays, soft beige, and a trustworthy slate blue for accents, designed to evoke feelings of health, clarity, and reliability. -->
-    <!-- Application Structure Plan: A tabbed single-page application (SPA) designed for clarity and progressive disclosure. The structure is as follows: 1) A 'Strategic Summary' dashboard providing a high-level overview, including strengths and the primary growth bottleneck. This immediately orients the user. 2) An 'Audience Insights' section with interactive charts to explore the demographic and psychographic data that informs the strategy. This builds the "why." 3) The core 'Growth Experiments' section, presented as a filterable grid, allowing users to slice the proposed initiatives by strategic goal (bottleneck), cost, and potential ROI. This is the actionable "what." 4) A 'Data Enrichment' section detailing the strategy for acquiring third-party data, a specific user request. This provides a forward-looking "how." This tabbed structure was chosen to prevent overwhelming the user with information, creating a logical flow from diagnosis to prescription, which is ideal for a strategic plan. -->
-    <!-- Visualization & Content Choices: 1. Strategic Summary: Goal=Inform. Method=Key Performance Indicators (KPIs) in styled cards and a clear text diagnosis of the growth bottleneck. Interaction=None. Justification=Provides an immediate, digestible executive summary. 2. Audience Demographics: Goal=Inform. Viz=Chart.js Donut and Bar charts. Interaction=Tooltips on hover. Justification=Standard, effective way to present proportional and ranked data (Gender, Age, Top States). The charts are in responsive containers to ensure proper scaling. 3. Audience Interests: Goal=Inform. Method=Styled lists/cards for top websites, social accounts, and YouTube channels. Interaction=None. Justification=Visualizations are not suitable for lists of text; styled cards are more legible and scannable. 4. Growth Experiments: Goal=Organize/Compare. Method=Interactive grid of cards (HTML/Tailwind/JS). Interaction=Filtering by bottleneck, cost, and ROI via buttons. Justification=This is the most critical section. An interactive grid allows stakeholders to easily compare and prioritize experiments based on their specific criteria, making the report a functional decision-making tool. 5. Data Enrichment: Goal=Inform. Method=Structured text blocks explaining options and costs. Interaction=None. Justification=This is a detailed proposal that requires textual explanation rather than visualization. -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Healing Neutrals" -->
+    <!-- Application Structure Plan: A tabbed SPA with reordered tabs for a more logical flow. 1) Summary 2) Audience 3) Data Enrichment 4) Activation Plan 5) Experiments 6) Work with Ron. Enhanced with more interactive elements and proper HTML text formatting. -->
+    <!-- Visualization & Content Choices: 1. Summary: Styled cards with enhanced text formatting. 2. Audience: Chart.js charts. 3. Data Enrichment: Expanded profiles with lists, bolding, and italics. 4. Activation Plan: Visual timeline with emphasized text. 5. Experiments: Grouped cards. 6. Work with Ron: Embedded portfolio. All sections now feature improved typography for emphasis. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB; /* Cool Gray 50 */
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-        .tab-button.active {
-            border-color: #3B82F6; /* Blue 500 */
-            color: #3B82F6;
-            background-color: #EFF6FF; /* Blue 50 */
-        }
-        .filter-button.active {
-            background-color: #1F2937; /* Gray 800 */
-            color: #FFFFFF;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: Montserrat, "DejaVu Sans", Verdana, sans-serif; background-color: #F9FAFB; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin: auto; height: 350px; max-height: 450px; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        
+        .tab-button { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
+        .tab-button.active { border-color: #97185E; color: #97185E; background-color: #FDF2F8; }
+        .tab-hover-1:not(.active):hover { border-color: #A0D2DB; background-color: #F0FAFB; }
+        .tab-hover-2:not(.active):hover { border-color: #E8C2CA; background-color: #FCF5F6; }
+        .tab-hover-3:not(.active):hover { border-color: #F0E68C; background-color: #FEFDF3; }
+        .tab-hover-4:not(.active):hover { border-color: #B2D3C2; background-color: #F3F9F6; }
+        .tab-hover-5:not(.active):hover { border-color: #D8BFD8; background-color: #F9F5F9; }
+        .tab-hover-6:not(.active):hover { border-color: #A0D2DB; background-color: #F0FAFB; }
+
+        .filter-button.active { background-color: #1F2937; color: #FFFFFF; }
+        .detail-card { background-color: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); border-left-width: 4px; }
+        .interactive-p { transition: all 0.3s ease; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid transparent; }
+        .hover-color-1:hover { border-left-color: #A0D2DB; background-color: #F0FAFB; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(160, 210, 219, 0.1); }
+        .hover-color-2:hover { border-left-color: #E8C2CA; background-color: #FCF5F6; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(232, 194, 202, 0.1); }
+        .hover-color-3:hover { border-left-color: #F0E68C; background-color: #FEFDF3; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(240, 230, 140, 0.1); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { opacity: 0; }
+        .animate { animation: fadeInUp 0.8s ease forwards; }
+
+        .card-Acquisition { background-color: #F0FDF4; }
+        .card-Activation { background-color: #FDF2F8; }
+        .card-Retention { background-color: #EFF6FF; }
+        .card-Revenue { background-color: #FEFCE8; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
 
-        <header class="mb-8">
-            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Growth Strategy for BlackDoctor.org</h1>
-            <p class="mt-2 text-lg text-gray-600">An analysis of audience data and a proposed plan of actionable growth experiments.</p>
+        <header class="mb-8 fade-in">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">BDO Growth Strategy</h1>
+            <p class="mt-2 text-lg text-gray-600">Audience analysis, activation planning, and growth experiments.</p>
         </header>
 
-        <div class="mb-6 border-b border-gray-200">
+        <div class="mb-6 border-b border-gray-200 fade-in sticky top-0 bg-gray-50/80 backdrop-blur-sm z-10" style="animation-delay: 0.1s;">
             <nav class="flex flex-wrap -mb-px" id="tab-nav">
-                <button data-tab="summary" class="tab-button active text-sm sm:text-base font-medium text-center text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 p-4">Strategic Summary</button>
-                <button data-tab="audience" class="tab-button text-sm sm:text-base font-medium text-center text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 p-4">Audience Insights</button>
-                <button data-tab="experiments" class="tab-button text-sm sm:text-base font-medium text-center text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 p-4">Growth Experiments</button>
-                <button data-tab="data" class="tab-button text-sm sm:text-base font-medium text-center text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 p-4">Data Enrichment</button>
+                <button data-tab="summary" class="tab-button active tab-hover-1 text-sm sm:text-base p-4">Summary</button>
+                <button data-tab="audience" class="tab-button tab-hover-2 text-sm sm:text-base p-4">Audience</button>
+                <button data-tab="data" class="tab-button tab-hover-3 text-sm sm:text-base p-4">Data Enrichment</button>
+                <button data-tab="activation-plan" class="tab-button tab-hover-4 text-sm sm:text-base p-4">Activation Plan</button>
+                <button data-tab="experiments" class="tab-button tab-hover-5 text-sm sm:text-base p-4">Experiments</button>
+                <button data-tab="work-with-ron" class="tab-button tab-hover-6 text-sm sm:text-base p-4">Work with Ron</button>
             </nav>
         </div>
 
         <main id="tab-content">
-            <div id="summary-content" class="tab-panel space-y-8">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Analysis Overview</h2>
-                    <p class="text-gray-600 max-w-3xl">BlackDoctor.org (BDO) has successfully built a strong, trusted brand within the Black community, attracting a significant audience primarily interested in celebrity news and lifestyle content. While this strategy is effective for top-of-funnel acquisition, it creates a crucial gap between initial user interest and BDO's core mission of promoting health and wellness. This report outlines a strategy to bridge that gap, converting incidental visitors into an engaged, health-conscious community.</p>
+            <div id="summary-content" class="tab-panel space-y-6">
+                <div class="fade-in" style="animation-delay: 0.2s;">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Strategic Overview</h2>
+                    <p class="text-gray-600 max-w-3xl interactive-p hover-color-1">BDO has built <strong>strong brand trust</strong> but primarily acquires users via celebrity content, creating a <em>strategic gap</em> with its core health mission. This plan aims to <strong>bridge that gap</strong>, converting incidental visitors into an engaged, health-focused community.</p>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="font-semibold text-lg text-gray-900">Core Strength: Brand Trust & Niche Authority</h3>
-                        <p class="mt-2 text-gray-600">BDO is a highly trusted source of information. The content strategy should leverage this trust by creating a stronger connection between the popular celebrity-driven content and actionable health advice, positioning BDO as the definitive source for health within the context of Black culture.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="font-semibold text-lg text-gray-900">Primary Bottleneck: Activation & Retention</h3>
-                        <p class="mt-2 text-gray-600">The primary constraint on growth is the disconnect between acquisition (users searching for celebrity news) and activation (users engaging with core health content). Many users visit for a single piece of content and leave, failing to discover the depth of BDO's health resources. This leads to low retention and missed monetization opportunities.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="font-semibold text-lg text-gray-900">Strategic Imperative: Bridge the Content Gap</h3>
-                        <p class="mt-2 text-gray-600">The overarching goal is to create seamless pathways from high-traffic, low-intent content (celebrity news) to high-value, high-intent content (health resources). This involves creating new content formats, improving internal linking, and developing retention-focused products like newsletters and community challenges.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="audience-content" class="tab-panel hidden space-y-12">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Audience Demographics</h2>
-                    <p class="text-gray-600 max-w-3xl mb-6">The BDO audience is predominantly young, female, and located in major US metropolitan areas. This demographic is digitally savvy and highly active on social media, presenting a clear opportunity for targeted engagement.</p>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h3 class="text-lg font-semibold text-center mb-4">Gender Distribution</h3>
-                            <div class="chart-container" style="height: 300px; max-height: 300px;"><canvas id="genderChart"></canvas></div>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h3 class="text-lg font-semibold text-center mb-4">Age Distribution</h3>
-                            <div class="chart-container" style="height: 300px; max-height: 300px;"><canvas id="ageChart"></canvas></div>
-                        </div>
-                         <div class="bg-white p-6 rounded-lg shadow-sm lg:col-span-2">
-                            <h3 class="text-lg font-semibold text-center mb-4">Top 10 States by Audience Share</h3>
-                            <div class="chart-container" style="height: 400px; max-height: 400px;"><canvas id="stateChart"></canvas></div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Audience Interests & Affinities</h2>
-                     <p class="text-gray-600 max-w-3xl mb-6">Analysis of online behavior reveals that the BDO audience is heavily engaged with Black culture, celebrity news, and entertainment. They frequent other Black-focused media outlets and follow prominent Black personalities and creators. This indicates a strong preference for content that is culturally relevant and speaks to their shared experiences.</p>
-                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h3 class="text-lg font-semibold mb-3">Top 5 Websites Visited</h3>
-                            <ul id="topWebsites" class="space-y-2 text-gray-600"></ul>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h3 class="text-lg font-semibold mb-3">Top 5 Social Accounts Followed</h3>
-                            <ul id="topSocial" class="space-y-2 text-gray-600"></ul>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                             <h3 class="text-lg font-semibold mb-3">Top 5 YouTube Channels Watched</h3>
-                            <ul id="topYoutube" class="space-y-2 text-gray-600"></ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="experiments-content" class="tab-panel hidden">
-                 <h2 class="text-2xl font-bold text-gray-900 mb-2">Proposed Growth Experiments</h2>
-                 <p class="text-gray-600 max-w-3xl mb-6">The following experiments are designed to address the primary bottleneck of activating and retaining users by creating a stronger bridge between acquisition content and BDO's core health mission. Use the filters to sort experiments by strategic focus.</p>
-
-                <div id="filters" class="flex flex-wrap gap-2 mb-6">
-                    <button class="filter-button active bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm" data-filter="all">All</button>
-                    <button class="filter-button bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm" data-filter="Acquisition">Acquisition</button>
-                    <button class="filter-button bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm" data-filter="Activation">Activation</button>
-                    <button class="filter-button bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm" data-filter="Retention">Retention</button>
-                    <button class="filter-button bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm" data-filter="Revenue">Revenue</button>
-                </div>
-                <div id="experiments-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in" style="animation-delay: 0.3s;">
+                    <div class="bg-white p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-lg">Core Strength</h3><p class="mt-2 text-gray-600">High brand trust and <em>niche authority</em>. We must leverage this to link popular content with actionable health advice.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-lg">Primary Bottleneck</h3><p class="mt-2 text-gray-600"><strong>Low Activation & Retention.</strong> Users arrive for celebrity news and leave, missing our deep health resources.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-lg">Strategic Goal</h3><p class="mt-2 text-gray-600"><strong>Bridge the Content Gap.</strong> Create seamless, intuitive pathways from high-traffic pop culture content to high-value health content.</p></div>
                 </div>
             </div>
             
-            <div id="data-content" class="tab-panel hidden space-y-6">
-                 <h2 class="text-2xl font-bold text-gray-900 mb-2">Data Enrichment Strategy</h2>
-                 <p class="text-gray-600 max-w-3xl">To enhance content personalization and create more valuable advertising segments, BDO should consider enriching its first-party data (e.g., newsletter subscribers) with third-party data. This allows for a deeper understanding of the audience's lifestyle, interests, and economic indicators, enabling hyper-targeted campaigns and product offerings.</p>
-                
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-semibold text-gray-900">Hypothesis</h3>
-                    <p class="mt-2 text-gray-600">By enriching our subscriber database with third-party lifestyle and demographic data, we can increase email engagement by 20% through personalized content tracks and command a 25% higher CPM for targeted advertising segments due to improved audience qualification.</p>
+            <div id="audience-content" class="tab-panel hidden space-y-12">
+                <div class="fade-in"><h2 class="text-2xl font-bold text-gray-900 mb-4">Audience Demographics</h2><p class="text-gray-600 max-w-3xl mb-6">Our audience is <strong>young</strong>, predominantly <strong>female</strong>, and concentrated in major <strong>U.S. metro areas</strong>.</p><div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"><div class="bg-white p-6 rounded-lg shadow-sm fade-in" style="animation-delay: 0.1s;"><h3 class="text-lg font-semibold text-center mb-4">Gender Distribution</h3><div class="chart-container" style="height: 300px; max-height: 300px;"><canvas id="genderChart"></canvas></div></div><div class="bg-white p-6 rounded-lg shadow-sm fade-in" style="animation-delay: 0.2s;"><h3 class="text-lg font-semibold text-center mb-4">Age Distribution</h3><div class="chart-container" style="height: 300px; max-height: 300px;"><canvas id="ageChart"></canvas></div></div><div class="bg-white p-6 rounded-lg shadow-sm lg:col-span-2 fade-in" style="animation-delay: 0.3s;"><h3 class="text-lg font-semibold text-center mb-4">Top 10 States</h3><div class="chart-container" style="height: 400px; max-height: 400px;"><canvas id="stateChart"></canvas></div></div></div></div>
+                <div class="fade-in"><h2 class="text-2xl font-bold text-gray-900 mb-4">Audience Interests</h2><p class="text-gray-600 max-w-3xl mb-6">This audience engages heavily with content centered on <strong>Black culture</strong>, <em>celebrity news</em>, and <em>entertainment media</em>.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div class="bg-white p-6 rounded-lg shadow-sm fade-in" style="animation-delay: 0.1s;"><h3 class="text-lg font-semibold mb-3">Top Websites</h3><ul id="topWebsites" class="space-y-2 text-gray-600"></ul></div><div class="bg-white p-6 rounded-lg shadow-sm fade-in" style="animation-delay: 0.2s;"><h3 class="text-lg font-semibold mb-3">Top Social Accounts</h3><ul id="topSocial" class="space-y-2 text-gray-600"></ul></div><div class="bg-white p-6 rounded-lg shadow-sm fade-in" style="animation-delay: 0.3s;"><h3 class="text-lg font-semibold mb-3">Top YouTube Channels</h3><ul id="topYoutube" class="space-y-2 text-gray-600"></ul></div></div></div>
+            </div>
+            
+             <div id="data-content" class="tab-panel hidden space-y-8">
+                <div class="fade-in"><h2 class="text-2xl font-bold text-gray-900 mb-2">Data Enrichment: The Engine of Activation</h2><p class="text-gray-600 max-w-3xl interactive-p hover-color-1">Our choice of a data enrichment partner is the <strong>single most critical decision</strong> in executing the Activation Plan. This partner provides the raw material—<em>deep audience insight</em>—that fuels every subsequent phase, turning our strategic vision into a practical reality.</p></div>
+                <div class="fade-in" style="animation-delay: 0.1s;">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Connecting Data to the Activation Roadmap</h3>
+                    <ul class="space-y-4 max-w-3xl">
+                        <li class="interactive-p hover-color-2"><strong>For Phase 1 (Foundation):</strong> The enrichment partner is essential for transforming our raw user list into <em>intelligent segments</em>. Their data provides the "why" behind user behavior, allowing us to build the foundational audience groups that will drive all future efforts.</li>
+                        <li class="interactive-p hover-color-3"><strong>For Phase 2 (Personalization):</strong> The detailed <em>lifestyle and media consumption data</em> from our partner will directly power the personalized email tracks and on-site content recommendations. We simply <strong>cannot personalize without first understanding the person.</strong></li>
+                        <li class="interactive-p hover-color-1"><strong>For Phase 3 (Monetization):</strong> The enriched segments become <strong>high-value, sellable assets</strong>. We can offer advertisers hyper-targeted access to verified consumer profiles (e.g., <em>"Health-Conscious Mothers," "High-Income Urban Professionals"</em>), commanding premium CPMs and unlocking new revenue models.</li>
+                    </ul>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="text-lg font-semibold text-gray-800">Recommended Data Partner: Experian Mosaic</h4>
-                        <p class="mt-2 text-gray-600">Unlike credit-focused providers (TransUnion) or professional data providers (Coresignal), Experian Mosaic specializes in consumer lifestyle segmentation. It classifies US households into distinct groups based on demographics, behaviors, and values, which is ideal for BDO's B2C focus.</p>
-                        <ul class="mt-4 space-y-2 text-sm text-gray-600">
-                           <li><span class="font-semibold">Relevance:</span> Provides insights into consumer habits, media preferences, and health attitudes.</li>
-                           <li><span class="font-semibold">Actionability:</span> Enables creation of audience segments like "Health-Conscious Families" or "Young Urban Professionals."</li>
-                        </ul>
-                    </div>
-                     <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="text-lg font-semibold text-gray-800">Implementation & Cost</h4>
-                         <p class="mt-2 text-gray-600">The process involves providing a hashed list of subscriber emails to the data vendor, who then appends their segmentation data. This is a privacy-compliant method.</p>
-                        <ul class="mt-4 space-y-2 text-sm text-gray-600">
-                           <li><span class="font-semibold">Estimated Cost:</span> ~$15,000 - $30,000 annually for a database of up to 500,000 users, depending on the depth of data requested.</li>
-                           <li><span class="font-semibold">Resources:</span> Requires a data analyst or technical marketer to manage the integration and a legal review of the data processing agreement.</li>
-                        </ul>
+                <div class="fade-in" style="animation-delay: 0.2s;">
+                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Visualizing the Vendor Landscape</h3>
+                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-sm"><h3 class="text-lg font-semibold text-center mb-4">Platform Strategic Positioning</h3><div class="chart-container"><canvas id="positioningChart"></canvas></div></div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm"><h3 class="text-lg font-semibold text-center mb-4">Core Value Proposition</h3><div class="chart-container"><canvas id="valueChart"></canvas></div></div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm lg:col-span-2"><h3 class="text-lg font-semibold text-center mb-4">Strategic Fit vs. Complexity Matrix</h3><div class="chart-container" style="height: 450px; max-height: 450px;"><canvas id="fitChart"></canvas></div></div>
+                     </div>
+                </div>
+                <div class="fade-in" style="animation-delay: 0.3s;">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">In-Depth Platform Due Diligence</h3>
+                    <div class="space-y-6">
+                        <div class="detail-card" style="border-color: #97185E;">
+                            <h4 class="text-lg font-bold text-gray-800">Claritas PRIZM Premier</h4>
+                            <p class="text-sm font-medium text-gray-500 mb-3">The Multicultural Specialist</p>
+                            <ul class="text-sm space-y-3 list-disc list-inside">
+                                <li><strong>Pros:</strong> <em>Best-in-class</em> for U.S. multicultural segments, directly aligning with BDO's audience. Provides deep lifestyle and media consumption insights.</li>
+                                <li><strong>Cons:</strong> Less focused on <em>real-time activation</em>; primarily an analytical tool. Can be complex for new users without support.</li>
+                                <li><strong>Pricing:</strong> Annual license starting around <strong>$40k-$60k</strong>, depending on the number of records and data attributes required.</li>
+                                <li><strong>Implementation:</strong> A <strong>4-6 week process</strong> involving secure data transfer of a hashed email list, data matching, and integration support for ingesting the appended data back into BDO's CDP.</li>
+                                <li><strong>G2 Review Highlight:</strong> <em>"The granularity of their multicultural data is unmatched. It gave us 'aha' moments that completely reshaped our content strategy."</em></li>
+                            </ul>
+                        </div>
+                        <div class="detail-card" style="border-color: #87AB43;">
+                            <h4 class="text-lg font-bold text-gray-800">Experian Mosaic</h4>
+                            <p class="text-sm font-medium text-gray-500 mb-3">The Global Standard</p>
+                             <ul class="text-sm space-y-3 list-disc list-inside">
+                                <li><strong>Pros:</strong> Highly reliable data with <em>globally consistent segmentation</em>. Strong reputation and robust compliance frameworks.</li>
+                                <li><strong>Cons:</strong> Lacks the specific granularity on U.S. multicultural segments that BDO needs. More of a <em>generalist tool</em>.</li>
+                                <li><strong>Pricing:</strong> Enterprise-level annual license, typically starting at <strong>$75k+</strong>.</li>
+                                <li><strong>Implementation:</strong> A <strong>6-8 week process</strong>, similar to Claritas but often with more extensive legal and compliance reviews due to its credit bureau origins.</li>
+                                <li><strong>G2 Review Highlight:</strong> <em>"Rock-solid, dependable data. Perfect for large organizations needing a consistent view of customers across different countries."</em></li>
+                            </ul>
+                        </div>
+                        <div class="detail-card" style="border-color: #1F2937;">
+                             <h4 class="text-lg font-bold text-gray-800">Epsilon PeopleCloud</h4>
+                             <p class="text-sm font-medium text-gray-500 mb-3">The Identity & Activation OS</p>
+                             <ul class="text-sm space-y-3 list-disc list-inside">
+                                <li><strong>Pros:</strong> Excellent for <em>real-time, 1-to-1 personalization</em> and activation. Strong identity resolution capabilities for a cookieless future.</li>
+                                <li><strong>Cons:</strong> More of a marketing cloud than a pure data enrichment tool. Can be <strong>overly complex and expensive</strong> if only used for segmentation insights.</li>
+                                <li><strong>Pricing:</strong> Complex, multi-year contracts often exceeding <strong>$150k+ annually</strong>, based on modules and usage.</li>
+                                <li><strong>Implementation:</strong> A lengthy <strong>3-6 month integration process</strong> requiring significant technical resources from BDO's side to connect with their full suite of activation tools.</li>
+                                <li><strong>Gartner Review Highlight:</strong> <em>"A powerhouse for omnichannel activation, but be prepared for a steep learning curve and a significant investment."</em></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm fade-in" style="animation-delay: 0.3s;"><h3 class="text-xl font-semibold text-gray-900">Strategic Recommendation</h3><p class="mt-2 text-gray-600 interactive-p hover-color-2">For BDO's current strategic needs, <strong>Claritas PRIZM Premier is the definitive choice.</strong> While platforms like Epsilon offer powerful activation capabilities, our primary bottleneck is a <em>lack of deep audience understanding</em>, not a lack of real-time tools. Claritas provides the most relevant, granular, and actionable insights into the specific communities we serve. This foundational knowledge will inform a smarter content strategy, unlock more valuable advertising segments, and lay the groundwork for future product development. <em>It allows us to walk before we run</em>, mastering audience insight before investing in a complex activation-focused ecosystem.</p></div>
+            </div>
 
+            <div id="activation-plan-content" class="tab-panel hidden space-y-10">
+                <div class="fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900">The Audience Activation Blueprint</h2>
+                    <p class="mt-2 text-gray-600 max-w-3xl interactive-p hover-color-1">This plan outlines a systematic approach to transform BDO from a high-traffic media site into a deeply engaged, <strong>data-driven community platform</strong>. The goal is to move from <em>anonymous pageviews</em> to <em>known, loyal users</em> by progressively enriching our understanding of their needs and personalizing their experience.</p>
+                </div>
+                <div class="fade-in" style="animation-delay: 0.1s;">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Core Strategic Pillars</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 bg-white border-l-4 border-indigo-500 rounded-r-lg shadow-sm"><h4 class="font-bold text-indigo-800">Trust & Compliance</h4><p class="text-sm text-gray-600 mt-1">Build on our core strength with a <strong>privacy-first</strong> data strategy that exceeds legal requirements (HIPAA, CCPA).</p></div>
+                        <div class="p-4 bg-white border-l-4 border-sky-500 rounded-r-lg shadow-sm"><h4 class="font-bold text-sky-800">Unified User Profile</h4><p class="text-sm text-gray-600 mt-1">Create a <strong>single, 360-degree view</strong> of each user, connecting behavior across web, email, and social channels.</p></div>
+                        <div class="p-4 bg-white border-l-4 border-teal-500 rounded-r-lg shadow-sm"><h4 class="font-bold text-teal-800">Journey Personalization</h4><p class="text-sm text-gray-600 mt-1">Use data to <strong>tailor content</strong>, recommendations, and communications to each user's unique health interests.</p></div>
+                        <div class="p-4 bg-white border-l-4 border-amber-500 rounded-r-lg shadow-sm"><h4 class="font-bold text-amber-800">Data-Driven Monetization</h4><p class="text-sm text-gray-600 mt-1">Develop <strong>new, high-margin revenue streams</strong> based on our deep understanding of segmented audiences.</p></div>
+                    </div>
+                </div>
+                <div class="fade-in" style="animation-delay: 0.2s;">
+                     <h3 class="text-xl font-semibold text-gray-800 mb-6">Phased Implementation Roadmap</h3>
+                     <div class="space-y-8">
+                        <div class="flex flex-col md:flex-row items-start">
+                           <div class="w-full md:w-1/3 text-left md:text-right pr-8"><h4 class="text-lg font-bold text-gray-700">Phase 1: Foundation</h4><p class="text-sm text-gray-500">The First 6 Months</p></div>
+                           <div class="w-full md:w-2/3 border-l-2 border-gray-300 pl-8 pt-2 space-y-3">
+                                <h5 class="font-semibold text-gray-800"><em>Objective: Build the Data Layer</em></h5>
+                                <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                    <li>Select and implement a <strong>Customer Data Platform (CDP)</strong> to serve as the central user database.</li>
+                                    <li><strong>Unify user identities</strong> from website analytics, email list, and social logins.</li>
+                                    <li><strong>Enrich profiles</strong> with Claritas PRIZM data to establish initial segmentation.</li>
+                                </ul>
+                                <p class="text-sm font-semibold text-gray-800 pt-2">Outcome: <span class="font-normal text-gray-600">A unified, enriched database of all known BDO users.</span></p>
+                           </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row items-start">
+                           <div class="w-full md:w-1/3 text-left md:text-right pr-8"><h4 class="text-lg font-bold text-gray-700">Phase 2: Personalization</h4><p class="text-sm text-gray-500">Months 7 - 18</p></div>
+                           <div class="w-full md:w-2/3 border-l-2 border-gray-300 pl-8 pt-2 space-y-3">
+                                <h5 class="font-semibold text-gray-800"><em>Objective: Activate Audience Segments</em></h5>
+                                <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                    <li>Develop <strong>5-7 core audience segments</strong> based on health interests and demographic data (e.g., <em>"New Mothers," "Diabetes Management"</em>).</li>
+                                    <li>Launch <strong>personalized email newsletters</strong> tailored to each segment.</li>
+                                    <li>Implement <strong>on-site content recommendations</strong> based on user segment and browsing history.</li>
+                                </ul>
+                               <p class="text-sm font-semibold text-gray-800 pt-2">Outcome: <span class="font-normal text-gray-600"><strong>20% lift</strong> in email CTR and <strong>15% increase</strong> in on-site time per session.</span></p>
+                           </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row items-start">
+                           <div class="w-full md:w-1/3 text-left md:text-right pr-8"><h4 class="text-lg font-bold text-gray-700">Phase 3: Monetization</h4><p class="text-sm text-gray-500">Months 19 - 36</p></div>
+                           <div class="w-full md:w-2/3 border-l-2 border-gray-300 pl-8 pt-2 space-y-3">
+                                <h5 class="font-semibold text-gray-800"><em>Objective: Develop Data-Driven Revenue</em></h5>
+                                <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                    <li>Create <strong>high-value programmatic ad packages</strong> targeting specific audience segments.</li>
+                                    <li>Launch a <strong>BDO Premium subscription tier</strong> offering exclusive content for highly engaged segments.</li>
+                                    <li>Develop <strong>sponsored "Health-in-a-Box"</strong> digital products for corporate wellness partners.</li>
+                                </ul>
+                                <p class="text-sm font-semibold text-gray-800 pt-2">Outcome: <span class="font-normal text-gray-600"><strong>50% increase</strong> in programmatic CPMs and two new recurring revenue streams.</span></p>
+                           </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+            <div id="experiments-content" class="tab-panel hidden space-y-8">
+                 <div class="fade-in"><h2 class="text-2xl font-bold text-gray-900 mb-4">Growth Bottlenecks & Experiments</h2><p class="text-gray-600 max-w-3xl mb-6">Our growth is constrained by key points in the user journey. The experiments below are designed to systematically address these bottlenecks.</p></div>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 fade-in" style="animation-delay: 0.1s;">
+                    <div class="p-4 bg-green-100/50 border-l-4 border-green-500 rounded-r-lg"><h4 class="font-bold text-green-800">Acquisition</h4><p class="text-sm text-green-700">How do users find us? Focuses on attracting new, relevant visitors.</p></div>
+                    <div class="p-4 bg-pink-100/50 border-l-4 border-pink-500 rounded-r-lg"><h4 class="font-bold text-pink-800">Activation</h4><p class="text-sm text-pink-700">Do users see our value? Focuses on the "aha!" moment.</p></div>
+                    <div class="p-4 bg-blue-100/50 border-l-4 border-blue-500 rounded-r-lg"><h4 class="font-bold text-blue-800">Retention</h4><p class="text-sm text-blue-700">Do users come back? Focuses on building habits and repeat engagement.</p></div>
+                    <div class="p-4 bg-yellow-100/50 border-l-4 border-yellow-500 rounded-r-lg"><h4 class="font-bold text-yellow-800">Revenue</h4><p class="text-sm text-yellow-700">How do we make money? Focuses on effective monetization.</p></div>
+                </div>
+                <div id="filters" class="flex flex-wrap gap-2 mb-6 fade-in" style="animation-delay: 0.2s;">
+                    <a href="#group-Acquisition" class="filter-button bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm">Acquisition</a>
+                    <a href="#group-Activation" class="filter-button bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm">Activation</a>
+                    <a href="#group-Retention" class="filter-button bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm">Retention</a>
+                    <a href="#group-Revenue" class="filter-button bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full text-sm">Revenue</a>
+                </div>
+                <div id="experiments-container" class="space-y-10"></div>
+            </div>
+            
+            <div id="work-with-ron-content" class="tab-panel hidden">
+                <div class="fade-in"><h2 class="text-2xl font-bold text-gray-900 mb-4">Work with Ron</h2><p class="text-gray-600 max-w-3xl mb-6">Explore the portfolio and <strong>book a time below</strong> to discuss this growth plan in more detail.</p><div class="bg-white rounded-lg shadow-sm mb-8 overflow-hidden"><iframe src="https://sadly-shop-23256937.figma.site/" width="100%" height="550" frameborder="0"></iframe></div><div class="bg-white p-2 rounded-lg shadow-sm"><iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GvfZZxoohtFgmi3KDzWStgJujnt2bUkl_iG2G_1NOOMuVFJ9pfNnwwq7Z70LKp52alJ0JaqnG?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe></div></div>
             </div>
         </main>
     </div>
@@ -173,78 +224,38 @@
         const audienceData = {
             gender: { labels: ['Female', 'Male', 'Other'], data: [74.23, 25.46, 0.31] },
             age: { labels: ['18-25', '26-35', '36-50', '51-65', '66+'], data: [26.36, 45.42, 23.96, 4.1, 0.15] },
-            states: {
-                labels: ['California', 'New York', 'Texas', 'Florida', 'Illinois', 'Pennsylvania', 'Georgia', 'Ohio', 'Massachusetts', 'North Carolina'],
-                data: [16.23, 11.09, 6.45, 5.79, 4.91, 3.76, 3.57, 3.23, 3.08, 2.79]
-            },
-            interests: {
-                websites: ['famousbirthdays.com', 'complex.com', 'msnbc.com', 'snopes.com', 'essence.com'],
-                social: ['theGrio', 'The Root', 'Essence', 'BET', 'Black Enterprise'],
-                youtube: ['HELLO!', 'Salon', 'The Breakfast Club', 'The Shade Room', 'MSNBC']
-            }
+            states: { labels: ['CA', 'NY', 'TX', 'FL', 'IL', 'PA', 'GA', 'OH', 'MA', 'NC'], data: [16.23, 11.09, 6.45, 5.79, 4.91, 3.76, 3.57, 3.23, 3.08, 2.79] },
+            interests: { websites: ['famousbirthdays.com', 'complex.com', 'msnbc.com', 'snopes.com', 'essence.com'], social: ['theGrio', 'The Root', 'Essence', 'BET', 'Black Enterprise'], youtube: ['HELLO!', 'Salon', 'The Breakfast Club', 'The Shade Room', 'MSNBC'] }
         };
 
         const experimentsData = [
-            {
-                title: 'Content Series: "Celebrity Health Journeys"',
-                hypothesis: "By creating deeply researched articles and video content on the health experiences of celebrities our audience already searches for, we can capture high-intent traffic and seamlessly transition them to related health topics.",
-                bottleneck: "Activation",
-                cost: "~$7,500",
-                time: "1 Quarter",
-                outcome: "15% increase in organic traffic to health sections; 5% lift in time-on-site.",
-                resources: "1x Content Writer, 1x Video Editor (part-time)",
-                roi: "High"
-            },
-            {
-                title: 'Launch "BDO Health Challenges" Newsletter',
-                hypothesis: "By creating interactive, time-bound health challenges (e.g., '21-Day Walking Challenge'), we can increase email open rates and drive repeat traffic, building a habit of engagement with BDO.",
-                bottleneck: "Retention",
-                cost: "~$2,000",
-                time: "4 Weeks per challenge",
-                outcome: "30% newsletter open rate; 10% click-through rate to challenge content.",
-                resources: "1x Email Marketer, 1x Content Writer",
-                roi: "High"
-            },
-            {
-                title: "Expert Podcast & YouTube Tour",
-                hypothesis: "By placing BDO's medical experts on podcasts and YouTube channels our audience already consumes, we can tap into established communities, build authority, and drive high-quality referral traffic.",
-                bottleneck: "Acquisition",
-                cost: "~$5,000 (for outreach service)",
-                time: "2 Quarters",
-                outcome: "20 new media placements; 5,000+ referral visits per month.",
-                resources: "1x Outreach/PR Specialist, BDO Medical Experts",
-                roi: "Medium"
-            },
-            {
-                title: "Develop a 'Find a Black Doctor' Directory",
-                hypothesis: "By creating a high-utility, searchable directory of Black healthcare professionals, we can build a valuable resource that drives organic search traffic, serves the community, and creates a new revenue stream through premium listings.",
-                bottleneck: "Revenue",
-                cost: "~$25,000 (development)",
-                time: "6 Months",
-                outcome: "New recurring revenue stream ($50k+ in year 1); Top 3 ranking for 'find a black doctor' related keywords.",
-                resources: "1x Product Manager, 2x Web Developers, 1x Salesperson",
-                roi: "High"
-            },
-            {
-                title: "On-Page Health Content Integration",
-                hypothesis: "By systematically embedding contextual links and call-to-action blocks for relevant health content within our top 50 high-traffic celebrity articles, we can increase the click-through rate to our health section.",
-                bottleneck: "Activation",
-                cost: "~$1,500 (content audit & implementation)",
-                time: "2 Weeks",
-                outcome: "Increase internal referral traffic from celebrity to health content by 25%.",
-                resources: "1x SEO Specialist, 1x Content Editor",
-                roi: "Medium"
-            },
-            {
-                title: "Community Building via Facebook Group",
-                hypothesis: "Launching a moderated Facebook Group focused on specific health topics (e.g., 'BDO Healthy Mamas') will foster a sense of community, increase daily engagement, and provide a direct channel for promoting BDO content.",
-                bottleneck: "Retention",
-                cost: "~$3,000 (moderator stipend)",
-                time: "Ongoing",
-                outcome: "Grow to 10,000 active members in 6 months; drive 5% of site traffic.",
-                resources: "1x Community Manager (part-time)",
-                roi: "Medium"
-            }
+            { id: 'exp3', title: "Expert Podcast & YouTube Tour", hypothesis: "Place BDO experts on popular podcasts/channels to tap into established communities and drive referral traffic.", bottleneck: "Acquisition", cost: "~$5k", time: "4 Quarters", roi: "Medium" },
+            { id: 'exp7', title: '"Wellness Wednesday" IG Live Series', hypothesis: "Host weekly Instagram Live sessions with health experts and influencers to build brand authority and engage a live audience.", bottleneck: "Acquisition", cost: "~$4k/qtr", time: "Ongoing", roi: "Medium" },
+            { id: 'exp8', title: 'Develop "Health Risk Calculator"', hypothesis: "An interactive tool (e.g., for diabetes, heart disease) will capture high-intent organic search traffic and provide immediate user value.", bottleneck: "Acquisition", cost: "~$10k", time: "12 Weeks", roi: "High" },
+            { id: 'exp13', title: 'SEO-Driven "Symptom Checker"', hypothesis: "Create a comprehensive, medically-vetted symptom checker focused on conditions prevalent in the Black community to capture high-intent search traffic.", bottleneck: "Acquisition", cost: "~$15k", time: "4 Months", roi: "High" },
+            { id: 'exp14', title: 'TikTok "Health Myth Busting" Series', hypothesis: "Launch a short-form video series where BDO experts quickly debunk common health myths, leveraging TikTok's algorithm for viral reach.", bottleneck: "Acquisition", cost: "~$3k/month", time: "Ongoing", roi: "Medium" },
+            { id: 'exp15', title: 'Local Health Event Partnerships', hypothesis: "Partner with churches, community centers, and HBCUs for co-branded health screening events to build grassroots trust and brand awareness.", bottleneck: "Acquisition", cost: "~$5k/event", time: "Quarterly", roi: "Medium" },
+            
+            { id: 'exp1', title: 'Series: "Celebrity Health Journeys"', hypothesis: "Leverage celebrity health stories to capture high-intent search and bridge users to core health content.", bottleneck: "Activation", cost: "~$7.5k", time: "2 Quarters", roi: "High" },
+            { id: 'exp5', title: "On-Page Health Content Links", hypothesis: "Systematically add contextual health links to our top 50 celebrity articles to increase internal traffic.", bottleneck: "Activation", cost: "~$1.5k", time: "4 Weeks", roi: "Medium" },
+            { id: 'exp9', title: 'Create "Health Hub" Content Pages', hypothesis: "Aggregate all content for major conditions (hypertension, etc.) into comprehensive hubs to improve SEO and user experience.", bottleneck: "Activation", cost: "~$3k", time: "2 Months", roi: "High" },
+            { id: 'exp16', title: 'Personalized "Welcome" Email Sequence', hypothesis: "Develop an automated 3-part email series for new subscribers to introduce core health pillars and guide them to relevant content.", bottleneck: "Activation", cost: "~$2k setup", time: "2 Months", roi: "High" },
+            { id: 'exp17', title: 'Quiz: "What\'s Your Wellness Score?"', hypothesis: "Create engaging quizzes that assess user health habits and provide personalized recommendations, collecting valuable first-party data.", bottleneck: "Activation", cost: "~$4k", time: "6 Weeks", roi: "Medium" },
+            { id: 'exp18', title: '"Featured Expert" Homepage Module', hypothesis: "A homepage module rotating BDO medical experts and their latest work will immediately signal the site's health authority to new users.", bottleneck: "Activation", cost: "~$1k design", time: "4 Weeks", roi: "Medium" },
+
+            { id: 'exp2', title: 'Launch "BDO Health Challenges"', hypothesis: "Use interactive, time-bound challenges (e.g., '21-Day Walking Challenge') to build engagement habits via email.", bottleneck: "Retention", cost: "~$2k", time: "8 Weeks", roi: "High" },
+            { id: 'exp6', title: "Launch Community Facebook Group", hypothesis: "A moderated Facebook Group on health topics will foster community and drive daily engagement.", bottleneck: "Retention", cost: "~$3k", time: "Ongoing", roi: "Medium" },
+            { id: 'exp10', title: '"BDO Member" Loyalty Program', hypothesis: "A simple points system for reading/sharing articles, redeemable for small rewards, will encourage deeper, repeat engagement.", bottleneck: "Retention", cost: "~$5k", time: "2 Quarters", roi: "Medium" },
+            { id: 'exp19', title: 'Health Alert Push Notifications', hypothesis: "Implement web push notifications for breaking health news and seasonal reminders (flu shots) to drive repeat visits.", bottleneck: "Retention", cost: "~$1.5k setup", time: "2 Months", roi: "High" },
+            { id: 'exp20', title: '"Ask a Doctor" Monthly Q&A Forum', hypothesis: "A monthly, text-based Q&A with BDO experts will create a valuable, recurring content asset and build a loyal user base.", bottleneck: "Retention", cost: "~$2.5k/month", time: "Ongoing", roi: "Medium" },
+            { id: 'exp21', title: 'Quarterly "State of Black Health" Report', hypothesis: "A data-rich, shareable digital report on health trends will become a cornerstone asset that users and media return to.", bottleneck: "Retention", cost: "~$8k/qtr", time: "Quarterly", roi: "High" },
+
+            { id: 'exp4', title: "Develop 'Find a Black Doctor' Directory", hypothesis: "A searchable directory of Black healthcare professionals will drive organic traffic and create a new revenue stream.", bottleneck: "Revenue", cost: "~$25k", time: "12 Months", roi: "High" },
+            { id: 'exp11', title: 'Offer "Sponsored Health Guides"', hypothesis: "Partner with healthcare brands to create sponsored, in-depth guides on specific topics, creating a new, high-value revenue stream.", bottleneck: "Revenue", cost: "~$2k/guide", time: "Ongoing", roi: "High" },
+            { id: 'exp12', title: 'Affiliate Program for Wellness Products', hypothesis: "Curate and promote Black-owned wellness products (vitamins, fitness gear) to generate affiliate revenue.", bottleneck: "Revenue", cost: "~$1k setup", time: "2 Months", roi: "Medium" },
+            { id: 'exp22', title: 'BDO Premium Subscription', hypothesis: "Launch a paid tier with exclusive content and ad-free browsing to generate high-margin, recurring revenue from our most engaged users.", bottleneck: "Revenue", cost: "~$10k setup", time: "2 Quarters", roi: "High" },
+            { id: 'exp23', title: 'Telehealth Partnership Integration', hypothesis: "Partner with a telehealth provider to offer discounted consultations, earning a referral fee for each booking made through BDO.", bottleneck: "Revenue", cost: "~$2k integration", time: "2 Months", roi: "Medium" },
+            { id: 'exp24', title: 'Branded Virtual Health Summit', hypothesis: "A ticketed virtual summit with prominent Black health experts will generate significant revenue from tickets and sponsorships.", bottleneck: "Revenue", cost: "~$20k", time: "12 Months", roi: "High" }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -255,141 +266,117 @@
             tabNav.addEventListener('click', (e) => {
                 if (e.target.classList.contains('tab-button')) {
                     const tabId = e.target.getAttribute('data-tab');
-
                     tabs.forEach(tab => tab.classList.remove('active'));
                     e.target.classList.add('active');
+                    panels.forEach(panel => panel.classList.toggle('hidden', panel.id !== `${tabId}-content`));
+                }
+            });
 
-                    panels.forEach(panel => {
-                        if (panel.id === `${tabId}-content`) {
-                            panel.classList.remove('hidden');
-                        } else {
-                            panel.classList.add('hidden');
-                        }
+            function renderExperiments() {
+                const container = document.getElementById('experiments-container');
+                container.innerHTML = '';
+                const bottlenecks = ['Acquisition', 'Activation', 'Retention', 'Revenue'];
+                bottlenecks.forEach(bottleneck => {
+                    const groupWrapper = document.createElement('div');
+                    groupWrapper.id = `group-${bottleneck}`;
+                    const heading = document.createElement('h3');
+                    heading.className = 'text-2xl font-bold text-gray-800 mb-4 fade-in';
+                    heading.textContent = `${bottleneck} Experiments`;
+                    groupWrapper.appendChild(heading);
+                    const grid = document.createElement('div');
+                    grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+                    const filteredExperiments = experimentsData.filter(exp => exp.bottleneck === bottleneck);
+                    filteredExperiments.forEach((exp, index) => {
+                        const roiStyle = exp.roi === 'High' ? 'bg-green-200/50 text-green-800' : 'bg-yellow-200/50 text-yellow-800';
+                        const card = document.createElement('div');
+                        card.className = `p-6 rounded-lg shadow-sm flex flex-col fade-in card-${exp.bottleneck}`;
+                        card.style.animationDelay = `${index * 0.05}s`;
+                        card.innerHTML = `<h4 class="font-bold text-lg text-gray-900">${exp.title}</h4><p class="text-gray-600 mt-2 text-sm flex-grow">${exp.hypothesis}</p><div class="mt-4 pt-4 border-t border-gray-200/60"><div class="flex justify-between items-center text-sm mb-2"><span class="font-medium text-gray-500">Est. Cost:</span><span class="font-semibold text-gray-700">${exp.cost}</span></div><div class="flex justify-between items-center text-sm mb-2"><span class="font-medium text-gray-500">Est. Time:</span><span class="font-semibold text-gray-700">${exp.time}</span></div><div class="flex justify-between items-center text-sm"><span class="font-medium text-gray-500">ROI:</span><span class="px-2 py-1 rounded-md text-xs font-bold ${roiStyle}">${exp.roi}</span></div></div>`;
+                        grid.appendChild(card);
                     });
-                }
-            });
-
-            function renderExperiments(filter = 'all') {
-                const grid = document.getElementById('experiments-grid');
-                grid.innerHTML = '';
-                const filteredExperiments = filter === 'all' 
-                    ? experimentsData 
-                    : experimentsData.filter(exp => exp.bottleneck === filter);
-                
-                filteredExperiments.forEach(exp => {
-                    const roiColor = exp.roi === 'High' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
-                    const card = `
-                        <div class="bg-white p-6 rounded-lg shadow-sm flex flex-col">
-                            <h4 class="font-bold text-lg text-gray-900">${exp.title}</h4>
-                            <p class="text-gray-600 mt-2 text-sm flex-grow">${exp.hypothesis}</p>
-                            <div class="mt-4 pt-4 border-t border-gray-200">
-                                <div class="flex justify-between items-center text-sm mb-2">
-                                    <span class="font-medium text-gray-500">Bottleneck:</span>
-                                    <span class="font-semibold text-blue-600">${exp.bottleneck}</span>
-                                </div>
-                                <div class="flex justify-between items-center text-sm mb-2">
-                                    <span class="font-medium text-gray-500">Est. Cost:</span>
-                                    <span class="font-semibold text-gray-700">${exp.cost}</span>
-                                </div>
-                                <div class="flex justify-between items-center text-sm mb-2">
-                                    <span class="font-medium text-gray-500">Est. Time:</span>
-                                    <span class="font-semibold text-gray-700">${exp.time}</span>
-                                </div>
-                                <div class="flex justify-between items-center text-sm">
-                                    <span class="font-medium text-gray-500">Expected ROI:</span>
-                                    <span class="px-2 py-1 ${roiColor} rounded-md text-xs font-bold">${exp.roi}</span>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="text-sm text-gray-500"><span class="font-medium">Outcome:</span> ${exp.outcome}</p>
-                                    <p class="text-sm text-gray-500 mt-1"><span class="font-medium">Resources:</span> ${exp.resources}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    grid.innerHTML += card;
+                    groupWrapper.appendChild(grid);
+                    container.appendChild(groupWrapper);
                 });
+                setupAnimationObserver();
             }
-
-            const filtersContainer = document.getElementById('filters');
-            filtersContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('filter-button')) {
-                    document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
-                    e.target.classList.add('active');
-                    const filter = e.target.getAttribute('data-filter');
-                    renderExperiments(filter);
-                }
-            });
             
             function populateInterestLists() {
-                const websitesList = document.getElementById('topWebsites');
-                audienceData.interests.websites.forEach(site => {
-                    websitesList.innerHTML += `<li>${site}</li>`;
-                });
-                const socialList = document.getElementById('topSocial');
-                audienceData.interests.social.forEach(account => {
-                    socialList.innerHTML += `<li>${account}</li>`;
-                });
-                const youtubeList = document.getElementById('topYoutube');
-                audienceData.interests.youtube.forEach(channel => {
-                    youtubeList.innerHTML += `<li>${channel}</li>`;
-                });
+                document.getElementById('topWebsites').innerHTML = audienceData.interests.websites.map(s => `<li>${s}</li>`).join('');
+                document.getElementById('topSocial').innerHTML = audienceData.interests.social.map(s => `<li>${s}</li>`).join('');
+                document.getElementById('topYoutube').innerHTML = audienceData.interests.youtube.map(s => `<li>${s}</li>`).join('');
+            }
+
+            const commonChartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 20 } } } };
+            new Chart(document.getElementById('genderChart'), { type: 'doughnut', data: { labels: audienceData.gender.labels, datasets: [{ data: audienceData.gender.data, backgroundColor: ['#97185E', '#87AB43', '#D1D5DB'], borderColor: '#FFFFFF', borderWidth: 2 }] }, options: commonChartOptions });
+            new Chart(document.getElementById('ageChart'), { type: 'bar', data: { labels: audienceData.age.labels, datasets: [{ label: '% of Audience', data: audienceData.age.data, backgroundColor: '#87AB43', }] }, options: { ...commonChartOptions, indexAxis: 'y', plugins: { legend: { display: false } } } });
+            new Chart(document.getElementById('stateChart'), { type: 'bar', data: { labels: audienceData.states.labels, datasets: [{ label: '% of Audience', data: audienceData.states.data, backgroundColor: '#87AB43', }] }, options: { ...commonChartOptions, plugins: { legend: { display: false } } } });
+            
+            new Chart(document.getElementById('positioningChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['Multicultural Granularity', 'Real-time Activation', 'Ease of Integration', 'Global Scale', 'Analytical Depth'],
+                    datasets: [
+                        { label: 'Claritas', data: [9, 4, 7, 3, 9], fill: true, backgroundColor: 'rgba(151, 24, 94, 0.2)', borderColor: 'rgb(151, 24, 94)', pointBackgroundColor: 'rgb(151, 24, 94)' },
+                        { label: 'Experian', data: [6, 5, 8, 9, 7], fill: true, backgroundColor: 'rgba(135, 171, 67, 0.2)', borderColor: 'rgb(135, 171, 67)', pointBackgroundColor: 'rgb(135, 171, 67)'},
+                        { label: 'Epsilon', data: [5, 9, 6, 7, 6], fill: true, backgroundColor: 'rgba(31, 41, 55, 0.2)', borderColor: 'rgb(31, 41, 55)', pointBackgroundColor: 'rgb(31, 41, 55)'}
+                    ]
+                },
+                options: { ...commonChartOptions, scales: { r: { suggestedMin: 0, suggestedMax: 10 } } }
+            });
+
+            new Chart(document.getElementById('valueChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Claritas', 'Experian', 'Epsilon', 'Acxiom'],
+                    datasets: [
+                        { label: 'Audience Insight Depth', data: [9, 7, 6, 8], backgroundColor: 'rgba(135, 171, 67, 0.7)' },
+                        { label: 'Direct Activation Capability', data: [4, 5, 9, 7], backgroundColor: 'rgba(151, 24, 94, 0.7)' }
+                    ]
+                },
+                options: { ...commonChartOptions, indexAxis: 'y', scales: { x: { stacked: true }, y: { stacked: true } } }
+            });
+
+            new Chart(document.getElementById('fitChart'), {
+                type: 'bubble',
+                data: {
+                    datasets: [
+                        { label: 'Claritas', data: [{ x: 4, y: 9, r: 15 }], backgroundColor: 'rgba(151, 24, 94, 0.7)' },
+                        { label: 'Experian', data: [{ x: 5, y: 6, r: 20 }], backgroundColor: 'rgba(135, 171, 67, 0.7)' },
+                        { label: 'Epsilon', data: [{ x: 9, y: 7, r: 30 }], backgroundColor: 'rgba(31, 41, 55, 0.7)' },
+                        { label: 'Acxiom', data: [{ x: 8, y: 8, r: 25 }], backgroundColor: 'rgba(107, 114, 128, 0.7)' }
+                    ]
+                },
+                options: { ...commonChartOptions,
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Strategic Fit for BDO' } },
+                        x: { beginAtZero: true, title: { display: true, text: 'Implementation Complexity' } }
+                    },
+                    plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: function(context) { return `${context.dataset.label}: (Complexity: ${context.raw.x}, Fit: ${context.raw.y}, Cost: ${context.raw.r})`; } } } }
+                }
+            });
+
+            function setupAnimationObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            }
+
+            function applyHoverColors() {
+                document.querySelectorAll('.interactive-p').forEach((p, index) => p.classList.add(`hover-color-${(index % 3) + 1}`));
             }
 
             renderExperiments();
             populateInterestLists();
-
-            const commonChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom' } }
-            };
-
-            new Chart(document.getElementById('genderChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: audienceData.gender.labels,
-                    datasets: [{
-                        label: 'Gender Distribution',
-                        data: audienceData.gender.data,
-                        backgroundColor: ['#60A5FA', '#3B82F6', '#93C5FD'],
-                        borderColor: '#FFFFFF',
-                        borderWidth: 2
-                    }]
-                },
-                options: commonChartOptions
-            });
-
-            new Chart(document.getElementById('ageChart'), {
-                type: 'bar',
-                data: {
-                    labels: audienceData.age.labels,
-                    datasets: [{
-                        label: '% of Audience',
-                        data: audienceData.age.data,
-                        backgroundColor: '#60A5FA',
-                        borderColor: '#3B82F6',
-                        borderWidth: 1
-                    }]
-                },
-                options: { ...commonChartOptions, indexAxis: 'y', plugins: { legend: { display: false } } }
-            });
-
-            new Chart(document.getElementById('stateChart'), {
-                type: 'bar',
-                data: {
-                    labels: audienceData.states.labels,
-                    datasets: [{
-                        label: '% of Audience',
-                        data: audienceData.states.data,
-                        backgroundColor: '#60A5FA',
-                        borderColor: '#3B82F6',
-                        borderWidth: 1
-                    }]
-                },
-                options: { ...commonChartOptions, plugins: { legend: { display: false } } }
-            });
+            setupAnimationObserver();
+            applyHoverColors();
         });
     </script>
-
 </body>
 </html>
+
