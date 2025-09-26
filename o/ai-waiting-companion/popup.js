@@ -44,3 +44,63 @@ async function registerClickAndFetchStats() {
         document.getElementById('stats-list').innerHTML = "<li>Couldn't load stats, but we know others are waiting too!</li>";
     }
 }
+// Helper function to update the UI (used for both cached and fresh data)
+function updateUI(data) {
+    document.getElementById('stat-hour').textContent = data.hour.toLocaleString();
+    document.getElementById('stat-day').textContent = data.day.toLocaleString();
+    document.getElementById('stat-week').textContent = data.week.toLocaleString();
+    document.getElementById('stat-month').textContent = data.month.toLocaleString();
+    document.getElementById('stat-year').textContent = data.year.toLocaleString();
+}
+
+async function registerClickAndFetchStats() {
+    const THROTTLE_TIME_MS = 10000; // 10 seconds cooldown
+    const now = Date.now();
+
+    // 1. Check for Throttling and Cache
+    const storageData = await chrome.storage.local.get(['lastRequestTime', 'cachedStats']);
+
+    if (storageData.lastRequestTime && now - storageData.lastRequestTime < THROTTLE_TIME_MS) {
+        console.log("Throttled. Loading cached stats.");
+        // If throttled, load previously cached stats
+        if (storageData.cachedStats) {
+            updateUI(storageData.cachedStats);
+        }
+        // If no cached stats exist (e.g., very first run), we keep the "Loading..." text from the HTML
+        return; // Exit the function early
+    }
+
+    // 2. Proceed with Network Request
+    try {
+        const response = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        updateUI(data);
+
+        // 3. Save the successful request time and the data for future throttling
+        await chrome.storage.local.set({
+            lastRequestTime: now,
+            cachedStats: data
+        });
+
+    } catch (error) {
+        console.error("Error communicating with the backend:", error);
+        document.getElementById('stats-list').innerHTML = "<li>Couldn't load stats, but we know others are waiting too!</li>";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    displayEncouragement();
+    registerClickAndFetchStats();
+});
