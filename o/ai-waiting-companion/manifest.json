@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "AI Waiting Companion",
+    "version": "1.0.0",
+    "description": "Find comfort knowing others are also waiting for their AI tasks.",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "i/AI-Waiting-Buddy-8 (48).png"
+    },
+    "icons": {
+      "48": "i/AI-Waiting-Buddy-8 (48).png",
+      "128": "i/AI-Waiting-Buddy-8 (128).png"
+    },
+    "host_permissions": [
+      "https://cfbwytfyhvdpaptdfnzn.supabase.co/"
+    ]
+  }
