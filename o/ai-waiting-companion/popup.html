@@ -3,23 +3,47 @@
 <head>
   <title>Waiting Companion</title>
   <style>
-    /* Basic styling (can also be moved to a separate CSS file) */
-    body { width: 350px; padding: 15px; font-family: sans-serif; }
-    #encouragement { font-style: italic; margin-bottom: 15px; color: #333; }
-    ul { padding-left: 20px; }
+    /* Basic styling */
+    body {
+        width: 350px;
+        padding: 15px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+    h2 {
+        color: #444;
+    }
+    #encouragement {
+        font-style: italic;
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #f0f8ff; /* Light blue background */
+        border-left: 4px solid #0078d4; /* Darker blue accent */
+    }
+    ul {
+        padding-left: 0px;
+        list-style-type: none; /* Remove bullets */
+    }
+    li {
+        margin-bottom: 8px;
+    }
+    .stat-label {
+        font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <h2>You are not alone!</h2>
   <div id="encouragement"></div>
 
-  <p>Others waiting for their AI in the last:</p>
+  <p>Shared moments of waiting for AI recorded in the last:</p>
+
   <ul id="stats-list">
-    <li>Hour: <span id="stat-hour">Loading...</span></li>
-    <li>Day: <span id="stat-day">Loading...</span></li>
-    <li>Week: <span id="stat-week">Loading...</span></li>
-    <li>Month: <span id="stat-month">Loading...</span></li>
-    <li>Year: <span id="stat-year">Loading...</span></li>
+    <li><span class="stat-label">Hour:</span> <span id="stat-hour">Loading...</span></li>
+    <li><span class="stat-label">Day:</span> <span id="stat-day">Loading...</span></li>
+    <li><span class="stat-label">Week:</span> <span id="stat-week">Loading...</span></li>
+    <li><span class="stat-label">Month:</span> <span id="stat-month">Loading...</span></li>
+    <li><span class="stat-label">Year:</span> <span id="stat-year">Loading...</span></li>
   </ul>
 
   <script src="popup.js"></script>
