@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C-Vision Growth Diagnostic Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral & Tech Blue -->
+    <!-- Application Structure Plan: A single-page narrative application that guides the user through the core problem, visual evidence, and proposed solutions. The structure is thematic: 1) Executive Summary & Diagnosis, 2) Interactive Data Evidence (Search Intent), 3) Visualizing the Bottleneck (Perceptual Map), and 4) The Prescription (Interactive Tabs). This flow was chosen to build a compelling case, starting broad, drilling into the key data, summarizing the problem visually, and then offering clear, actionable steps, making the complex report easily digestible and engaging. -->
+    <!-- Visualization & Content Choices: 1. Search Modifiers -> Goal: Compare brand perception -> Viz: Interactive Bar Chart -> Interaction: Buttons to switch company data -> Justification: Directly visualizes the core problem of search intent misalignment in a dynamic, comparative way that is more impactful than static text. Library: Chart.js. 2. Perceptual Map -> Goal: Visualize competitive positioning -> Viz: Scatter Plot on a quadrant background -> Interaction: Hover tooltips -> Justification: Translates the report's key static visual into a dynamic, canvas-based chart, summarizing the entire competitive landscape effectively. Library: Chart.js. 3. Experiments -> Goal: Organize solutions -> Viz: Tabbed Interface -> Interaction: Click to switch content -> Justification: Condenses detailed text into a user-controlled, digestible format, preventing information overload. Method: HTML/CSS/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfcfb;
+            color: #1f2937;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .active-tab {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        .active-btn {
+            background-color: #3b82f6;
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+        <header class="text-center max-w-4xl mx-auto mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-800 mb-4">Growth Bottleneck Diagnostic Report</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-blue-600">C-Vision: A Market-Brand Fit Analysis</h2>
+        </header>
+
+        <section id="diagnosis" class="mb-12 md:mb-16">
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Diagnosis: Severe Market-Brand Fit Bottleneck</h3>
+                <p class="text-lg text-gray-600 mb-6">
+                    A comprehensive analysis of competitive and audience data reveals the most critical bottleneck hindering C-Vision's growth: a weak **Market-Brand Fit (MBF)**. The data shows a significant disconnect between C-Vision's intended brand as a technology provider and the market's actual perception of it as a recruitment or job-seeking resource. This brand ambiguity is a foundational problem that suppresses performance across all growth functions.
+                </p>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-700">Search Intent Misalignment</h4>
+                        <p class="text-sm text-gray-500">Audience searches for C-Vision are overwhelmingly job-related.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-700">Weak Brand Recall</h4>
+                        <p class="text-sm text-gray-500">Low direct search volume for the company name indicates poor brand awareness.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-700">Audience Context Mismatch</h4>
+                        <p class="text-sm text-gray-500">Engagement is driven by career needs, not interest in B2B solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="evidence" class="mb-12 md:mb-16">
+            <div class="text-center max-w-3xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-2">The Core Evidence: Search Intent</h3>
+                <p class="text-lg text-gray-600 mb-8">
+                    The most compelling evidence of brand misalignment comes from analyzing the terms people search for alongside company names. This data reveals what audiences associate with each brand. Select a company below to see how public perception differs dramatically.
+                </p>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200">
+                <div class="flex justify-center items-center space-x-2 md:space-x-4 mb-6">
+                    <button id="btn-c-vision" class="company-btn active-btn px-4 py-2 text-sm font-medium rounded-full shadow-sm transition-colors duration-200">C-Vision</button>
+                    <button id="btn-evanta" class="company-btn px-4 py-2 text-sm font-medium rounded-full shadow-sm transition-colors duration-200 bg-white text-gray-700 hover:bg-gray-100">Evanta</button>
+                    <button id="btn-argyle" class="company-btn px-4 py-2 text-sm font-medium rounded-full shadow-sm transition-colors duration-200 bg-white text-gray-700 hover:bg-gray-100">Argyle</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="searchModifiersChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="visualization" class="mb-12 md:mb-16">
+            <div class="text-center max-w-3xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-2">Visualizing the Bottleneck</h3>
+                <p class="text-lg text-gray-600 mb-8">
+                    This perceptual map plots each company's brand position based on public search data. C-Vision is isolated in the "Recruitment-Focused" quadrant, far from the ideal B2B "Solution-Focused" zone where its competitors thrive.
+                </p>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200">
+                 <div class="chart-container">
+                    <canvas id="perceptualMap"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="prescription">
+            <div class="text-center max-w-3xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-2">The Prescription: A Path Forward</h3>
+                <p class="text-lg text-gray-600 mb-8">
+                    To fix this core bottleneck, C-Vision must execute a series of learning-oriented experiments designed to fundamentally reposition its brand in the market. The following three experiments provide a strategic starting point.
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="flex border-b border-gray-200 mb-6">
+                    <button data-tab="1" class="tab-btn py-3 px-6 font-semibold text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700 transition-colors duration-200 active-tab">Experiment 1: Content</button>
+                    <button data-tab="2" class="tab-btn py-3 px-6 font-semibold text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700 transition-colors duration-200">Experiment 2: Advertising</button>
+                    <button data-tab="3" class="tab-btn py-3 px-6 font-semibold text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700 transition-colors duration-200">Experiment 3: SEO</button>
+                </div>
+
+                <div id="tab-content-1" class="tab-content bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">High-Value, Solution-Oriented Content Marketing</h4>
+                    <p class="font-semibold text-gray-600 mb-4"><strong>Hypothesis:</strong> By creating and promoting thought-leadership content that directly solves the problems of the Ideal Customer Profile (ICP), we can shift brand perception from "a place to work" to "a source of industry expertise and solutions."</p>
+                    <div class="space-y-4">
+                        <div>
+                            <h5 class="font-bold text-gray-700">Experiment Steps:</h5>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1 mt-2">
+                                <li><strong>ICP Pain Point Identification:</strong> Interview 5-10 ideal customers to deeply understand their challenges.</li>
+                                <li><strong>Pillar Content Creation:</strong> Develop a comprehensive guide, report, or webinar addressing a key ICP pain point.</li>
+                                <li><strong>Content Amplification:</strong> Promote content on LinkedIn, relevant subreddits, and through targeted outreach.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-gray-700">Success Metrics:</h5>
+                             <ul class="list-disc list-inside text-gray-600 space-y-1 mt-2">
+                                <li><strong>Leading Indicators:</strong> Content downloads, webinar sign-ups, social engagement.</li>
+                                <li><strong>Lagging Indicators:</strong> Increase in MQLs from content, qualitative shift in lead-in reasons.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-content-2" class="tab-content hidden bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Targeted LinkedIn Brand Advertising</h4>
+                    <p class="font-semibold text-gray-600 mb-4"><strong>Hypothesis:</strong> We can accelerate brand perception change by running highly targeted ad campaigns on LinkedIn that focus exclusively on our B2B value proposition and key differentiators.</p>
+                     <div class="space-y-4">
+                        <div>
+                            <h5 class="font-bold text-gray-700">Experiment Steps:</h5>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1 mt-2">
+                                <li><strong>ICP Audience Development:</strong> Build a targeted LinkedIn audience based on job titles, industries, and company size.</li>
+                                <li><strong>Ad Creative Development:</strong> Design benefit-driven ads that speak to ICP challenges, avoiding all recruitment language.</li>
+                                <li><strong>A/B Testing:</strong> Test different messaging angles (e.g., ROI-focused vs. technology-focused) to find what resonates.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-gray-700">Success Metrics:</h5>
+                             <ul class="list-disc list-inside text-gray-600 space-y-1 mt-2">
+                                <li><strong>Leading Indicators:</strong> Ad impressions, Click-Through Rate (CTR), website traffic from target ICP.</li>
+                                <li><strong>Lagging Indicators:</strong> Conversion rates on landing pages, new leads generated, improved traffic quality ratio.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-content-3" class="tab-content hidden bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Strategic SEO & Website Messaging Overhaul</h4>
+                    <p class="font-semibold text-gray-600 mb-4"><strong>Hypothesis:</strong> By optimizing our website's messaging and SEO strategy for commercial-intent keywords, we can attract a more qualified audience and improve our rankings for terms that lead to sales conversations.</p>
+                     <div class="space-y-4">
+                        <div>
+                            <h5 class="font-bold text-gray-700">Experiment Steps:</h5>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1 mt-2">
+                                <li><strong>Commercial Keyword Research:</strong> Identify search terms the ICP uses when looking for solutions.</li>
+                                <li><strong>On-Page SEO & Messaging Revamp:</strong> Rewrite homepage and service pages to be customer-centric with clear calls-to-action.</li>
+                                <li><strong>Content Creation for SEO:</strong> Develop new content targeting identified commercial keywords.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-gray-700">Success Metrics:</h5>
+                             <ul class="list-disc list-inside text-gray-600 space-y-1 mt-2">
+                                <li><strong>Leading Indicators:</strong> Improved rankings for commercial keywords, increased organic traffic, lower bounce rates.</li>
+                                <li><strong>Lagging Indicators:</strong> Higher number of organic leads from solution-focused keywords, improved conversion rate.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchModifiersData = {
+                'c-vision': {
+                    labels: ['job', 'remote', 'no degree', 'entry level', 'no experience', 'work from home'],
+                    data: [80.7, 25.2, 21.7, 7.2, 3.7, 3.5],
+                    backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                    borderColor: 'rgba(239, 68, 68, 1)',
+                },
+                'evanta': {
+                    labels: ['events', 'cio', 'summit', 'data', 'marketing', 'ciso'],
+                    data: [1.8, 1.5, 1.3, 1.2, 1.1, 1.0],
+                    backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                },
+                'argyle': {
+                    labels: ['data', 'marketing', 'hr', 'cio', 'cfo', 'events'],
+                    data: [4.4, 1.5, 1.1, 0.9, 0.8, 0.7],
+                    backgroundColor: 'rgba(139, 92, 246, 0.6)',
+                    borderColor: 'rgba(139, 92, 246, 1)',
+                }
+            };
+
+            const modifiersCtx = document.getElementById('searchModifiersChart').getContext('2d');
+            let searchModifiersChart = new Chart(modifiersCtx, {
+                type: 'bar',
+                data: {
+                    labels: searchModifiersData['c-vision'].labels,
+                    datasets: [{
+                        label: 'Search Modifier Affinity',
+                        data: searchModifiersData['c-vision'].data,
+                        backgroundColor: searchModifiersData['c-vision'].backgroundColor,
+                        borderColor: searchModifiersData['c-vision'].borderColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Affinity: ${context.raw}`;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Top Search Modifiers for C-Vision',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Affinity Score'
+                            }
+                        }
+                    }
+                }
+            });
+
+            const companyButtons = document.querySelectorAll('.company-btn');
+            companyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    companyButtons.forEach(btn => btn.classList.remove('active-btn'));
+                    button.classList.add('active-btn');
+                    
+                    const companyId = button.id.split('-')[1];
+                    const companyData = searchModifiersData[companyId];
+                    
+                    searchModifiersChart.data.labels = companyData.labels;
+                    searchModifiersChart.data.datasets[0].data = companyData.data;
+                    searchModifiersChart.data.datasets[0].backgroundColor = companyData.backgroundColor;
+                    searchModifiersChart.data.datasets[0].borderColor = companyData.borderColor;
+                    searchModifiersChart.options.plugins.title.text = `Top Search Modifiers for ${button.textContent}`;
+                    searchModifiersChart.update();
+                });
+            });
+
+            const perceptualMapCtx = document.getElementById('perceptualMap').getContext('2d');
+            const perceptualMap = new Chart(perceptualMapCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'C-Vision',
+                        data: [{x: -80, y: -50}],
+                        backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        pointRadius: 12,
+                        pointHoverRadius: 15
+                    }, {
+                        label: 'Evanta',
+                        data: [{x: 85, y: 80}],
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        pointRadius: 10,
+                        pointHoverRadius: 13
+                    }, {
+                        label: 'Argyle',
+                        data: [{x: 70, y: 60}],
+                        backgroundColor: 'rgba(139, 92, 246, 0.8)',
+                        borderColor: 'rgba(139, 92, 246, 1)',
+                        pointRadius: 10,
+                        pointHoverRadius: 13
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label;
+                                }
+                            }
+                        },
+                        annotation: {
+                            annotations: {
+                                targetZone: {
+                                    type: 'box',
+                                    xMin: 0,
+                                    xMax: 100,
+                                    yMin: 0,
+                                    yMax: 100,
+                                    backgroundColor: 'rgba(74, 222, 128, 0.1)',
+                                    borderColor: 'rgba(74, 222, 128, 0.3)',
+                                    borderWidth: 1,
+                                    borderDash: [6, 6]
+                                },
+                                labelTarget: {
+                                    type: 'label',
+                                    xValue: 50,
+                                    yValue: 50,
+                                    content: 'Target Audience Ideal',
+                                    font: {
+                                        size: 12,
+                                        weight: 'bold'
+                                    },
+                                    color: 'rgba(22, 163, 74, 0.8)'
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            min: -100,
+                            max: 100,
+                            grid: {
+                                drawOnChartArea: false,
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Solution-Focused →',
+                                align: 'end',
+                                font: { size: 14 }
+                            },
+                            afterBuildTicks: (axis) => {
+                                axis.ticks.push({ value: 0, major: true });
+                            }
+                        },
+                        y: {
+                            min: -100,
+                            max: 100,
+                            grid: {
+                                drawOnChartArea: false,
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                display: false
+                            },
+                             title: {
+                                display: true,
+                                text: 'Niche / B2B →',
+                                align: 'end',
+                                font: { size: 14 }
+                            },
+                            afterBuildTicks: (axis) => {
+                                axis.ticks.push({ value: 0, major: true });
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 20,
+                            right: 20
+                        }
+                    }
+                },
+                plugins: [{
+                    id: 'customCanvasBackground',
+                    beforeDraw: (chart) => {
+                        const {ctx, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = chart;
+                        ctx.save();
+                        ctx.font = '12px Inter, sans-serif';
+                        ctx.fillStyle = '#6b7280';
+                        
+                        ctx.textAlign = 'start';
+                        ctx.fillText('← Recruitment-Focused', left, y.getPixelForValue(0) + 15);
+                        
+                        ctx.textAlign = 'center';
+                        ctx.fillText('↓ General / B2C', x.getPixelForValue(0) - 15, bottom);
+
+                        ctx.restore();
+                    }
+                }]
+            });
+            
+            const tabs = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => item.classList.remove('active-tab'));
+                    tab.classList.add('active-tab');
+
+                    const targetTab = tab.getAttribute('data-tab');
+                    
+                    tabContents.forEach(content => {
+                        if (content.id === `tab-content-${targetTab}`) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

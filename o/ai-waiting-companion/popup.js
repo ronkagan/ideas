@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const SUPABASE_URL = "https://cfbwytfyhvdpaptdfnzn.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYnd5dGZ5aHZkcGFwdGRmbnpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgyMDg3MTEsImV4cCI6MjA3Mzc4NDcxMX0.9Ogp9C6X9yAfFWaWvgjUj49bsar-xIb10e5psY5jVKs";
-const API_ENDPOINT = "https://cfbwytfyhvdpaptdfnzn.supabase.co/rest/v1/rpc/register-and-get-stats";
+const API_ENDPOINT = `${SUPABASE_URL}/rest/v1/rpc/register_click_and_get_stats`;
 
 // Function to display a random encouragement message
 function displayEncouragement() {
