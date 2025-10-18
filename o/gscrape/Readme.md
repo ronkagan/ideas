@@ -1,3 +1,15 @@
+# gscrape (example scaffold)
+
+Minimal scaffold demonstrating Places API usage. This is a starting point — extend with exporters, retries, and tests.
+
+Usage
+- Set the API key in environment: `export API_KEY=your_key_here`
+- Run a dry-run: `npm run dry-run`
+- Run a real job: `npm start -- --config config.example.yaml`
+
+Notes
+- Do not check API keys into source control. Use environment variables or secret stores.
+- The textSearch implementation uses the Places Text Search endpoint and paginates using next_page_token.
 # gscrape
 
 Lightweight project for collecting structured place information from Google Maps results for research and analysis.

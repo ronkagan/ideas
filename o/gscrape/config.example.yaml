@@ -1,0 +1,10 @@
+query: "coffee near seattle"
+bounds: null
+max_results: 40
+# requests per minute (used to compute delays). Adjust to respect quotas.
+rate_limit: 60
+# whether to fetch place details (phone, website). Defaults to true.
+request_details: true
+output:
+  path: out.json
+  format: json

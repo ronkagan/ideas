@@ -5,7 +5,8 @@ const yaml = require('js-yaml');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const Places = require('./lib/places');
-const { exportJson } = require('./lib/exporters');
+const { exportJson, exportCsv } = require('./lib/exporters');
+const Storage = require('./lib/storage');
 
 async function main() {
   const argv = yargs(hideBin(process.argv))
@@ -27,7 +28,15 @@ async function main() {
     process.exit(1);
   }
 
-  const client = new Places(apiKey, cfg);
+  const storage = new Storage(path.resolve('gscrape.db'));
+  await storage.init();
+
+  const client = new Places(apiKey, cfg, {
+    incrementApiCall: async () => {
+      await storage.incrementApiCalls();
+    },
+    storage
+  });
   const results = [];
 
   // Simple single-query search for demo purposes
@@ -35,13 +44,19 @@ async function main() {
   console.log('Query:', q);
 
   try {
-    const items = await client.textSearch(q, { bounds: cfg.bounds, maxResults: cfg.max_results || 20 });
+  const items = await client.textSearch(q, { bounds: cfg.bounds, maxResults: cfg.max_results || 20, detailsTopN: cfg.details_top_n });
+  // record that we've run this query
+  await storage.recordQuery(q, items.length);
     console.log('Found', items.length, 'results.');
     if (argv['dry-run']) {
       console.log('Sample result:', items[0]);
     } else {
       const outPath = cfg.output && cfg.output.path ? cfg.output.path : 'out.json';
-      await exportJson(items, outPath);
+      if (cfg.output && cfg.output.format === 'csv') {
+        await exportCsv(items, outPath);
+      } else {
+        await exportJson(items, outPath);
+      }
       console.log('Wrote results to', outPath);
     }
   } catch (e) {
