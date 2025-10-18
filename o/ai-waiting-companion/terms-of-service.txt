@@ -1,0 +1,65 @@
+AI Waiting Companion - Terms of Service
+
+Effective Date: September 30, 2025
+
+These Terms of Service ("Terms") govern your access to and use of the "AI Waiting Companion" Chrome extension and its associated backend services (collectively, the "Service").
+
+By installing or using the Service, you agree to be bound by these Terms. If you do not agree to these Terms, do not install or use the Service.
+
+1. Description of Service
+
+The Service provides users with aggregated, anonymous statistics about how often the Extension is used globally, along with messages of encouragement.
+
+2. License
+
+The Extension's source code is provided under the MIT License. Please refer to the LICENSE file included with the Extension for details.
+
+3. Privacy
+
+Our practices regarding data collection and use are described in our Privacy Policy. By using the Service, you agree to the terms of the Privacy Policy.
+
+4. Acceptable Use Policy
+
+You agree not to use the Service in a manner that:
+
+Overburdens Infrastructure: You shall not intentionally attempt to overload, disrupt, or spam the Service's backend API (e.g., through automated scripts, excessively frequent requests, or denial-of-service attacks).
+
+Compromises Security: You shall not attempt to gain unauthorized access to our servers or database.
+
+Is Unlawful: You shall not use the Service for any illegal or unauthorized purpose.
+
+We reserve the right to implement rate limiting or block access to users who violate this Acceptable Use Policy.
+
+5. Modification and Termination of Service
+
+We reserve the right to modify, suspend, or discontinue the Service (or any part thereof) at any time, with or without notice. You agree that we shall not be liable to you or to any third party for any modification, suspension, or discontinuance of the Service. We may also terminate your access to the Service if you violate these Terms.
+
+6. DISCLAIMER OF WARRANTIES
+
+THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS. YOU EXPRESSLY AGREE THAT USE OF THE SERVICE IS AT YOUR SOLE RISK. WE EXPRESSLY DISCLAIM ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+WE MAKE NO WARRANTY THAT:
+
+THE SERVICE WILL MEET YOUR REQUIREMENTS.
+
+THE SERVICE WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE.
+
+THE RESULTS (INCLUDING AGGREGATED STATISTICS) OBTAINED FROM THE USE OF THE SERVICE WILL BE ACCURATE, COMPLETE, OR RELIABLE.
+
+ANY ERRORS IN THE SOFTWARE OR SERVICE WILL BE CORRECTED.
+
+7. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL WE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES (EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES), RESULTING FROM THE USE OR THE INABILITY TO USE THE SERVICE.
+
+8. Governing Law
+
+These Terms shall be governed by and construed in accordance with the laws of Cuyahoga County, Ohio, The United States of America, without regard to its conflict of law provisions.
+
+9. Changes to These Terms
+
+We reserve the right, at our sole discretion, to modify or replace these Terms at any time. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.
+
+10. Contact Us
+
+If you have any questions about these Terms, please contact us at elevens.cranky_29 icloud.com.

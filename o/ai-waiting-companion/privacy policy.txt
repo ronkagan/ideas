@@ -1,0 +1,60 @@
+Privacy Policy
+AI Waiting Companion - Privacy Policy
+
+Effective Date: September 30, 2025
+
+This Privacy Policy describes how the "AI Waiting Companion" Chrome extension (the "Extension") collects, uses, and handles information. We are committed to protecting user privacy and have designed the Extension to be anonymous by default.
+
+1. Summary
+
+We prioritize your privacy. We do not collect any Personally Identifiable Information (PII). We do not track who you are or where you browse.
+
+2. Information We Collect
+
+The Extension collects only the minimum information necessary to provide its service. When you open the Extension popup, we collect:
+
+Anonymous Timestamp: We record the exact time the Extension popup was opened (e.g., "2025-09-30 05:30:00").
+
+3. Information We DO NOT Collect
+
+We explicitly state that we do NOT collect:
+
+Usernames, email addresses, or account information.
+
+IP Addresses (Note: While the underlying server infrastructure may temporarily log IP addresses for security and abuse prevention, we do not store or associate them with usage timestamps).
+
+Browsing history or the content of the websites you visit.
+
+Device identifiers or location data.
+
+4. How We Use the Information
+
+The collected timestamps are used solely for the following purpose:
+
+Aggregated Statistics: We process these timestamps to calculate the total number of times the extension popup has been opened globally within the last hour, day, week, month, and year. These aggregated statistics are then displayed within the extension to all users to provide a sense of shared experience.
+
+We do not use this data for profiling, advertising, or any other commercial purpose.
+
+5. Data Storage and Third-Party Services
+
+We use a third-party service, Supabase (Supabase, Inc.), to host our backend database and API.
+
+Security: Communication between the Extension and Supabase is encrypted via HTTPS. We rely on Supabase's infrastructure to secure the data against unauthorized access.
+
+Data Sharing: We do not share, sell, rent, or trade the collected timestamps with any third parties, except as necessary to provide the Service (i.e., storage via Supabase).
+
+6. Data Retention
+
+Timestamps are automatically and permanently deleted from our database when they are older than one (1) year.
+
+7. Children's Privacy
+
+The Extension is not directed to individuals under the age of 13. We do not knowingly collect information from children under 13.
+
+8. Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Effective Date" at the top.
+
+9. Contact Us
+
+If you have any questions about this Privacy Policy, please contact us at elevens.cranky_29 icloud.com.
