@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "AI Waiting Companion",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Find comfort knowing others are also waiting for their AI tasks.",
     "action": {
       "default_popup": "popup.html",
