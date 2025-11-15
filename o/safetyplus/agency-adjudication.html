@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Evaluation Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        [role="tab"] {
+            transition: all 0.3s ease;
+        }
+        [role="tab"][aria-selected="true"] {
+            background-color: #059669; /* emerald-600 */
+            color: white;
+            border-color: #059669;
+        }
+        [role="tab"]:not([aria-selected="true"]):hover {
+            background-color: #f0fdf4; /* emerald-50 */
+            border-color: #a7f3d0;
+        }
+        [role="tabpanel"] {
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50vh;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+    <!-- Chosen Palette: "Calm Neutral" (Base: Slate, Gray-50 | Accent: Emerald) -->
+    <!-- Application Structure Plan: The SPA is structured as an interactive dashboard. The primary navigation uses tabs to switch between a 'Comparative Dashboard' and 'Agency Deep Dives'. This dashboard-driven approach was chosen because the user's goal is *comparison* and *selection*. The main dashboard provides a high-level visual (Radar Chart) for quick comparison, while the tabbed deep-dive sections allow the user to explore the specific evidence for each agency against the rubric without losing context. User flow: 1) See high-level comparison. 2) Click tab for Agency A. 3) Review detailed rubric/evidence. 4) Click tab for Agency B. 5) Compare. This is more usable than a long scrolling report. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Comparative scores for 4 agencies across 7 rubric points.
+        - Goal: High-level comparison.
+        - Viz/Presentation: Radar Chart (Chart.js) in a styled canvas container.
+        - Interaction: Hovering tooltips show scores.
+        - Justification: Radar chart is ideal for comparing multiple entities across multiple shared axes (the 7-point rubric).
+        - Library: Chart.js (Canvas).
+        - Report Info: Agency-specific evidence (e.g., pricing, creative examples).
+        - Goal: Detailed drill-down.
+        - Viz/Presentation: Structured HTML/Tailwind sections (cards, lists, tables) for each rubric point.
+        - Interaction: Main tab navigation (JS show/hide) to switch between agency detail views.
+        - Justification: Clear, scannable HTML is best for qualitative text and evidence. Tabbed navigation keeps the single page clean.
+        - Report Info: Creative examples (e.g., Shuntware, Right Percent).
+        - Goal: Showcase creative quality.
+        - Viz/Presentation: Simple HTML `div`s with Tailwind styling to *recreate* the *style* of the ads (e.g., a box with text "HARD -> EASY") instead of using images.
+        - Justification: Adheres to NO SVG/Image constraint while still conveying the creative concept.
+        - Report Info: Metadata.io.
+        - Goal: Clarify its role.
+        - Viz/Presentation: A simple text block in a "Tools" section.
+        - Justification: It's not an agency, so it's separated to avoid confusion. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-gray-50 text-slate-800 leading-relaxed">
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="mb-8">
+            <h1 class="text-4xl font-bold text-slate-900 mb-2">Marketing Agency Evaluation</h1>
+            <p class="text-lg text-slate-600">An interactive dashboard to compare potential marketing partners based on your rubric and provided materials.</p>
+        </header>
+
+        <nav class="mb-6 border-b border-gray-200">
+            <div role="tablist" class="flex flex-wrap -mb-px">
+                <button role="tab" aria-selected="true" data-target="panel-dashboard" class="nav-tab inline-block py-3 px-5 text-sm font-medium text-center text-slate-700 rounded-t-lg border-b-2 border-transparent hover:text-emerald-700">
+                    Comparative Dashboard
+                </button>
+                <button role="tab" aria-selected="false" data-target="panel-gbg" class="nav-tab inline-block py-3 px-5 text-sm font-medium text-center text-slate-700 rounded-t-lg border-b-2 border-transparent hover:text-emerald-700">
+                    GBG
+                </button>
+                <button role="tab" aria-selected="false" data-target="panel-saashero" class="nav-tab inline-block py-3 px-5 text-sm font-medium text-center text-slate-700 rounded-t-lg border-b-2 border-transparent hover:text-emerald-700">
+                    SaaS Hero
+                </button>
+                <button role="tab" aria-selected="false" data-target="panel-rightpercent" class="nav-tab inline-block py-3 px-5 text-sm font-medium text-center text-slate-700 rounded-t-lg border-b-2 border-transparent hover:text-emerald-700">
+                    Right Percent
+                </button>
+                <button role="tab" aria-selected="false" data-target="panel-97thfloor" class="nav-tab inline-block py-3 px-5 text-sm font-medium text-center text-slate-700 rounded-t-lg border-b-2 border-transparent hover:text-emerald-700">
+                    97thFloor
+                </button>
+                <button role="tab" aria-selected="false" data-target="panel-mitch" class="nav-tab inline-block py-3 px-5 text-sm font-medium text-center text-slate-700 rounded-t-lg border-b-2 border-transparent hover:text-emerald-700">
+                    Mitch Cartwright
+                </button>
+                <button role="tab" aria-selected="false" data-target="panel-metadata" class="nav-tab inline-block py-3 px-5 text-sm font-medium text-center text-slate-700 rounded-t-lg border-b-2 border-transparent hover:text-emerald-700">
+                    Metadata.io (Platform + Service)
+                </button>
+            </div>
+        </nav>
+
+        <div id="tab-content">
+            
+            <div role="tabpanel" id="panel-dashboard">
+                <section class="mb-8 p-6 bg-white rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-semibold text-slate-900 mb-4">Comparative Analysis</h2>
+                    <p class="text-slate-600 mb-6">This chart visualizes the top contenders against your 7-point rubric. Scores are estimated from 1 (Weak) to 5 (Strong) based on the provided documents and public information. Use this as a high-level guide before exploring the deep-dive tabs for specific evidence.</p>
+                    <div class="chart-container">
+                        <canvas id="comparisonRadarChart"></canvas>
+                    </div>
+                </section>
+
+                <section class="p-6 bg-white rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-semibold text-slate-900 mb-4">At a Glance: Agency Specialties</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left table-auto">
+                            <thead class="bg-gray-100 text-slate-700 text-sm">
+                                <tr>
+                                    <th class="p-3 font-semibold">Agency</th>
+                                    <th class="p-3 font-semibold">Primary Focus</th>
+                                    <th class="p-3 font-semibold">Best For...</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-3 font-medium text-slate-900">GBG</td>
+                                    <td class="p-3">Full-Service B2B (Industrial)</td>
+                                    <td class="p-3">Complex manufacturing/industrial sales cycles.</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-medium text-slate-900">SaaS Hero</td>
+                                    <td class="p-3">Performance Marketing (SaaS)</td>
+                                    <td class="p-3">Data-driven SaaS companies focused on LP/conversion optimization.</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-medium text-slate-900">Right Percent</td>
+                                    <td class="p-3">B2B Ad Creative</td>
+                                    <td class="p-3">Teams that need to scale high-performing B2B ad creative specifically.</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-medium text-slate-900">97thFloor</td>
+                                    <td class="p-3">Full-Service Digital (Broad)</td>
+                                    <td class="p-3">Enterprise-level, holistic digital marketing (SEO, Content, PPC).</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-medium text-slate-900">Mitch Cartwright</td>
+                                    <td class="p-3">PPC Specialist</td>
+                                    <td class="p-3">Specific, expert-level PPC campaign management.</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-medium text-slate-900">Metadata.io</td>
+                                    <td class="p-3">SaaS Platform + Managed Service</td>
+                                    <td class="p-3">Companies wanting an "all-in-one" tech + service bundle.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <div role="tabpanel" id="panel-gbg" class="hidden">
+                <section class="p-6 bg-white rounded-lg shadow-sm">
+                    <header class="mb-6">
+                        <h2 class="text-3xl font-bold text-slate-900">GBG (goBRANDgo!)</h2>
+                        <p class="text-lg text-slate-600 mt-2"><strong>At a Glance:</strong> A full-service agency specializing in marketing for complex B2B, industrial, and manufacturing companies.</p>
+                        <p class="text-slate-600 mt-4">This analysis is based on the "SafetyPlus Agency Overview," "ShuntwareCampaign Concepts," and "Digital Ad Strategy Pricing" documents. GBG demonstrates a clear, process-driven approach tailored to long sales cycles.</p>
+                    </header>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">🔍 1. Strategic Thinking & Planning</h3>
+                            <p><strong>Score: 5/5.</strong> Their entire pitch is strategy-focused. They explicitly mention "Navigating Complex Marketing Landscapes," "Full Funnel SEO & Content Strategy," and aligning initiatives with "business goals." Their 22+ years in manufacturing shows deep industry understanding.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">📈 2. Performance & Results</h3>
+                            <p><strong>Score: 4/5.</strong> The overview includes a "Sample Marketing Dashboard" showing MQLs and SQLs against goals. They claim to generate "million+ annual marketing-attributed leads" and feature a testimonial from a sales leader about a "consistent source of leads."</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">🧠 3. Expertise & Capabilities</h3>
+                            <p><strong>Score: 5/5.</strong> This is their strongest area. "22+ years specialized in manufacturing, industrial, and complex services." They list a full-time team of 20 specialists and showcase expertise in SEO, content, and lead gen for complex B2B.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">🤝 4. Communication & Collaboration</h3>
+                            <p><strong>Score: 4.5/5.</strong> The pricing doc clearly outlines "Bi-weekly optimization calls" or "Weekly calls" depending on the tier. They commit to "shared dashboards" and "honest communication" as part of their "Commitment to Your Success."</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">💡 5. Creativity & Branding</h3>
+                            <p><strong>Score: 3.5/5.</strong> The "ShuntwareCampaign" doc shows a very structured and iterative creative process. The concepts ("HARD -> EASY," "YARD LIKE A BOSS") are professional, clean, and on-brand for an industrial audience, though not highly "creative" in an artistic sense. It's functional and effective.</p>
+                            <div class="mt-2 p-4 border border-gray-200 rounded-lg bg-gray-50 max-w-sm">
+                                <p class="text-sm text-gray-500 mb-2">Creative Concept Example (Shuntware)</p>
+                                <div class="flex items-center justify-between p-4 bg-white border rounded shadow-md">
+                                    <span class="text-2xl font-bold text-red-600">HARD</span>
+                                    <span class="text-xl font-bold text-gray-400">►►►</span>
+                                    <span class="text-2xl font-bold text-green-600">EASY</span>
+                                </div>
+                                <p class="text-center mt-2 font-semibold">Put your yard ops on EASY MODE</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">💰 6. Pricing & Value</h3>
+                            <p><strong>Score: 5/5.</strong> Extremely transparent. The "Pricing 2025" doc gives clear tiers: a one-time $5,500 onboarding fee, an $8,500/mo tier, and a $12,500/mo tier, with all deliverables for each clearly listed. No ambiguity.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">🧾 7. Client References & Reputation</h3>
+                            <p><strong>Score: 4/5.</strong> The overview doc shows client logos (Paulo, Cope, Cosasco) and boasts a "60%+ client retention rate" with long-term relationships. It includes a strong, relevant testimonial from a sales leader.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div role="tabpanel" id="panel-metadata" class="hidden">
+                <section class="p-6 bg-white rounded-lg shadow-sm">
+                    <header class="mb-6">
+                        <h2 class="text-3xl font-bold text-slate-900">Metadata.io (Platform + Managed Service)</h2>
+                        <p class="text-lg text-slate-600 mt-2"><strong>At a Glance:</strong> This is a hybrid option. The quote is for their core SaaS platform *plus* a "SERVICES PRO" package, which effectively acts as a managed service (like an agency) that builds, manages, and creates for your campaigns *on* their platform.</p>
+                        <p class="text-slate-600 mt-4">This analysis is based on the "metadata-SafetyPlus.io" quote and the "Keyword Audit Executive Summary" which was "Powered by Metadata.io."</p>
+                    </header>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">🔍 1. Strategic Thinking & Planning</h3>
+                            <p><strong>Score: 5/5.</strong> The quote outlines a comprehensive 5-phase plan: 1. Technical Integration, 2. Research & Goal Setting, 3. Action Plan, 4. Ongoing Execution, 5. Ongoing Meetings. This is an extremely thorough, documented strategic approach.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">📈 2. Performance & Results</h3>
+                            <p><strong>Score: 5/5 (Inferred).</strong> Their entire platform and service are built to "move beyond 'leads'" and connect ad spend directly to pipeline and revenue via deep CRM integration. The "Keyword Audit" shows this focus (fixing static conversion values). This is their core value prop.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">🧠 3. Expertise & Capabilities</h3>
+                            <p><strong>Score: 4.5/5.</strong> World-class expertise in their specific platform and the B2B ad-tech ecosystem. The "SERVICES PRO" package gives you a "designated Marketing Strategy Director" and team to run the platform, effectively giving you specialists on their own tech.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">🤝 4. Communication & Collaboration</h3>
+                            <p><strong>Score: 5/5.</strong> The quote *explicitly defines* the communication cadence: "1 Executive Business Review every 3 months," "1 call per Quarter... with Sales Leadership," and "2 Performance calls per month." This is the most transparent communication plan of all options.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">💡 5. Creativity & Branding</h3>
+                            <p><strong>Score: 3.5/5.</strong> The "SERVICES PRO" package *includes* creative. The quote specifies: "One included creative package: Designing high-quality Static Ad Creatives... 16 total images. 4 concepts and 4 variations." and "Crafting compelling copy..." This is a solid, process-driven creative offering.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">💰 6. Pricing & Value</h3>
+                            <p><strong>Score: 5/5.</strong> Perfectly transparent. The quote breaks it down:
+                                <ul class="list-disc list-inside mt-2 ml-4 text-slate-700">
+                                    <li><strong>SERVICES PRO (Managed Service):</strong> \$4,000.00 / month</li>
+                                    <li><strong>Campaigns - Agency Plan (Platform Fee):</strong> \$9,900.00 / quarter (or \$3,300 / month)</li>
+                                    <li><strong>Total Monthly Cost:</strong> \$7,300.00</li>
+                                    <li><strong>Total Contract Value (Annual):</strong> \$87,600.00</li>
+                                </ul>
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">🧾 7. Client References & Reputation</h3>
+                            <p><strong>Score: 4/5.</strong> Metadata.io is a well-known and respected leader in the B2B MarTech space. The fact that other high-performance agencies (like SaaS Hero, who used it for your audit) build services *on top* of their tech speaks to its strong reputation.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('[role="tab"]');
+            const panels = document.querySelectorAll('[role="tabpanel"]');
+
+            function handleTabClick(event) {
+                panels.forEach(panel => {
+                    panel.classList.add('hidden');
+                });
+                
+                tabs.forEach(tab => {
+                    tab.setAttribute('aria-selected', 'false');
+                    tab.classList.remove('text-emerald-600', 'border-emerald-600');
+                    tab.classList.add('text-slate-700', 'border-transparent');
+                });
+                
+                const targetPanel = document.getElementById(event.currentTarget.dataset.target);
+                targetPanel.classList.remove('hidden');
+                
+                event.currentTarget.setAttribute('aria-selected', 'true');
+                event.currentTarget.classList.add('text-emerald-600', 'border-emerald-600');
+                event.currentTarget.classList.remove('text-slate-700', 'border-transparent');
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', handleTabClick);
+            });
+
+            const radarData = {
+                labels: [
+                    '🔍 Strategy',
+                    '📈 Performance',
+                    '🧠 Expertise',
+                    '🤝 Communication',
+                    '💡 Creativity',
+                    '💰 Pricing',
+                    '🧾 Reputation'
+                ],
+                datasets: [
+                    {
+                        label: 'GBG',
+                        data: [5, 4, 5, 4.5, 3.5, 5, 4],
+                        fill: true,
+                        backgroundColor: 'rgba(217, 70, 239, 0.2)',
+                        borderColor: 'rgb(217, 70, 239)',
+                        pointBackgroundColor: 'rgb(217, 70, 239)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(217, 70, 239)'
+                    },
+                    {
+                        label: 'SaaS Hero',
+                        data: [5, 5, 4, 4, 3, 4.5, 4],
+                        fill: true,
+                        backgroundColor: 'rgba(5, 150, 105, 0.2)',
+                        borderColor: 'rgb(5, 150, 105)',
+                        pointBackgroundColor: 'rgb(5, 150, 105)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(5, 150, 105)'
+                    },
+                    {
+                        label: 'Right Percent',
+                        data: [4.5, 3, 4, 2, 5, 2, 3.5],
+                        fill: true,
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    },
+                     {
+                        label: '97thFloor',
+                        data: [4, 4.5, 4.5, 3, 4, 2, 5],
+                        fill: true,
+                        backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                        borderColor: 'rgb(249, 115, 22)',
+                        pointBackgroundColor: 'rgb(249, 115, 22)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(249, 115, 22)'
+                    },
+                    {
+                        label: 'Metadata.io',
+                        data: [5, 5, 4.5, 5, 3.5, 5, 4],
+                        fill: true,
+                        backgroundColor: 'rgba(225, 29, 72, 0.2)',
+                        borderColor: 'rgb(225, 29, 72)',
+                        pointBackgroundColor: 'rgb(225, 29, 72)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(225, 29, 72)'
+                    }
+                ]
+            };
+            
+            const radarConfig = {
+                type: 'radar',
+                data: radarData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            min: 0,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1,
+                                backdropColor: 'rgba(255, 255, 255, 0.05)',
+                                color: '#475569',
+                                font: {
+                                    weight: '500'
+                                }
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 13,
+                                    weight: '600'
+                                },
+                                color: '#0f172a'
+                            },
+                            grid: {
+                                color: '#e2e8f0'
+                            },
+                            angleLines: {
+                                color: '#e2e8f0'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    weight: '500'
+                                },
+                                color: '#334155'
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#0f172a',
+                            titleFont: {
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                weight: '500'
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.r !== null) {
+                                        label += context.parsed.r.toFixed(1);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            const ctx = document.getElementById('comparisonRadarChart').getContext('2d');
+            new Chart(ctx, radarConfig);
+
+            document.querySelector('[role="tab"]').click();
+        });
+    </script>
+</body>
+</html>
+
+
