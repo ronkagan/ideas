@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Last Abstraction</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Code, words, and the lived ground of meaning — why speaking apps into existence feels like felt fact, and why LLMs caught fire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf7f1;
+    --ink:#211d16;
+    --ink-soft:#6a6355;
+    --line:rgba(33,29,22,.16);
+    --accent:#a4511e;
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#161310;
+      --ink:#e9e2d4;
+      --ink-soft:#a89e8c;
+      --line:rgba(233,226,212,.18);
+      --accent:#e08a4f;
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--serif);
+    font-size:clamp(17.5px,1.1vw + 14px,19.5px);
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--accent);color:var(--paper)}
+  .wrap{max-width:41rem;margin:0 auto;padding:clamp(32px,7vw,88px) 24px 110px}
+
+  header .kicker{
+    font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:.3em;text-transform:uppercase;color:var(--accent);
+  }
+  h1{
+    margin:.45em 0 0;
+    font-weight:600;font-size:clamp(38px,6.5vw,56px);
+    line-height:1.04;letter-spacing:-.022em;
+  }
+  .sub{
+    margin:.7em 0 0;font-style:italic;font-weight:400;
+    font-size:clamp(19px,2.4vw,22px);line-height:1.5;color:var(--ink-soft);
+  }
+  .byline{
+    margin-top:2.2em;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  .byline .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-soft);flex:none}
+  header{padding-bottom:2.6em;border-bottom:1px solid var(--line);margin-bottom:3.2em}
+
+  section{margin-top:3.6em}
+  .num{
+    font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:.3em;color:var(--accent);text-transform:uppercase;
+  }
+  h2{
+    margin:.4em 0 1em;font-weight:600;
+    font-size:clamp(23px,3vw,27px);line-height:1.2;letter-spacing:-.012em;
+  }
+  p{margin:0 0 1.4em}
+  em{font-style:italic}
+
+  .open::first-letter{
+    float:left;
+    font-size:3.1em;line-height:.86;
+    padding:.06em .12em 0 0;
+    font-weight:500;color:var(--accent);
+  }
+
+  .pull{
+    margin:2.4em 0;padding:.2em 0 .2em 1.5em;
+    border-left:2px solid var(--accent);
+    font-style:italic;font-weight:500;
+    font-size:clamp(21px,2.8vw,25px);line-height:1.45;
+  }
+
+  figure.ladder{margin:2.6em 0;padding:1.7em 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rungs{
+    font-family:var(--mono);font-size:clamp(11.5px,1.5vw,13px);
+    line-height:2.1;letter-spacing:.02em;color:var(--ink-soft);
+    word-spacing:.1em;
+  }
+  .rungs .arrow{color:var(--accent);padding:0 .2em}
+  .rungs .end{color:var(--accent);font-weight:600}
+  figcaption{
+    margin-top:1em;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+  }
+
+  .fin{color:var(--accent);font-family:var(--mono);font-size:.8em;padding-left:.35em}
+
+  footer{
+    margin-top:5em;padding-top:2em;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+  footer a:hover{color:var(--accent);border-color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Ideas · Essay</div>
+  <h1>The Last Abstraction</h1>
+  <p class="sub">Code, words, and the lived ground of meaning — or, why speaking apps into existence feels less abstract than anything that came before it.</p>
+  <div class="byline">
+    <span>Ron Kagan</span><span class="dot"></span><span>July 2026</span><span class="dot"></span><span>8 min</span>
+  </div>
+</header>
+
+<article>
+
+<section>
+  <div class="num">I</div>
+  <h2>The paradox</h2>
+
+  <p class="open">Coding has been on a long journey from abstraction to felt fact — and, strangely, it got there by abstracting harder.</p>
+
+  <p>The history of programming is usually told as a climb. First we set voltages by hand. Then we punched holes that stood for the voltages, wrote mnemonics that stood for the holes, built compilers that stood for the mnemonics, then languages that let us pretend memory was infinite and the machine was patient. Every rung was denounced by the rung below it. Real programmers wrote assembly; garbage collection was for people who couldn&rsquo;t be trusted with pointers; Python was too slow to be serious. And at the top of the ladder today sits the least serious layer of all: you just say what you want. We speak apps into existence.</p>
+
+  <figure class="ladder">
+    <div class="rungs">voltages <span class="arrow">→</span> punched cards <span class="arrow">→</span> mnemonics <span class="arrow">→</span> compilers <span class="arrow">→</span> managed languages <span class="arrow">→</span> frameworks <span class="arrow">→</span> autocomplete <span class="arrow">→</span> <span class="end">conversation</span></div>
+    <figcaption>Each rung: further from the machine, closer to the person</figcaption>
+  </figure>
+
+  <p>Each denunciation had the same form: <em>you&rsquo;re moving away from what&rsquo;s really happening.</em> But away from whom? Every step away from the machine was a step toward the person. Abstraction in computing never meant abstraction from us; it meant abstraction from <em>it</em>. Layer by layer we removed the machine-shaped details — registers, addresses, allocation, syntax — until what remained was human-shaped. Run that process to its limit and you arrive at the one medium that was never a notation at all: ordinary speech.</p>
+
+  <p>That is why speaking an app into existence doesn&rsquo;t feel abstract. Assembly was concrete to the machine and abstract to me. A sentence is the reverse: so abstract to the machine that it takes a datacenter to interpret, and utterly concrete to me, because I have been using sentences to make things happen since before I could tie my shoes.</p>
+
+  <div class="pull">Concreteness was never a property of the layer. It is a property of whose life the layer resembles.</div>
+
+  <p>The tower of abstraction, built high enough, comes out at the body.</p>
+</section>
+
+<section>
+  <div class="num">II</div>
+  <h2>Words and numbers</h2>
+
+  <p>But why here? Machines have been outperforming us for decades — arithmetic, chess, Go, protein folding — and none of it caught fire like this. Spreadsheets changed the world and nobody felt spoken to. I would say the reason LLMs ignited the way they did is that words are not just bits.</p>
+
+  <p>A number&rsquo;s meaning is structural. Seven is defined by its neighbors — one more than six, one less than eight — and exhausted by its role in the system. Nothing of you sticks to it. Your seven and my seven are the same seven, and that anonymity is precisely what makes numbers good for engineering: meaning with the life scrubbed off, portable across any speaker, any century, any planet.</p>
+
+  <p>A word&rsquo;s meaning is biographical. <em>Home</em> is not defined by its neighbors in any formal system; it is defined by staircases and smells and the specific quality of light in a kitchen you may never see again. <em>Winter</em> means differently in Helsinki and in Haifa. Words have referents, and the referents are attached to experiences — not incidentally, the way a price tag is attached to a jacket, but constitutively. Living is what encodes the meaning of words. A dictionary doesn&rsquo;t contain meanings; it gestures toward the experiences where meanings are kept.</p>
+
+  <p>Strip the experiences away and words go dead — sound without significance, which is to say, not really words at all. Push on this and you land in Wittgenstein&rsquo;s territory: the private language argument. It is usually wheeled out in the other direction — against the idea that meaning lives <em>inside</em>. A word whose correct use only I could verify, he argued, has no correct use: whatever seems right to me will be right, and that only means that here we can&rsquo;t talk about &ldquo;right.&rdquo; Meaning can&rsquo;t be a private glow in one skull. It has to live in shared use — in the games a community plays with a word, everyone keeping score on everyone else.</p>
+
+  <p>So the claim survives, but sharpened: words are lived, yes — lived <em>together</em>. Meaning is communal property, maintained by billions of speakers and corrected in every conversation. No single life is enough to mean anything.</p>
+
+  <p>And that is the loophole through which the machines got in.</p>
+</section>
+
+<section>
+  <div class="num">III</div>
+  <h2>The fossil record</h2>
+
+  <p>If meaning were private experience, training on text would yield nothing. Text would be shadow — marks left by inner lights no one else can access, and the model a cargo cult of syntax. But if meaning is public use, then the corpus is not shadow at all. It is the fossil record of use: the largest deposit of language games ever assembled. Every sentence in it was produced by someone in the middle of a life, trying to do something to someone else in the middle of theirs — persuade, comfort, sell, seduce, apologize, warn. Text is what living leaves behind.</p>
+
+  <p>A language model is a compression of that record. What it learns is not the world; it is the world as lived and told. When it speaks, it speaks with borrowed meaning — meaning on loan from everyone whose usage it distills.</p>
+
+  <p>Which explains the magic and the failure in a single stroke. The magic: its sentences arrive already soaked in significance, because significance is exactly what the training data was made of. The failure: wherever telling diverges from living, the model can&rsquo;t feel the difference. It knows <em>grief</em> the way you know a city you have never visited — fluently, from the accounts of others, the map assembled from a billion journeys of which it has taken none. Hallucination isn&rsquo;t a glitch in the compression; it is what speech sounds like when nothing was ever at stake for the speaker.</p>
+</section>
+
+<section>
+  <div class="num">IV</div>
+  <h2>Why the fire caught</h2>
+
+  <p>Deep Blue beat Kasparov and it was a headline. AlphaGo beat Lee Sedol and it was a documentary. Extraordinary, and containable — victories inside the machine&rsquo;s own ontology: formal, positional, anonymous. Nobody&rsquo;s sense of reality wobbled, because nobody lives in chess.</p>
+
+  <p>Then a machine spoke in the first person, and everything wobbled.</p>
+
+  <p>For seventy years, humans did all the commuting. We crossed to the machine&rsquo;s side of the table and learned its formalisms — &ldquo;learning to code&rdquo; always meant exactly that crossing. LLMs reversed the traffic. The machine crossed to our side, and it arrived speaking. And speech is not an interface we evaluate from the outside; it is the medium in which we became selves in the first place. You cannot receive a sentence as mere bits. &ldquo;I understand how hard that must be&rdquo; lands carrying every time anyone ever said it to you. The words come pre-soaked, and no act of will can dry them out.</p>
+
+  <p>We call this the ELIZA effect, as if it were a glitch in the user. But it is not that we are fooled into treating words as lived. It is that, for us, there is no other way words can be. The grounding the machine lacks, the reader supplies — instantly, involuntarily, out of a lifetime of referents. The current of meaning runs through us; we close the loop. Whatever meaning circulates between human and model routes through human lives at both ends: deposited in the corpus long ago, or supplied fresh, right now, by the person reading.</p>
+</section>
+
+<section>
+  <div class="num">V</div>
+  <h2>Felt fact</h2>
+
+  <p>In 1985, Peter Naur argued that a program isn&rsquo;t really its code. The program proper is the <em>theory</em> of it — the living understanding, held by the people who built it, of how the software and the world fit together. The code is just that theory&rsquo;s notation, and when the people leave, the program dies, however perfectly the text is preserved.</p>
+
+  <p>Seen from here, what happened recently is not that machines acquired language. It is that the translation gap closed. We always kept the theory in one medium — life, talk, intention — and expressed it in another, by hand, lossily, at great expense. Now the medium of the theory and the medium of the making are converging into one. The wish and the world sit closer together than they have ever been.</p>
+
+  <p>That is what felt fact means. Not that software became simple, but that making it stopped requiring an ontology transplant. The loop from intention to running thing tightened until building began to feel the way words have always felt: immediate, consequential, mine.</p>
+
+  <p>The ladder of abstraction was never climbing away from the ground. It was the machine&rsquo;s long climb down — rung by rung, out of the voltages, through the notations, into the place where we already live. And on the bottom rung it found the least abstract thing there is: a life, speaking. Words with lives attached — which is the only kind there are.<span class="fin">∎</span></p>
+</section>
+
+</article>
+
+<footer>
+  <span>Ron Kagan · Ideas</span>
+  <a href="https://www.linkedin.com/in/ronykagan" rel="noopener">LinkedIn ↗</a>
+</footer>
+
+</div>
+</body>
+</html>
