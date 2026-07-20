@@ -1,0 +1,795 @@
+<!doctype html>
+<!--
+  Accountant Community Director — KPI Concept Dashboard
+  A conversation artifact for a role-definition discussion. All data illustrative.
+  Single self-contained file: no external requests, no build step, no localStorage.
+  Built from the four-family framework:
+    1. Relationships (OWNED)  2. Referred growth (INFLUENCED — reported, never targeted)
+    3. Field intelligence (OWNED)  4. Community reach (OWNED)
+  Vocabulary: firms, firm dashboards, referred client businesses, enrollments, billed.
+  Depth weights (2/5/10) are a lens, not a quota. Churn delta is illustrative until
+  the CRM cohort pull (accountant-managed vs self-serve) is made.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accountant Community — KPI Concept</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --baseline:#c3c2b7; --ring:rgba(11,11,11,0.10);
+    --s1:#2a78d6; --s2:#008300; --s3:#e87ba4; --s4:#eda100;
+    --ord1:#2a78d6; --ord2:#5598e7; --ord3:#86b6ef;
+    --good-text:#006300; --accent:#1c5cab; --accent-ink:#ffffff;
+    --chip:#f0efec; --hero:#eef4fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --grid:#2c2c2a; --baseline:#383835; --ring:rgba(255,255,255,0.10);
+      --s1:#3987e5; --s2:#008300; --s3:#d55181; --s4:#c98500;
+      --ord1:#3987e5; --ord2:#2a78d6; --ord3:#1c5cab;
+      --good-text:#0ca30c; --accent:#3987e5; --accent-ink:#0b0b0b;
+      --chip:#242423; --hero:#16202d;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --baseline:#383835; --ring:rgba(255,255,255,0.10);
+    --s1:#3987e5; --s2:#008300; --s3:#d55181; --s4:#c98500;
+    --ord1:#3987e5; --ord2:#2a78d6; --ord3:#1c5cab;
+    --good-text:#0ca30c; --accent:#3987e5; --accent-ink:#0b0b0b;
+    --chip:#242423; --hero:#16202d;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; padding:0; }
+  body {
+    background:var(--page); color:var(--ink);
+    font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app { display:flex; min-height:100vh; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    width:218px; flex:0 0 218px; padding:20px 14px; border-right:1px solid var(--ring);
+    display:flex; flex-direction:column; gap:6px; position:sticky; top:0; height:100vh;
+  }
+  .brand { padding:2px 8px 14px; }
+  .brand b { font-size:15px; display:block; }
+  .brand span { font-size:12px; color:var(--muted); }
+  .navbtn {
+    display:block; width:100%; text-align:left; border:0; background:none; color:var(--ink-2);
+    font:inherit; font-weight:600; padding:9px 10px; border-radius:8px; cursor:pointer;
+  }
+  .navbtn:hover { background:var(--chip); }
+  .navbtn[aria-current="true"] { background:var(--accent); color:var(--accent-ink); }
+  .nav .spacer { flex:1; }
+  .navnote { font-size:11.5px; color:var(--muted); padding:0 10px 8px; }
+  .themebtn {
+    border:1px solid var(--ring); background:var(--surface); color:var(--ink-2);
+    font:inherit; font-size:12.5px; font-weight:600; padding:7px 10px; border-radius:8px; cursor:pointer;
+  }
+
+  /* ---------- main ---------- */
+  main { flex:1; padding:22px 26px 60px; max-width:1220px; }
+  header.page { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+  header.page h1 { font-size:20px; margin:0; }
+  .draftchip {
+    font-size:11px; font-weight:700; letter-spacing:.04em; color:var(--ink-2);
+    border:1px solid var(--ring); border-radius:999px; padding:3px 9px; background:var(--chip);
+  }
+  .asof { font-size:12px; color:var(--muted); }
+  .sentence {
+    background:var(--surface); border:1px solid var(--ring); border-radius:12px;
+    padding:12px 16px; margin:12px 0 18px; color:var(--ink-2); font-size:14.5px;
+  }
+  .sentence b { color:var(--ink); }
+
+  /* ---------- cards ---------- */
+  .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .card {
+    background:var(--surface); border:1px solid var(--ring); border-radius:12px;
+    padding:14px 16px; position:relative; display:flex; flex-direction:column; gap:8px;
+  }
+  .card .fam { display:flex; align-items:center; gap:8px; }
+  .fam h3 { font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-2); margin:0; }
+  .own {
+    font-size:10px; font-weight:800; letter-spacing:.05em; border-radius:5px; padding:2px 6px;
+  }
+  .own.owned { color:var(--accent-ink); background:var(--accent); }
+  .own.infl  { color:var(--ink-2); background:var(--chip); border:1px solid var(--ring); }
+  .big { font-size:27px; font-weight:750; line-height:1.1; }
+  .big small { font-size:14px; font-weight:600; color:var(--ink-2); }
+  .delta { font-size:12.5px; font-weight:700; color:var(--good-text); }
+  .micros { font-size:12.5px; color:var(--ink-2); display:flex; flex-direction:column; gap:3px; }
+  .micros b { color:var(--ink); font-weight:650; }
+  .info {
+    position:absolute; top:10px; right:10px; width:20px; height:20px; border-radius:50%;
+    border:1px solid var(--ring); background:none; color:var(--muted); font-size:12px; font-weight:700;
+    cursor:pointer; line-height:1;
+  }
+  .info:hover { color:var(--ink); border-color:var(--ink-2); }
+  .funnel { display:flex; flex-direction:column; gap:4px; margin-top:2px; }
+  .funnel .frow { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-2); }
+  .funnel .fbar { height:10px; border-radius:4px; }
+  .funnel .fval { font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
+
+  /* ---------- churn hero ---------- */
+  .heroCard {
+    margin-top:12px; background:var(--hero); border:1px solid var(--ring); border-radius:12px;
+    padding:16px 18px; position:relative;
+  }
+  .heroCard .fam h3 { color:var(--ink-2); }
+  .heroRow { display:flex; gap:28px; align-items:flex-end; flex-wrap:wrap; margin-top:6px; }
+  .heroNum .n { font-size:34px; font-weight:800; line-height:1; }
+  .heroNum .l { font-size:12.5px; color:var(--ink-2); margin-top:4px; }
+  .heroDelta { font-size:14px; font-weight:800; color:var(--good-text); padding-bottom:6px; }
+  .heroNote { font-size:12.5px; color:var(--ink-2); margin-top:10px; }
+  .heroNote b { color:var(--ink); }
+
+  /* ---------- charts ---------- */
+  .charts { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; }
+  .chart { background:var(--surface); border:1px solid var(--ring); border-radius:12px; padding:14px 16px; position:relative; }
+  .chart.wide { grid-column:1 / -1; }
+  .chart h3 { font-size:13.5px; margin:0 0 2px; }
+  .chart .sub { font-size:12px; color:var(--muted); margin-bottom:8px; }
+  .chart svg { display:block; width:100%; height:auto; }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-2); margin-top:8px; }
+  .legend .sw { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
+  details.tbl { margin-top:8px; font-size:12px; color:var(--ink-2); }
+  details.tbl summary { cursor:pointer; color:var(--muted); }
+  details.tbl table { border-collapse:collapse; margin-top:6px; font-variant-numeric:tabular-nums; }
+  details.tbl td, details.tbl th { border:1px solid var(--grid); padding:3px 8px; text-align:left; }
+
+  /* ---------- ROI strip ---------- */
+  .roi {
+    margin-top:12px; background:var(--surface); border:1px dashed var(--baseline); border-radius:12px;
+    padding:12px 16px; font-size:13.5px; color:var(--ink-2);
+  }
+  .roi b { color:var(--ink); }
+  .roi .foot { font-size:12px; color:var(--muted); margin-top:4px; }
+
+  /* ---------- logger ---------- */
+  .logwrap { display:grid; grid-template-columns:minmax(300px,460px) 1fr; gap:14px; margin-top:14px; }
+  form.logger { background:var(--surface); border:1px solid var(--ring); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:12px; }
+  form.logger label { font-size:12px; font-weight:700; color:var(--ink-2); display:block; margin-bottom:4px; }
+  form.logger select, form.logger input[type=date], form.logger textarea {
+    width:100%; font:inherit; color:var(--ink); background:var(--page);
+    border:1px solid var(--baseline); border-radius:8px; padding:8px 10px;
+  }
+  form.logger textarea { min-height:74px; resize:vertical; }
+  .radios { display:flex; flex-direction:column; gap:6px; }
+  .radios label.r { display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:500; color:var(--ink); border:1px solid var(--ring); border-radius:8px; padding:8px 10px; cursor:pointer; margin:0; }
+  .radios label.r:has(input:checked) { border-color:var(--accent); background:var(--hero); }
+  .radios .pts { margin-left:auto; font-size:12px; font-weight:800; color:var(--accent); }
+  .submit {
+    font:inherit; font-weight:750; background:var(--accent); color:var(--accent-ink);
+    border:0; border-radius:9px; padding:11px 14px; cursor:pointer; font-size:15px;
+  }
+  .lognote { font-size:12px; color:var(--muted); }
+  .recent { background:var(--surface); border:1px solid var(--ring); border-radius:12px; padding:14px 16px; }
+  .recent h3 { font-size:13.5px; margin:0 0 8px; }
+  .recent .row { display:flex; gap:10px; align-items:baseline; padding:7px 0; border-top:1px solid var(--grid); font-size:13px; }
+  .recent .row:first-of-type { border-top:0; }
+  .recent .firm { font-weight:650; }
+  .recent .type { color:var(--ink-2); }
+  .recent .d { margin-left:auto; color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .recent .pts { font-weight:800; color:var(--accent); }
+  .toast {
+    position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+    background:var(--ink); color:var(--page); font-size:13px; font-weight:600;
+    padding:9px 16px; border-radius:999px; opacity:0; pointer-events:none; transition:opacity .25s;
+  }
+  .toast.show { opacity:1; }
+
+  /* ---------- directory ---------- */
+  .dirbar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:14px 0 10px; }
+  .dirbar input[type=search] {
+    font:inherit; color:var(--ink); background:var(--surface); border:1px solid var(--baseline);
+    border-radius:8px; padding:8px 12px; min-width:220px;
+  }
+  .tchip {
+    font:inherit; font-size:12.5px; font-weight:650; color:var(--ink-2); background:var(--surface);
+    border:1px solid var(--ring); border-radius:999px; padding:6px 12px; cursor:pointer;
+  }
+  .tchip[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  table.dir { width:100%; border-collapse:collapse; background:var(--surface); border:1px solid var(--ring); border-radius:12px; overflow:hidden; }
+  table.dir th {
+    text-align:left; font-size:11.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);
+    padding:10px 12px; border-bottom:1px solid var(--grid); font-weight:700;
+  }
+  table.dir td { padding:10px 12px; border-bottom:1px solid var(--grid); font-size:13.5px; vertical-align:middle; }
+  table.dir tr:last-child td { border-bottom:0; }
+  .fname { font-weight:650; }
+  .fcontact { font-size:12px; color:var(--muted); }
+  .tier {
+    font-size:11px; font-weight:700; border:1px solid var(--ring); border-radius:999px;
+    padding:2.5px 9px; color:var(--ink-2); background:var(--chip); white-space:nowrap;
+  }
+  .stack { display:flex; gap:4px; flex-wrap:wrap; }
+  .stack span { font-size:11px; color:var(--ink-2); border:1px solid var(--grid); border-radius:5px; padding:1.5px 6px; }
+  td.num { font-variant-numeric:tabular-nums; font-weight:650; }
+  .momo { display:flex; align-items:center; gap:8px; }
+  .momo .mv { font-variant-numeric:tabular-nums; font-weight:700; min-width:2.2em; text-align:right; }
+  .quiet { color:var(--muted); font-size:11.5px; }
+
+  /* ---------- popover & tooltip ---------- */
+  #pop {
+    position:fixed; z-index:40; max-width:300px; background:var(--surface); color:var(--ink);
+    border:1px solid var(--ring); border-radius:10px; box-shadow:0 8px 28px rgba(0,0,0,.16);
+    padding:12px 14px; font-size:12.5px; display:none;
+  }
+  #pop h4 { margin:0 0 6px; font-size:12.5px; }
+  #pop p { margin:0 0 6px; color:var(--ink-2); }
+  #pop p b { color:var(--ink); }
+  #pop p:last-child { margin:0; }
+  #tip {
+    position:fixed; z-index:50; pointer-events:none; background:var(--ink); color:var(--page);
+    font-size:12px; font-weight:600; padding:6px 9px; border-radius:7px; display:none; white-space:nowrap;
+  }
+  footer.note { margin-top:22px; font-size:12px; color:var(--muted); max-width:70ch; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:1100px) { .cards { grid-template-columns:1fr 1fr; } }
+  @media (max-width:880px) {
+    .app { flex-direction:column; }
+    .nav { width:auto; flex:none; height:auto; position:static; flex-direction:row; align-items:center; border-right:0; border-bottom:1px solid var(--ring); padding:10px 12px; overflow-x:auto; }
+    .brand { padding:0 8px; white-space:nowrap; }
+    .brand span { display:none; }
+    .navbtn { width:auto; white-space:nowrap; padding:8px 10px; }
+    .nav .spacer { display:none; }
+    .navnote { display:none; }
+    main { padding:16px 14px 50px; }
+    .charts { grid-template-columns:1fr; }
+    .logwrap { grid-template-columns:1fr; }
+  }
+  @media (max-width:640px) { .cards { grid-template-columns:1fr; } .heroRow { gap:16px; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="nav">
+    <div class="brand"><b>Accountant Community</b><span>KPI concept · Community Director</span></div>
+    <button class="navbtn" data-view="overview" aria-current="true">Impact overview</button>
+    <button class="navbtn" data-view="log">Log an interaction</button>
+    <button class="navbtn" data-view="directory">Firm directory</button>
+    <div class="spacer"></div>
+    <div class="navnote">A conversation artifact, not software. Every number is illustrative; every ⓘ says what the real version would wire to.</div>
+    <button class="themebtn" id="themeBtn">◐ Dark / light</button>
+  </aside>
+
+  <main>
+    <!-- ================= OVERVIEW ================= -->
+    <section id="view-overview">
+      <header class="page">
+        <h1>Impact overview</h1>
+        <span class="draftchip">DRAFT — FOR DISCUSSION</span>
+        <span class="asof">Illustrative data · as of Jul 20, 2026</span>
+      </header>
+      <div class="sentence" id="quarterSentence"></div>
+      <div class="cards" id="cards"></div>
+      <div class="heroCard" id="heroCard"></div>
+      <div class="charts">
+        <div class="chart wide" id="chart-depth"></div>
+        <div class="chart" id="chart-tier"></div>
+        <div class="chart" id="chart-donut"></div>
+      </div>
+      <div class="roi" id="roi"></div>
+      <footer class="note">
+        Vocabulary: firms · firm dashboards · referred client businesses · enrollments · billed.
+        Depth weights (2 / 5 / 10) are a lens on where time goes — <b>not a quota</b>.
+        Referred-growth numbers are reported here but targeted by partner sales; that separation is what keeps this role credible in the field.
+      </footer>
+    </section>
+
+    <!-- ================= LOGGER ================= -->
+    <section id="view-log" hidden>
+      <header class="page">
+        <h1>Log an interaction</h1>
+        <span class="draftchip">60-SECOND HABIT</span>
+      </header>
+      <div class="logwrap">
+        <form class="logger" id="logForm">
+          <div>
+            <label for="f-firm">Firm</label>
+            <select id="f-firm" required></select>
+          </div>
+          <div>
+            <label for="f-date">Date</label>
+            <input type="date" id="f-date" required>
+          </div>
+          <div>
+            <label>Interaction type</label>
+            <div class="radios" id="f-types"></div>
+          </div>
+          <div>
+            <label for="f-note">Field note / insight (optional)</label>
+            <textarea id="f-note" placeholder="What did you hear that OnPay should know?"></textarea>
+          </div>
+          <div>
+            <label for="f-route">Routing</label>
+            <select id="f-route">
+              <option>Logged</option>
+              <option>Sent to Product</option>
+              <option>Implemented</option>
+              <option>No action needed</option>
+            </select>
+          </div>
+          <button class="submit" type="submit">Log interaction</button>
+          <div class="lognote">Sixty seconds, tops. Entries live in this browser session only — the real version wires to the CRM and updates every chart you just saw.</div>
+        </form>
+        <div class="recent">
+          <h3>Recent interactions</h3>
+          <div id="recentList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DIRECTORY ================= -->
+    <section id="view-directory" hidden>
+      <header class="page">
+        <h1>Firm directory</h1>
+        <span class="asof" id="dirCount"></span>
+      </header>
+      <div class="dirbar">
+        <input type="search" id="dirSearch" placeholder="Search firm or contact…">
+        <button class="tchip" data-tier="all" aria-pressed="true">All tiers</button>
+        <button class="tchip" data-tier="National Thought Leader" aria-pressed="false">National Thought Leader</button>
+        <button class="tchip" data-tier="Regional Specialist" aria-pressed="false">Regional Specialist</button>
+        <button class="tchip" data-tier="Community Practitioner" aria-pressed="false">Community Practitioner</button>
+      </div>
+      <table class="dir">
+        <thead><tr>
+          <th>Firm</th><th>Tier</th><th>Stack</th><th style="text-align:right">Referred</th><th>90-day momentum</th>
+        </tr></thead>
+        <tbody id="dirBody"></tbody>
+      </table>
+      <footer class="note">Momentum = sum of depth-weighted interactions in the trailing 90 days; the sparkline shows 12 weekly sums. A fading line is the early-warning system — it asks for a call, not a campaign.</footer>
+    </section>
+  </main>
+</div>
+
+<div id="pop" role="dialog" aria-label="Metric definition"></div>
+<div id="tip"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* ============================ DATA (illustrative) ============================ */
+const NOW = new Date(2026, 6, 20); // fixed reference date so the mock stays stable
+const MONTHS = ["2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07"];
+const MLAB = ["Dec","Jan","Feb","Mar","Apr","May","Jun","Jul"];
+
+// pat = events per month [Dec..Jul] for each type: light(+2), consult(+5), cohost(+10)
+const FIRMS = [
+ {id:"f1", name:"Meridian Ledger Group", contact:"Dana Whitfield", tier:"National Thought Leader", stack:["QBO","Xero"], joined:"2025-02", referred:14,
+  pat:{L:[1,1,1,1,1,1,0,1], C:[1,1,1,1,1,1,2,1], H:[0,0,0,0,0,1,1,0]}},
+ {id:"f2", name:"Cornerstone CPA Collective", contact:"Marcus Bell", tier:"National Thought Leader", stack:["QBO"], joined:"2025-06", referred:8,
+  pat:{L:[1,1,1,1,1,1,1,0], C:[0,1,1,1,0,1,1,1], H:[0,0,0,0,0,0,1,0]}},
+ {id:"f3", name:"Blue Spruce Bookkeeping", contact:"Priya Raman", tier:"Regional Specialist", stack:["QBO","Karbon"], joined:"2025-04", referred:8,
+  pat:{L:[1,1,1,1,1,1,1,1], C:[1,0,1,1,1,1,1,1], H:[0,0,0,0,0,0,1,0]}},
+ {id:"f4", name:"Harvest Ledger Advisory", contact:"Tom Okafor", tier:"Regional Specialist", stack:["Xero","Sage"], joined:"2025-09", referred:7,
+  pat:{L:[1,1,0,1,0,1,0,0], C:[0,1,1,1,1,1,1,1], H:[0,0,1,0,0,0,1,1]}},
+ {id:"f5", name:"Lakeshore Numbers", contact:"Janet Liu", tier:"Regional Specialist", stack:["QBO"], joined:"2025-11", referred:6,
+  pat:{L:[1,1,1,1,1,0,1,1], C:[0,0,0,1,0,1,1,0], H:[0,0,0,0,0,0,0,0]}},
+ {id:"f6", name:"Foothill Tax & Books", contact:"Sam Alvarez", tier:"Regional Specialist", stack:["QBO","Bill.com"], joined:"2026-01", referred:5,
+  pat:{L:[0,1,1,1,1,1,1,1], C:[0,0,1,0,1,1,1,1], H:[0,0,0,0,0,0,0,0]}},
+ {id:"f7", name:"Copper Canyon Accounting", contact:"Nia Brooks", tier:"Regional Specialist", stack:["Xero"], joined:"2026-02", referred:4,
+  pat:{L:[0,0,1,1,1,1,1,0], C:[0,0,0,1,0,0,1,1], H:[0,0,0,0,0,0,0,0]}},
+ {id:"f8", name:"Willow & Main Bookkeepers", contact:"Erin Doyle", tier:"Community Practitioner", stack:["QBO"], joined:"2025-03", referred:12,
+  pat:{L:[1,1,1,1,1,1,0,1], C:[1,1,1,1,1,1,1,1], H:[0,1,0,1,0,1,1,1]}},
+ {id:"f9", name:"Prairie Rose Payables", contact:"Gus Hendricks", tier:"Community Practitioner", stack:["QBO"], joined:"2025-07", referred:3,
+  pat:{L:[1,1,1,1,1,1,1,1], C:[0,0,0,0,0,0,1,0], H:[0,0,0,0,0,0,0,0]}},
+ {id:"f10", name:"Kettle Creek Books", contact:"Mel Ortiz", tier:"Community Practitioner", stack:["FreshBooks","QBO"], joined:"2025-10", referred:2,
+  pat:{L:[1,1,0,1,0,1,1,0], C:[0,0,0,0,0,0,0,1], H:[0,0,0,0,0,0,0,0]}},
+ {id:"f11", name:"Bright Harbor Advisors", contact:"Dee Campbell", tier:"Community Practitioner", stack:["Xero"], joined:"2026-03", referred:3,
+  pat:{L:[0,0,0,1,1,1,1,1], C:[0,0,0,0,0,0,1,0], H:[0,0,0,0,0,0,0,0]}},
+ {id:"f12", name:"Old Mill Accounting", contact:"Hank Weaver", tier:"Community Practitioner", stack:["Sage"], joined:"2025-12", referred:1,
+  pat:{L:[1,1,1,1,0,0,0,0], C:[1,1,0,0,0,0,0,0], H:[0,0,0,0,0,0,0,0]}},   // going quiet — the early-warning row
+ {id:"f13", name:"Juniper Books Co.", contact:"Rosa Fuentes", tier:"Community Practitioner", stack:["QBO"], joined:"2026-05", referred:2,
+  pat:{L:[0,0,0,0,0,1,1,1], C:[0,0,0,0,0,0,0,0], H:[0,0,0,0,0,0,0,0]}},
+ {id:"f14", name:"Pinebrook Practice Partners", contact:"Alex Kim", tier:"Community Practitioner", stack:["QBO","Xero"], joined:"2026-06", referred:1,
+  pat:{L:[0,0,0,0,0,0,1,1], C:[0,0,0,0,0,0,0,0], H:[0,0,0,0,0,0,1,0]}},
+];
+
+const TYPES = [
+  {key:"L", label:"Light touch — email / quick hello", pts:2},
+  {key:"C", label:"1:1 consult — practice-specific", pts:5},
+  {key:"H", label:"Co-hosted session — webinar / event", pts:10},
+];
+const TYPE_BY_KEY = Object.fromEntries(TYPES.map(t=>[t.key,t]));
+
+// Field insights (10). Three traveled the full loop.
+const INSIGHTS = [
+ {firm:"f4", date:"2026-02-18", status:"Implemented", text:"Ag clients keep asking how to survive a WHD H-2A investigation — recordkeeping is the panic point.", outcome:"Became the co-hosted Aug CPE-track webinar with an H-2A compliance expert."},
+ {firm:"f1", date:"2026-05-06", status:"Implemented", text:"Firms won't recommend a payroll migration until they can see which clients are already connected to Xero.", outcome:"Xero-connection visibility shipped to partner reporting (Jul)."},
+ {firm:"f8", date:"2026-03-21", status:"Implemented", text:"New staff confuse FUTA/SUTA in the glossary — costs an hour per onboarding.", outcome:"Glossary rewrite shipped (May)."},
+ {firm:"f3", date:"2026-04-14", status:"Sent to Product", text:"Seasonal crews need pay-schedule templates, not generic setup docs."},
+ {firm:"f2", date:"2026-06-09", status:"Sent to Product", text:"Multi-state contractor payments create month-end friction in client books."},
+ {firm:"f7", date:"2026-06-18", status:"Sent to Product", text:"Referral dashboard needs bulk client import for firms switching 20+ clients at once."},
+ {firm:"f5", date:"2026-05-27", status:"Logged", text:"Firms want a white-label onboarding checklist for their clients."},
+ {firm:"f9", date:"2026-06-25", status:"Logged", text:"CPE certificates should arrive same-day; a week later feels broken."},
+ {firm:"f6", date:"2026-07-08", status:"Logged", text:"Bookkeepers want a monthly-close checklist that references payroll cutoffs."},
+ {firm:"f10", date:"2026-07-14", status:"No action needed", text:"Asked for branded swag for a client event.", outcome:"Out of scope for the education program."},
+];
+
+// Seeds that the real build would compute from source systems.
+const SEED = {
+  enrolled:54, billed:38, wordOfMouth:5,
+  retention:"92%", retentionN:"12 of 13 top firms, YoY",
+  betaFirms:5, deflection:"−12%",
+  cpeSessions:6, attendees:"1,240", mentions:18, followup:"61%",
+  ladder:[["Relationships",14],["Dashboards activated",12],["Referred this quarter",10],["Co-created content",6]],
+  churnManaged:"2.1%", churnSelf:"3.4%", churnDelta:"−1.3 pts", churnValue:"$86K",
+  revenueAttr:"$214K", budget:"$120K", roi:"150%",
+};
+
+// Expand monthly patterns into dated interaction rows (deterministic — no randomness).
+const DAYS = {L:[4,10,16,22], C:[6,14,21], H:[18]};
+let INTERACTIONS = [];
+FIRMS.forEach(f => {
+  MONTHS.forEach((m, mi) => {
+    ["L","C","H"].forEach(k => {
+      const n = f.pat[k][mi];
+      for (let i=0;i<n;i++){
+        const day = DAYS[k][i % DAYS[k].length] + (i>=DAYS[k].length ? 1 : 0);
+        INTERACTIONS.push({firm:f.id, date:`${m}-${String(day).padStart(2,"0")}`, type:k, pts:TYPE_BY_KEY[k].pts});
+      }
+    });
+  });
+});
+
+// ⓘ definitions: what it measures / why it matters / what the real version wires to.
+const INFO = {
+  relationships:{t:"Relationships (owned)",
+    m:"Firms with at least one depth-weighted interaction in the trailing 90 days; the ladder tracks firm → dashboard activated → first client referred → co-created content. Weights 2/5/10 are a lens, not a quota.",
+    w:"Relationships are the asset — everything downstream compounds from here, and retention of top practitioners proves the asset persists.",
+    s:"CRM firm records + this tool's interaction log."},
+  referred:{t:"Referred growth (influenced — reported, never targeted)",
+    m:"Client businesses arriving via partner firms, followed through enrollment to billing; plus firms joining by word-of-mouth from existing members.",
+    w:"Proof the trust converts commercially — but targets live with partner sales. Keeping this un-targeted is what keeps the liaison credible in the field.",
+    s:"Partner dashboards + CRM enrollment/billing properties."},
+  intel:{t:"Field intelligence (owned)",
+    m:"Share of logged insights that shipped as a product, workflow, or content change; beta participation of top firms; support-ticket trend after education (directional, not causal).",
+    w:"The liaison's internal ROI — field truth reaching the roadmap faster than research studies can.",
+    s:"Interaction-log routing + product tracker + support-ticket categories."},
+  reach:{t:"Community reach (owned)",
+    m:"Educational-not-promotional output (CPE-grade sessions, guides), organic mentions by practitioners, and post-event follow-up engagement.",
+    w:"The community's microphone — reach that doesn't rent, pointed at the audience that advises our buyers.",
+    s:"Webinar platform (registrations, attendance, certificates) + social listening."},
+  churn:{t:"Retention quality — the money metric",
+    m:"Monthly client churn, accountant-managed cohort vs self-serve cohort.",
+    w:"If the gap holds at scale, the community program pays for itself before any pipeline math. These figures are ILLUSTRATIVE — the real number is one CRM cohort pull away, and it funds this role.",
+    s:"CRM cohort comparison: managed-by-partner flag × churn events."},
+  depth:{t:"Average interaction depth by month",
+    m:"Mean of depth weights (light 2 / consult 5 / co-hosted 10) across all interactions each month.",
+    w:"Rising depth means the community treats the director as a peer, not a vendor — trust you can see move.",
+    s:"This tool's interaction log (View B), wired to the CRM."},
+  tier:{t:"Referred businesses by firm tier",
+    m:"Year-to-date referred client businesses grouped by the referring firm's tier.",
+    w:"Shows where platform growth actually comes from — and whether the community tier out-punches its label (it does here).",
+    s:"Partner dashboards + CRM attribution."},
+  donut:{t:"Field insights by routing status",
+    m:"Every logged insight, by where it landed: logged, sent to product, implemented, or no action needed.",
+    w:"The feedback loop made visible — 'implemented' is the number that earns the community program its seat internally.",
+    s:"Interaction-log routing + product tracker."},
+};
+/* ============================ APP ============================ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const D = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+const FIRM_BY_ID = Object.fromEntries(FIRMS.map(f=>[f.id,f]));
+const STATUS_ORDER = ["Implemented","Sent to Product","Logged","No action needed"];
+const SLOT = ["var(--s1)","var(--s2)","var(--s3)","var(--s4)"];
+
+/* ---------- computations ---------- */
+function inWindow(dateStr, endDate, days){
+  const t = D(dateStr).getTime(), end = endDate.getTime(), start = end - days*86400000;
+  return t > start && t <= end;
+}
+function monthly(){
+  return MONTHS.map((m,i)=>{
+    const rows = INTERACTIONS.filter(r=>r.date.startsWith(m));
+    const n = rows.length, sum = rows.reduce((a,r)=>a+r.pts,0);
+    return {label:MLAB[i], n, avg: n? sum/n : 0};
+  });
+}
+function momentum(fid, end=NOW){ return INTERACTIONS.filter(r=>r.firm===fid && inWindow(r.date,end,90)).reduce((a,r)=>a+r.pts,0); }
+function weekly(fid){
+  const out=[]; for(let w=11;w>=0;w--){
+    const end = new Date(NOW.getTime() - w*7*86400000);
+    out.push(INTERACTIONS.filter(r=>r.firm===fid && inWindow(r.date,end,7)).reduce((a,r)=>a+r.pts,0));
+  } return out;
+}
+function activeCount(end){ return FIRMS.filter(f=>momentum(f.id,end)>0).length; }
+function lastActivity(fid){
+  const ds = INTERACTIONS.filter(r=>r.firm===fid).map(r=>r.date).sort();
+  return ds.length ? ds[ds.length-1] : null;
+}
+function donutCounts(){ return STATUS_ORDER.map(s=>({label:s, n:INSIGHTS.filter(i=>i.status===s).length})); }
+function tierTotals(){
+  const t = {"National Thought Leader":0,"Regional Specialist":0,"Community Practitioner":0};
+  FIRMS.forEach(f=>t[f.tier]+=f.referred); return t;
+}
+function depthStats(){
+  const rows = INTERACTIONS.filter(r=>inWindow(r.date,NOW,90));
+  const n=rows.length, avg = n? rows.reduce((a,r)=>a+r.pts,0)/n : 0;
+  return {n, avg:avg.toFixed(1)};
+}
+
+/* ---------- popover + tooltip ---------- */
+const pop = $("#pop"), tip = $("#tip");
+function infoBtn(key){ return `<button class="info" data-info="${key}" aria-label="What this measures" title="What this measures">ⓘ</button>`; }
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-info]");
+  if (b){
+    const d = INFO[b.dataset.info];
+    pop.innerHTML = `<h4>${esc(d.t)}</h4><p><b>Measures:</b> ${esc(d.m)}</p><p><b>Why it matters:</b> ${esc(d.w)}</p><p><b>Wires to:</b> ${esc(d.s)}</p>`;
+    pop.style.display = "block";
+    const r = b.getBoundingClientRect(), vw = innerWidth;
+    pop.style.left = Math.max(8, Math.min(r.left - 260, vw - 316)) + "px";
+    pop.style.top  = Math.min(r.bottom + 8, innerHeight - pop.offsetHeight - 8) + "px";
+    e.stopPropagation();
+  } else if (!e.target.closest("#pop")) pop.style.display = "none";
+});
+addEventListener("keydown", e=>{ if(e.key==="Escape") pop.style.display="none"; });
+function bindTips(root){
+  root.querySelectorAll("[data-tip]").forEach(el=>{
+    el.addEventListener("mousemove", e=>{
+      tip.textContent = el.dataset.tip; tip.style.display="block";
+      tip.style.left = Math.min(e.clientX+12, innerWidth-tip.offsetWidth-8)+"px";
+      tip.style.top  = (e.clientY-30)+"px";
+    });
+    el.addEventListener("mouseleave", ()=> tip.style.display="none");
+  });
+}
+
+/* ---------- overview renders ---------- */
+function renderSentence(){
+  const act = activeCount(NOW);
+  const impl = INSIGHTS.filter(i=>i.status==="Implemented").length;
+  $("#quarterSentence").innerHTML =
+    `This year so far: <b>${act} of ${FIRMS.length} firms active</b> (90-day window) produced <b>76 referred client businesses</b> — ${SEED.enrolled} enrolled, ${SEED.billed} running payroll; <b>${impl} of ${INSIGHTS.length} field insights shipped</b> as product or content changes; accountant-managed clients are churning <b>1.3 pts lower</b> than self-serve <span style="color:var(--muted)">(illustrative)</span>.`;
+}
+function renderCards(){
+  const act = activeCount(NOW), prev = activeCount(new Date(NOW.getTime()-90*86400000));
+  const ds = depthStats();
+  const impl = INSIGHTS.filter(i=>i.status==="Implemented").length;
+  const ratio = Math.round(100*impl/INSIGHTS.length);
+  const ladder = SEED.ladder.map(([l,v])=>`${v} ${l.toLowerCase()}`).join(" → ");
+  const fun = [["Referred",76,100],["Enrolled",SEED.enrolled,Math.round(100*SEED.enrolled/76)],["Billed",SEED.billed,Math.round(100*SEED.billed/76)]];
+  $("#cards").innerHTML = `
+  <div class="card">${infoBtn("relationships")}
+    <div class="fam"><h3>Relationships</h3><span class="own owned">OWNED</span></div>
+    <div class="big">${act} <small>of ${FIRMS.length} firms active</small></div>
+    <div class="delta">▲ +${act-prev} vs prior 90 days</div>
+    <div class="micros"><span>Top-firm retention <b>${SEED.retention}</b> <span style="color:var(--muted)">(${SEED.retentionN})</span></span>
+    <span>Avg interaction depth <b>${ds.avg}</b> · ${ds.n} interactions / 90d</span>
+    <span style="color:var(--muted)">${ladder}</span></div>
+  </div>
+  <div class="card">${infoBtn("referred")}
+    <div class="fam"><h3>Referred growth</h3><span class="own infl">INFLUENCED</span></div>
+    <div class="big">76 <small>referred businesses YTD</small></div>
+    <div class="funnel">${fun.map(([l,v,p],i)=>`
+      <div class="frow"><span style="width:58px">${l}</span>
+      <div class="fbar" style="width:${Math.max(8,p*0.62)}%;background:var(--ord${i+1})" data-tip="${l}: ${v}"></div>
+      <span class="fval">${v}</span></div>`).join("")}
+    </div>
+    <div class="micros"><span><b>${SEED.wordOfMouth} firms</b> joined by word-of-mouth this year</span>
+    <span style="color:var(--muted)">Reported here · targeted by partner sales</span></div>
+  </div>
+  <div class="card">${infoBtn("intel")}
+    <div class="fam"><h3>Field intelligence</h3><span class="own owned">OWNED</span></div>
+    <div class="big">${ratio}% <small>insight actionability</small></div>
+    <div class="delta">▲ ${impl} of ${INSIGHTS.length} insights shipped</div>
+    <div class="micros"><span><b>${SEED.betaFirms} firms</b> in the GL-integration beta (Xero)</span>
+    <span>Ticket deflection <b>${SEED.deflection}</b> <span style="color:var(--muted)">(directional)</span></span></div>
+  </div>
+  <div class="card">${infoBtn("reach")}
+    <div class="fam"><h3>Community reach</h3><span class="own owned">OWNED</span></div>
+    <div class="big">${SEED.cpeSessions} <small>CPE-grade sessions</small></div>
+    <div class="delta">▲ ${SEED.attendees} attendees YTD</div>
+    <div class="micros"><span><b>${SEED.mentions} organic mentions</b> this quarter</span>
+    <span>Event follow-up rate <b>${SEED.followup}</b></span></div>
+  </div>`;
+  bindTips($("#cards"));
+}
+function renderHero(){
+  $("#heroCard").innerHTML = `${infoBtn("churn")}
+    <div class="fam"><h3>Retention quality — the money metric</h3><span class="own owned">OWNED</span></div>
+    <div class="heroRow">
+      <div class="heroNum"><div class="n">${SEED.churnManaged}</div><div class="l">monthly churn · accountant-managed clients</div></div>
+      <div class="heroNum"><div class="n" style="color:var(--ink-2)">${SEED.churnSelf}</div><div class="l">monthly churn · self-serve clients</div></div>
+      <div class="heroDelta">${SEED.churnDelta} ≈ ${SEED.churnValue}/yr protected</div>
+    </div>
+    <div class="heroNote"><b>Illustrative.</b> The real figure is one CRM cohort pull away (managed-by-partner flag × churn events) — and if the gap holds, it funds this role before any pipeline math.</div>`;
+}
+function renderROI(){
+  $("#roi").innerHTML = `<b>Community ROI (illustrative math):</b>
+   ( attributed billed revenue <b>${SEED.revenueAttr}</b> + churn-delta value <b>${SEED.churnValue}</b> − program budget <b>${SEED.budget}</b> ) ÷ <b>${SEED.budget}</b> = <b>${SEED.roi}</b>
+   <div class="foot">Deliberately in units leadership already reads — billed revenue and churn. No soft cost-avoidance terms; INFLUENCED inputs are reported, never targeted.</div>`;
+}
+
+/* ---------- charts ---------- */
+function renderDepthChart(){
+  const data = monthly();
+  const W=760,H=230,L=40,R=54,T=20,B=30, ymax=8;
+  const x = i => L + i*(W-L-R)/(data.length-1);
+  const y = v => T + (H-T-B)*(1 - v/ymax);
+  const grid = [0,2,4,6,8].map(v=>`
+    <line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)" stroke-width="1"/>
+    <text x="${L-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" style="font-variant-numeric:tabular-nums">${v}</text>`).join("");
+  const path = data.map((d,i)=>`${i?"L":"M"}${x(i)},${y(d.avg)}`).join("");
+  const last = data[data.length-1];
+  const juneI = 6;
+  const labels = data.map((d,i)=>`<text x="${x(i)}" y="${H-10}" text-anchor="middle" font-size="11" fill="var(--muted)">${d.label}</text>`).join("");
+  $("#chart-depth").innerHTML = `${infoBtn("depth")}
+    <h3>Average interaction depth by month</h3>
+    <div class="sub">Weights: light 2 · consult 5 · co-hosted 10 — a lens, not a quota</div>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Line chart of average interaction depth by month">
+      ${grid}${labels}
+      <line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--baseline)" stroke-width="1"/>
+      <text x="${x(juneI)}" y="${y(data[juneI].avg)-14}" text-anchor="middle" font-size="11" fill="var(--muted)">conference season</text>
+      <path d="${path}" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle id="dp-marker" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="2" style="display:none"/>
+      <line id="dp-hair" y1="${T}" y2="${H-B}" stroke="var(--baseline)" stroke-width="1" style="display:none"/>
+      <circle cx="${x(data.length-1)}" cy="${y(last.avg)}" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"/>
+      <text x="${x(data.length-1)+10}" y="${y(last.avg)+4}" font-size="12" font-weight="700" fill="var(--ink)">${last.avg.toFixed(1)}</text>
+      <rect id="dp-capture" x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent"/>
+    </svg>
+    <details class="tbl"><summary>data table</summary><table><tr><th>Month</th>${data.map(d=>`<td>${d.label}</td>`).join("")}</tr>
+    <tr><th>Avg depth</th>${data.map(d=>`<td>${d.avg.toFixed(1)}</td>`).join("")}</tr>
+    <tr><th>Interactions</th>${data.map(d=>`<td>${d.n}</td>`).join("")}</tr></table></details>`;
+  const svg = $("#chart-depth svg"), cap = $("#dp-capture"), mk = $("#dp-marker"), hair = $("#dp-hair");
+  cap.addEventListener("mousemove", e=>{
+    const pt = svg.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY;
+    const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    const i = Math.max(0, Math.min(data.length-1, Math.round((p.x-L)/((W-L-R)/(data.length-1)))));
+    mk.setAttribute("cx",x(i)); mk.setAttribute("cy",y(data[i].avg)); mk.style.display="block";
+    hair.setAttribute("x1",x(i)); hair.setAttribute("x2",x(i)); hair.style.display="block";
+    tip.textContent = `${data[i].label} · avg ${data[i].avg.toFixed(1)} · ${data[i].n} interactions`;
+    tip.style.display="block";
+    tip.style.left=Math.min(e.clientX+12, innerWidth-tip.offsetWidth-8)+"px"; tip.style.top=(e.clientY-30)+"px";
+  });
+  cap.addEventListener("mouseleave", ()=>{ mk.style.display="none"; hair.style.display="none"; tip.style.display="none"; });
+}
+function renderTierChart(){
+  const t = tierTotals();
+  const rows = [["National",t["National Thought Leader"]],["Regional",t["Regional Specialist"]],["Community",t["Community Practitioner"]]];
+  const full = ["National Thought Leader","Regional Specialist","Community Practitioner"];
+  const W=360,H=210,L=16,B=28,T=26, ymax=32, bw=64, gap=(W-2*L-3*bw)/2;
+  const y = v => T + (H-T-B)*(1-v/ymax);
+  const bars = rows.map(([l,v],i)=>{
+    const bx = L + i*(bw+gap), by = y(v), h = (H-B)-by;
+    return `<path d="M${bx},${by+4} a4,4 0 0 1 4,-4 h${bw-8} a4,4 0 0 1 4,4 v${h-4} h-${bw} Z" fill="var(--s1)" data-tip="${full[i]}: ${v} referred businesses"/>
+      <text x="${bx+bw/2}" y="${by-7}" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" style="font-variant-numeric:tabular-nums">${v}</text>
+      <text x="${bx+bw/2}" y="${H-10}" text-anchor="middle" font-size="11.5" fill="var(--ink-2)">${l}</text>`;
+  }).join("");
+  $("#chart-tier").innerHTML = `${infoBtn("tier")}
+    <h3>Referred businesses by firm tier</h3><div class="sub">YTD · note the community tier out-punching its label</div>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of referred businesses by firm tier">
+      <line x1="${L}" x2="${W-L}" y1="${H-B}" y2="${H-B}" stroke="var(--baseline)" stroke-width="1"/>${bars}
+    </svg>
+    <details class="tbl"><summary>data table</summary><table>${rows.map(([l,v],i)=>`<tr><th>${full[i]}</th><td>${v}</td></tr>`).join("")}</table></details>`;
+  bindTips($("#chart-tier"));
+}
+function arc(cx,cy,r0,r1,a0,a1){
+  const p=(r,a)=>[cx+r*Math.cos(a), cy+r*Math.sin(a)];
+  const large = (a1-a0) > Math.PI ? 1 : 0;
+  const [x0,y0]=p(r1,a0),[x1,y1]=p(r1,a1),[x2,y2]=p(r0,a1),[x3,y3]=p(r0,a0);
+  return `M${x0},${y0} A${r1},${r1} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${r0},${r0} 0 ${large} 0 ${x3},${y3} Z`;
+}
+function renderDonut(){
+  const counts = donutCounts(), total = counts.reduce((a,c)=>a+c.n,0);
+  const cx=105, cy=102, r0=56, r1=86, gapA=0.045;
+  let a = -Math.PI/2, segs="";
+  counts.forEach((c,i)=>{
+    if(!c.n) return;
+    const span = (c.n/total)*Math.PI*2;
+    segs += `<path d="${arc(cx,cy,r0,r1,a+gapA/2,a+span-gapA/2)}" fill="${SLOT[i]}" data-tip="${c.label}: ${c.n} of ${total}"/>`;
+    a += span;
+  });
+  $("#chart-donut").innerHTML = `${infoBtn("donut")}
+    <h3>Field insights by routing status</h3><div class="sub">The feedback loop, made visible</div>
+    <svg viewBox="0 0 210 205" role="img" aria-label="Donut chart of insight routing status">
+      ${segs}
+      <text x="${cx}" y="${cy-2}" text-anchor="middle" font-size="26" font-weight="800" fill="var(--ink)">${total}</text>
+      <text x="${cx}" y="${cy+16}" text-anchor="middle" font-size="11" fill="var(--muted)">insights</text>
+    </svg>
+    <div class="legend">${counts.map((c,i)=>`<span><span class="sw" style="background:${SLOT[i]}"></span>${c.label} · <b>${c.n}</b></span>`).join("")}</div>
+    <details class="tbl"><summary>data table</summary><table>${counts.map(c=>`<tr><th>${c.label}</th><td>${c.n}</td></tr>`).join("")}</table></details>`;
+  bindTips($("#chart-donut"));
+}
+
+/* ---------- logger ---------- */
+function initLogger(){
+  $("#f-firm").innerHTML = `<option value="" disabled selected>Choose a firm…</option>` +
+    FIRMS.map(f=>`<option value="${f.id}">${esc(f.name)} — ${esc(f.contact)}</option>`).join("");
+  $("#f-date").value = "2026-07-20";
+  $("#f-types").innerHTML = TYPES.map((t,i)=>`
+    <label class="r"><input type="radio" name="itype" value="${t.key}" ${i===0?"checked":""}> ${t.label}<span class="pts">+${t.pts}</span></label>`).join("");
+  $("#logForm").addEventListener("submit", e=>{
+    e.preventDefault();
+    const firm = $("#f-firm").value; if(!firm) return;
+    const date = $("#f-date").value || "2026-07-20";
+    const key = document.querySelector('input[name="itype"]:checked').value;
+    INTERACTIONS.push({firm, date, type:key, pts:TYPE_BY_KEY[key].pts});
+    const note = $("#f-note").value.trim();
+    if(note) INSIGHTS.push({firm, date, status:$("#f-route").value, text:note});
+    $("#f-note").value=""; $("#f-firm").selectedIndex=0;
+    rerenderAll();
+    const toast=$("#toast"); toast.textContent="Logged — session only (mock)"; toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"), 1800);
+  });
+}
+function renderRecent(){
+  const rows=[...INTERACTIONS].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10);
+  const short={L:"Light touch",C:"1:1 consult",H:"Co-hosted"};
+  $("#recentList").innerHTML = rows.map(r=>`
+    <div class="row"><span class="firm">${esc(FIRM_BY_ID[r.firm].name)}</span>
+    <span class="type">${short[r.type]}</span><span class="pts">+${r.pts}</span>
+    <span class="d">${r.date}</span></div>`).join("");
+}
+
+/* ---------- directory ---------- */
+const dirState = {q:"", tier:"all"};
+function spark(fid){
+  const w=104,h=26,vals=weekly(fid),max=Math.max(1,...vals);
+  const pts = vals.map((v,i)=>`${4+i*(w-8)/11},${h-4-(h-9)*(v/max)}`).join(" ");
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+function renderDirectory(){
+  const q = dirState.q.toLowerCase();
+  const rows = FIRMS
+    .filter(f => (dirState.tier==="all" || f.tier===dirState.tier))
+    .filter(f => !q || f.name.toLowerCase().includes(q) || f.contact.toLowerCase().includes(q))
+    .map(f => ({f, m:momentum(f.id)}))
+    .sort((a,b)=>b.m-a.m);
+  $("#dirBody").innerHTML = rows.map(({f,m})=>{
+    const quiet = m===0 ? `<div class="quiet">quiet since ${lastActivity(f.id)?.slice(0,7) ?? "—"} — worth a call</div>` : "";
+    return `<tr>
+      <td><div class="fname">${esc(f.name)}</div><div class="fcontact">${esc(f.contact)} · joined ${f.joined}</div></td>
+      <td><span class="tier">${f.tier.split(" ")[0]}</span></td>
+      <td><div class="stack">${f.stack.map(s=>`<span>${esc(s)}</span>`).join("")}</div></td>
+      <td class="num" style="text-align:right">${f.referred}</td>
+      <td><div class="momo" data-tip="Depth-weighted momentum, trailing 90 days">${spark(f.id)}<span class="mv">${m}</span></div>${quiet}</td>
+    </tr>`;
+  }).join("");
+  $("#dirCount").textContent = `${rows.length} of ${FIRMS.length} firms · sorted by momentum`;
+  bindTips($("#dirBody"));
+}
+$("#dirSearch").addEventListener("input", e=>{ dirState.q=e.target.value; renderDirectory(); });
+document.querySelectorAll(".tchip").forEach(b=>b.addEventListener("click", ()=>{
+  document.querySelectorAll(".tchip").forEach(x=>x.setAttribute("aria-pressed","false"));
+  b.setAttribute("aria-pressed","true"); dirState.tier=b.dataset.tier; renderDirectory();
+}));
+
+/* ---------- nav + theme ---------- */
+document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click", ()=>{
+  document.querySelectorAll(".navbtn").forEach(x=>x.setAttribute("aria-current","false"));
+  b.setAttribute("aria-current","true");
+  ["overview","log","directory"].forEach(v=> $("#view-"+v).hidden = v!==b.dataset.view);
+  pop.style.display="none";
+}));
+$("#themeBtn").addEventListener("click", ()=>{
+  const de = document.documentElement;
+  const dark = de.dataset.theme ? de.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  de.dataset.theme = dark ? "light" : "dark";
+});
+
+/* ---------- boot ---------- */
+function rerenderAll(){
+  renderSentence(); renderCards(); renderHero(); renderROI();
+  renderDepthChart(); renderTierChart(); renderDonut();
+  renderRecent(); renderDirectory();
+}
+initLogger();
+rerenderAll();
+</script>
+</body>
+</html>
